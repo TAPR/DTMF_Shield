@@ -1,0 +1,33 @@
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\ResolveAssemblyReference.cache
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\RadioProgrammingApp.vbproj.GenerateResource.Cache
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Radio.Form1.resources
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Radio.Form2.resources
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Radio.Form3.resources
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Radio.Resources.resources
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.exe.manifest
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.application
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.exe
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.pdb
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.xml
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.exe.manifest
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.application
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.exe
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.xml
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.pdb
+D:\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.exe
+D:\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.xml
+D:\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.pdb
+D:\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.exe.manifest
+D:\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.application
+D:\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.exe
+D:\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.pdb
+D:\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.xml
+D:\UsbTest2\UsbTest\obj\Release\ResolveAssemblyReference.cache
+D:\UsbTest2\UsbTest\obj\Release\Radio.Form1.resources
+D:\UsbTest2\UsbTest\obj\Release\Radio.Form2.resources
+D:\UsbTest2\UsbTest\obj\Release\Radio.Form3.resources
+D:\UsbTest2\UsbTest\obj\Release\Radio.Resources.resources
+D:\UsbTest2\UsbTest\obj\Release\RadioProgrammingApp.vbproj.GenerateResource.Cache
+D:\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.exe.manifest
+D:\UsbTest2\UsbTest\obj\Release\Kenwood TM742 Programmer.application
+D:\UsbTest2\UsbTest\bin\Release\Kenwood TM742 Programmer.exe.config

@@ -1,0 +1,57 @@
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Tm742Configuration.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.config
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.application
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.pdb
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\TM742RadioProgrammingApp.vbproj.AssemblyReference.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form1.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form2.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form3.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Resources.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\TM742RadioProgrammingApp.vbproj.GenerateResource.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\TM742RadioProgrammingApp.vbproj.CoreCompileInputs.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.application
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.pdb
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Tm742Configuration.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.exe.config
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.application
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.exe
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.pdb
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\TM742RadioProgrammingApp.vbproj.AssemblyReference.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Radio.Form1.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Radio.Form2.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Radio.Form3.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Radio.Resources.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\TM742RadioProgrammingApp.vbproj.GenerateResource.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\TM742RadioProgrammingApp.vbproj.CoreCompileInputs.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.application
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.exe
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.pdb
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Tm742Configuration.xml
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.exe.config
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.application
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.exe
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.pdb
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\bin\Debug\Kenwood TM742 Programmer.xml
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\TM742RadioProgrammingApp.vbproj.AssemblyReference.cache
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Radio.Form1.resources
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Radio.Form2.resources
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Radio.Form3.resources
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Radio.Resources.resources
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\TM742RadioProgrammingApp.vbproj.GenerateResource.cache
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\TM742RadioProgrammingApp.vbproj.CoreCompileInputs.cache
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.application
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.exe
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.xml
+D:\Documents\GitHub\DTMF_Shield\TM742ApplicationSln\TM742RadioProgrammingApp\obj\Debug\Kenwood TM742 Programmer.pdb

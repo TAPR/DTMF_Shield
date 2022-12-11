@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TM742>
+  <usbPort>0</usbPort>
+  <eType>False</eType>
+  <tsu7Installed>False</tsu7Installed>
+  <wideBand>False</wideBand>
+  <ARO>True</ARO>
+  <timingMode>0</timingMode>
+  <tab1Mod>None</tab1Mod>
+  <tab1StepSize>0</tab1StepSize>
+  <tab1Filename>NULL</tab1Filename>
+  <tab2Mod>None</tab2Mod>
+  <tab2StepSize>0</tab2StepSize>
+  <tab2Filename>NULL</tab2Filename>
+  <tab3Mod>None</tab3Mod>
+  <tab3StepSize>0</tab3StepSize>
+  <tab3Filename>NULL</tab3Filename>
+</TM742>

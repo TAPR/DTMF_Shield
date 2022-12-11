@@ -1,0 +1,109 @@
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\RadioProgrammingApp.vbproj.GenerateResource.Cache
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Radio.Form1.resources
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Radio.Form2.resources
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Radio.Form3.resources
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Radio.Resources.resources
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.application
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.pdb
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.xml
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.application
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.xml
+C:\Users\ToddB\Documents\Visual Studio 2008\Projects\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.pdb
+D:\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.config
+D:\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.application
+D:\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe
+D:\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.pdb
+D:\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.xml
+D:\UsbTest2\UsbTest\obj\Debug\ResolveAssemblyReference.cache
+D:\UsbTest2\UsbTest\obj\Debug\Radio.Form1.resources
+D:\UsbTest2\UsbTest\obj\Debug\Radio.Form2.resources
+D:\UsbTest2\UsbTest\obj\Debug\Radio.Form3.resources
+D:\UsbTest2\UsbTest\obj\Debug\Radio.Resources.resources
+D:\UsbTest2\UsbTest\obj\Debug\RadioProgrammingApp.vbproj.GenerateResource.Cache
+D:\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.application
+D:\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe
+D:\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.xml
+D:\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.pdb
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.config
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.xml
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.pdb
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.application
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.pdb
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\bin\Debug\Kenwood TM742 Programmer.xml
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Radio.Form1.resources
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Radio.Form2.resources
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Radio.Form3.resources
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Radio.Resources.resources
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+C:\Users\ms21425\Documents\Visual Studio 2010\Projects\UsbTest2\UsbTest2\UsbTest\obj\Debug\Kenwood TM742 Programmer.application
+D:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.config
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.xml
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.pdb
+D:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.application
+D:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe
+D:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.pdb
+D:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.xml
+D:\TM742ApplicationSln\UsbTest\obj\Debug\RadioProgrammingApp.vbprojResolveAssemblyReference.cache
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form1.resources
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form2.resources
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form3.resources
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Resources.resources
+D:\TM742ApplicationSln\UsbTest\obj\Debug\RadioProgrammingApp.vbproj.GenerateResource.Cache
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.application
+D:\TM742ApplicationSln\UsbTest\bin\Debug\Tm742Configuration.xml
+C:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.config
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.xml
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.pdb
+C:\TM742ApplicationSln\UsbTest\bin\Debug\Tm742Configuration.xml
+C:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+C:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.application
+C:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe
+C:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.pdb
+C:\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.xml
+C:\TM742ApplicationSln\UsbTest\obj\Debug\ResolveAssemblyReference.cache
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form1.resources
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form2.resources
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form3.resources
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Resources.resources
+C:\TM742ApplicationSln\UsbTest\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\TM742ApplicationSln\UsbTest\obj\Debug\GenerateResource.read.1.tlog
+C:\TM742ApplicationSln\UsbTest\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\TM742ApplicationSln\UsbTest\obj\Debug\GenerateResource.write.1.tlog
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+C:\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.application
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Tm742Configuration.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.config
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.application
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.exe
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.pdb
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\bin\Debug\Kenwood TM742 Programmer.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\RadioProgrammingApp.vbproj.AssemblyReference.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form1.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form2.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Form3.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Radio.Resources.resources
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\RadioProgrammingApp.vbproj.GenerateResource.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\RadioProgrammingApp.vbproj.CoreCompileInputs.cache
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe.manifest
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.application
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.exe
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.xml
+D:\Downloads\Kenwood\TM-742A\TM-742AE Programmer Board Larry Anderton WA7YLI\TM742ApplicationSln\UsbTest\obj\Debug\Kenwood TM742 Programmer.pdb
