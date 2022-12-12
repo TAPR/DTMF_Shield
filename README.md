@@ -6,7 +6,8 @@ This code and designs all came from Larry Anderton, WA7YLI.  It is released with
 Many thanks to Curt Mills, WE7U, 'the Xastir Guy', who loaned me his functional TM742 Programmer unit, so that I could test my built boards initially,
 and to know correct from incorrect, or unexpected, behavior.
 
-License is listed as MIT, but other open source licenses are also acceptable, especially BSD, Mozilla, or GNU 2.0
+License is listed as MIT, but other open source licenses are also acceptable, especially BSD, Mozilla, or GNU 2.0.
+
 Hardware designs are licensed under the TAPR Open Hardware License
  
 This consists of:
