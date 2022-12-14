@@ -21,7 +21,7 @@
     <ManifestCertificateThumbprint>7CE6771B42EAC2D10E198456FD7AD8FDB68A5B36</ManifestCertificateThumbprint>
     <ManifestKeyFile>RadioProgrammingApp_1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <ApplicationIcon>tm742.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <FileUpgradeFlags>
