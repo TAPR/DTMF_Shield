@@ -32,34 +32,34 @@
   <dependency>
     <dependentOS>
       <osVersionInfo>
-        <os majorVersion="4" minorVersion="10" buildNumber="0" servicePackMajor="0" />
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
       </osVersionInfo>
     </dependentOS>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
-      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="2.0.50727.0" />
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kenwood TM742 Programmer.exe" size="253360">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kenwood TM742 Programmer.exe" size="195072">
       <assemblyIdentity name="Kenwood TM742 Programmer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>p8o9tgzDHTgw+PuqTsxp6GpzvtY=</dsig:DigestValue>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>H8Y0FpDlLqTnTz5q1MfXtX+qqgroNA4j8g/SY+zaIG8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Kenwood TM742 Programmer.exe.config" size="1146">
+  <file name="Kenwood TM742 Programmer.exe.config" size="1175">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>0+tCodE7jwpXWFxWBa7KZw8M23w=</dsig:DigestValue>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>HuEKzBuEKALkhqmLyeBTxSkF5Pngls/hE4ZnbiYhLLY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="tm742.ico" size="17542">
@@ -67,8 +67,8 @@
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>KUzlTKuGDiQoyv8pOrFe/c/ar5A=</dsig:DigestValue>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Wlq+TLNCL/6WyaEpFBxcgTNeuA5FLl0PDJqXWyq/ZtE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Tm742Configuration.xml" size="537">
@@ -76,8 +76,8 @@
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>BTJTGZJP9jQApGOqOguTaUy9SX8=</dsig:DigestValue>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>WmWWskZ8T8/lYgW7L3yf7ejJjyMsdRQqW2Dl83x7ZeE=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

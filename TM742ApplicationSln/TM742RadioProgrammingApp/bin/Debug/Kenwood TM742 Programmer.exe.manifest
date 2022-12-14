@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kenwood TM742 Programmer.exe" size="264112">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kenwood TM742 Programmer.exe" size="263600">
       <assemblyIdentity name="Kenwood TM742 Programmer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rDTodPgo49VwMBHNOAqehbojWBk=</dsig:DigestValue>
+        <dsig:DigestValue>tvTMY30+3qlLokiSCjrqE0PpnY4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

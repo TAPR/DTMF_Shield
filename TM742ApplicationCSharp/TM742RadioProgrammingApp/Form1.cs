@@ -2014,8 +2014,6 @@ namespace Radio
             return getRepeaterValRet;
         }
 
-        private bool _Form1_FormClosing_test = false;
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
 
@@ -2035,20 +2033,14 @@ namespace Radio
             }
             SerialPort1.Close();
 
-            if (_Form1_FormClosing_test == false)
+            if (channelListObj.Items.Count > 1 & channelUpdateClicked[TabControl.SelectedIndex] == true)
             {
-                if (channelListObj.Items.Count > 1 & channelUpdateClicked[TabControl.SelectedIndex] == true)
-                {
-                    displaySaveMessage();
-                }
-
-                channelUpdateClicked[TabControl.SelectedIndex] = false;
-
-                _Form1_FormClosing_test = true;
-                My.MyProject.Forms.Form2.Close();
-                Close();
+                displaySaveMessage();
             }
 
+            channelUpdateClicked[TabControl.SelectedIndex] = false;
+
+            My.MyProject.Forms.Form2.Enabled = true;
         }
 
         private void Button11_Click(object sender, EventArgs e)

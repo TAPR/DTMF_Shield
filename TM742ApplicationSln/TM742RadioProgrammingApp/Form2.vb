@@ -28,7 +28,7 @@ Public Class Form2
     Public applicationPath As String
     Public xmlFile As String
 
-    Private Sub Form2_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub Form2_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
         applicationPath = Application.StartupPath
         xmlFile = applicationPath
         xmlFile = String.Concat(xmlFile, "\Tm742Configuration.xml")
@@ -36,10 +36,10 @@ Public Class Form2
         ToolTip1.AutoPopDelay = 32000
         ToolTip1.InitialDelay = 1000
         ToolTip1.ReshowDelay = 500
-        ToolTip1.SetToolTip(GroupBox5, "These radio buttons control the DTMF tone and button press duration for programming" & vbCrLf & _
-        Chr(149) & "The normal selection uses an 80 millisecond duration" & vbCrLf & _
-        Chr(149) & "The slow selection uses a 250 millisecond duration" & vbCrLf & _
-        Chr(149) & "The debug selection uses a 1 second duration (this is slow enough that one can follow the actual commands being sent to the radio" & vbCrLf & _
+        ToolTip1.SetToolTip(GroupBox5, "These radio buttons control the DTMF tone and button press duration for programming" & vbCrLf &
+        Chr(149) & "The normal selection uses an 80 millisecond duration" & vbCrLf &
+        Chr(149) & "The slow selection uses a 250 millisecond duration" & vbCrLf &
+        Chr(149) & "The debug selection uses a 1 second duration (this is slow enough that one can follow the actual commands being sent to the radio" & vbCrLf &
         "These selections are useful for different radio models/firmware.  If the normal (default) duration does not work properly, try the slow setting")
 
         Mod1None.Checked() = True
@@ -139,23 +139,6 @@ Public Class Form2
             Case Else
                 'do nothing
         End Select
-
-        'If Not radioConfig.tab1Filename.Equals("NULL") Then
-        '    Form1.tab1ChannelFileName.Text = radioConfig.tab1Filename
-        'Else
-        '    Form1.tab1ChannelFileName.Text = ""
-        'End If
-        'If Not radioConfig.tab2Filename.Equals("NULL") Then
-        '    Form1.tab2ChannelFileName.Text = radioConfig.tab2Filename
-        'Else
-        '    Form1.tab2ChannelFileName.Text = ""
-        'End If
-        'If Not radioConfig.tab3Filename.Equals("NULL") Then
-        '    Form1.tab3ChannelFileName.Text = radioConfig.tab3Filename
-        'Else
-        '    Form1.tab3ChannelFileName.Text = ""
-        'End If
-
     End Sub
 
     Private Sub ChannelLists_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChannelLists.Click
@@ -411,21 +394,6 @@ Public Class Form2
             testXml.SelectSingleNode("TM742/tab3Mod").InnerText = "NULL"
         End If
 
-        'If Not Form1.tab1ChannelFileName.Text.Equals("") Then
-        '    testXml.SelectSingleNode("TM742/tab1Filename").InnerText = Form1.tab1ChannelFileName.Text
-        'Else
-        '    testXml.SelectSingleNode("TM742/tab1Filename").InnerText = "NULL"
-        'End If
-        'If Not Form1.tab2ChannelFileName.Text.Equals("") Then
-        '    testXml.SelectSingleNode("TM742/tab2Filename").InnerText = Form1.tab2ChannelFileName.Text
-        'Else
-        '    testXml.SelectSingleNode("TM742/tab2Filename").InnerText = "NULL"
-        'End If
-        'If Not Form1.tab3ChannelFileName.Text.Equals("") Then
-        '    testXml.SelectSingleNode("TM742/tab3Filename").InnerText = Form1.tab3ChannelFileName.Text
-        'Else
-        '    testXml.SelectSingleNode("TM742/tab3Filename").InnerText = "NULL"
-        'End If
         testXml.Save(xmlFile)
 
         Form1.TabControl.SelectedIndex = 0
@@ -433,14 +401,7 @@ Public Class Form2
 
     End Sub
 
-    Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
-
-        Static test As Boolean = False
-        If (test = False) Then
-            test = True
-            Form1.Close()
-            Me.Close()
-        End If
+    Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs)
 
     End Sub
 
@@ -475,5 +436,9 @@ Public Class Form2
             Mod2UT220.Enabled = True
             Mod3UT220.Enabled = True
         End If
+    End Sub
+
+    Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+
     End Sub
 End Class

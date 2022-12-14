@@ -105,7 +105,7 @@ Partial Class Form2
         Me.TableLayoutPanel2.ColumnCount = 3
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.17544!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.82456!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Panel2, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel1, 2, 0)
@@ -126,7 +126,7 @@ Partial Class Form2
         Me.Panel2.Location = New System.Drawing.Point(181, 5)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(168, 325)
+        Me.Panel2.Size = New System.Drawing.Size(167, 325)
         Me.Panel2.TabIndex = 1
         '
         'GroupBox1
@@ -349,10 +349,10 @@ Partial Class Form2
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.GroupBox3)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(357, 5)
+        Me.Panel1.Location = New System.Drawing.Point(356, 5)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(204, 325)
+        Me.Panel1.Size = New System.Drawing.Size(205, 325)
         Me.Panel1.TabIndex = 3
         '
         'GroupBox3

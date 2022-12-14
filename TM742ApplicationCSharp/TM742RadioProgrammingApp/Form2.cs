@@ -8,8 +8,7 @@ namespace Radio
 
     public partial class Form2
     {
-
-        public struct radioConfigStruct
+       public struct radioConfigStruct
         {
             public int usbPort;
             public bool eType;
@@ -50,9 +49,6 @@ namespace Radio
             ToolTip1.InitialDelay = 1000;
             ToolTip1.ReshowDelay = 500;
             ToolTip1.SetToolTip(GroupBox5, "These radio buttons control the DTMF tone and button press duration for programming" + Constants.vbCrLf + Strings.Chr(149) + "The normal selection uses an 80 millisecond duration" + Constants.vbCrLf + Strings.Chr(149) + "The slow selection uses a 250 millisecond duration" + Constants.vbCrLf + Strings.Chr(149) + "The debug selection uses a 1 second duration (this is slow enough that one can follow the actual commands being sent to the radio" + Constants.vbCrLf + "These selections are useful for different radio models/firmware.  If the normal (default) duration does not work properly, try the slow setting");
-
-
-
 
             Mod1None.Checked = true;
             Mod2None.Checked = true;
@@ -239,23 +235,6 @@ namespace Radio
                     }
                     // do nothing
             }
-
-            // If Not radioConfig.tab1Filename.Equals("NULL") Then
-            // Form1.tab1ChannelFileName.Text = radioConfig.tab1Filename
-            // Else
-            // Form1.tab1ChannelFileName.Text = ""
-            // End If
-            // If Not radioConfig.tab2Filename.Equals("NULL") Then
-            // Form1.tab2ChannelFileName.Text = radioConfig.tab2Filename
-            // Else
-            // Form1.tab2ChannelFileName.Text = ""
-            // End If
-            // If Not radioConfig.tab3Filename.Equals("NULL") Then
-            // Form1.tab3ChannelFileName.Text = radioConfig.tab3Filename
-            // Else
-            // Form1.tab3ChannelFileName.Text = ""
-            // End If
-
         }
 
         private void ChannelLists_Click(object sender, EventArgs e)
@@ -592,6 +571,7 @@ namespace Radio
             {
                 testXml.SelectSingleNode("TM742/tab1Mod").InnerText = "NULL";
             }
+
             My.MyProject.Forms.Form1.TabControl.SelectedIndex = 1;
             if (!My.MyProject.Forms.Form1.TabControl.SelectedTab.Text.StartsWith("Installed"))
             {
@@ -602,6 +582,7 @@ namespace Radio
             {
                 testXml.SelectSingleNode("TM742/tab2Mod").InnerText = "NULL";
             }
+
             My.MyProject.Forms.Form1.TabControl.SelectedIndex = 2;
             if (!My.MyProject.Forms.Form1.TabControl.SelectedTab.Text.StartsWith("Installed"))
             {
@@ -613,39 +594,15 @@ namespace Radio
                 testXml.SelectSingleNode("TM742/tab3Mod").InnerText = "NULL";
             }
 
-            // If Not Form1.tab1ChannelFileName.Text.Equals("") Then
-            // testXml.SelectSingleNode("TM742/tab1Filename").InnerText = Form1.tab1ChannelFileName.Text
-            // Else
-            // testXml.SelectSingleNode("TM742/tab1Filename").InnerText = "NULL"
-            // End If
-            // If Not Form1.tab2ChannelFileName.Text.Equals("") Then
-            // testXml.SelectSingleNode("TM742/tab2Filename").InnerText = Form1.tab2ChannelFileName.Text
-            // Else
-            // testXml.SelectSingleNode("TM742/tab2Filename").InnerText = "NULL"
-            // End If
-            // If Not Form1.tab3ChannelFileName.Text.Equals("") Then
-            // testXml.SelectSingleNode("TM742/tab3Filename").InnerText = Form1.tab3ChannelFileName.Text
-            // Else
-            // testXml.SelectSingleNode("TM742/tab3Filename").InnerText = "NULL"
-            // End If
             testXml.Save(xmlFile);
 
             My.MyProject.Forms.Form1.TabControl.SelectedIndex = 0;
             Enabled = false;
-
         }
 
-        private bool _Form1_FormClosing_test = false;
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_Form1_FormClosing_test == false)
-            {
-                _Form1_FormClosing_test = true;
-                My.MyProject.Forms.Form1.Close();
-                Close();
-            }
-
+            // just exit
         }
 
         private void eTypeRadioCheckBox_CheckedChanged(object sender, EventArgs e)

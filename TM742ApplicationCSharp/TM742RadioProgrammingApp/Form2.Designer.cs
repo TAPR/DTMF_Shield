@@ -35,642 +35,642 @@ namespace Radio
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
-            TableLayoutPanel1 = new TableLayoutPanel();
-            TableLayoutPanel2 = new TableLayoutPanel();
-            Panel2 = new Panel();
-            GroupBox1 = new GroupBox();
-            Mod2None = new RadioButton();
-            Mod2UT1200 = new RadioButton();
-            Mod2UT440 = new RadioButton();
-            Mod2UT30 = new RadioButton();
-            Mod2UT220 = new RadioButton();
-            Mod2UT50 = new RadioButton();
-            Mod2UT144 = new RadioButton();
-            Panel3 = new Panel();
-            GroupBox2 = new GroupBox();
-            Mod1None = new RadioButton();
-            Mod1UT1200 = new RadioButton();
-            Mod1UT440 = new RadioButton();
-            Mod1UT30 = new RadioButton();
-            Mod1UT220 = new RadioButton();
-            Mod1UT50 = new RadioButton();
-            Mod1UT144 = new RadioButton();
-            Panel1 = new Panel();
-            GroupBox3 = new GroupBox();
-            Mod3None = new RadioButton();
-            Mod3UT1200 = new RadioButton();
-            Mod3UT440 = new RadioButton();
-            Mod3UT30 = new RadioButton();
-            Mod3UT220 = new RadioButton();
-            Mod3UT50 = new RadioButton();
-            Mod3UT144 = new RadioButton();
-            TableLayoutPanel3 = new TableLayoutPanel();
-            Panel5 = new Panel();
-            GroupBox5 = new GroupBox();
-            debugRadioTimingButton = new RadioButton();
-            slowRadioTimingButton = new RadioButton();
-            normalRadioTimingButton = new RadioButton();
-            GroupBox4 = new GroupBox();
-            AROcheckBox = new CheckBox();
-            wideBandCheckBox = new CheckBox();
-            eTypeRadioCheckBox = new CheckBox();
-            eTypeRadioCheckBox.CheckedChanged += new EventHandler(eTypeRadioCheckBox_CheckedChanged);
-            Tsu7CheckBox = new CheckBox();
-            Panel6 = new Panel();
-            Panel4 = new Panel();
-            ChannelLists = new Button();
-            ChannelLists.Click += new EventHandler(ChannelLists_Click);
-            ToolTip1 = new ToolTip(components);
-            TableLayoutPanel1.SuspendLayout();
-            TableLayoutPanel2.SuspendLayout();
-            Panel2.SuspendLayout();
-            GroupBox1.SuspendLayout();
-            Panel3.SuspendLayout();
-            GroupBox2.SuspendLayout();
-            Panel1.SuspendLayout();
-            GroupBox3.SuspendLayout();
-            TableLayoutPanel3.SuspendLayout();
-            Panel5.SuspendLayout();
-            GroupBox5.SuspendLayout();
-            GroupBox4.SuspendLayout();
-            Panel6.SuspendLayout();
-            Panel4.SuspendLayout();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.TableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.Panel2 = new System.Windows.Forms.Panel();
+            this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.Mod2None = new System.Windows.Forms.RadioButton();
+            this.Mod2UT1200 = new System.Windows.Forms.RadioButton();
+            this.Mod2UT440 = new System.Windows.Forms.RadioButton();
+            this.Mod2UT30 = new System.Windows.Forms.RadioButton();
+            this.Mod2UT220 = new System.Windows.Forms.RadioButton();
+            this.Mod2UT50 = new System.Windows.Forms.RadioButton();
+            this.Mod2UT144 = new System.Windows.Forms.RadioButton();
+            this.Panel3 = new System.Windows.Forms.Panel();
+            this.GroupBox2 = new System.Windows.Forms.GroupBox();
+            this.Mod1None = new System.Windows.Forms.RadioButton();
+            this.Mod1UT1200 = new System.Windows.Forms.RadioButton();
+            this.Mod1UT440 = new System.Windows.Forms.RadioButton();
+            this.Mod1UT30 = new System.Windows.Forms.RadioButton();
+            this.Mod1UT220 = new System.Windows.Forms.RadioButton();
+            this.Mod1UT50 = new System.Windows.Forms.RadioButton();
+            this.Mod1UT144 = new System.Windows.Forms.RadioButton();
+            this.Panel1 = new System.Windows.Forms.Panel();
+            this.GroupBox3 = new System.Windows.Forms.GroupBox();
+            this.Mod3None = new System.Windows.Forms.RadioButton();
+            this.Mod3UT1200 = new System.Windows.Forms.RadioButton();
+            this.Mod3UT440 = new System.Windows.Forms.RadioButton();
+            this.Mod3UT30 = new System.Windows.Forms.RadioButton();
+            this.Mod3UT220 = new System.Windows.Forms.RadioButton();
+            this.Mod3UT50 = new System.Windows.Forms.RadioButton();
+            this.Mod3UT144 = new System.Windows.Forms.RadioButton();
+            this.TableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.Panel5 = new System.Windows.Forms.Panel();
+            this.GroupBox5 = new System.Windows.Forms.GroupBox();
+            this.debugRadioTimingButton = new System.Windows.Forms.RadioButton();
+            this.slowRadioTimingButton = new System.Windows.Forms.RadioButton();
+            this.normalRadioTimingButton = new System.Windows.Forms.RadioButton();
+            this.GroupBox4 = new System.Windows.Forms.GroupBox();
+            this.AROcheckBox = new System.Windows.Forms.CheckBox();
+            this.wideBandCheckBox = new System.Windows.Forms.CheckBox();
+            this.eTypeRadioCheckBox = new System.Windows.Forms.CheckBox();
+            this.Tsu7CheckBox = new System.Windows.Forms.CheckBox();
+            this.Panel6 = new System.Windows.Forms.Panel();
+            this.Panel4 = new System.Windows.Forms.Panel();
+            this.ChannelLists = new System.Windows.Forms.Button();
+            this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.TableLayoutPanel1.SuspendLayout();
+            this.TableLayoutPanel2.SuspendLayout();
+            this.Panel2.SuspendLayout();
+            this.GroupBox1.SuspendLayout();
+            this.Panel3.SuspendLayout();
+            this.GroupBox2.SuspendLayout();
+            this.Panel1.SuspendLayout();
+            this.GroupBox3.SuspendLayout();
+            this.TableLayoutPanel3.SuspendLayout();
+            this.Panel5.SuspendLayout();
+            this.GroupBox5.SuspendLayout();
+            this.GroupBox4.SuspendLayout();
+            this.Panel6.SuspendLayout();
+            this.Panel4.SuspendLayout();
+            this.SuspendLayout();
             // 
             // TableLayoutPanel1
             // 
-            TableLayoutPanel1.ColumnCount = 1;
-            TableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.0f));
-            TableLayoutPanel1.Controls.Add(TableLayoutPanel2, 0, 0);
-            TableLayoutPanel1.Controls.Add(TableLayoutPanel3, 0, 1);
-            TableLayoutPanel1.Dock = DockStyle.Fill;
-            TableLayoutPanel1.Location = new Point(0, 0);
-            TableLayoutPanel1.Margin = new Padding(4, 5, 4, 5);
-            TableLayoutPanel1.Name = "TableLayoutPanel1";
-            TableLayoutPanel1.RowCount = 2;
-            TableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 58.44156f));
-            TableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 41.55844f));
-            TableLayoutPanel1.Size = new Size(573, 592);
-            TableLayoutPanel1.TabIndex = 0;
+            this.TableLayoutPanel1.ColumnCount = 1;
+            this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.Controls.Add(this.TableLayoutPanel2, 0, 0);
+            this.TableLayoutPanel1.Controls.Add(this.TableLayoutPanel3, 0, 1);
+            this.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.TableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TableLayoutPanel1.Name = "TableLayoutPanel1";
+            this.TableLayoutPanel1.RowCount = 2;
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.44156F));
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.55844F));
+            this.TableLayoutPanel1.Size = new System.Drawing.Size(573, 592);
+            this.TableLayoutPanel1.TabIndex = 0;
             // 
             // TableLayoutPanel2
             // 
-            TableLayoutPanel2.ColumnCount = 3;
-            TableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.17544f));
-            TableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.82456f));
-            TableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 211.0f));
-            TableLayoutPanel2.Controls.Add(Panel2, 1, 0);
-            TableLayoutPanel2.Controls.Add(Panel3, 0, 0);
-            TableLayoutPanel2.Controls.Add(Panel1, 2, 0);
-            TableLayoutPanel2.Dock = DockStyle.Fill;
-            TableLayoutPanel2.Location = new Point(4, 5);
-            TableLayoutPanel2.Margin = new Padding(4, 5, 4, 5);
-            TableLayoutPanel2.Name = "TableLayoutPanel2";
-            TableLayoutPanel2.RowCount = 1;
-            TableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50.0f));
-            TableLayoutPanel2.Size = new Size(565, 335);
-            TableLayoutPanel2.TabIndex = 0;
+            this.TableLayoutPanel2.ColumnCount = 3;
+            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.17544F));
+            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.82456F));
+            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212F));
+            this.TableLayoutPanel2.Controls.Add(this.Panel2, 1, 0);
+            this.TableLayoutPanel2.Controls.Add(this.Panel3, 0, 0);
+            this.TableLayoutPanel2.Controls.Add(this.Panel1, 2, 0);
+            this.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayoutPanel2.Location = new System.Drawing.Point(4, 5);
+            this.TableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TableLayoutPanel2.Name = "TableLayoutPanel2";
+            this.TableLayoutPanel2.RowCount = 1;
+            this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel2.Size = new System.Drawing.Size(565, 335);
+            this.TableLayoutPanel2.TabIndex = 0;
             // 
             // Panel2
             // 
-            Panel2.BorderStyle = BorderStyle.Fixed3D;
-            Panel2.Controls.Add(GroupBox1);
-            Panel2.Dock = DockStyle.Fill;
-            Panel2.Location = new Point(181, 5);
-            Panel2.Margin = new Padding(4, 5, 4, 5);
-            Panel2.Name = "Panel2";
-            Panel2.Size = new Size(168, 325);
-            Panel2.TabIndex = 1;
+            this.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Panel2.Controls.Add(this.GroupBox1);
+            this.Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel2.Location = new System.Drawing.Point(181, 5);
+            this.Panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Panel2.Name = "Panel2";
+            this.Panel2.Size = new System.Drawing.Size(167, 325);
+            this.Panel2.TabIndex = 1;
             // 
             // GroupBox1
             // 
-            GroupBox1.Controls.Add(Mod2None);
-            GroupBox1.Controls.Add(Mod2UT1200);
-            GroupBox1.Controls.Add(Mod2UT440);
-            GroupBox1.Controls.Add(Mod2UT30);
-            GroupBox1.Controls.Add(Mod2UT220);
-            GroupBox1.Controls.Add(Mod2UT50);
-            GroupBox1.Controls.Add(Mod2UT144);
-            GroupBox1.Location = new Point(24, 32);
-            GroupBox1.Margin = new Padding(4, 5, 4, 5);
-            GroupBox1.Name = "GroupBox1";
-            GroupBox1.Padding = new Padding(4, 5, 4, 5);
-            GroupBox1.Size = new Size(146, 288);
-            GroupBox1.TabIndex = 2;
-            GroupBox1.TabStop = false;
-            GroupBox1.Text = "Module 2";
+            this.GroupBox1.Controls.Add(this.Mod2None);
+            this.GroupBox1.Controls.Add(this.Mod2UT1200);
+            this.GroupBox1.Controls.Add(this.Mod2UT440);
+            this.GroupBox1.Controls.Add(this.Mod2UT30);
+            this.GroupBox1.Controls.Add(this.Mod2UT220);
+            this.GroupBox1.Controls.Add(this.Mod2UT50);
+            this.GroupBox1.Controls.Add(this.Mod2UT144);
+            this.GroupBox1.Location = new System.Drawing.Point(24, 32);
+            this.GroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox1.Name = "GroupBox1";
+            this.GroupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox1.Size = new System.Drawing.Size(146, 288);
+            this.GroupBox1.TabIndex = 2;
+            this.GroupBox1.TabStop = false;
+            this.GroupBox1.Text = "Module 2";
             // 
             // Mod2None
             // 
-            Mod2None.AutoSize = true;
-            Mod2None.Location = new Point(40, 29);
-            Mod2None.Margin = new Padding(4, 5, 4, 5);
-            Mod2None.Name = "Mod2None";
-            Mod2None.Size = new Size(72, 24);
-            Mod2None.TabIndex = 6;
-            Mod2None.TabStop = true;
-            Mod2None.Text = "None";
-            Mod2None.UseVisualStyleBackColor = true;
+            this.Mod2None.AutoSize = true;
+            this.Mod2None.Location = new System.Drawing.Point(40, 29);
+            this.Mod2None.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod2None.Name = "Mod2None";
+            this.Mod2None.Size = new System.Drawing.Size(72, 24);
+            this.Mod2None.TabIndex = 6;
+            this.Mod2None.TabStop = true;
+            this.Mod2None.Text = "None";
+            this.Mod2None.UseVisualStyleBackColor = true;
             // 
             // Mod2UT1200
             // 
-            Mod2UT1200.AutoSize = true;
-            Mod2UT1200.Location = new Point(40, 242);
-            Mod2UT1200.Margin = new Padding(4, 5, 4, 5);
-            Mod2UT1200.Name = "Mod2UT1200";
-            Mod2UT1200.Size = new Size(95, 24);
-            Mod2UT1200.TabIndex = 5;
-            Mod2UT1200.TabStop = true;
-            Mod2UT1200.Text = "UT 1200";
-            Mod2UT1200.UseVisualStyleBackColor = true;
+            this.Mod2UT1200.AutoSize = true;
+            this.Mod2UT1200.Location = new System.Drawing.Point(40, 242);
+            this.Mod2UT1200.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod2UT1200.Name = "Mod2UT1200";
+            this.Mod2UT1200.Size = new System.Drawing.Size(95, 24);
+            this.Mod2UT1200.TabIndex = 5;
+            this.Mod2UT1200.TabStop = true;
+            this.Mod2UT1200.Text = "UT 1200";
+            this.Mod2UT1200.UseVisualStyleBackColor = true;
             // 
             // Mod2UT440
             // 
-            Mod2UT440.AutoSize = true;
-            Mod2UT440.Location = new Point(40, 206);
-            Mod2UT440.Margin = new Padding(4, 5, 4, 5);
-            Mod2UT440.Name = "Mod2UT440";
-            Mod2UT440.Size = new Size(86, 24);
-            Mod2UT440.TabIndex = 4;
-            Mod2UT440.TabStop = true;
-            Mod2UT440.Text = "UT 440";
-            Mod2UT440.UseVisualStyleBackColor = true;
+            this.Mod2UT440.AutoSize = true;
+            this.Mod2UT440.Location = new System.Drawing.Point(40, 206);
+            this.Mod2UT440.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod2UT440.Name = "Mod2UT440";
+            this.Mod2UT440.Size = new System.Drawing.Size(86, 24);
+            this.Mod2UT440.TabIndex = 4;
+            this.Mod2UT440.TabStop = true;
+            this.Mod2UT440.Text = "UT 440";
+            this.Mod2UT440.UseVisualStyleBackColor = true;
             // 
             // Mod2UT30
             // 
-            Mod2UT30.AutoSize = true;
-            Mod2UT30.Location = new Point(40, 65);
-            Mod2UT30.Margin = new Padding(4, 5, 4, 5);
-            Mod2UT30.Name = "Mod2UT30";
-            Mod2UT30.Size = new Size(77, 24);
-            Mod2UT30.TabIndex = 0;
-            Mod2UT30.TabStop = true;
-            Mod2UT30.Text = "UT 30";
-            Mod2UT30.UseVisualStyleBackColor = true;
+            this.Mod2UT30.AutoSize = true;
+            this.Mod2UT30.Location = new System.Drawing.Point(40, 65);
+            this.Mod2UT30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod2UT30.Name = "Mod2UT30";
+            this.Mod2UT30.Size = new System.Drawing.Size(77, 24);
+            this.Mod2UT30.TabIndex = 0;
+            this.Mod2UT30.TabStop = true;
+            this.Mod2UT30.Text = "UT 30";
+            this.Mod2UT30.UseVisualStyleBackColor = true;
             // 
             // Mod2UT220
             // 
-            Mod2UT220.AutoSize = true;
-            Mod2UT220.Location = new Point(40, 171);
-            Mod2UT220.Margin = new Padding(4, 5, 4, 5);
-            Mod2UT220.Name = "Mod2UT220";
-            Mod2UT220.Size = new Size(86, 24);
-            Mod2UT220.TabIndex = 3;
-            Mod2UT220.TabStop = true;
-            Mod2UT220.Text = "UT 220";
-            Mod2UT220.UseVisualStyleBackColor = true;
+            this.Mod2UT220.AutoSize = true;
+            this.Mod2UT220.Location = new System.Drawing.Point(40, 171);
+            this.Mod2UT220.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod2UT220.Name = "Mod2UT220";
+            this.Mod2UT220.Size = new System.Drawing.Size(86, 24);
+            this.Mod2UT220.TabIndex = 3;
+            this.Mod2UT220.TabStop = true;
+            this.Mod2UT220.Text = "UT 220";
+            this.Mod2UT220.UseVisualStyleBackColor = true;
             // 
             // Mod2UT50
             // 
-            Mod2UT50.AutoSize = true;
-            Mod2UT50.Location = new Point(40, 100);
-            Mod2UT50.Margin = new Padding(4, 5, 4, 5);
-            Mod2UT50.Name = "Mod2UT50";
-            Mod2UT50.Size = new Size(77, 24);
-            Mod2UT50.TabIndex = 1;
-            Mod2UT50.TabStop = true;
-            Mod2UT50.Text = "UT 50";
-            Mod2UT50.UseVisualStyleBackColor = true;
+            this.Mod2UT50.AutoSize = true;
+            this.Mod2UT50.Location = new System.Drawing.Point(40, 100);
+            this.Mod2UT50.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod2UT50.Name = "Mod2UT50";
+            this.Mod2UT50.Size = new System.Drawing.Size(77, 24);
+            this.Mod2UT50.TabIndex = 1;
+            this.Mod2UT50.TabStop = true;
+            this.Mod2UT50.Text = "UT 50";
+            this.Mod2UT50.UseVisualStyleBackColor = true;
             // 
             // Mod2UT144
             // 
-            Mod2UT144.AutoSize = true;
-            Mod2UT144.Location = new Point(40, 135);
-            Mod2UT144.Margin = new Padding(4, 5, 4, 5);
-            Mod2UT144.Name = "Mod2UT144";
-            Mod2UT144.Size = new Size(86, 24);
-            Mod2UT144.TabIndex = 2;
-            Mod2UT144.TabStop = true;
-            Mod2UT144.Text = "UT 144";
-            Mod2UT144.UseVisualStyleBackColor = true;
+            this.Mod2UT144.AutoSize = true;
+            this.Mod2UT144.Location = new System.Drawing.Point(40, 135);
+            this.Mod2UT144.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod2UT144.Name = "Mod2UT144";
+            this.Mod2UT144.Size = new System.Drawing.Size(86, 24);
+            this.Mod2UT144.TabIndex = 2;
+            this.Mod2UT144.TabStop = true;
+            this.Mod2UT144.Text = "UT 144";
+            this.Mod2UT144.UseVisualStyleBackColor = true;
             // 
             // Panel3
             // 
-            Panel3.BorderStyle = BorderStyle.Fixed3D;
-            Panel3.Controls.Add(GroupBox2);
-            Panel3.Dock = DockStyle.Fill;
-            Panel3.Location = new Point(4, 5);
-            Panel3.Margin = new Padding(4, 5, 4, 5);
-            Panel3.Name = "Panel3";
-            Panel3.Size = new Size(169, 325);
-            Panel3.TabIndex = 2;
+            this.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Panel3.Controls.Add(this.GroupBox2);
+            this.Panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel3.Location = new System.Drawing.Point(4, 5);
+            this.Panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Panel3.Name = "Panel3";
+            this.Panel3.Size = new System.Drawing.Size(169, 325);
+            this.Panel3.TabIndex = 2;
             // 
             // GroupBox2
             // 
-            GroupBox2.Controls.Add(Mod1None);
-            GroupBox2.Controls.Add(Mod1UT1200);
-            GroupBox2.Controls.Add(Mod1UT440);
-            GroupBox2.Controls.Add(Mod1UT30);
-            GroupBox2.Controls.Add(Mod1UT220);
-            GroupBox2.Controls.Add(Mod1UT50);
-            GroupBox2.Controls.Add(Mod1UT144);
-            GroupBox2.Location = new Point(22, 32);
-            GroupBox2.Margin = new Padding(4, 5, 4, 5);
-            GroupBox2.Name = "GroupBox2";
-            GroupBox2.Padding = new Padding(4, 5, 4, 5);
-            GroupBox2.Size = new Size(146, 288);
-            GroupBox2.TabIndex = 1;
-            GroupBox2.TabStop = false;
-            GroupBox2.Text = "Module 1";
+            this.GroupBox2.Controls.Add(this.Mod1None);
+            this.GroupBox2.Controls.Add(this.Mod1UT1200);
+            this.GroupBox2.Controls.Add(this.Mod1UT440);
+            this.GroupBox2.Controls.Add(this.Mod1UT30);
+            this.GroupBox2.Controls.Add(this.Mod1UT220);
+            this.GroupBox2.Controls.Add(this.Mod1UT50);
+            this.GroupBox2.Controls.Add(this.Mod1UT144);
+            this.GroupBox2.Location = new System.Drawing.Point(22, 32);
+            this.GroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox2.Name = "GroupBox2";
+            this.GroupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox2.Size = new System.Drawing.Size(146, 288);
+            this.GroupBox2.TabIndex = 1;
+            this.GroupBox2.TabStop = false;
+            this.GroupBox2.Text = "Module 1";
             // 
             // Mod1None
             // 
-            Mod1None.AutoSize = true;
-            Mod1None.Location = new Point(40, 29);
-            Mod1None.Margin = new Padding(4, 5, 4, 5);
-            Mod1None.Name = "Mod1None";
-            Mod1None.Size = new Size(72, 24);
-            Mod1None.TabIndex = 6;
-            Mod1None.TabStop = true;
-            Mod1None.Text = "None";
-            Mod1None.UseVisualStyleBackColor = true;
+            this.Mod1None.AutoSize = true;
+            this.Mod1None.Location = new System.Drawing.Point(40, 29);
+            this.Mod1None.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod1None.Name = "Mod1None";
+            this.Mod1None.Size = new System.Drawing.Size(72, 24);
+            this.Mod1None.TabIndex = 6;
+            this.Mod1None.TabStop = true;
+            this.Mod1None.Text = "None";
+            this.Mod1None.UseVisualStyleBackColor = true;
             // 
             // Mod1UT1200
             // 
-            Mod1UT1200.AutoSize = true;
-            Mod1UT1200.Location = new Point(40, 242);
-            Mod1UT1200.Margin = new Padding(4, 5, 4, 5);
-            Mod1UT1200.Name = "Mod1UT1200";
-            Mod1UT1200.Size = new Size(95, 24);
-            Mod1UT1200.TabIndex = 5;
-            Mod1UT1200.TabStop = true;
-            Mod1UT1200.Text = "UT 1200";
-            Mod1UT1200.UseVisualStyleBackColor = true;
+            this.Mod1UT1200.AutoSize = true;
+            this.Mod1UT1200.Location = new System.Drawing.Point(40, 242);
+            this.Mod1UT1200.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod1UT1200.Name = "Mod1UT1200";
+            this.Mod1UT1200.Size = new System.Drawing.Size(95, 24);
+            this.Mod1UT1200.TabIndex = 5;
+            this.Mod1UT1200.TabStop = true;
+            this.Mod1UT1200.Text = "UT 1200";
+            this.Mod1UT1200.UseVisualStyleBackColor = true;
             // 
             // Mod1UT440
             // 
-            Mod1UT440.AutoSize = true;
-            Mod1UT440.Location = new Point(40, 206);
-            Mod1UT440.Margin = new Padding(4, 5, 4, 5);
-            Mod1UT440.Name = "Mod1UT440";
-            Mod1UT440.Size = new Size(86, 24);
-            Mod1UT440.TabIndex = 4;
-            Mod1UT440.TabStop = true;
-            Mod1UT440.Text = "UT 440";
-            Mod1UT440.UseVisualStyleBackColor = true;
+            this.Mod1UT440.AutoSize = true;
+            this.Mod1UT440.Location = new System.Drawing.Point(40, 206);
+            this.Mod1UT440.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod1UT440.Name = "Mod1UT440";
+            this.Mod1UT440.Size = new System.Drawing.Size(86, 24);
+            this.Mod1UT440.TabIndex = 4;
+            this.Mod1UT440.TabStop = true;
+            this.Mod1UT440.Text = "UT 440";
+            this.Mod1UT440.UseVisualStyleBackColor = true;
             // 
             // Mod1UT30
             // 
-            Mod1UT30.AutoSize = true;
-            Mod1UT30.Location = new Point(40, 65);
-            Mod1UT30.Margin = new Padding(4, 5, 4, 5);
-            Mod1UT30.Name = "Mod1UT30";
-            Mod1UT30.Size = new Size(77, 24);
-            Mod1UT30.TabIndex = 0;
-            Mod1UT30.TabStop = true;
-            Mod1UT30.Text = "UT 30";
-            Mod1UT30.UseVisualStyleBackColor = true;
+            this.Mod1UT30.AutoSize = true;
+            this.Mod1UT30.Location = new System.Drawing.Point(40, 65);
+            this.Mod1UT30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod1UT30.Name = "Mod1UT30";
+            this.Mod1UT30.Size = new System.Drawing.Size(77, 24);
+            this.Mod1UT30.TabIndex = 0;
+            this.Mod1UT30.TabStop = true;
+            this.Mod1UT30.Text = "UT 30";
+            this.Mod1UT30.UseVisualStyleBackColor = true;
             // 
             // Mod1UT220
             // 
-            Mod1UT220.AutoSize = true;
-            Mod1UT220.Location = new Point(40, 171);
-            Mod1UT220.Margin = new Padding(4, 5, 4, 5);
-            Mod1UT220.Name = "Mod1UT220";
-            Mod1UT220.Size = new Size(86, 24);
-            Mod1UT220.TabIndex = 3;
-            Mod1UT220.TabStop = true;
-            Mod1UT220.Text = "UT 220";
-            Mod1UT220.UseVisualStyleBackColor = true;
+            this.Mod1UT220.AutoSize = true;
+            this.Mod1UT220.Location = new System.Drawing.Point(40, 171);
+            this.Mod1UT220.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod1UT220.Name = "Mod1UT220";
+            this.Mod1UT220.Size = new System.Drawing.Size(86, 24);
+            this.Mod1UT220.TabIndex = 3;
+            this.Mod1UT220.TabStop = true;
+            this.Mod1UT220.Text = "UT 220";
+            this.Mod1UT220.UseVisualStyleBackColor = true;
             // 
             // Mod1UT50
             // 
-            Mod1UT50.AutoSize = true;
-            Mod1UT50.Location = new Point(40, 100);
-            Mod1UT50.Margin = new Padding(4, 5, 4, 5);
-            Mod1UT50.Name = "Mod1UT50";
-            Mod1UT50.Size = new Size(77, 24);
-            Mod1UT50.TabIndex = 1;
-            Mod1UT50.TabStop = true;
-            Mod1UT50.Text = "UT 50";
-            Mod1UT50.UseVisualStyleBackColor = true;
+            this.Mod1UT50.AutoSize = true;
+            this.Mod1UT50.Location = new System.Drawing.Point(40, 100);
+            this.Mod1UT50.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod1UT50.Name = "Mod1UT50";
+            this.Mod1UT50.Size = new System.Drawing.Size(77, 24);
+            this.Mod1UT50.TabIndex = 1;
+            this.Mod1UT50.TabStop = true;
+            this.Mod1UT50.Text = "UT 50";
+            this.Mod1UT50.UseVisualStyleBackColor = true;
             // 
             // Mod1UT144
             // 
-            Mod1UT144.AutoSize = true;
-            Mod1UT144.Location = new Point(40, 135);
-            Mod1UT144.Margin = new Padding(4, 5, 4, 5);
-            Mod1UT144.Name = "Mod1UT144";
-            Mod1UT144.Size = new Size(86, 24);
-            Mod1UT144.TabIndex = 2;
-            Mod1UT144.TabStop = true;
-            Mod1UT144.Text = "UT 144";
-            Mod1UT144.UseVisualStyleBackColor = true;
+            this.Mod1UT144.AutoSize = true;
+            this.Mod1UT144.Location = new System.Drawing.Point(40, 135);
+            this.Mod1UT144.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod1UT144.Name = "Mod1UT144";
+            this.Mod1UT144.Size = new System.Drawing.Size(86, 24);
+            this.Mod1UT144.TabIndex = 2;
+            this.Mod1UT144.TabStop = true;
+            this.Mod1UT144.Text = "UT 144";
+            this.Mod1UT144.UseVisualStyleBackColor = true;
             // 
             // Panel1
             // 
-            Panel1.BorderStyle = BorderStyle.Fixed3D;
-            Panel1.Controls.Add(GroupBox3);
-            Panel1.Dock = DockStyle.Fill;
-            Panel1.Location = new Point(357, 5);
-            Panel1.Margin = new Padding(4, 5, 4, 5);
-            Panel1.Name = "Panel1";
-            Panel1.Size = new Size(204, 325);
-            Panel1.TabIndex = 3;
+            this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Panel1.Controls.Add(this.GroupBox3);
+            this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel1.Location = new System.Drawing.Point(356, 5);
+            this.Panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Panel1.Name = "Panel1";
+            this.Panel1.Size = new System.Drawing.Size(205, 325);
+            this.Panel1.TabIndex = 3;
             // 
             // GroupBox3
             // 
-            GroupBox3.Controls.Add(Mod3None);
-            GroupBox3.Controls.Add(Mod3UT1200);
-            GroupBox3.Controls.Add(Mod3UT440);
-            GroupBox3.Controls.Add(Mod3UT30);
-            GroupBox3.Controls.Add(Mod3UT220);
-            GroupBox3.Controls.Add(Mod3UT50);
-            GroupBox3.Controls.Add(Mod3UT144);
-            GroupBox3.Location = new Point(27, 32);
-            GroupBox3.Margin = new Padding(4, 5, 4, 5);
-            GroupBox3.Name = "GroupBox3";
-            GroupBox3.Padding = new Padding(4, 5, 4, 5);
-            GroupBox3.Size = new Size(146, 288);
-            GroupBox3.TabIndex = 3;
-            GroupBox3.TabStop = false;
-            GroupBox3.Text = "Module 3";
+            this.GroupBox3.Controls.Add(this.Mod3None);
+            this.GroupBox3.Controls.Add(this.Mod3UT1200);
+            this.GroupBox3.Controls.Add(this.Mod3UT440);
+            this.GroupBox3.Controls.Add(this.Mod3UT30);
+            this.GroupBox3.Controls.Add(this.Mod3UT220);
+            this.GroupBox3.Controls.Add(this.Mod3UT50);
+            this.GroupBox3.Controls.Add(this.Mod3UT144);
+            this.GroupBox3.Location = new System.Drawing.Point(27, 32);
+            this.GroupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox3.Name = "GroupBox3";
+            this.GroupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox3.Size = new System.Drawing.Size(146, 288);
+            this.GroupBox3.TabIndex = 3;
+            this.GroupBox3.TabStop = false;
+            this.GroupBox3.Text = "Module 3";
             // 
             // Mod3None
             // 
-            Mod3None.AutoSize = true;
-            Mod3None.Location = new Point(40, 29);
-            Mod3None.Margin = new Padding(4, 5, 4, 5);
-            Mod3None.Name = "Mod3None";
-            Mod3None.Size = new Size(72, 24);
-            Mod3None.TabIndex = 6;
-            Mod3None.TabStop = true;
-            Mod3None.Text = "None";
-            Mod3None.UseVisualStyleBackColor = true;
+            this.Mod3None.AutoSize = true;
+            this.Mod3None.Location = new System.Drawing.Point(40, 29);
+            this.Mod3None.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod3None.Name = "Mod3None";
+            this.Mod3None.Size = new System.Drawing.Size(72, 24);
+            this.Mod3None.TabIndex = 6;
+            this.Mod3None.TabStop = true;
+            this.Mod3None.Text = "None";
+            this.Mod3None.UseVisualStyleBackColor = true;
             // 
             // Mod3UT1200
             // 
-            Mod3UT1200.AutoSize = true;
-            Mod3UT1200.Location = new Point(40, 242);
-            Mod3UT1200.Margin = new Padding(4, 5, 4, 5);
-            Mod3UT1200.Name = "Mod3UT1200";
-            Mod3UT1200.Size = new Size(95, 24);
-            Mod3UT1200.TabIndex = 5;
-            Mod3UT1200.TabStop = true;
-            Mod3UT1200.Text = "UT 1200";
-            Mod3UT1200.UseVisualStyleBackColor = true;
+            this.Mod3UT1200.AutoSize = true;
+            this.Mod3UT1200.Location = new System.Drawing.Point(40, 242);
+            this.Mod3UT1200.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod3UT1200.Name = "Mod3UT1200";
+            this.Mod3UT1200.Size = new System.Drawing.Size(95, 24);
+            this.Mod3UT1200.TabIndex = 5;
+            this.Mod3UT1200.TabStop = true;
+            this.Mod3UT1200.Text = "UT 1200";
+            this.Mod3UT1200.UseVisualStyleBackColor = true;
             // 
             // Mod3UT440
             // 
-            Mod3UT440.AutoSize = true;
-            Mod3UT440.Location = new Point(40, 206);
-            Mod3UT440.Margin = new Padding(4, 5, 4, 5);
-            Mod3UT440.Name = "Mod3UT440";
-            Mod3UT440.Size = new Size(86, 24);
-            Mod3UT440.TabIndex = 4;
-            Mod3UT440.TabStop = true;
-            Mod3UT440.Text = "UT 440";
-            Mod3UT440.UseVisualStyleBackColor = true;
+            this.Mod3UT440.AutoSize = true;
+            this.Mod3UT440.Location = new System.Drawing.Point(40, 206);
+            this.Mod3UT440.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod3UT440.Name = "Mod3UT440";
+            this.Mod3UT440.Size = new System.Drawing.Size(86, 24);
+            this.Mod3UT440.TabIndex = 4;
+            this.Mod3UT440.TabStop = true;
+            this.Mod3UT440.Text = "UT 440";
+            this.Mod3UT440.UseVisualStyleBackColor = true;
             // 
             // Mod3UT30
             // 
-            Mod3UT30.AutoSize = true;
-            Mod3UT30.Location = new Point(40, 65);
-            Mod3UT30.Margin = new Padding(4, 5, 4, 5);
-            Mod3UT30.Name = "Mod3UT30";
-            Mod3UT30.Size = new Size(77, 24);
-            Mod3UT30.TabIndex = 0;
-            Mod3UT30.TabStop = true;
-            Mod3UT30.Text = "UT 30";
-            Mod3UT30.UseVisualStyleBackColor = true;
+            this.Mod3UT30.AutoSize = true;
+            this.Mod3UT30.Location = new System.Drawing.Point(40, 65);
+            this.Mod3UT30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod3UT30.Name = "Mod3UT30";
+            this.Mod3UT30.Size = new System.Drawing.Size(77, 24);
+            this.Mod3UT30.TabIndex = 0;
+            this.Mod3UT30.TabStop = true;
+            this.Mod3UT30.Text = "UT 30";
+            this.Mod3UT30.UseVisualStyleBackColor = true;
             // 
             // Mod3UT220
             // 
-            Mod3UT220.AutoSize = true;
-            Mod3UT220.Location = new Point(40, 171);
-            Mod3UT220.Margin = new Padding(4, 5, 4, 5);
-            Mod3UT220.Name = "Mod3UT220";
-            Mod3UT220.Size = new Size(86, 24);
-            Mod3UT220.TabIndex = 3;
-            Mod3UT220.TabStop = true;
-            Mod3UT220.Text = "UT 220";
-            Mod3UT220.UseVisualStyleBackColor = true;
+            this.Mod3UT220.AutoSize = true;
+            this.Mod3UT220.Location = new System.Drawing.Point(40, 171);
+            this.Mod3UT220.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod3UT220.Name = "Mod3UT220";
+            this.Mod3UT220.Size = new System.Drawing.Size(86, 24);
+            this.Mod3UT220.TabIndex = 3;
+            this.Mod3UT220.TabStop = true;
+            this.Mod3UT220.Text = "UT 220";
+            this.Mod3UT220.UseVisualStyleBackColor = true;
             // 
             // Mod3UT50
             // 
-            Mod3UT50.AutoSize = true;
-            Mod3UT50.Location = new Point(40, 100);
-            Mod3UT50.Margin = new Padding(4, 5, 4, 5);
-            Mod3UT50.Name = "Mod3UT50";
-            Mod3UT50.Size = new Size(77, 24);
-            Mod3UT50.TabIndex = 1;
-            Mod3UT50.TabStop = true;
-            Mod3UT50.Text = "UT 50";
-            Mod3UT50.UseVisualStyleBackColor = true;
+            this.Mod3UT50.AutoSize = true;
+            this.Mod3UT50.Location = new System.Drawing.Point(40, 100);
+            this.Mod3UT50.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod3UT50.Name = "Mod3UT50";
+            this.Mod3UT50.Size = new System.Drawing.Size(77, 24);
+            this.Mod3UT50.TabIndex = 1;
+            this.Mod3UT50.TabStop = true;
+            this.Mod3UT50.Text = "UT 50";
+            this.Mod3UT50.UseVisualStyleBackColor = true;
             // 
             // Mod3UT144
             // 
-            Mod3UT144.AutoSize = true;
-            Mod3UT144.Location = new Point(40, 135);
-            Mod3UT144.Margin = new Padding(4, 5, 4, 5);
-            Mod3UT144.Name = "Mod3UT144";
-            Mod3UT144.Size = new Size(86, 24);
-            Mod3UT144.TabIndex = 2;
-            Mod3UT144.TabStop = true;
-            Mod3UT144.Text = "UT 144";
-            Mod3UT144.UseVisualStyleBackColor = true;
+            this.Mod3UT144.AutoSize = true;
+            this.Mod3UT144.Location = new System.Drawing.Point(40, 135);
+            this.Mod3UT144.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod3UT144.Name = "Mod3UT144";
+            this.Mod3UT144.Size = new System.Drawing.Size(86, 24);
+            this.Mod3UT144.TabIndex = 2;
+            this.Mod3UT144.TabStop = true;
+            this.Mod3UT144.Text = "UT 144";
+            this.Mod3UT144.UseVisualStyleBackColor = true;
             // 
             // TableLayoutPanel3
             // 
-            TableLayoutPanel3.ColumnCount = 2;
-            TableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 68.61702f));
-            TableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 31.38298f));
-            TableLayoutPanel3.Controls.Add(Panel5, 0, 0);
-            TableLayoutPanel3.Controls.Add(Panel6, 1, 0);
-            TableLayoutPanel3.Dock = DockStyle.Fill;
-            TableLayoutPanel3.Location = new Point(4, 350);
-            TableLayoutPanel3.Margin = new Padding(4, 5, 4, 5);
-            TableLayoutPanel3.Name = "TableLayoutPanel3";
-            TableLayoutPanel3.RowCount = 1;
-            TableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50.0f));
-            TableLayoutPanel3.Size = new Size(565, 237);
-            TableLayoutPanel3.TabIndex = 1;
+            this.TableLayoutPanel3.ColumnCount = 2;
+            this.TableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.61702F));
+            this.TableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.38298F));
+            this.TableLayoutPanel3.Controls.Add(this.Panel5, 0, 0);
+            this.TableLayoutPanel3.Controls.Add(this.Panel6, 1, 0);
+            this.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayoutPanel3.Location = new System.Drawing.Point(4, 350);
+            this.TableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TableLayoutPanel3.Name = "TableLayoutPanel3";
+            this.TableLayoutPanel3.RowCount = 1;
+            this.TableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel3.Size = new System.Drawing.Size(565, 237);
+            this.TableLayoutPanel3.TabIndex = 1;
             // 
             // Panel5
             // 
-            Panel5.Controls.Add(GroupBox5);
-            Panel5.Controls.Add(GroupBox4);
-            Panel5.Dock = DockStyle.Fill;
-            Panel5.Location = new Point(4, 5);
-            Panel5.Margin = new Padding(4, 5, 4, 5);
-            Panel5.Name = "Panel5";
-            Panel5.Size = new Size(379, 227);
-            Panel5.TabIndex = 0;
+            this.Panel5.Controls.Add(this.GroupBox5);
+            this.Panel5.Controls.Add(this.GroupBox4);
+            this.Panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel5.Location = new System.Drawing.Point(4, 5);
+            this.Panel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Panel5.Name = "Panel5";
+            this.Panel5.Size = new System.Drawing.Size(379, 227);
+            this.Panel5.TabIndex = 0;
             // 
             // GroupBox5
             // 
-            GroupBox5.Controls.Add(debugRadioTimingButton);
-            GroupBox5.Controls.Add(slowRadioTimingButton);
-            GroupBox5.Controls.Add(normalRadioTimingButton);
-            GroupBox5.Location = new Point(192, 6);
-            GroupBox5.Margin = new Padding(4, 5, 4, 5);
-            GroupBox5.Name = "GroupBox5";
-            GroupBox5.Padding = new Padding(4, 5, 4, 5);
-            GroupBox5.Size = new Size(138, 154);
-            GroupBox5.TabIndex = 1;
-            GroupBox5.TabStop = false;
-            GroupBox5.Text = "Radio Timing";
+            this.GroupBox5.Controls.Add(this.debugRadioTimingButton);
+            this.GroupBox5.Controls.Add(this.slowRadioTimingButton);
+            this.GroupBox5.Controls.Add(this.normalRadioTimingButton);
+            this.GroupBox5.Location = new System.Drawing.Point(192, 6);
+            this.GroupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox5.Name = "GroupBox5";
+            this.GroupBox5.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox5.Size = new System.Drawing.Size(138, 154);
+            this.GroupBox5.TabIndex = 1;
+            this.GroupBox5.TabStop = false;
+            this.GroupBox5.Text = "Radio Timing";
             // 
             // debugRadioTimingButton
             // 
-            debugRadioTimingButton.AutoSize = true;
-            debugRadioTimingButton.Location = new Point(15, 102);
-            debugRadioTimingButton.Margin = new Padding(4, 5, 4, 5);
-            debugRadioTimingButton.Name = "debugRadioTimingButton";
-            debugRadioTimingButton.Size = new Size(82, 24);
-            debugRadioTimingButton.TabIndex = 2;
-            debugRadioTimingButton.TabStop = true;
-            debugRadioTimingButton.Text = "Debug";
-            debugRadioTimingButton.UseVisualStyleBackColor = true;
+            this.debugRadioTimingButton.AutoSize = true;
+            this.debugRadioTimingButton.Location = new System.Drawing.Point(15, 102);
+            this.debugRadioTimingButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.debugRadioTimingButton.Name = "debugRadioTimingButton";
+            this.debugRadioTimingButton.Size = new System.Drawing.Size(82, 24);
+            this.debugRadioTimingButton.TabIndex = 2;
+            this.debugRadioTimingButton.TabStop = true;
+            this.debugRadioTimingButton.Text = "Debug";
+            this.debugRadioTimingButton.UseVisualStyleBackColor = true;
             // 
             // slowRadioTimingButton
             // 
-            slowRadioTimingButton.AutoSize = true;
-            slowRadioTimingButton.Location = new Point(15, 66);
-            slowRadioTimingButton.Margin = new Padding(4, 5, 4, 5);
-            slowRadioTimingButton.Name = "slowRadioTimingButton";
-            slowRadioTimingButton.Size = new Size(68, 24);
-            slowRadioTimingButton.TabIndex = 1;
-            slowRadioTimingButton.TabStop = true;
-            slowRadioTimingButton.Text = "Slow";
-            slowRadioTimingButton.UseVisualStyleBackColor = true;
+            this.slowRadioTimingButton.AutoSize = true;
+            this.slowRadioTimingButton.Location = new System.Drawing.Point(15, 66);
+            this.slowRadioTimingButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.slowRadioTimingButton.Name = "slowRadioTimingButton";
+            this.slowRadioTimingButton.Size = new System.Drawing.Size(68, 24);
+            this.slowRadioTimingButton.TabIndex = 1;
+            this.slowRadioTimingButton.TabStop = true;
+            this.slowRadioTimingButton.Text = "Slow";
+            this.slowRadioTimingButton.UseVisualStyleBackColor = true;
             // 
             // normalRadioTimingButton
             // 
-            normalRadioTimingButton.AutoSize = true;
-            normalRadioTimingButton.Checked = true;
-            normalRadioTimingButton.Location = new Point(15, 31);
-            normalRadioTimingButton.Margin = new Padding(4, 5, 4, 5);
-            normalRadioTimingButton.Name = "normalRadioTimingButton";
-            normalRadioTimingButton.Size = new Size(84, 24);
-            normalRadioTimingButton.TabIndex = 0;
-            normalRadioTimingButton.TabStop = true;
-            normalRadioTimingButton.Text = "Normal";
-            normalRadioTimingButton.UseVisualStyleBackColor = true;
+            this.normalRadioTimingButton.AutoSize = true;
+            this.normalRadioTimingButton.Checked = true;
+            this.normalRadioTimingButton.Location = new System.Drawing.Point(15, 31);
+            this.normalRadioTimingButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.normalRadioTimingButton.Name = "normalRadioTimingButton";
+            this.normalRadioTimingButton.Size = new System.Drawing.Size(84, 24);
+            this.normalRadioTimingButton.TabIndex = 0;
+            this.normalRadioTimingButton.TabStop = true;
+            this.normalRadioTimingButton.Text = "Normal";
+            this.normalRadioTimingButton.UseVisualStyleBackColor = true;
             // 
             // GroupBox4
             // 
-            GroupBox4.Controls.Add(AROcheckBox);
-            GroupBox4.Controls.Add(wideBandCheckBox);
-            GroupBox4.Controls.Add(eTypeRadioCheckBox);
-            GroupBox4.Controls.Add(Tsu7CheckBox);
-            GroupBox4.Location = new Point(9, 6);
-            GroupBox4.Margin = new Padding(4, 5, 4, 5);
-            GroupBox4.Name = "GroupBox4";
-            GroupBox4.Padding = new Padding(4, 5, 4, 5);
-            GroupBox4.Size = new Size(174, 194);
-            GroupBox4.TabIndex = 0;
-            GroupBox4.TabStop = false;
-            GroupBox4.Text = "Radio Options";
+            this.GroupBox4.Controls.Add(this.AROcheckBox);
+            this.GroupBox4.Controls.Add(this.wideBandCheckBox);
+            this.GroupBox4.Controls.Add(this.eTypeRadioCheckBox);
+            this.GroupBox4.Controls.Add(this.Tsu7CheckBox);
+            this.GroupBox4.Location = new System.Drawing.Point(9, 6);
+            this.GroupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox4.Name = "GroupBox4";
+            this.GroupBox4.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GroupBox4.Size = new System.Drawing.Size(174, 194);
+            this.GroupBox4.TabIndex = 0;
+            this.GroupBox4.TabStop = false;
+            this.GroupBox4.Text = "Radio Options";
             // 
             // AROcheckBox
             // 
-            AROcheckBox.Location = new Point(10, 137);
-            AROcheckBox.Margin = new Padding(4, 5, 4, 5);
-            AROcheckBox.Name = "AROcheckBox";
-            AROcheckBox.Size = new Size(156, 48);
-            AROcheckBox.TabIndex = 4;
-            AROcheckBox.Text = "Automatic Repeater Offset";
-            AROcheckBox.UseVisualStyleBackColor = true;
+            this.AROcheckBox.Location = new System.Drawing.Point(10, 137);
+            this.AROcheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AROcheckBox.Name = "AROcheckBox";
+            this.AROcheckBox.Size = new System.Drawing.Size(156, 48);
+            this.AROcheckBox.TabIndex = 4;
+            this.AROcheckBox.Text = "Automatic Repeater Offset";
+            this.AROcheckBox.UseVisualStyleBackColor = true;
             // 
             // wideBandCheckBox
             // 
-            wideBandCheckBox.AutoSize = true;
-            wideBandCheckBox.Location = new Point(10, 111);
-            wideBandCheckBox.Margin = new Padding(4, 5, 4, 5);
-            wideBandCheckBox.Name = "wideBandCheckBox";
-            wideBandCheckBox.Size = new Size(113, 24);
-            wideBandCheckBox.TabIndex = 3;
-            wideBandCheckBox.Text = "Wide Band";
-            wideBandCheckBox.UseVisualStyleBackColor = true;
+            this.wideBandCheckBox.AutoSize = true;
+            this.wideBandCheckBox.Location = new System.Drawing.Point(10, 111);
+            this.wideBandCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.wideBandCheckBox.Name = "wideBandCheckBox";
+            this.wideBandCheckBox.Size = new System.Drawing.Size(113, 24);
+            this.wideBandCheckBox.TabIndex = 3;
+            this.wideBandCheckBox.Text = "Wide Band";
+            this.wideBandCheckBox.UseVisualStyleBackColor = true;
             // 
             // eTypeRadioCheckBox
             // 
-            eTypeRadioCheckBox.AutoSize = true;
-            eTypeRadioCheckBox.Location = new Point(10, 78);
-            eTypeRadioCheckBox.Margin = new Padding(4, 5, 4, 5);
-            eTypeRadioCheckBox.Name = "eTypeRadioCheckBox";
-            eTypeRadioCheckBox.Size = new Size(136, 24);
-            eTypeRadioCheckBox.TabIndex = 2;
-            eTypeRadioCheckBox.Text = "'E' Type Radio";
-            eTypeRadioCheckBox.UseVisualStyleBackColor = true;
+            this.eTypeRadioCheckBox.AutoSize = true;
+            this.eTypeRadioCheckBox.Location = new System.Drawing.Point(10, 78);
+            this.eTypeRadioCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.eTypeRadioCheckBox.Name = "eTypeRadioCheckBox";
+            this.eTypeRadioCheckBox.Size = new System.Drawing.Size(136, 24);
+            this.eTypeRadioCheckBox.TabIndex = 2;
+            this.eTypeRadioCheckBox.Text = "\'E\' Type Radio";
+            this.eTypeRadioCheckBox.UseVisualStyleBackColor = true;
+            this.eTypeRadioCheckBox.CheckedChanged += new System.EventHandler(this.eTypeRadioCheckBox_CheckedChanged);
             // 
             // Tsu7CheckBox
             // 
-            Tsu7CheckBox.AutoSize = true;
-            Tsu7CheckBox.Location = new Point(10, 45);
-            Tsu7CheckBox.Margin = new Padding(4, 5, 4, 5);
-            Tsu7CheckBox.Name = "Tsu7CheckBox";
-            Tsu7CheckBox.Size = new Size(145, 24);
-            Tsu7CheckBox.TabIndex = 0;
-            Tsu7CheckBox.Text = "TSU-7 Installed";
-            Tsu7CheckBox.UseVisualStyleBackColor = true;
+            this.Tsu7CheckBox.AutoSize = true;
+            this.Tsu7CheckBox.Location = new System.Drawing.Point(10, 45);
+            this.Tsu7CheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Tsu7CheckBox.Name = "Tsu7CheckBox";
+            this.Tsu7CheckBox.Size = new System.Drawing.Size(145, 24);
+            this.Tsu7CheckBox.TabIndex = 0;
+            this.Tsu7CheckBox.Text = "TSU-7 Installed";
+            this.Tsu7CheckBox.UseVisualStyleBackColor = true;
             // 
             // Panel6
             // 
-            Panel6.Controls.Add(Panel4);
-            Panel6.Dock = DockStyle.Fill;
-            Panel6.Location = new Point(391, 5);
-            Panel6.Margin = new Padding(4, 5, 4, 5);
-            Panel6.Name = "Panel6";
-            Panel6.Size = new Size(170, 227);
-            Panel6.TabIndex = 1;
+            this.Panel6.Controls.Add(this.Panel4);
+            this.Panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel6.Location = new System.Drawing.Point(391, 5);
+            this.Panel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Panel6.Name = "Panel6";
+            this.Panel6.Size = new System.Drawing.Size(170, 227);
+            this.Panel6.TabIndex = 1;
             // 
             // Panel4
             // 
-            Panel4.BorderStyle = BorderStyle.Fixed3D;
-            Panel4.Controls.Add(ChannelLists);
-            Panel4.Dock = DockStyle.Fill;
-            Panel4.Location = new Point(0, 0);
-            Panel4.Margin = new Padding(4, 5, 4, 5);
-            Panel4.Name = "Panel4";
-            Panel4.Size = new Size(170, 227);
-            Panel4.TabIndex = 1;
+            this.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Panel4.Controls.Add(this.ChannelLists);
+            this.Panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel4.Location = new System.Drawing.Point(0, 0);
+            this.Panel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Panel4.Name = "Panel4";
+            this.Panel4.Size = new System.Drawing.Size(170, 227);
+            this.Panel4.TabIndex = 1;
             // 
             // ChannelLists
             // 
-            ChannelLists.Location = new Point(27, 71);
-            ChannelLists.Margin = new Padding(4, 5, 4, 5);
-            ChannelLists.Name = "ChannelLists";
-            ChannelLists.Size = new Size(117, 60);
-            ChannelLists.TabIndex = 2;
-            ChannelLists.Text = "Go To Channel Lists";
-            ChannelLists.UseVisualStyleBackColor = true;
+            this.ChannelLists.Location = new System.Drawing.Point(27, 71);
+            this.ChannelLists.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ChannelLists.Name = "ChannelLists";
+            this.ChannelLists.Size = new System.Drawing.Size(117, 60);
+            this.ChannelLists.TabIndex = 2;
+            this.ChannelLists.Text = "Go To Channel Lists";
+            this.ChannelLists.UseVisualStyleBackColor = true;
+            this.ChannelLists.Click += new System.EventHandler(this.ChannelLists_Click);
             // 
             // Form2
             // 
-            AutoScaleDimensions = new SizeF(9.0f, 20.0f);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(573, 592);
-            Controls.Add(TableLayoutPanel1);
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
-            Name = "Form2";
-            Text = "Radio Configuration (Version 1.1)";
-            TableLayoutPanel1.ResumeLayout(false);
-            TableLayoutPanel2.ResumeLayout(false);
-            Panel2.ResumeLayout(false);
-            GroupBox1.ResumeLayout(false);
-            GroupBox1.PerformLayout();
-            Panel3.ResumeLayout(false);
-            GroupBox2.ResumeLayout(false);
-            GroupBox2.PerformLayout();
-            Panel1.ResumeLayout(false);
-            GroupBox3.ResumeLayout(false);
-            GroupBox3.PerformLayout();
-            TableLayoutPanel3.ResumeLayout(false);
-            Panel5.ResumeLayout(false);
-            GroupBox5.ResumeLayout(false);
-            GroupBox5.PerformLayout();
-            GroupBox4.ResumeLayout(false);
-            GroupBox4.PerformLayout();
-            Panel6.ResumeLayout(false);
-            Panel4.ResumeLayout(false);
-            Load += new EventHandler(Form2_Load);
-            FormClosing += new FormClosingEventHandler(Form1_FormClosing);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(573, 592);
+            this.Controls.Add(this.TableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Name = "Form2";
+            this.Text = "Radio Configuration (Version 1.1)";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
+            this.Load += new System.EventHandler(this.Form2_Load);
+            this.TableLayoutPanel1.ResumeLayout(false);
+            this.TableLayoutPanel2.ResumeLayout(false);
+            this.Panel2.ResumeLayout(false);
+            this.GroupBox1.ResumeLayout(false);
+            this.GroupBox1.PerformLayout();
+            this.Panel3.ResumeLayout(false);
+            this.GroupBox2.ResumeLayout(false);
+            this.GroupBox2.PerformLayout();
+            this.Panel1.ResumeLayout(false);
+            this.GroupBox3.ResumeLayout(false);
+            this.GroupBox3.PerformLayout();
+            this.TableLayoutPanel3.ResumeLayout(false);
+            this.Panel5.ResumeLayout(false);
+            this.GroupBox5.ResumeLayout(false);
+            this.GroupBox5.PerformLayout();
+            this.GroupBox4.ResumeLayout(false);
+            this.GroupBox4.PerformLayout();
+            this.Panel6.ResumeLayout(false);
+            this.Panel4.ResumeLayout(false);
+            this.ResumeLayout(false);
 
         }
         internal TableLayoutPanel TableLayoutPanel1;

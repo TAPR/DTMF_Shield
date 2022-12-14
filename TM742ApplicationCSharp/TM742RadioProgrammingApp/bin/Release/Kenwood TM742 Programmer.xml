@@ -1,26 +1,24 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <doc>
-<assembly>
-<name>
-Kenwood TM742 Programmer
-</name>
-</assembly>
-<members>
-<member name="T:Radio.My.Resources.Resources">
-<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member>
-<member name="P:Radio.My.Resources.Resources.ResourceManager">
-<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member>
-<member name="P:Radio.My.Resources.Resources.Culture">
-<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member>
-</members>
+    <assembly>
+        <name>Kenwood TM742 Programmer</name>
+    </assembly>
+    <members>
+        <member name="T:Radio.My.Resources.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Radio.My.Resources.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Radio.My.Resources.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
 </doc>
