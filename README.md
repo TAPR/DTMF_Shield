@@ -25,7 +25,12 @@ and the Upload, also worked as well as with the Arduino IDE 1.x.
 I suspect that this project could be modified to easily program the Kenwood TM-732, and possibly TM-733.  It can also be a generic DTMF generating board.
 The Arduino is just a serial port that accepts commands that are processed by the DTMF_Shield sketch.  DTMF tones and button presses and such result from this.
 
-Note that it is likely that this code will work on a Mac or on Linux using Visual Studio.  You may have to edit the code related to how Arduino unit
-interfacing and identification work. The current code attempts to open SerialPort objects for devices with names like 'COM1' and so on.
+Note that it is possible that this code will work on a Mac or on Linux using Visual Studio, in some form.  You would have to edit the code related to how Arduino unit
+interfacing and identification work. The current code attempts to open SerialPort objects for devices with names like 'COM1' and so on.  For example, on a Mac, I
+see a serial port Arduino on port '/dev/cu.usbmodem14101'.  On Ubuntu 22.04LTS I saw a device name like '/dev/ttyARM01'.
+
+VS IDE and VS Code seem to want to do only C# on a Mac.  VS Code only wants to do C# on Linux.  So converting the code from VB.Net to C# is in order.
+Using ICSharpCode.CodeConverter vsix plugin for vs2019 (or vs2022), I've converted the VB.Net original project/solution to CSharp.  4 minor code changes were required.
+The result looks like it runs.  Of course more testing is required before I commit it to GitHub.
 
 I have and use those OS types myself, but help is appreciated!
