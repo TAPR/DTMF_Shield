@@ -31,6 +31,10 @@ see a serial port Arduino on port '/dev/cu.usbmodem14101'.  On Ubuntu 22.04LTS I
 
 VS IDE and VS Code seem to want to do only C# on a Mac.  VS Code only wants to do C# on Linux.  So converting the code from VB.Net to C# is in order.
 Using ICSharpCode.CodeConverter vsix plugin for vs2019 (or vs2022), I've converted the VB.Net original project/solution to CSharp.  4 minor code changes were required.
-The result looks like it runs.  Of course more testing is required before I commit it to GitHub.
+The result looks like it runs.  It does in fact run.
 
-I have and use those OS types myself, but help is appreciated!
+Mac and Linux do NOT want to do Windows Forms applications (which is what the programmer app is...) any more. I think that maybe 10 years ago we could create
+the app on windows, and run it under Mono.  However, the Mac and Linux seem to use only .Net Core, which does not include support for Windows Forms apps.  It no longer
+works that way.  It looks like the way forward is to convert to a Xamarin app.  But I could be very wrong, and chasing alleged unicorns.
+
+I have and use MacOS and Linux myself, but help is appreciated!
