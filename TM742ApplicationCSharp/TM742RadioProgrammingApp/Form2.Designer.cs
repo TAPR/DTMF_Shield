@@ -6,6 +6,7 @@ using System.Windows.Forms;
 namespace Radio
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class Form2 : Form
     {
 

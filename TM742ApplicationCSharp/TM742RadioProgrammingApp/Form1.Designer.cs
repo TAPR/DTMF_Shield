@@ -6,6 +6,8 @@ using System.Windows.Forms;
 namespace Radio
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class Form1 : Form
     {
 
@@ -100,7 +102,7 @@ namespace Radio
             tab1ChannelFileName = new Label();
             Label9 = new Label();
             Tab1StopProgramButton = new Button();
-            Tab1StopProgramButton.Click += new EventHandler(stopProgramButton_Click);
+            Tab1StopProgramButton.Click += new EventHandler(StopProgramButton_Click);
             Tab1UsbRcvdLabel = new Label();
             Label72 = new Label();
             Tab1UsbCmdLabel = new Label();
@@ -177,7 +179,7 @@ namespace Radio
             tab2ChannelFileName = new Label();
             Label10 = new Label();
             Tab2StopProgramButton = new Button();
-            Tab2StopProgramButton.Click += new EventHandler(stopProgramButton_Click);
+            Tab2StopProgramButton.Click += new EventHandler(StopProgramButton_Click);
             Tab2UsbRcvdLabel = new Label();
             Label73 = new Label();
             Tab2UsbCmdLabel = new Label();
@@ -254,7 +256,7 @@ namespace Radio
             tab3ChannelFileName = new Label();
             Label36 = new Label();
             Tab3StopProgramButton = new Button();
-            Tab3StopProgramButton.Click += new EventHandler(stopProgramButton_Click);
+            Tab3StopProgramButton.Click += new EventHandler(StopProgramButton_Click);
             Tab3UsbRcvdLabel = new Label();
             Label74 = new Label();
             Tab3UsbCmdLabel = new Label();

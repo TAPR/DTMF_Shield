@@ -54,29 +54,6 @@ namespace Radio.My
                 }
             }
 
-
-            [EditorBrowsable(EditorBrowsableState.Never)]
-            public Form3 m_Form3;
-
-            public Form3 Form3
-            {
-                [DebuggerHidden]
-                get
-                {
-                    m_Form3 = Create__Instance__(m_Form3);
-                    return m_Form3;
-                }
-                [DebuggerHidden]
-                set
-                {
-                    if (ReferenceEquals(value, m_Form3))
-                        return;
-                    if (value is not null)
-                        throw new ArgumentException("Property can only be set to Nothing");
-                    Dispose__Instance__(ref m_Form3);
-                }
-            }
-
         }
 
 

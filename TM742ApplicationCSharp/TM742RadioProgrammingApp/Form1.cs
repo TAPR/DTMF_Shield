@@ -8,6 +8,8 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace Radio
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable IDE1006
 
     public partial class Form1
     {
@@ -18,18 +20,18 @@ namespace Radio
         [DllImport("kernel32")]
         private static extern void Sleep(long dwMilliseconds);
 
-        private bool[] channelUpdateClicked = new bool[3];
+        private readonly bool[] channelUpdateClicked = new bool[3];
         private string recvdData = "";
         private bool UserSelectedChannel;
         private bool stopProgrammingRequested;
-        public const bool DEBUG = false;
+        public  bool DEBUG = false;
         private const int NORMAL_RADIO_TIMING = 80;
         private const int SLOW_RADIO_TIMING = 250;
         private const int DEBUG_RADIO_TIMING = 500;
         private string decimalSeparator = "";
-        public bool setStepSize(ref string stepSizeStr)
+        
+        public bool SetStepSize(string stepSizeStr)
         {
-            bool setStepSizeRet = default;
             ToolStripComboBox KhzToolStripComboBoxObj;
 
             if (TabControl.SelectedIndex == 0)
@@ -45,7 +47,6 @@ namespace Radio
                 KhzToolStripComboBoxObj = Tab3KHzToolStripComboBox;
             }
 
-            setStepSizeRet = true;
             if (stepSizeStr.Equals("10"))
             {
                 KhzToolStripComboBoxObj.SelectedIndex = 0;
@@ -64,17 +65,14 @@ namespace Radio
             }
             else
             {
-                setStepSizeRet = false;
+                return false;
             }
 
-            return setStepSizeRet;
-
+            return true;
         }
 
         public bool initializeForm()
         {
-            bool initializeFormRet = default;
-
             ListView ChannelListViewObj;
             ToolStripComboBox KhzToolStripComboBoxObj;
             ToolStripStatusLabel ToolStripStatusLabelObj;
@@ -87,7 +85,9 @@ namespace Radio
             decimalSeparator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator;
 
             for (int x = 0; x <= 2; x++)
+            {
                 channelUpdateClicked[x] = false;
+            }
 
             Tab1UsbRcvdLabel.Text = "";
             Tab2UsbRcvdLabel.Text = "";
@@ -117,7 +117,7 @@ namespace Radio
             ChannelListViewObj.Items[0].Selected = true;
             ChannelListViewObj.HideSelection = false;
             UserSelectedChannel = false;
-            if (!setStepSize(ref My.MyProject.Forms.Form2.radioConfig.tab1StepSize))
+            if (!SetStepSize(My.MyProject.Forms.Form2.getTab1StepSize()))
             {
                 KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
                 if (TabControl.SelectedTab.Text.Contains("144e"))
@@ -168,7 +168,7 @@ namespace Radio
             ChannelListViewObj.Items[0].Selected = true;
             ChannelListViewObj.HideSelection = false;
             UserSelectedChannel = false;
-            if (!setStepSize(ref My.MyProject.Forms.Form2.radioConfig.tab2StepSize))
+            if (!SetStepSize(My.MyProject.Forms.Form2.getTab2StepSize()))
             {
                 KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
                 if (TabControl.SelectedTab.Text.Contains("144e"))
@@ -219,7 +219,7 @@ namespace Radio
             ChannelListViewObj.Items[0].Selected = true;
             ChannelListViewObj.HideSelection = false;
             UserSelectedChannel = false;
-            if (!setStepSize(ref My.MyProject.Forms.Form2.radioConfig.tab3StepSize))
+            if (!SetStepSize(My.MyProject.Forms.Form2.getTab3StepSize()))
             {
                 KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
                 if (TabControl.SelectedTab.Text.Contains("144e"))
@@ -250,26 +250,19 @@ namespace Radio
 
             TabControl.SelectedIndex = 0;
 
-            initializeFormRet = true;
-            return initializeFormRet;
-
+            return true;
         }
 
         private bool openSerialPort()
         {
-            bool openSerialPortRet = default;
-            openSerialPortRet = false;
-
             if (DEBUG)
             {
-                openSerialPortRet = true;
-                return openSerialPortRet;
+                return true;
             }
 
             if (SerialPort1.IsOpen)
             {
-                openSerialPortRet = true;
-                return openSerialPortRet;
+                return true;
             }
 
             TextBox textBoxObj;
@@ -290,29 +283,25 @@ namespace Radio
             bool tryDefaultPort = false;
             try
             {
-                string portString = "COM";
-                portString += Convert.ToString(My.MyProject.Forms.Form2.radioConfig.usbPort);
+                string portString = My.MyProject.Forms.Form2.getUsbPortName();
                 SerialPort1.PortName = portString;
                 SerialPort1.Open();
                 Sleep(3000L);
                 tryDefaultPort = true;
             }
-            catch (Exception ex1)
+            catch (Exception)
             {
                 Sleep(500L);
             }
 
             if (tryDefaultPort)
             {
-                tryDefaultPort = false;
-                bool testMsg = sendString(" ");
+                bool testMsg = SendString(" ");
                 if (testMsg)
                 {
-                    string message = "Found Arduino on on COM port: ";
-                    message += Convert.ToString(My.MyProject.Forms.Form2.radioConfig.usbPort);
+                    string message = String.Format("Found Arduino on on COM port: {0}", My.MyProject.Forms.Form2.getUsbPortNumber());
                     MessageBox.Show(message);
-                    openSerialPortRet = true;
-                    return openSerialPortRet;
+                    return true;
                 }
                 else
                 {
@@ -335,18 +324,17 @@ namespace Radio
                     SerialPort1.Open();
                     Sleep(3000L);
                 }
-                catch (Exception ex1)
+                catch (Exception)
                 {
                     Sleep(500L);
                     continue;
                 }
-                bool testMsg = sendString(" ");
+                bool testMsg = SendString(" ");
                 if (testMsg)
                 {
                     string message = "Found Arduino on on COM port: ";
                     message += Convert.ToString(x);
                     MessageBox.Show(message);
-                    openSerialPortRet = true;
 
                     var testXml = new XmlDocument();
                     testXml.Load(My.MyProject.Forms.Form2.xmlFile);
@@ -354,7 +342,7 @@ namespace Radio
                     testXml.Save(My.MyProject.Forms.Form2.xmlFile);
                     textBoxObj.Visible = false;
 
-                    return openSerialPortRet;
+                    return true;
                 }
                 else
                 {
@@ -363,9 +351,9 @@ namespace Radio
                     continue;
                 }
             }
-            textBoxObj.Visible = false;
-            return openSerialPortRet;
 
+            textBoxObj.Visible = false;
+            return false;
         }
 
         private void SetChannelButtone_Click(object sender, EventArgs e)
@@ -552,7 +540,7 @@ namespace Radio
             {
                 UserSelectedChannel = true;
                 ChannelTextBoxObj.Text = ChannelListViewObj.SelectedItems[0].Text;
-                int channelIndex = Convert.ToInt32(ChannelListViewObj.SelectedItems[0].Text);
+//                int channelIndex = Convert.ToInt32(ChannelListViewObj.SelectedItems[0].Text);
                 double frequency;
                 if (!string.IsNullOrEmpty(ChannelListViewObj.SelectedItems[0].SubItems[1].Text) & ChannelListViewObj.SelectedItems[0].SubItems[1].Text != "BLANK")
                 {
@@ -626,7 +614,7 @@ namespace Radio
             ComboBox KHzComboBoxObj;
             ComboBox RepeaterComboBoxObj;
             ComboBox ToneComboBoxObj;
-            TextBox ChannelTextBoxObj;
+//            TextBox ChannelTextBoxObj;
             ToolStripComboBox KhzStepSizeObj;
             RadioButton CtcssRadioButtonObj;
             RadioButton ToneRadioButtonObj;
@@ -638,7 +626,7 @@ namespace Radio
                 KHzComboBoxObj = Tab1KHzCombBox;
                 RepeaterComboBoxObj = Tab1RepeaterComboBox;
                 ToneComboBoxObj = Tab1ToneComboBox;
-                ChannelTextBoxObj = Tab1ChannelTextBox;
+//                ChannelTextBoxObj = Tab1ChannelTextBox;
                 KhzStepSizeObj = Tab1KHzToolStripComboBox;
                 CtcssRadioButtonObj = Tab1CtcssXmitRec;
                 ToneRadioButtonObj = Tab1CtcssXmit;
@@ -650,7 +638,7 @@ namespace Radio
                 KHzComboBoxObj = Tab2KHzCombBox;
                 RepeaterComboBoxObj = Tab2RepeaterComboBox;
                 ToneComboBoxObj = Tab2ToneComboBox;
-                ChannelTextBoxObj = Tab2ChannelTextBox;
+//                ChannelTextBoxObj = Tab2ChannelTextBox;
                 KhzStepSizeObj = Tab2KHzToolStripComboBox;
                 CtcssRadioButtonObj = Tab2CtcssXmitRec;
                 ToneRadioButtonObj = Tab2CtcssXmit;
@@ -662,7 +650,7 @@ namespace Radio
                 KHzComboBoxObj = Tab3KHzCombBox;
                 RepeaterComboBoxObj = Tab3RepeaterComboBox;
                 ToneComboBoxObj = Tab3ToneComboBox;
-                ChannelTextBoxObj = Tab3ChannelTextBox;
+//                ChannelTextBoxObj = Tab3ChannelTextBox;
                 KhzStepSizeObj = Tab3KHzToolStripComboBox;
                 CtcssRadioButtonObj = Tab3CtcssXmitRec;
                 ToneRadioButtonObj = Tab3CtcssXmit;
@@ -707,13 +695,12 @@ namespace Radio
                             {
                                 KHzComboBoxObj.Items.Add(Convert.ToString(x));
                             }
-                            x = x + KhzStepSize;
+                            x += KhzStepSize;
                         }
 
                         // Tab1KHzCombBox.SelectionStart = 100
                         // Tab1KHzCombBox.SelectedIndex = 50
                         KHzComboBoxObj.DroppedDown = true;
-
                     }
                 }
             }
@@ -731,41 +718,42 @@ namespace Radio
             }
         }
 
-        private int ProgramCannelCount;
         private int repeaterAryIndex;
         private int repeaterElements;
 
-        private string[] _getRepeaterIncrement_repeaterAry = new string[] { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" };
+        private readonly string[] _getRepeaterIncrement_repeaterAry = new string[] { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" };
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public int getRepeaterIncrement(string str)
         {
-            int getRepeaterIncrementRet = default;
             int count = 0;
 
             while ((str.ToUpper() ?? "") != (_getRepeaterIncrement_repeaterAry[repeaterAryIndex] ?? ""))
             {
-                repeaterAryIndex = repeaterAryIndex + 1;
+                repeaterAryIndex++;
                 if (repeaterAryIndex >= repeaterElements)
                 {
                     repeaterAryIndex = 0;
                 }
-                count = count + 1;
+                count++;
                 // todo check for overflow
             }
 
-            getRepeaterIncrementRet = count;
-            return getRepeaterIncrementRet;
+            return count;
 
         }
 
         private int ctcssAryIndex;
 
-        private string[] _getCtcssIncrement_ctcssAry = new string[] { "OFF", "XMIT", "XMIT/REC" };
+        private readonly string[] _getCtcssIncrement_ctcssAry = new string[] { "OFF", "XMIT", "XMIT/REC" };
         private int _getCtcssIncrement_ctcssElements = 2;
 
         public int getCtcssIncrement(string str)
         {
-            int getCtcssIncrementRet = default;
             int count = 0;
             if (My.MyProject.Forms.Form2.Tsu7CheckBox.Checked)
             {
@@ -778,27 +766,25 @@ namespace Radio
 
             while ((str.ToUpper() ?? "") != (_getCtcssIncrement_ctcssAry[ctcssAryIndex] ?? ""))
             {
-                ctcssAryIndex = ctcssAryIndex + 1;
+                ctcssAryIndex++;
                 if (ctcssAryIndex > _getCtcssIncrement_ctcssElements - 1)
                 {
                     ctcssAryIndex = 0;
                 }
-                count = count + 1;
+                count++;
                 // todo check for overflow
             }
 
-            getCtcssIncrementRet = count;
-            return getCtcssIncrementRet;
+            return count;
 
         }
 
         private int toneAryIndex;
 
-        private double[] _getToneIncrement_toneAry = new double[] { 67.0d, 71.9d, 74.4d, 77.0d, 79.7d, 82.5d, 85.4d, 88.5d, 91.5d, 94.8d, 97.4d, 100.0d, 103.5d, 107.2d, 110.9d, 114.8d, 118.8d, 123.0d, 127.3d, 131.8d, 136.5d, 141.3d, 146.2d, 151.4d, 156.7d, 162.2d, 167.9d, 173.8d, 179.9d, 186.2d, 192.8d, 203.5d, 210.7d, 218.1d, 225.7d, 233.6d, 241.8d, 250.3d };
+        private readonly double[] _getToneIncrement_toneAry = new double[] { 67.0d, 71.9d, 74.4d, 77.0d, 79.7d, 82.5d, 85.4d, 88.5d, 91.5d, 94.8d, 97.4d, 100.0d, 103.5d, 107.2d, 110.9d, 114.8d, 118.8d, 123.0d, 127.3d, 131.8d, 136.5d, 141.3d, 146.2d, 151.4d, 156.7d, 162.2d, 167.9d, 173.8d, 179.9d, 186.2d, 192.8d, 203.5d, 210.7d, 218.1d, 225.7d, 233.6d, 241.8d, 250.3d };
 
         public int getToneIncrement(string str, ref string command)
         {
-            int getToneIncrementRet = default;
             int count = 0;
 
             if (Convert.ToDouble(fixDecimalSeparator(str)) <= _getToneIncrement_toneAry[toneAryIndex])
@@ -806,32 +792,29 @@ namespace Radio
                 command = "DOWN";
                 while (Convert.ToDouble(fixDecimalSeparator(str)) != _getToneIncrement_toneAry[toneAryIndex])
                 {
-                    toneAryIndex = toneAryIndex - 1;
+                    toneAryIndex--;
                     if (toneAryIndex == -1)
                     {
                         // publish an error
                     }
-                    count = count + 1;
+                    count++;
                 }
-                getToneIncrementRet = count;
-                return getToneIncrementRet;
+                return count;
             }
             else
             {
                 command = "UP";
                 while (Convert.ToDouble(fixDecimalSeparator(str)) != _getToneIncrement_toneAry[toneAryIndex])
                 {
-                    toneAryIndex = toneAryIndex + 1;
+                    toneAryIndex++;
                     if (toneAryIndex == _getToneIncrement_toneAry.Length)
                     {
                         // publish an error
                     }
-                    count = count + 1;
+                    count++;
                 }
-                getToneIncrementRet = count;
-                return getToneIncrementRet;
             }
-
+            return count;
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -840,7 +823,6 @@ namespace Radio
             ListView ChannelListViewObj;
             ToolStripStatusLabel ToolStripStatusLabel;
             ToolStripComboBox ToolStripComboBoxObj;
-            bool serialStatus = false;
             int blankChannelCount = 0;
             bool firstChannelComplete = false;
             Label commandLabel;
@@ -916,7 +898,7 @@ namespace Radio
             }
             Timer1.Enabled = true;
 
-            int toneAndButtonOnTime = 0;
+            int toneAndButtonOnTime;
             if (My.MyProject.Forms.Form2.normalRadioTimingButton.Checked)
             {
                 toneAndButtonOnTime = NORMAL_RADIO_TIMING;
@@ -932,32 +914,32 @@ namespace Radio
 
             string timeString;
             timeString = "SET_TONE_TIME:";
-            serialStatus = sendString(timeString);
+            bool serialStatus = SendString(timeString);
             if (serialStatus != true)
             {
                 return;
             }
             timeString = Convert.ToString(toneAndButtonOnTime);
-            serialStatus = sendString(timeString);
+            serialStatus = SendString(timeString);
             if (serialStatus != true)
             {
                 return;
             }
 
             timeString = "SET_BUTTON_TIME:";
-            serialStatus = sendString(timeString);
+            serialStatus = SendString(timeString);
             if (serialStatus != true)
             {
                 return;
             }
             timeString = Convert.ToString(toneAndButtonOnTime);
-            serialStatus = sendString(timeString);
+            serialStatus = SendString(timeString);
             if (serialStatus != true)
             {
                 return;
             }
 
-            serialStatus = sendString("VFO");
+            serialStatus = SendString("VFO");
             if (serialStatus != true)
             {
                 return;
@@ -973,7 +955,7 @@ namespace Radio
 
                 if (ChannelListViewObj.Items[channelIndex].SubItems[1].Text == "BLANK" | string.IsNullOrEmpty(ChannelListViewObj.Items[channelIndex].SubItems[1].Text))
                 {
-                    blankChannelCount = blankChannelCount + 1;
+                    blankChannelCount++;
                 }
                 else
                 {
@@ -994,29 +976,24 @@ namespace Radio
                         numOfKhzChars = 2;
                     }
 
-                    sendString("A");
-                    int freqCharIndex = 1;
-                    // For loopVar1 As Integer = 0 To mhzVal.Length - 2
-                    // sendString(mhzVal.Chars(freqCharIndex))
-                    // freqCharIndex = freqCharIndex + 1
-                    // Next
+                    SendString("A");
 
-                    if (My.MyProject.Forms.Form2.wideBandCheckBox.Checked & TabControl.SelectedTab.Text.Contains("1200"))
+                    if (My.MyProject.Forms.Form2.wideBandCheckBox.Checked && TabControl.SelectedTab.Text.Contains("1200"))
                     {
-                        sendString(Conversions.ToString(mhzVal[mhzVal.Length - 3]));
+                        SendString(Conversions.ToString(mhzVal[mhzVal.Length - 3]));
                     }
 
-                    if (!TabControl.SelectedTab.Text.Contains("e") | TabControl.SelectedTab.Text.Contains("1200"))
+                    if (!TabControl.SelectedTab.Text.Contains("e") || TabControl.SelectedTab.Text.Contains("1200"))
                     {
-                        sendString(Conversions.ToString(mhzVal[mhzVal.Length - 2]));
+                        SendString(Conversions.ToString(mhzVal[mhzVal.Length - 2]));
                     }
-                    sendString(Conversions.ToString(mhzVal[mhzVal.Length - 1]));
+                    SendString(Conversions.ToString(mhzVal[mhzVal.Length - 1]));
 
-                    freqCharIndex = 0;
+                    int freqCharIndex = 0;
                     for (int loopVar = 0, loopTo1 = numOfKhzChars - 1; loopVar <= loopTo1; loopVar++)
                     {
-                        sendString(Conversions.ToString(kHzVal[freqCharIndex]));
-                        freqCharIndex = freqCharIndex + 1;
+                        SendString(Conversions.ToString(kHzVal[freqCharIndex]));
+                        freqCharIndex++;
                     }
 
                     if (My.MyProject.Forms.Form2.AROcheckBox.Checked)
@@ -1102,7 +1079,7 @@ namespace Radio
                     if (repeaterCount > 0)
                     {
                         for (int loopVar = 0, loopTo2 = repeaterCount - 1; loopVar <= loopTo2; loopVar++)
-                            sendString("1");
+                            SendString("1");
                     }
 
                     // send ctcss mode
@@ -1110,7 +1087,7 @@ namespace Radio
                     if (ctcssCount > 0)
                     {
                         for (int loopVar = 0, loopTo3 = ctcssCount - 1; loopVar <= loopTo3; loopVar++)
-                            sendString("2");
+                            SendString("2");
                     }
 
                     // send tone increment/decrement
@@ -1120,31 +1097,31 @@ namespace Radio
                         int toneCount = getToneIncrement(ChannelListViewObj.Items[channelIndex].SubItems[3].Text, ref direction);
                         if (toneCount > 0)
                         {
-                            sendString("D");
-                            sendString("2");
+                            SendString("D");
+                            SendString("2");
                             for (int loopVar = 0, loopTo4 = toneCount - 1; loopVar <= loopTo4; loopVar++)
-                                sendString(direction);
-                            sendString("2");
-                            sendString("PAUSE: ");
+                                SendString(direction);
+                            SendString("2");
+                            SendString("PAUSE: ");
                         }
                     }
 
                     // send memory store and increment
-                    sendString("D");
+                    SendString("D");
                     if (!firstChannelComplete)
                     {
                         for (int y = 0, loopTo5 = blankChannelCount - 1; y <= loopTo5; y++)
-                            sendString("UP");
+                            SendString("UP");
                         firstChannelComplete = true;
                     }
                     else
                     {
                         for (int y = 0, loopTo6 = blankChannelCount; y <= loopTo6; y++)
-                            sendString("UP");
+                            SendString("UP");
                     }
                     blankChannelCount = 0;
-                    sendString("MR");
-                    sendString("PAUSE: ");
+                    SendString("MR");
+                    SendString("PAUSE: ");
 
                 }
 
@@ -1270,26 +1247,26 @@ namespace Radio
                 {
                     KHzComboBoxObj.Items.Add(Convert.ToString(x));
                 }
-                x = x + KhzStepSize;
+                x += KhzStepSize;
             }
 
             var testXml = new XmlDocument();
             testXml.Load(My.MyProject.Forms.Form2.xmlFile);
             if (TabControl.SelectedIndex == 0)
             {
-                if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.radioConfig.tab1StepSize))
+                if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.getTab1StepSize()))
                 {
                     testXml.SelectSingleNode("TM742/tab1StepSize").InnerText = Convert.ToString(ToolStripComboBoxObj.Text);
                 }
             }
             else if (TabControl.SelectedIndex == 1)
             {
-                if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.radioConfig.tab2StepSize))
+                if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.getTab2StepSize()))
                 {
                     testXml.SelectSingleNode("TM742/tab2StepSize").InnerText = Convert.ToString(ToolStripComboBoxObj.Text);
                 }
             }
-            else if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.radioConfig.tab3StepSize))
+            else if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.getTab3StepSize()))
             {
                 testXml.SelectSingleNode("TM742/tab3StepSize").InnerText = Convert.ToString(ToolStripComboBoxObj.Text);
             }
@@ -1522,7 +1499,6 @@ namespace Radio
         private void SaveFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var myWriter = My.MyProject.Computer.FileSystem.OpenTextFileWriter(SaveFileDialog1.FileName, false);
-            string newLine = "";
 
             int index;
             ListView channelListView;
@@ -1543,8 +1519,7 @@ namespace Radio
             var loopTo = channelListView.Items.Count - 2;
             for (index = 0; index <= loopTo; index++)
             {
-                newLine = "";
-                newLine += channelListView.Items[index].SubItems[0].Text + ",";
+                string newLine = channelListView.Items[index].SubItems[0].Text + ",";
                 string mhzLcl = channelListView.Items[index].SubItems[1].Text;
                 if (decimalSeparator == ",")
                 {
@@ -1559,19 +1534,6 @@ namespace Radio
                 myWriter.WriteLine(newLine);
             }
 
-            // Dim testXml As New XmlDocument
-            // testXml.Load("Tm742Configuration.xml")
-            // If TabControl.SelectedIndex = 0 Then
-            // tab1ChannelFileName.Text = SaveFileDialog1.FileName
-            // testXml.SelectSingleNode("TM742/tab1Filename").InnerText = tab1ChannelFileName.Text
-            // ElseIf TabControl.SelectedIndex = 1 Then
-            // tab2ChannelFileName.Text = SaveFileDialog1.FileName
-            // testXml.SelectSingleNode("TM742/tab2Filename").InnerText = tab2ChannelFileName.Text
-            // Else
-            // tab3ChannelFileName.Text = SaveFileDialog1.FileName
-            // testXml.SelectSingleNode("TM742/tab3Filename").InnerText = tab3ChannelFileName.Text
-            // End If
-            // testXml.Save("Tm742Configuration.xml")
             myWriter.Close();
 
             channelUpdateClicked[TabControl.SelectedIndex] = false;
@@ -1604,48 +1566,47 @@ namespace Radio
             var myParser = My.MyProject.Computer.FileSystem.OpenTextFieldParser(OpenFileDialog1.FileName);
             myParser.SetDelimiters(",");
 
-            var testAry = new string[6];
             int indexLcl = 0;
             ListView channelListView;
             ComboBox mhzComboBox;
-            ComboBox khzComboBox;
+//            ComboBox khzComboBox;
             ComboBox repeaterComboBox;
             ComboBox toneComboBox;
-            TextBox notesTextObj;
+//            TextBox notesTextObj;
 
             if (TabControl.SelectedIndex == 0)
             {
                 channelListView = Tab1ChannelListView;
                 mhzComboBox = Tab1MHzComboBox;
-                khzComboBox = Tab1KHzCombBox;
+//                khzComboBox = Tab1KHzCombBox;
                 repeaterComboBox = Tab1RepeaterComboBox;
                 toneComboBox = Tab1ToneComboBox;
-                notesTextObj = Tab1ChannelNotes;
+//                notesTextObj = Tab1ChannelNotes;
             }
             else if (TabControl.SelectedIndex == 1)
             {
                 channelListView = Tab2ChannelListView;
                 mhzComboBox = Tab2MHzComboBox;
-                khzComboBox = Tab2KHzCombBox;
+//                khzComboBox = Tab2KHzCombBox;
                 repeaterComboBox = Tab2RepeaterComboBox;
                 toneComboBox = Tab2ToneComboBox;
-                notesTextObj = Tab2ChannelNotes;
+//                notesTextObj = Tab2ChannelNotes;
             }
             else
             {
                 channelListView = Tab3ChannelListView;
                 mhzComboBox = Tab3MHzComboBox;
-                khzComboBox = Tab3KHzCombBox;
+//                khzComboBox = Tab3KHzCombBox;
                 repeaterComboBox = Tab3RepeaterComboBox;
                 toneComboBox = Tab3ToneComboBox;
-                notesTextObj = Tab3ChannelNotes;
+//                notesTextObj = Tab3ChannelNotes;
             }
 
             channelListView.Items.Clear();
 
             while (!myParser.EndOfData)
             {
-                testAry = myParser.ReadFields();
+                var testAry = myParser.ReadFields();
                 channelListView.Items.Add(indexLcl.ToString());
                 channelListView.Items[indexLcl].Text = (indexLcl + 1).ToString();
                 if (testAry[1] == "BLANK")
@@ -1739,34 +1700,29 @@ namespace Radio
             myParser.Close();
 
             channelUpdateClicked[TabControl.SelectedIndex] = false;
-
         }
 
         private void clearList()
         {
             ListView ChannelListViewObj;
-            ToolStripComboBox KhzToolStripComboBoxObj;
             ToolStripLabel ToolStripStatusLabelObj;
             RadioButton CtssToneObj;
 
             if (TabControl.SelectedIndex == 0)
             {
                 ChannelListViewObj = Tab1ChannelListView;
-                KhzToolStripComboBoxObj = Tab1KHzToolStripComboBox;
                 ToolStripStatusLabelObj = Tab1ToolStripStatusLabel;
                 CtssToneObj = Tab1CtcssXmit;
             }
             else if (TabControl.SelectedIndex == 1)
             {
                 ChannelListViewObj = Tab2ChannelListView;
-                KhzToolStripComboBoxObj = Tab2KHzToolStripComboBox;
                 ToolStripStatusLabelObj = Tab2ToolStripStatusLabel;
                 CtssToneObj = Tab2CtcssXmit;
             }
             else
             {
                 ChannelListViewObj = Tab3ChannelListView;
-                KhzToolStripComboBoxObj = Tab3KHzToolStripComboBox;
                 ToolStripStatusLabelObj = Tab3ToolStripStatusLabel;
                 CtssToneObj = Tab3CtcssXmit;
             }
@@ -1785,14 +1741,12 @@ namespace Radio
             ChannelListViewObj.Items[0].Selected = true;
             ChannelListViewObj.HideSelection = false;
             UserSelectedChannel = false;
-            // KhzToolStripComboBoxObj.Text = KhzToolStripComboBoxObj.Items(0)
             ToolStripStatusLabelObj.Text = "";
 
         }
 
-        public bool sendString(string strLcl)
+        public bool SendString(string strLcl)
         {
-            bool sendStringRet = default;
             Label commandLabel;
             // Dim cmdRcvdObj As Label
 
@@ -1820,23 +1774,23 @@ namespace Radio
             if (!DEBUG)
             {
                 SerialPort1.WriteLine(strLcl + Conversions.ToString('\r'));
-                sendStringRet = waitForReady();
+                return WaitForReady();
             }
             else
             {
                 Sleep(200L);
-                sendStringRet = true;
+                return true;
 
             }
-
-            return sendStringRet;
         }
 
         private bool newDataAvailable = false;
 
-        public bool waitForReady()
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool WaitForReady()
         {
-            bool waitForReadyRet = default;
             int cntrLcl = 0;
 
             Label cmdRcvdObj;
@@ -1858,26 +1812,26 @@ namespace Radio
             {
                 Sleep(200L);
                 Application.DoEvents();
+
                 if (newDataAvailable)
                 {
                     cmdRcvdObj.Text = recvdData;
                     cmdRcvdObj.Update();
                 }
+
                 if (newDataAvailable & recvdData.Contains("READY"))
                 {
                     newDataAvailable = false;
-                    waitForReadyRet = true;
-                    return waitForReadyRet;
+                    return true;
                 }
                 else
                 {
-                    cntrLcl = cntrLcl + 1;
+                    cntrLcl++;
                 }
             }
             while (cntrLcl != 10);
             newDataAvailable = false;
-            waitForReadyRet = false;
-            return waitForReadyRet;
+            return false;
         }
 
         private void SerialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
@@ -1920,12 +1874,11 @@ namespace Radio
 
         public string getRepeaterVal(string mHz, string kHz, int tabIndex)
         {
-            string getRepeaterValRet = default;
+            string getRepeaterValRet;
 
             if (string.IsNullOrEmpty(mHz) | string.IsNullOrEmpty(kHz) | mHz == "BLANK")
             {
-                getRepeaterValRet = "SIMPLEX";
-                return getRepeaterValRet;
+                return "SIMPLEX";
             }
 
             double frequency;
@@ -2096,16 +2049,13 @@ namespace Radio
 
         }
 
-        private void stopProgramButton_Click(object sender, EventArgs e)
+        private void StopProgramButton_Click(object sender, EventArgs e)
         {
             stopProgrammingRequested = true;
         }
 
         public bool displaySaveMessage()
         {
-            bool displaySaveMessageRet = default;
-            displaySaveMessageRet = true;
-
             ToolStripMenuItem saveFile;
 
             if (TabControl.SelectedIndex == 0)
@@ -2128,7 +2078,7 @@ namespace Radio
                 // displaySaveMessage = False
             }
 
-            return displaySaveMessageRet;
+            return true;
 
             // Tab1SaveChannelFileToolStripMenuItem.PerformClick()
 
@@ -2208,8 +2158,7 @@ namespace Radio
 
         public string fixDecimalSeparator(string inputStr)
         {
-            string fixDecimalSeparatorRet = default;
-            fixDecimalSeparatorRet = inputStr;
+            string fixDecimalSeparatorRet = inputStr;
             if (decimalSeparator == ",")
             {
                 fixDecimalSeparatorRet = inputStr.Replace(".", ",");

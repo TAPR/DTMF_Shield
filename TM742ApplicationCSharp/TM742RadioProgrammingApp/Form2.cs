@@ -5,10 +5,11 @@ using Microsoft.VisualBasic;
 
 namespace Radio
 {
-
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable IDE1006
     public partial class Form2
     {
-       public struct radioConfigStruct
+        public struct RadioConfigStruct
         {
             public int usbPort;
             public bool eType;
@@ -30,13 +31,38 @@ namespace Radio
         public bool initializing = false;
         public bool[] tabHasChanged = new bool[3];
         public string[] tabFilename = new string[3];
-        public radioConfigStruct radioConfig;
+        public RadioConfigStruct radioConfig;
         public string applicationPath;
         public string xmlFile;
 
         public Form2()
         {
             InitializeComponent();
+        }
+
+        public string getUsbPortName()
+        {
+            return String.Format("COM{0}", radioConfig.usbPort);
+        }
+
+        public int getUsbPortNumber()
+        {
+            return radioConfig.usbPort;
+        }
+
+        public string getTab1StepSize()
+        {
+            return radioConfig.tab1StepSize;
+        }
+
+        public string getTab2StepSize()
+        {
+            return radioConfig.tab2StepSize;
+        }
+
+        public string getTab3StepSize()
+        {
+            return radioConfig.tab3StepSize;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -425,9 +451,7 @@ namespace Radio
             // Dim MhzComboBoxObj As Object
             var startVal = default(int);
             var stopVal = default(int);
-            bool addDoubleMinus = false;
             ComboBox repeaterComboBoxObj;
-            string tabString;
             ComboBox mhzComboBoxObj;
             ListView listViewObj;
             RadioButton ctcssXmitRecObj;
@@ -444,7 +468,6 @@ namespace Radio
                     mhzComboBoxObj = My.MyProject.Forms.Form1.Tab1MHzComboBox;
                     repeaterComboBoxObj = My.MyProject.Forms.Form1.Tab1RepeaterComboBox;
                     My.MyProject.Forms.Form1.TabControl.SelectedIndex = x;
-                    tabString = My.MyProject.Forms.Form1.TabControl.SelectedTab.Text;
                 }
                 else if (x == 1)
                 {
@@ -454,7 +477,6 @@ namespace Radio
                     mhzComboBoxObj = My.MyProject.Forms.Form1.Tab2MHzComboBox;
                     repeaterComboBoxObj = My.MyProject.Forms.Form1.Tab2RepeaterComboBox;
                     My.MyProject.Forms.Form1.TabControl.SelectedIndex = x;
-                    tabString = My.MyProject.Forms.Form1.TabControl.SelectedTab.Text;
                 }
                 else
                 {
@@ -464,7 +486,6 @@ namespace Radio
                     mhzComboBoxObj = My.MyProject.Forms.Form1.Tab3MHzComboBox;
                     repeaterComboBoxObj = My.MyProject.Forms.Form1.Tab3RepeaterComboBox;
                     My.MyProject.Forms.Form1.TabControl.SelectedIndex = x;
-                    tabString = My.MyProject.Forms.Form1.TabControl.SelectedTab.Text;
                 }
 
                 channelListViewObj.Items.Clear();
@@ -635,7 +656,7 @@ namespace Radio
 
                 if (ut220Checked == true)
                 {
-                    var msgResult = Interaction.MsgBox("UT220 module is not a valid selection with an 'E' type radio.");
+                    Interaction.MsgBox("UT220 module is not a valid selection with an 'E' type radio.");
                 }
             }
             else
