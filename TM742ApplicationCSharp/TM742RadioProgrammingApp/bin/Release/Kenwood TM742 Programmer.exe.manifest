@@ -42,24 +42,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kenwood TM742 Programmer.exe" size="195072">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kenwood TM742 Programmer.exe" size="182272">
       <assemblyIdentity name="Kenwood TM742 Programmer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>8sISItYGODZc1HgQBG/YJywD/7RqcDaW0i1TpDRCy0o=</dsig:DigestValue>
+        <dsig:DigestValue>iWVteyKboHCPG28mU/GbNN98BEYZ5lmHcsZ1QcXmc5g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Kenwood TM742 Programmer.exe.config" size="1175">
+  <file name="Kenwood TM742 Programmer.exe.config" size="1173">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>HuEKzBuEKALkhqmLyeBTxSkF5Pngls/hE4ZnbiYhLLY=</dsig:DigestValue>
+      <dsig:DigestValue>yxnv79beJNGbd+rWG3ecUKbkBjGM47nMv1AXL2Ohd/o=</dsig:DigestValue>
     </hash>
   </file>
   <file name="tm742.ico" size="17542">

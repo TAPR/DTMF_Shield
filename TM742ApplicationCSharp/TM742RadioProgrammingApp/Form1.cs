@@ -1537,29 +1537,12 @@ namespace Radio
             myWriter.Close();
 
             channelUpdateClicked[TabControl.SelectedIndex] = false;
-
         }
 
         private void Tab1OpenChannelFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            // If TabControl.SelectedIndex = 0 Then
-            // If Not tab1ChannelFileName.Equals("") Then
-            // OpenFileDialog1.FileName = tab1ChannelFileName.Text
-            // End If
-            // ElseIf TabControl.SelectedIndex = 1 Then
-            // If Not tab2ChannelFileName.Equals("") Then
-            // OpenFileDialog1.FileName = tab2ChannelFileName.Text
-            // End If
-            // ElseIf TabControl.SelectedIndex = 2 Then
-            // If Not tab3ChannelFileName.Equals("") Then
-            // OpenFileDialog1.FileName = tab3ChannelFileName.Text
-            // End If
-            // End If
-            // OpenFileDialog1.ShowHelp = True
             OpenFileDialog1.ShowDialog();
         }
-
 
         private void OpenFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -2075,19 +2058,14 @@ namespace Radio
             if (msgResult == MsgBoxResult.Yes)
             {
                 saveFile.PerformClick();
-                // displaySaveMessage = False
             }
 
             return true;
-
-            // Tab1SaveChannelFileToolStripMenuItem.PerformClick()
-
         }
 
         private void TabControl_Deselecting(object sender, TabControlCancelEventArgs e)
         {
             ListView channelListObj;
-
 
             if (TabControl.SelectedIndex == 0)
             {
@@ -2148,7 +2126,6 @@ namespace Radio
                     ChannelListViewObj.Select();
 
                     channelUpdateClicked[TabControl.SelectedIndex] = true;
-
                 }
             }
             catch
@@ -2166,7 +2143,6 @@ namespace Radio
 
             return fixDecimalSeparatorRet;
         }
-
 
         private void Tab2CtcssOff_CheckedChanged(object sender, EventArgs e)
         {

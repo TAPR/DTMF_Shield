@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM742RadioProgrammingApp", "TM742RadioProgrammingApp\TM742RadioProgrammingApp.csproj", "{9888CEF7-1E4C-04FC-2C05-D071E4B9BD68}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BEB3FC2D-B361-40F8-A41C-BAF37B165157}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

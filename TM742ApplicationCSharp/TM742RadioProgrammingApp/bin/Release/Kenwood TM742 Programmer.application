@@ -4,7 +4,7 @@
   <description asmv2:publisher="TM742" asmv2:product="TM742 Programmer" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" co.v1:createDesktopShortcut="true" />
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
-    <framework targetVersion="4.8.1" profile="Full" supportedRuntime="4.0.30319" />
+    <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
     <dependentAssembly dependencyType="install" codebase="Kenwood TM742 Programmer.exe.manifest" size="4435">
@@ -14,7 +14,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lclwf4ZH79tD6jr5yVp3iiDN4vuqUtauc0+7m+cMSFY=</dsig:DigestValue>
+        <dsig:DigestValue>risSwXwgn/yxV2rdrykh+kP1v5qkypTfIqRbQLbtby0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
