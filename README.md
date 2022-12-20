@@ -17,6 +17,7 @@ This consists of:
   the two zip files are the original installer and the original Visual Studio source code.  It was called 'UsbTest' then.
 
 "TM742 Programmer - Rev 1 candidate Jul1 1, 2014.zip" is the original installer as provided by WA7YLI.  This is also what the 'initial release' gives you.
+
 "TM742ApplicationSln.zip" is the original source code from WA7YLI.
 
 If you are using Arduino IDE 1.x, place the Messenger folder inside your Documents\Arduino\libraries folder.  Open the DTMF_Shield sketch.
