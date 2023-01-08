@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2022 TAPR
+Copyright (c) 2022 George Byrkit K9TRV, TAPR, and all original work Larry Anderton WA7YLI
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+The hardware designs and documentation are released under the TAPR Open Hardware
+License (OHL).  See “Licensed under the TAPR Open Hardware License (www.tapr.org/OHL)”
+
+The software is additionally licenseable under the GNU 2.0 license, the Mozilla License,
+or the BSD license.  We want this to be openly available and usable.  We wish that
+updates, changes, bugfixes, etc. will be returned to the community.
