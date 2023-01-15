@@ -178,6 +178,7 @@ void messageCompleted()
       break;
     }
     
+    // DTMF dual tones (0-9, A-D)
     if (message.checkString("0")) 
     {
       myShiftOut(DTMF_ZERO);
@@ -261,7 +262,55 @@ void messageCompleted()
       myShiftOut(DTMF_D);
       break;
     }
+    if (message.checkString("D")) 
+    {
+      myShiftOut(DTMF_D);
+      break;
+    }
     
+    // single tones
+    if (message.checkString("697")) 
+    {
+      myShiftOut(DTMF_697);
+      break;
+    }
+    if (message.checkString("770")) 
+    {
+      myShiftOut(DTMF_770);
+      break;
+    }
+    if (message.checkString("852")) 
+    {
+      myShiftOut(DTMF_852);
+      break;
+    }
+    if (message.checkString("941")) 
+    {
+      myShiftOut(DTMF_941);
+      break;
+    }
+    if (message.checkString("1209")) 
+    {
+      myShiftOut(DTMF_1209);
+      break;
+    }
+    if (message.checkString("1336")) 
+    {
+      myShiftOut(DTMF_1336);
+      break;
+    }
+    if (message.checkString("1477")) 
+    {
+      myShiftOut(DTMF_1477);
+      break;
+    }
+    if (message.checkString("1633")) 
+    {
+      myShiftOut(DTMF_1633);
+      break;
+    }
+
+  // button presses
     if (message.checkString("UP"))
     {
       pressButton(UP_PIN);
