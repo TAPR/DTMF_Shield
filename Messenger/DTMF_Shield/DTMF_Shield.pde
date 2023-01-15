@@ -208,13 +208,7 @@ void messageCompleted()
       break;
     }
     
-    if (message.checkString("0")) 
-    {
-      myShiftOut(DTMF_ZERO);
-      break;
-    }
-    
-    if (message.checkString("5")) 
+   if (message.checkString("5")) 
     {
       myShiftOut(DTMF_FIVE);
       break;
