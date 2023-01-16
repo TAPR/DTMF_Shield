@@ -262,9 +262,22 @@ void messageCompleted()
       myShiftOut(DTMF_D);
       break;
     }
+    
     if (message.checkString("D")) 
     {
       myShiftOut(DTMF_D);
+      break;
+    }
+    
+    if (message.checkString("STAR")) 
+    {
+      myShiftOut(DTMF_STAR);
+      break;
+    }
+    
+    if (message.checkString("POUND")) 
+    {
+      myShiftOut(DTMF_POUND);
       break;
     }
     
