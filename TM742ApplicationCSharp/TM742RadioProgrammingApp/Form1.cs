@@ -356,7 +356,7 @@ namespace Radio
             return false;
         }
 
-        private void SetChannelButtone_Click(object sender, EventArgs e)
+        private void SetChannelButton_Click(object sender, EventArgs e)
         {
             ListView ChannelListViewObj;
             ComboBox MHzComboBoxObj;
@@ -718,10 +718,10 @@ namespace Radio
             }
         }
 
-        private int repeaterAryIndex;
+        private int repeaterModeCurrentIndex;
         private int repeaterElements;
 
-        private readonly string[] _getRepeaterIncrement_repeaterAry = new string[] { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" };
+        private readonly string[] _getRepeaterModeList = new string[] { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" };
 
         /// <summary>
         /// 
@@ -732,12 +732,12 @@ namespace Radio
         {
             int count = 0;
 
-            while ((str.ToUpper() ?? "") != (_getRepeaterIncrement_repeaterAry[repeaterAryIndex] ?? ""))
+            while ((str.ToUpper() ?? "") != (_getRepeaterModeList[repeaterModeCurrentIndex] ?? ""))
             {
-                repeaterAryIndex++;
-                if (repeaterAryIndex >= repeaterElements)
+                repeaterModeCurrentIndex++;
+                if (repeaterModeCurrentIndex >= repeaterElements)
                 {
-                    repeaterAryIndex = 0;
+                    repeaterModeCurrentIndex = 0;
                 }
                 count++;
                 // todo check for overflow
@@ -747,29 +747,29 @@ namespace Radio
 
         }
 
-        private int ctcssAryIndex;
+        private int ctcssModeCurrentIndex;
 
-        private readonly string[] _getCtcssIncrement_ctcssAry = new string[] { "OFF", "XMIT", "XMIT/REC" };
-        private int _getCtcssIncrement_ctcssElements = 2;
+        private readonly string[] _getCtcssModeList = new string[] { "OFF", "XMIT", "XMIT/REC" };
+        private int _getCtcssModeList_Elements = 2;
 
-        public int getCtcssIncrement(string str)
+        public int getCtcssModeIndex(string str)
         {
             int count = 0;
             if (My.MyProject.Forms.Form2.Tsu7CheckBox.Checked)
             {
-                _getCtcssIncrement_ctcssElements = 3;
+                _getCtcssModeList_Elements = 3;
             }
             else
             {
-                _getCtcssIncrement_ctcssElements = 2;
+                _getCtcssModeList_Elements = 2;
             }
 
-            while ((str.ToUpper() ?? "") != (_getCtcssIncrement_ctcssAry[ctcssAryIndex] ?? ""))
+            while ((str.ToUpper() ?? "") != (_getCtcssModeList[ctcssModeCurrentIndex] ?? ""))
             {
-                ctcssAryIndex++;
-                if (ctcssAryIndex > _getCtcssIncrement_ctcssElements - 1)
+                ctcssModeCurrentIndex++;
+                if (ctcssModeCurrentIndex > _getCtcssModeList_Elements - 1)
                 {
-                    ctcssAryIndex = 0;
+                    ctcssModeCurrentIndex = 0;
                 }
                 count++;
                 // todo check for overflow
@@ -779,21 +779,21 @@ namespace Radio
 
         }
 
-        private int toneAryIndex;
+        private int CTCSSToneFrequencyIndex;
 
-        private readonly double[] _getToneIncrement_toneAry = new double[] { 67.0d, 71.9d, 74.4d, 77.0d, 79.7d, 82.5d, 85.4d, 88.5d, 91.5d, 94.8d, 97.4d, 100.0d, 103.5d, 107.2d, 110.9d, 114.8d, 118.8d, 123.0d, 127.3d, 131.8d, 136.5d, 141.3d, 146.2d, 151.4d, 156.7d, 162.2d, 167.9d, 173.8d, 179.9d, 186.2d, 192.8d, 203.5d, 210.7d, 218.1d, 225.7d, 233.6d, 241.8d, 250.3d };
+        private readonly double[] _getCTCSSToneFrequencyList = new double[] { 67.0d, 71.9d, 74.4d, 77.0d, 79.7d, 82.5d, 85.4d, 88.5d, 91.5d, 94.8d, 97.4d, 100.0d, 103.5d, 107.2d, 110.9d, 114.8d, 118.8d, 123.0d, 127.3d, 131.8d, 136.5d, 141.3d, 146.2d, 151.4d, 156.7d, 162.2d, 167.9d, 173.8d, 179.9d, 186.2d, 192.8d, 203.5d, 210.7d, 218.1d, 225.7d, 233.6d, 241.8d, 250.3d };
 
-        public int getToneIncrement(string str, ref string command)
+        public int getCTCSSToneFrequencyIndex(string str, ref string command)
         {
             int count = 0;
 
-            if (Convert.ToDouble(fixDecimalSeparator(str)) <= _getToneIncrement_toneAry[toneAryIndex])
+            if (Convert.ToDouble(fixDecimalSeparator(str)) <= _getCTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
             {
                 command = "DOWN";
-                while (Convert.ToDouble(fixDecimalSeparator(str)) != _getToneIncrement_toneAry[toneAryIndex])
+                while (Convert.ToDouble(fixDecimalSeparator(str)) != _getCTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
                 {
-                    toneAryIndex--;
-                    if (toneAryIndex == -1)
+                    CTCSSToneFrequencyIndex--;
+                    if (CTCSSToneFrequencyIndex == -1)
                     {
                         // publish an error
                     }
@@ -804,10 +804,10 @@ namespace Radio
             else
             {
                 command = "UP";
-                while (Convert.ToDouble(fixDecimalSeparator(str)) != _getToneIncrement_toneAry[toneAryIndex])
+                while (Convert.ToDouble(fixDecimalSeparator(str)) != _getCTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
                 {
-                    toneAryIndex++;
-                    if (toneAryIndex == _getToneIncrement_toneAry.Length)
+                    CTCSSToneFrequencyIndex++;
+                    if (CTCSSToneFrequencyIndex == _getCTCSSToneFrequencyList.Length)
                     {
                         // publish an error
                     }
@@ -817,7 +817,7 @@ namespace Radio
             return count;
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void ButtonProgramBandModule_Click(object sender, EventArgs e)
         {
             ProgressBar ProgressBarObj;
             ListView ChannelListViewObj;
@@ -866,9 +866,9 @@ namespace Radio
                 commandLabel = Tab3UsbCmdLabel;
             }
 
-            repeaterAryIndex = 0;
-            toneAryIndex = 7;
-            ctcssAryIndex = 0;
+            repeaterModeCurrentIndex = 0;
+            CTCSSToneFrequencyIndex = 7;
+            ctcssModeCurrentIndex = 0;
             repeaterElements = 3;
 
             ToolStripStatusLabel.Text = "";
@@ -888,9 +888,6 @@ namespace Radio
             ProgressBarObj.Maximum = ChannelListViewObj.Items.Count - 2;
             string mhzLabel = TabControl.SelectedTab.Text;
             var msgResult = Interaction.MsgBox("1. Reset Band in radio." + Constants.vbCrLf + "   " + Strings.Chr(149) + " Hold 'F' and Band select while turning on radio." + Constants.vbCrLf + "2. Put radio in 'RC' mode." + Constants.vbCrLf + "3. Select " + Strings.Mid(mhzLabel, 3, mhzLabel.Length - 2) + " MHz band on radio." + Constants.vbCrLf + "4. Ensure that both the radio and the tabbed channel list frequency step size are correct." + Constants.vbCrLf + "   " + Strings.Chr(149) + " Step size is selectable per tab under the Options menu", (MsgBoxStyle)((int)MsgBoxStyle.OkCancel + (int)MsgBoxStyle.Critical + (int)MsgBoxStyle.DefaultButton2), "Programming setup message");
-
-
-
 
             if (msgResult == MsgBoxResult.Cancel)
             {
@@ -976,7 +973,7 @@ namespace Radio
                         numOfKhzChars = 2;
                     }
 
-                    SendString("A");
+                    SendString("A");        // ENTER key. See page 61 of User Manual.
 
                     if (My.MyProject.Forms.Form2.wideBandCheckBox.Checked && TabControl.SelectedTab.Text.Contains("1200"))
                     {
@@ -998,8 +995,9 @@ namespace Radio
 
                     if (My.MyProject.Forms.Form2.AROcheckBox.Checked)
                     {
-                        if (TabControl.SelectedIndex == 0 & My.MyProject.Forms.Form2.Mod1UT144.Checked | TabControl.SelectedIndex == 1 & My.MyProject.Forms.Form2.Mod2UT144.Checked | TabControl.SelectedIndex == 2 & My.MyProject.Forms.Form2.Mod3UT144.Checked)
-
+                        if ((TabControl.SelectedIndex == 0 && My.MyProject.Forms.Form2.Mod1UT144.Checked)
+                            || (TabControl.SelectedIndex == 1 && My.MyProject.Forms.Form2.Mod2UT144.Checked)
+                            || (TabControl.SelectedIndex == 2 && My.MyProject.Forms.Form2.Mod3UT144.Checked))
                         {
                             if (!My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
                             {
@@ -1057,7 +1055,9 @@ namespace Radio
                                 getRepeaterIncrement("SIMPLEX");
                             }
                         }
-                        else if (TabControl.SelectedIndex == 0 & My.MyProject.Forms.Form2.Mod1UT220.Checked & !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked | TabControl.SelectedIndex == 1 & My.MyProject.Forms.Form2.Mod2UT220.Checked & !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked | TabControl.SelectedIndex == 2 & My.MyProject.Forms.Form2.Mod3UT220.Checked & !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
+                        else if ((TabControl.SelectedIndex == 0 && My.MyProject.Forms.Form2.Mod1UT220.Checked && !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
+                            || (TabControl.SelectedIndex == 1 && My.MyProject.Forms.Form2.Mod2UT220.Checked && !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
+                            || (TabControl.SelectedIndex == 2 && My.MyProject.Forms.Form2.Mod3UT220.Checked && !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked))
 
                         {
                             if (Convert.ToDouble(fixDecimalSeparator(freq)) < 223.92d)
@@ -1082,8 +1082,8 @@ namespace Radio
                             SendString("1");
                     }
 
-                    // send ctcss mode
-                    int ctcssCount = getCtcssIncrement(ChannelListViewObj.Items[channelIndex].SubItems[4].Text);
+                    // send CTCSS mode
+                    int ctcssCount = getCtcssModeIndex(ChannelListViewObj.Items[channelIndex].SubItems[4].Text);
                     if (ctcssCount > 0)
                     {
                         for (int loopVar = 0, loopTo3 = ctcssCount - 1; loopVar <= loopTo3; loopVar++)
@@ -1094,7 +1094,7 @@ namespace Radio
                     if (ChannelListViewObj.Items[channelIndex].SubItems[4].Text.ToUpper() != "OFF")
                     {
                         string direction = "";
-                        int toneCount = getToneIncrement(ChannelListViewObj.Items[channelIndex].SubItems[3].Text, ref direction);
+                        int toneCount = getCTCSSToneFrequencyIndex(ChannelListViewObj.Items[channelIndex].SubItems[3].Text, ref direction);
                         if (toneCount > 0)
                         {
                             SendString("D");
@@ -1107,7 +1107,7 @@ namespace Radio
                     }
 
                     // send memory store and increment
-                    SendString("D");
+                    SendString("D");        // F key. See page 61 of User Manual.
                     if (!firstChannelComplete)
                     {
                         for (int y = 0, loopTo5 = blankChannelCount - 1; y <= loopTo5; y++)
@@ -1143,8 +1143,8 @@ namespace Radio
             Tab1UsbRcvdLabel.Text = "";
             Tab2UsbRcvdLabel.Text = "";
             Tab3UsbRcvdLabel.Text = "";
-
         }
+
         private int _Timer1_Tick_cntr = 0;
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -1196,7 +1196,6 @@ namespace Radio
 
             KhzToolStripComboBoxObj.DroppedDown = true;
         }
-
 
         private void Tab1KHzToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1478,20 +1477,6 @@ namespace Radio
         {
             SaveFileDialog1.AddExtension = true;
             SaveFileDialog1.DefaultExt = "csv";
-
-            // If TabControl.SelectedIndex = 0 Then
-            // If Not tab1ChannelFileName.Equals("") Then
-            // SaveFileDialog1.FileName = tab1ChannelFileName.Text
-            // End If
-            // ElseIf TabControl.SelectedIndex = 1 Then
-            // If Not tab2ChannelFileName.Equals("") Then
-            // SaveFileDialog1.FileName = tab2ChannelFileName.Text
-            // End If
-            // ElseIf TabControl.SelectedIndex = 2 Then
-            // If Not tab3ChannelFileName.Equals("") Then
-            // SaveFileDialog1.FileName = tab3ChannelFileName.Text
-            // End If
-            // End If
 
             SaveFileDialog1.ShowDialog();
         }

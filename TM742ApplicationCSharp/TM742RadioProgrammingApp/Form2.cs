@@ -276,7 +276,7 @@ namespace Radio
 
             initializing = true;
 
-            y = 2;
+            y = 2;      //select tab 3
             My.MyProject.Forms.Form1.TabControl.SelectedIndex = y;
             if (Mod3UT30.Checked == true)
             {
@@ -333,7 +333,7 @@ namespace Radio
                 tabHasChanged[2] = true;
             }
 
-            y = 1;
+            y = 1;  // select tab 2
             My.MyProject.Forms.Form1.TabControl.SelectedIndex = y;
             if (Mod2UT30.Checked == true)
             {
@@ -390,7 +390,7 @@ namespace Radio
                 tabHasChanged[1] = true;
             }
 
-            y = 0;
+            y = 0;      // now finally tab 1 (the left section), representing the topmost module position.  Iften blank in a 2 module radio
             My.MyProject.Forms.Form1.TabControl.SelectedIndex = y;
             if (Mod1UT30.Checked == true)
             {
@@ -459,7 +459,6 @@ namespace Radio
 
             for (int x = 0; x <= 2; x++)
             {
-
                 if (x == 0)
                 {
                     channelListViewObj = My.MyProject.Forms.Form1.Tab1ChannelListView;
