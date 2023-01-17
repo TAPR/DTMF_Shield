@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -253,6 +254,13 @@ namespace Radio
             return true;
         }
 
+        private void closeSerialPort()
+        {
+            if (SerialPort1.IsOpen)
+            {
+                SerialPort1.Close();
+            }
+        }
         private bool openSerialPort()
         {
             if (DEBUG)
@@ -722,6 +730,7 @@ namespace Radio
         private int repeaterElements;
 
         private readonly string[] _getRepeaterModeList = new string[] { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" };
+        private List<string> repeaterModes = new List<string>(new string[] { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" });
 
         /// <summary>
         /// 
@@ -731,8 +740,10 @@ namespace Radio
         public int getRepeaterIncrement(string str)
         {
             int count = 0;
+            var toFind = str.ToUpper() ?? "";
+//            repeaterModes.FindIndex(toFind);
 
-            while ((str.ToUpper() ?? "") != (_getRepeaterModeList[repeaterModeCurrentIndex] ?? ""))
+            while (toFind != (_getRepeaterModeList[repeaterModeCurrentIndex] ?? ""))
             {
                 repeaterModeCurrentIndex++;
                 if (repeaterModeCurrentIndex >= repeaterElements)
@@ -744,7 +755,6 @@ namespace Radio
             }
 
             return count;
-
         }
 
         private int ctcssModeCurrentIndex;
@@ -816,8 +826,15 @@ namespace Radio
             }
             return count;
         }
-
         private void ButtonProgramBandModule_Click(object sender, EventArgs e)
+        {
+            ProgramBandModule();
+
+            // ensure serial port is closed.
+            closeSerialPort();
+        }
+
+        private void ProgramBandModule()
         {
             ProgressBar ProgressBarObj;
             ListView ChannelListViewObj;
@@ -876,6 +893,7 @@ namespace Radio
             string modLabel = TabControl.SelectedTab.Text;
             if (modLabel.EndsWith("440e") | modLabel.EndsWith("1200"))
             {
+                // allow "DBL MINUS"
                 repeaterElements = 4;
             }
 
@@ -963,6 +981,7 @@ namespace Radio
                     int decimalPointLocation = freq.IndexOf(".");
                     if (decimalPointLocation == -1)
                     {
+                        // this handles 'European' data with comma as decimal separator (the 'decimal point')
                         decimalPointLocation = freq.IndexOf(",");
                     }
                     string mhzVal = Convert.ToString(Strings.Mid(freq, 1, decimalPointLocation));
@@ -986,8 +1005,9 @@ namespace Radio
                     }
                     SendString(Conversions.ToString(mhzVal[mhzVal.Length - 1]));
 
+                    // now send the KHz characters needed
                     int freqCharIndex = 0;
-                    for (int loopVar = 0, loopTo1 = numOfKhzChars - 1; loopVar <= loopTo1; loopVar++)
+                    for (int loopVar = 0; loopVar <= (numOfKhzChars - 1); loopVar++)
                     {
                         SendString(Conversions.ToString(kHzVal[freqCharIndex]));
                         freqCharIndex++;
@@ -1078,7 +1098,7 @@ namespace Radio
                     int repeaterCount = getRepeaterIncrement(ChannelListViewObj.Items[channelIndex].SubItems[2].Text);
                     if (repeaterCount > 0)
                     {
-                        for (int loopVar = 0, loopTo2 = repeaterCount - 1; loopVar <= loopTo2; loopVar++)
+                        for (int loopVar = 0; loopVar <= (repeaterCount - 1); loopVar++)
                             SendString("1");
                     }
 
@@ -1086,7 +1106,7 @@ namespace Radio
                     int ctcssCount = getCtcssModeIndex(ChannelListViewObj.Items[channelIndex].SubItems[4].Text);
                     if (ctcssCount > 0)
                     {
-                        for (int loopVar = 0, loopTo3 = ctcssCount - 1; loopVar <= loopTo3; loopVar++)
+                        for (int loopVar = 0; loopVar <= (ctcssCount - 1); loopVar++)
                             SendString("2");
                     }
 
@@ -1099,7 +1119,7 @@ namespace Radio
                         {
                             SendString("D");
                             SendString("2");
-                            for (int loopVar = 0, loopTo4 = toneCount - 1; loopVar <= loopTo4; loopVar++)
+                            for (int loopVar = 0; loopVar <= (toneCount - 1); loopVar++)
                                 SendString(direction);
                             SendString("2");
                             SendString("PAUSE: ");
@@ -1110,13 +1130,13 @@ namespace Radio
                     SendString("D");        // F key. See page 61 of User Manual.
                     if (!firstChannelComplete)
                     {
-                        for (int y = 0, loopTo5 = blankChannelCount - 1; y <= loopTo5; y++)
+                        for (int y = 0; y <= (blankChannelCount - 1); y++)
                             SendString("UP");
                         firstChannelComplete = true;
                     }
                     else
                     {
-                        for (int y = 0, loopTo6 = blankChannelCount; y <= loopTo6; y++)
+                        for (int y = 0; y <= blankChannelCount; y++)
                             SendString("UP");
                     }
                     blankChannelCount = 0;
