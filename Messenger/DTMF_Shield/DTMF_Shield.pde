@@ -42,9 +42,11 @@
   
   int TONE_DELAY   = 75; //length of time in ms to leave tone on
   int BUTTON_DELAY = 75; //length of time in ms to leave button on
+  int LONG_PRESS_TIME = 1200; //length of time in ms to similate a long press (1200 ms, so it is > 1sec)
   const int ENABLE_DELAY = 1; //length of time in ms to apply enable before clocking in data
   bool getToneTime = false;
   bool getButtonTime = false;
+  bool getLongPressTime = false;
   
 void setup() {
   Serial.begin(9600);
@@ -85,58 +87,54 @@ void setEnableOff()
    digitalWrite(ENABLE_PIN, HIGH);
 }
 
-void myShiftOut (byte dataOut)
+void HT9200ACommandOut(byte dataOut)
+{
+  for (int x=0; x<10; x++)
+  {
+    if (x % 2 == 0)
+    {
+      digitalWrite(CLK_PIN, HIGH);
+      digitalWrite(DATA_PIN, bitRead(dataOut, 0));
+      dataOut >>= 1;
+    }
+    else
+    {
+      digitalWrite(CLK_PIN, LOW);
+   }
+  }
+}
+
+void myShiftOut (byte dataOut, int toneTime)
 {
   digitalWrite(CLK_PIN, HIGH);
   digitalWrite(DATA_PIN, LOW);
-  setEnableOn();
-  for (int x=0; x<10; x++)
-  {
-    if (x % 2 == 0)
-    {
-      digitalWrite(CLK_PIN, HIGH);
-      digitalWrite(DATA_PIN, bitRead(dataOut, 0));
-      dataOut >>= 1;
-    }
-    else
-    {
-      digitalWrite(CLK_PIN, LOW);
-   }
-  }
   
-    digitalWrite(CLK_PIN, HIGH);
-  delay(TONE_DELAY);
+  setEnableOn();
+  
+  HT9200ACommandOut(dataOut);
+  
+  digitalWrite(CLK_PIN, HIGH);
+  
+  delay(toneTime);
     
-  dataOut = DTMF_OFF;  
-  for (int x=0; x<10; x++)
-  {
-    if (x % 2 == 0)
-    {
-      digitalWrite(CLK_PIN, HIGH);
-      digitalWrite(DATA_PIN, bitRead(dataOut, 0));
-      dataOut >>= 1;
-    }
-    else
-    {
-      digitalWrite(CLK_PIN, LOW);
-   }
-  }
+  HT9200ACommandOut(DTMF_OFF);
 
   delay(TONE_DELAY);
+  
   setEnableOff();
+  
   digitalWrite(CLK_PIN, HIGH);
   digitalWrite(DATA_PIN, LOW);
 }
 
-void pressButton(const int pin)
-    {
-      pinMode(pin, OUTPUT);
-      delay(BUTTON_DELAY);
-      pinMode(pin, INPUT);
-    }
+void pressButton(const int pin, int pressTime)
+{
+  pinMode(pin, OUTPUT);
+  delay(pressTime);
+  pinMode(pin, INPUT);
+}
 
-void loop() {
-  
+void loop() { 
   while ( Serial.available( ) ) message.process(Serial.read( ) );
 }
 
@@ -157,6 +155,20 @@ void messageCompleted()
       getButtonTime = false;
       BUTTON_DELAY = message.readInt();
       //Serial.println(BUTTON_DELAY);
+      break;
+    }
+    
+    if (getLongPressTime == true)
+    {
+      getLongPressTime = false;
+      LONG_PRESS_TIME = message.readInt();
+      //Serial.println(LONG_PRESS_TIME);
+      break;
+    }
+    
+    if (message.checkString("SET_LONG_PRESS_TIME:"))
+    {
+      getLongPressTime = true;
       break;
     }
     
@@ -181,170 +193,175 @@ void messageCompleted()
     // DTMF dual tones (0-9, A-D)
     if (message.checkString("0")) 
     {
-      myShiftOut(DTMF_ZERO);
+      myShiftOut(DTMF_ZERO, TONE_DELAY);
       break;
     }
     
     if (message.checkString("1")) 
     {
-      myShiftOut(DTMF_ONE);
+      myShiftOut(DTMF_ONE, TONE_DELAY);
       break;
     }
     
     if (message.checkString("2")) 
     {
-      myShiftOut(DTMF_TWO);
+      myShiftOut(DTMF_TWO, TONE_DELAY);
       break;
     }
     
     if (message.checkString("3")) 
     {
-      myShiftOut(DTMF_THREE);
+      myShiftOut(DTMF_THREE, TONE_DELAY);
       break;
     }
     
     if (message.checkString("4")) 
     {
-      myShiftOut(DTMF_FOUR);
+      myShiftOut(DTMF_FOUR, TONE_DELAY);
       break;
     }
     
    if (message.checkString("5")) 
     {
-      myShiftOut(DTMF_FIVE);
+      myShiftOut(DTMF_FIVE, TONE_DELAY);
       break;
     }
     
     if (message.checkString("6")) 
     {
-      myShiftOut(DTMF_SIX);
+      myShiftOut(DTMF_SIX, TONE_DELAY);
       break;
     }
     
     if (message.checkString("7")) 
     {
-      myShiftOut(DTMF_SEVEN);
+      myShiftOut(DTMF_SEVEN, TONE_DELAY);
       break;
     }
     
     if (message.checkString("8")) 
     {
-      myShiftOut(DTMF_EIGHT);
+      myShiftOut(DTMF_EIGHT, TONE_DELAY);
       break;
     }
     
     if (message.checkString("9")) 
     {
-      myShiftOut(DTMF_NINE);
+      myShiftOut(DTMF_NINE, TONE_DELAY);
       break;
     }
     
     if (message.checkString("A")) 
     {
-      myShiftOut(DTMF_A);
+      myShiftOut(DTMF_A, TONE_DELAY);
       break;
     }
     
     if (message.checkString("B")) 
     {
-      myShiftOut(DTMF_B);
+      myShiftOut(DTMF_B, TONE_DELAY);
       break;
     }
     
     if (message.checkString("C")) 
     {
-      myShiftOut(DTMF_C);
+      myShiftOut(DTMF_C, TONE_DELAY);
       break;
     }
     
     if (message.checkString("D")) 
     {
-      myShiftOut(DTMF_D);
+      myShiftOut(DTMF_D, TONE_DELAY);
       break;
     }
-    
-    if (message.checkString("D")) 
-    {
-      myShiftOut(DTMF_D);
-      break;
-    }
-    
+       
     if (message.checkString("STAR")) 
     {
-      myShiftOut(DTMF_STAR);
+      myShiftOut(DTMF_STAR, TONE_DELAY);
       break;
     }
     
     if (message.checkString("POUND")) 
     {
-      myShiftOut(DTMF_POUND);
+      myShiftOut(DTMF_POUND, TONE_DELAY);
       break;
     }
     
     // single tones
     if (message.checkString("697")) 
     {
-      myShiftOut(DTMF_697);
+      myShiftOut(DTMF_697, TONE_DELAY);
       break;
     }
+    
     if (message.checkString("770")) 
     {
-      myShiftOut(DTMF_770);
+      myShiftOut(DTMF_770, TONE_DELAY);
       break;
     }
+    
     if (message.checkString("852")) 
     {
-      myShiftOut(DTMF_852);
+      myShiftOut(DTMF_852, TONE_DELAY);
       break;
     }
     if (message.checkString("941")) 
     {
-      myShiftOut(DTMF_941);
+      myShiftOut(DTMF_941, TONE_DELAY);
       break;
     }
     if (message.checkString("1209")) 
     {
-      myShiftOut(DTMF_1209);
+      myShiftOut(DTMF_1209, TONE_DELAY);
       break;
     }
+    
     if (message.checkString("1336")) 
     {
-      myShiftOut(DTMF_1336);
+      myShiftOut(DTMF_1336, TONE_DELAY);
       break;
     }
+    
     if (message.checkString("1477")) 
     {
-      myShiftOut(DTMF_1477);
+      myShiftOut(DTMF_1477, TONE_DELAY);
       break;
     }
+    
     if (message.checkString("1633")) 
     {
-      myShiftOut(DTMF_1633);
+      myShiftOut(DTMF_1633, TONE_DELAY);
       break;
     }
 
   // button presses
     if (message.checkString("UP"))
     {
-      pressButton(UP_PIN);
+      pressButton(UP_PIN, BUTTON_DELAY);
       break;
     }
     
     if (message.checkString("DOWN"))
     {
-      pressButton(DOWN_PIN);
+      pressButton(DOWN_PIN, BUTTON_DELAY);
       break;
     }
     
     if (message.checkString("MR"))
     {
-      pressButton(MR_PIN);
+      pressButton(MR_PIN, BUTTON_DELAY);
       break;
     }
-    
+     
+    if (message.checkString("LONG_MR"))
+    {
+      pressButton(MR_PIN, LONG_PRESS_TIME);
+      break;
+    }
+   
     if (message.checkString("VFO"))
     {
-      pressButton(VFO_PIN);
+      pressButton(VFO_PIN, BUTTON_DELAY);
       break;
     }
     
