@@ -416,12 +416,12 @@ namespace Radio
             {
                 if (!MHzComboBoxObj.Items.Contains(MHzComboBoxObj.Text))
                 {
-                    Interaction.MsgBox("Mhz selected is not a valid choice.", MsgBoxStyle.Critical, "Set Channel Error Message");
+                    Interaction.MsgBox("MHz selected is not a valid choice.", MsgBoxStyle.Critical, "Set Channel Error Message");
                     return;
                 }
                 if (!(Convert.ToDouble(fixDecimalSeparator(KHzComboBoxObj.Text)) * 10000d % 12.5d == 0d | Convert.ToDouble(fixDecimalSeparator(KHzComboBoxObj.Text)) * 10000d % 5d == 0d))
                 {
-                    Interaction.MsgBox("Khz selected is not a valid choice.", MsgBoxStyle.Critical, "Set Channel Error Message");
+                    Interaction.MsgBox("KHz selected is not a valid choice.", MsgBoxStyle.Critical, "Set Channel Error Message");
                     return;
                 }
                 if (!RepeaterComboBoxObj.Items.Contains(RepeaterComboBoxObj.Text))
@@ -759,25 +759,25 @@ namespace Radio
 
         private int ctcssModeCurrentIndex;
 
-        private readonly string[] _getCtcssModeList = new string[] { "OFF", "XMIT", "XMIT/REC" };
-        private int _getCtcssModeList_Elements = 2;
+        private readonly string[] CTCSSModeList = new string[] { "OFF", "XMIT", "XMIT/REC" };
+        private int CTCSSModeList_NumElementsToUse = 2; // so the indexes are 0 thru CTCSSModeList_NumElementsToUse-1
 
         public int getCtcssModeIndex(string str)
         {
             int count = 0;
             if (My.MyProject.Forms.Form2.Tsu7CheckBox.Checked)
             {
-                _getCtcssModeList_Elements = 3;
+                CTCSSModeList_NumElementsToUse = 3;
             }
             else
             {
-                _getCtcssModeList_Elements = 2;
+                CTCSSModeList_NumElementsToUse = 2;
             }
 
-            while ((str.ToUpper() ?? "") != (_getCtcssModeList[ctcssModeCurrentIndex] ?? ""))
+            while ((str.ToUpper() ?? "") != (CTCSSModeList[ctcssModeCurrentIndex] ?? ""))
             {
                 ctcssModeCurrentIndex++;
-                if (ctcssModeCurrentIndex > _getCtcssModeList_Elements - 1)
+                if (ctcssModeCurrentIndex > CTCSSModeList_NumElementsToUse - 1)
                 {
                     ctcssModeCurrentIndex = 0;
                 }
@@ -786,21 +786,20 @@ namespace Radio
             }
 
             return count;
-
         }
 
         private int CTCSSToneFrequencyIndex;
 
-        private readonly double[] _getCTCSSToneFrequencyList = new double[] { 67.0d, 71.9d, 74.4d, 77.0d, 79.7d, 82.5d, 85.4d, 88.5d, 91.5d, 94.8d, 97.4d, 100.0d, 103.5d, 107.2d, 110.9d, 114.8d, 118.8d, 123.0d, 127.3d, 131.8d, 136.5d, 141.3d, 146.2d, 151.4d, 156.7d, 162.2d, 167.9d, 173.8d, 179.9d, 186.2d, 192.8d, 203.5d, 210.7d, 218.1d, 225.7d, 233.6d, 241.8d, 250.3d };
+        private readonly double[] CTCSSToneFrequencyList = new double[] { 67.0d, 71.9d, 74.4d, 77.0d, 79.7d, 82.5d, 85.4d, 88.5d, 91.5d, 94.8d, 97.4d, 100.0d, 103.5d, 107.2d, 110.9d, 114.8d, 118.8d, 123.0d, 127.3d, 131.8d, 136.5d, 141.3d, 146.2d, 151.4d, 156.7d, 162.2d, 167.9d, 173.8d, 179.9d, 186.2d, 192.8d, 203.5d, 210.7d, 218.1d, 225.7d, 233.6d, 241.8d, 250.3d };
 
         public int getCTCSSToneFrequencyIndex(string str, ref string command)
         {
             int count = 0;
 
-            if (Convert.ToDouble(fixDecimalSeparator(str)) <= _getCTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
+            if (Convert.ToDouble(fixDecimalSeparator(str)) <= CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
             {
                 command = "DOWN";
-                while (Convert.ToDouble(fixDecimalSeparator(str)) != _getCTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
+                while (Convert.ToDouble(fixDecimalSeparator(str)) != CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
                 {
                     CTCSSToneFrequencyIndex--;
                     if (CTCSSToneFrequencyIndex == -1)
@@ -809,21 +808,21 @@ namespace Radio
                     }
                     count++;
                 }
-                return count;
             }
             else
             {
                 command = "UP";
-                while (Convert.ToDouble(fixDecimalSeparator(str)) != _getCTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
+                while (Convert.ToDouble(fixDecimalSeparator(str)) != CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
                 {
                     CTCSSToneFrequencyIndex++;
-                    if (CTCSSToneFrequencyIndex == _getCTCSSToneFrequencyList.Length)
+                    if (CTCSSToneFrequencyIndex == CTCSSToneFrequencyList.Length)
                     {
                         // publish an error
                     }
                     count++;
                 }
             }
+
             return count;
         }
         private void ButtonProgramBandModule_Click(object sender, EventArgs e)
@@ -843,6 +842,8 @@ namespace Radio
             int blankChannelCount = 0;
             bool firstChannelComplete = false;
             Label commandLabel;
+
+            textBoxSerialCommands.Text = "";
 
             stopProgrammingRequested = false;
 
@@ -959,6 +960,7 @@ namespace Radio
             {
                 return;
             }
+            textBoxSerialCommands.AppendText(Environment.NewLine);
 
             for (int channelIndex = 0, loopTo = ChannelListViewObj.Items.Count - 2; channelIndex <= loopTo; channelIndex++)
             {
@@ -1015,12 +1017,15 @@ namespace Radio
 
                     if (My.MyProject.Forms.Form2.AROcheckBox.Checked)
                     {
+                        // only the UT144 and UT220 have 'Automatic Receiver Offset' feature, it seems
                         if ((TabControl.SelectedIndex == 0 && My.MyProject.Forms.Form2.Mod1UT144.Checked)
                             || (TabControl.SelectedIndex == 1 && My.MyProject.Forms.Form2.Mod2UT144.Checked)
                             || (TabControl.SelectedIndex == 2 && My.MyProject.Forms.Form2.Mod3UT144.Checked))
                         {
+                            // it's a 2m module
                             if (!My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
                             {
+                                // USA band plan for 2m, based on 'Type E' checkbox being not checked
                                 if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.1d)
                                 {
                                     getRepeaterIncrement("SIMPLEX");
@@ -1062,17 +1067,21 @@ namespace Radio
                                     getRepeaterIncrement("SIMPLEX");
                                 }
                             }
-                            else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.6d)
-                            {
-                                getRepeaterIncrement("SIMPLEX");
-                            }
-                            else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.8d)
-                            {
-                                getRepeaterIncrement("MINUS");
-                            }
                             else
                             {
-                                getRepeaterIncrement("SIMPLEX");
+                                // European band plan for 2m, based on 'Type E' checkbox being checked
+                                if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.6d)
+                                {
+                                    getRepeaterIncrement("SIMPLEX");
+                                }
+                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.8d)
+                                {
+                                    getRepeaterIncrement("MINUS");
+                                }
+                                else
+                                {
+                                    getRepeaterIncrement("SIMPLEX");
+                                }
                             }
                         }
                         else if ((TabControl.SelectedIndex == 0 && My.MyProject.Forms.Form2.Mod1UT220.Checked && !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
@@ -1080,6 +1089,7 @@ namespace Radio
                             || (TabControl.SelectedIndex == 2 && My.MyProject.Forms.Form2.Mod3UT220.Checked && !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked))
 
                         {
+                            // it's a 220 MHz module.  Cannot be used in an 'e-type' radio (not legal in Europe)
                             if (Convert.ToDouble(fixDecimalSeparator(freq)) < 223.92d)
                             {
                                 getRepeaterIncrement("SIMPLEX");
@@ -1093,11 +1103,14 @@ namespace Radio
                                 getRepeaterIncrement("SIMPLEX");
                             }
                         }
-                    }
+                    } // end ARO handling
 
+                    // get how many steps are needed from 'current' increment to what was chosen.  Code above in ARO accounts for some choices
+                    // being automatic based on the frequency chosen.
                     int repeaterCount = getRepeaterIncrement(ChannelListViewObj.Items[channelIndex].SubItems[2].Text);
                     if (repeaterCount > 0)
                     {
+                        textBoxSerialCommands.AppendText(" Mode ");
                         for (int loopVar = 0; loopVar <= (repeaterCount - 1); loopVar++)
                             SendString("1");
                     }
@@ -1106,6 +1119,7 @@ namespace Radio
                     int ctcssCount = getCtcssModeIndex(ChannelListViewObj.Items[channelIndex].SubItems[4].Text);
                     if (ctcssCount > 0)
                     {
+                        textBoxSerialCommands.AppendText(" CTCSS ");
                         for (int loopVar = 0; loopVar <= (ctcssCount - 1); loopVar++)
                             SendString("2");
                     }
@@ -1117,6 +1131,7 @@ namespace Radio
                         int toneCount = getCTCSSToneFrequencyIndex(ChannelListViewObj.Items[channelIndex].SubItems[3].Text, ref direction);
                         if (toneCount > 0)
                         {
+                            textBoxSerialCommands.AppendText(" CTCSS Freq ");
                             SendString("D");
                             SendString("2");
                             for (int loopVar = 0; loopVar <= (toneCount - 1); loopVar++)
@@ -1143,6 +1158,7 @@ namespace Radio
                     SendString("MR");
                     SendString("PAUSE: ");
 
+                    textBoxSerialCommands.AppendText(Environment.NewLine);
                 }
 
                 ChannelListViewObj.Items[channelIndex].BackColor = Color.White;
@@ -1758,6 +1774,8 @@ namespace Radio
             // cmdRcvdObj.Update()
             commandLabel.Text = strLcl;
             commandLabel.Update();
+
+            textBoxSerialCommands.AppendText(strLcl + ", ");
 
             if (!DEBUG)
             {

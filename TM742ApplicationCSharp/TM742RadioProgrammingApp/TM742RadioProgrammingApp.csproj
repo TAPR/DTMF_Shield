@@ -21,7 +21,7 @@
     <ManifestCertificateThumbprint>7CE6771B42EAC2D10E198456FD7AD8FDB68A5B36</ManifestCertificateThumbprint>
     <ManifestKeyFile>RadioProgrammingApp_1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
     <ApplicationIcon>tm742.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <FileUpgradeFlags>
@@ -32,7 +32,7 @@
     <TargetFrameworkProfile />
     <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.vb</DefaultItemExcludes>
     <LangVersion>latest</LangVersion>
-    <PublishUrl>C:\KenwoodTM742Programmer\</PublishUrl>
+    <PublishUrl>D:\Documents\GitHub\DTMF_Shield\TM742ApplicationCSharp\PublishedRelease\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -45,8 +45,8 @@
     <ProductName>TM742 Programmer</ProductName>
     <PublisherName>TM742</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>96</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>100</ApplicationRevision>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -160,12 +160,12 @@
   <ItemGroup>
     <PublishFile Include="Tm742Configuration.xml">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

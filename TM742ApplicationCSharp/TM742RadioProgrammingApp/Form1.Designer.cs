@@ -337,6 +337,7 @@ namespace Radio
             this.ColumnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Label54 = new System.Windows.Forms.Label();
+            this.textBoxSerialCommands = new System.Windows.Forms.TextBox();
             this.TabControl.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.Tab1TableLayoutPanel1.SuspendLayout();
@@ -416,7 +417,7 @@ namespace Radio
             this.TabControl.Location = new System.Drawing.Point(0, 0);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1014, 568);
+            this.TabControl.Size = new System.Drawing.Size(1014, 669);
             this.TabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.TabControl.TabIndex = 0;
             this.TabControl.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl_Deselecting);
@@ -427,7 +428,7 @@ namespace Radio
             this.TabPage1.Location = new System.Drawing.Point(4, 34);
             this.TabPage1.Name = "TabPage1";
             this.TabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage1.Size = new System.Drawing.Size(1006, 530);
+            this.TabPage1.Size = new System.Drawing.Size(1006, 631);
             this.TabPage1.TabIndex = 0;
             this.TabPage1.Text = "TabPage1";
             this.TabPage1.UseVisualStyleBackColor = true;
@@ -444,7 +445,7 @@ namespace Radio
             this.Tab1TableLayoutPanel1.Name = "Tab1TableLayoutPanel1";
             this.Tab1TableLayoutPanel1.RowCount = 1;
             this.Tab1TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.Tab1TableLayoutPanel1.Size = new System.Drawing.Size(1000, 524);
+            this.Tab1TableLayoutPanel1.Size = new System.Drawing.Size(1000, 625);
             this.Tab1TableLayoutPanel1.TabIndex = 1;
             // 
             // TableLayoutPanel2
@@ -458,10 +459,10 @@ namespace Radio
             this.TableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.TableLayoutPanel2.Name = "TableLayoutPanel2";
             this.TableLayoutPanel2.RowCount = 3;
-            this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.14286F));
-            this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.85714F));
+            this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.98658F));
+            this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.01342F));
             this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
-            this.TableLayoutPanel2.Size = new System.Drawing.Size(461, 518);
+            this.TableLayoutPanel2.Size = new System.Drawing.Size(461, 619);
             this.TableLayoutPanel2.TabIndex = 0;
             // 
             // Panel1
@@ -491,7 +492,7 @@ namespace Radio
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel1.Location = new System.Drawing.Point(3, 3);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(455, 277);
+            this.Panel1.Size = new System.Drawing.Size(455, 280);
             this.Panel1.TabIndex = 0;
             // 
             // Tab1DeleteRowButton
@@ -954,6 +955,7 @@ namespace Radio
             // 
             this.Panel2.BackColor = System.Drawing.Color.Silver;
             this.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Panel2.Controls.Add(this.textBoxSerialCommands);
             this.Panel2.Controls.Add(this.tab1ChannelFileName);
             this.Panel2.Controls.Add(this.Label9);
             this.Panel2.Controls.Add(this.Tab1StopProgramButton);
@@ -966,9 +968,9 @@ namespace Radio
             this.Panel2.Controls.Add(this.Tab1ProgressBar1);
             this.Panel2.Controls.Add(this.Tab1ProgramButton);
             this.Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel2.Location = new System.Drawing.Point(3, 286);
+            this.Panel2.Location = new System.Drawing.Point(3, 289);
             this.Panel2.Name = "Panel2";
-            this.Panel2.Size = new System.Drawing.Size(455, 206);
+            this.Panel2.Size = new System.Drawing.Size(455, 304);
             this.Panel2.TabIndex = 1;
             // 
             // tab1ChannelFileName
@@ -985,11 +987,11 @@ namespace Radio
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(11, 177);
+            this.Label9.Location = new System.Drawing.Point(8, 177);
             this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(187, 25);
+            this.Label9.Size = new System.Drawing.Size(149, 30);
             this.Label9.TabIndex = 25;
-            this.Label9.Text = "Channel Filename";
+            this.Label9.Text = "Module File";
             this.Label9.Visible = false;
             // 
             // Tab1StopProgramButton
@@ -1085,7 +1087,7 @@ namespace Radio
             this.Tab1StatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Tab1ToolStripStepSize,
             this.Tab1ToolStripStatusLabel});
-            this.Tab1StatusStrip1.Location = new System.Drawing.Point(0, 495);
+            this.Tab1StatusStrip1.Location = new System.Drawing.Point(0, 596);
             this.Tab1StatusStrip1.Name = "Tab1StatusStrip1";
             this.Tab1StatusStrip1.Size = new System.Drawing.Size(461, 23);
             this.Tab1StatusStrip1.TabIndex = 2;
@@ -1114,7 +1116,7 @@ namespace Radio
             this.Panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel3.Location = new System.Drawing.Point(470, 3);
             this.Panel3.Name = "Panel3";
-            this.Panel3.Size = new System.Drawing.Size(527, 518);
+            this.Panel3.Size = new System.Drawing.Size(527, 619);
             this.Panel3.TabIndex = 1;
             // 
             // Tab1ChannelListView
@@ -1134,7 +1136,7 @@ namespace Radio
             this.Tab1ChannelListView.Location = new System.Drawing.Point(0, 34);
             this.Tab1ChannelListView.MultiSelect = false;
             this.Tab1ChannelListView.Name = "Tab1ChannelListView";
-            this.Tab1ChannelListView.Size = new System.Drawing.Size(523, 463);
+            this.Tab1ChannelListView.Size = new System.Drawing.Size(523, 583);
             this.Tab1ChannelListView.TabIndex = 12;
             this.Tab1ChannelListView.UseCompatibleStateImageBehavior = false;
             this.Tab1ChannelListView.View = System.Windows.Forms.View.Details;
@@ -4417,11 +4419,20 @@ namespace Radio
             this.Label54.TabIndex = 11;
             this.Label54.Text = "Channel List";
             // 
+            // textBoxSerialCommands
+            // 
+            this.textBoxSerialCommands.Location = new System.Drawing.Point(7, 212);
+            this.textBoxSerialCommands.Multiline = true;
+            this.textBoxSerialCommands.Name = "textBoxSerialCommands";
+            this.textBoxSerialCommands.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxSerialCommands.Size = new System.Drawing.Size(439, 85);
+            this.textBoxSerialCommands.TabIndex = 27;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1014, 568);
+            this.ClientSize = new System.Drawing.Size(1014, 669);
             this.Controls.Add(this.TabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -4431,7 +4442,7 @@ namespace Radio
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Channel Lists (Version 1.1)";
+            this.Text = "Channel Lists (Version 1.2)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.TabControl.ResumeLayout(false);
             this.TabPage1.ResumeLayout(false);
@@ -4829,6 +4840,6 @@ namespace Radio
         internal RadioButton Tab1CtcssOff;
         internal RadioButton Tab2CtcssOff;
         internal RadioButton Tab3CtcssOff;
-
+        private TextBox textBoxSerialCommands;
     }
 }

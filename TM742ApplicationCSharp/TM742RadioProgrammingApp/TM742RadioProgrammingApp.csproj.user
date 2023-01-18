@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <EnableSecurityDebugging>false</EnableSecurityDebugging>
-    <PublishUrlHistory />
+    <PublishUrlHistory>D:\Documents\GitHub\DTMF_Shield\TM742ApplicationCSharp\PublishedRelease\|C:\KenwoodTM742Programmer\</PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory />
     <UpdateUrlHistory />
