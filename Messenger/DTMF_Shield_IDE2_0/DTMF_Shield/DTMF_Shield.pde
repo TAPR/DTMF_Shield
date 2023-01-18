@@ -100,7 +100,7 @@ void HT9200ACommandOut(byte dataOut)
     else
     {
       digitalWrite(CLK_PIN, LOW);
-   }
+    }
   }
 }
 
@@ -367,7 +367,7 @@ void messageCompleted()
     
     if (message.checkString("CALL"))
     {
-      pressButton(CALL_PIN);
+      pressButton(CALL_PIN, BUTTON_DELAY);
       break;
     }
     
