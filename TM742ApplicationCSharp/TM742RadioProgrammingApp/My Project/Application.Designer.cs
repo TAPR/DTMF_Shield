@@ -33,7 +33,7 @@ namespace Radio.My
         [DebuggerStepThrough()]
         protected override void OnCreateMainForm()
         {
-            MainForm = MyProject.Forms.Form2;
+            MainForm = new Radio.Form2();
         }
     }
 }

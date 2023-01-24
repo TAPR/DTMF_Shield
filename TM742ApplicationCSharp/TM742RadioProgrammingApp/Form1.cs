@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml;
 using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.MyServices;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace Radio
@@ -14,10 +15,12 @@ namespace Radio
 
     public partial class Form1
     {
-        public Form1()
+        public Form1(Form2 parentForm)
         {
+            this.parentForm = parentForm;
             InitializeComponent();
         }
+
         [DllImport("kernel32")]
         private static extern void Sleep(long dwMilliseconds);
 
@@ -29,7 +32,7 @@ namespace Radio
         private const int NORMAL_RADIO_TIMING = 80;
         private const int SLOW_RADIO_TIMING = 250;
         private const int DEBUG_RADIO_TIMING = 500;
-        private string decimalSeparator = "";
+        private readonly Form2 parentForm = null;
         
         public bool SetStepSize(string stepSizeStr)
         {
@@ -83,8 +86,6 @@ namespace Radio
             ComboBox ToneComboBox;
             ComboBox MhzComboBox;
 
-            decimalSeparator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator;
-
             for (int x = 0; x <= 2; x++)
             {
                 channelUpdateClicked[x] = false;
@@ -118,7 +119,7 @@ namespace Radio
             ChannelListViewObj.Items[0].Selected = true;
             ChannelListViewObj.HideSelection = false;
             UserSelectedChannel = false;
-            if (!SetStepSize(My.MyProject.Forms.Form2.getTab1StepSize()))
+            if (!SetStepSize(parentForm.getTab1StepSize()))
             {
                 KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
                 if (TabControl.SelectedTab.Text.Contains("144e"))
@@ -138,6 +139,7 @@ namespace Radio
                     KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[3]);
                 }
             }
+
             ToolStripStatusLabelObj.Text = "";
             XmitButton.Checked = false;
             XmitRecButton.Checked = false;
@@ -169,7 +171,7 @@ namespace Radio
             ChannelListViewObj.Items[0].Selected = true;
             ChannelListViewObj.HideSelection = false;
             UserSelectedChannel = false;
-            if (!SetStepSize(My.MyProject.Forms.Form2.getTab2StepSize()))
+            if (!SetStepSize(parentForm.getTab2StepSize()))
             {
                 KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
                 if (TabControl.SelectedTab.Text.Contains("144e"))
@@ -189,6 +191,7 @@ namespace Radio
                     KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[3]);
                 }
             }
+
             ToolStripStatusLabelObj.Text = "";
             XmitButton.Checked = false;
             XmitRecButton.Checked = false;
@@ -220,7 +223,7 @@ namespace Radio
             ChannelListViewObj.Items[0].Selected = true;
             ChannelListViewObj.HideSelection = false;
             UserSelectedChannel = false;
-            if (!SetStepSize(My.MyProject.Forms.Form2.getTab3StepSize()))
+            if (!SetStepSize(parentForm.getTab3StepSize()))
             {
                 KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
                 if (TabControl.SelectedTab.Text.Contains("144e"))
@@ -240,6 +243,7 @@ namespace Radio
                     KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[3]);
                 }
             }
+
             ToolStripStatusLabelObj.Text = "";
             XmitButton.Checked = false;
             XmitRecButton.Checked = false;
@@ -261,6 +265,7 @@ namespace Radio
                 SerialPort1.Close();
             }
         }
+
         private bool openSerialPort()
         {
             if (DEBUG)
@@ -291,7 +296,7 @@ namespace Radio
             bool tryDefaultPort = false;
             try
             {
-                string portString = My.MyProject.Forms.Form2.getUsbPortName();
+                string portString = parentForm.getUsbPortName();
                 SerialPort1.PortName = portString;
                 SerialPort1.Open();
                 Sleep(3000L);
@@ -307,7 +312,7 @@ namespace Radio
                 bool testMsg = SendString(" ");
                 if (testMsg)
                 {
-                    string message = String.Format("Found Arduino on on COM port: {0}", My.MyProject.Forms.Form2.getUsbPortNumber());
+                    string message = String.Format("Found Arduino on on COM port: {0}", parentForm.getUsbPortNumber());
                     MessageBox.Show(message);
                     return true;
                 }
@@ -344,10 +349,7 @@ namespace Radio
                     message += Convert.ToString(x);
                     MessageBox.Show(message);
 
-                    var testXml = new XmlDocument();
-                    testXml.Load(My.MyProject.Forms.Form2.xmlFile);
-                    testXml.SelectSingleNode("TM742/usbPort").InnerText = Convert.ToString(x);
-                    testXml.Save(My.MyProject.Forms.Form2.xmlFile);
+                    updateSingleEntity(parentForm.xmlFile, "TM742/usbPort", Convert.ToString(x));
                     textBoxObj.Visible = false;
 
                     return true;
@@ -362,6 +364,14 @@ namespace Radio
 
             textBoxObj.Visible = false;
             return false;
+        }
+
+        public void updateSingleEntity(string xmlFile, string nodeName, string value)
+        {
+            var testXml = new XmlDocument();
+            testXml.Load(xmlFile);
+            testXml.SelectSingleNode(nodeName).InnerText = value;
+            testXml.Save(xmlFile);
         }
 
         private void SetChannelButton_Click(object sender, EventArgs e)
@@ -419,7 +429,8 @@ namespace Radio
                     Interaction.MsgBox("MHz selected is not a valid choice.", MsgBoxStyle.Critical, "Set Channel Error Message");
                     return;
                 }
-                if (!(Convert.ToDouble(fixDecimalSeparator(KHzComboBoxObj.Text)) * 10000d % 12.5d == 0d | Convert.ToDouble(fixDecimalSeparator(KHzComboBoxObj.Text)) * 10000d % 5d == 0d))
+                if (!(Convert.ToDecimal(KHzComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture) * 10000m % 12.5m == 0m
+                    || Convert.ToDecimal(KHzComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture) * 10000m % 5m == 0m))
                 {
                     Interaction.MsgBox("KHz selected is not a valid choice.", MsgBoxStyle.Critical, "Set Channel Error Message");
                     return;
@@ -441,7 +452,8 @@ namespace Radio
 
             if (!MHzComboBoxObj.Text.Equals("BLANK"))
             {
-                double test = Convert.ToDouble(fixDecimalSeparator(MHzComboBoxObj.Text)) + Convert.ToDouble(fixDecimalSeparator(KHzComboBoxObj.Text)) * 0.001d;
+                decimal test = Convert.ToDecimal(MHzComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture)
+                    + Convert.ToDecimal(KHzComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture) * 0.001m;
                 ChannelListViewObj.Items[selectedIndex].SubItems[1].Text = string.Format("{0:F4}", test);
                 ChannelListViewObj.Items[selectedIndex].SubItems[2].Text = RepeaterComboBoxObj.Text;
                 ChannelListViewObj.Items[selectedIndex].SubItems[3].Text = ToneComboBoxObj.Text;
@@ -549,18 +561,18 @@ namespace Radio
                 UserSelectedChannel = true;
                 ChannelTextBoxObj.Text = ChannelListViewObj.SelectedItems[0].Text;
 //                int channelIndex = Convert.ToInt32(ChannelListViewObj.SelectedItems[0].Text);
-                double frequency;
-                if (!string.IsNullOrEmpty(ChannelListViewObj.SelectedItems[0].SubItems[1].Text) & ChannelListViewObj.SelectedItems[0].SubItems[1].Text != "BLANK")
+                decimal frequency;
+                if (!string.IsNullOrEmpty(ChannelListViewObj.SelectedItems[0].SubItems[1].Text) && (ChannelListViewObj.SelectedItems[0].SubItems[1].Text != "BLANK"))
                 {
-                    frequency = Convert.ToDouble(fixDecimalSeparator(ChannelListViewObj.SelectedItems[0].SubItems[1].Text));
-                    MHzComboBoxObj.Text = Convert.ToInt32(frequency - frequency % 1d).ToString();
-                    double kHzVal = Convert.ToDouble(Math.Round(frequency % 1d * 1000d, 1));
+                    frequency = Convert.ToDecimal(ChannelListViewObj.SelectedItems[0].SubItems[1].Text, System.Globalization.CultureInfo.InvariantCulture);
+                    MHzComboBoxObj.Text = Convert.ToInt32(frequency - frequency % 1m).ToString();
+                    decimal kHzVal = Convert.ToDecimal(Math.Round(frequency % 1m * 1000m, 1));
                     string kHzString = Convert.ToString(kHzVal);
-                    if (kHzVal < 10d)
+                    if (kHzVal < 10.0m)
                     {
                         kHzString = "00" + kHzString;
                     }
-                    else if (kHzVal < 100d)
+                    else if (kHzVal < 100.0m)
                     {
                         kHzString = "0" + kHzString;
                     }
@@ -597,21 +609,6 @@ namespace Radio
                 }
                 NotesTextObj.Text = ChannelListViewObj.SelectedItems[0].SubItems[5].Text;
             }
-        }
-
-        private void MHzComboBox_DropDown(object sender, EventArgs e)
-        {
-            // Dim MHzComboBoxObject As ComboBox
-
-            // MHzComboBoxObject = Tab1MHzComboBox
-            // Dim itemSelect As Integer = MHzComboBoxObject.Items.Count / 2
-            // Dim test As System.IntPtr = Tab1MHzComboBox.Handle
-            // test->Events
-            // Tab1MHzComboBox.Enabled = False
-            // Tab1MHzComboBox.SelectedIndex = 2 'itemSelect
-
-            // 'MHzComboBoxObject.DroppedDown = True
-
         }
 
         private void MHzComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -664,22 +661,25 @@ namespace Radio
                 ToneRadioButtonObj = Tab3CtcssXmit;
             }
 
-            double KhzStepSize = Conversions.ToDouble(KhzStepSizeObj.Text);
-            if (KhzStepSizeObj.Text.StartsWith("12") & decimalSeparator == ",")
+            decimal KhzStepSize = Conversions.ToDecimal(KhzStepSizeObj.Text);
+            // this should be based on whether a 'type E' radio (really 'use European band plan').  It was: what is the decimal separator
+            // was:             if (KhzStepSizeObj.Text.StartsWith("12") && decimalSeparator == ",")
+            if (KhzStepSizeObj.Text.StartsWith("12") && parentForm.eTypeRadioCheckBox.Checked)
             {
-                KhzStepSize = 12.5d;
+                // is this if statement necessary?  what other khzStepSize could it be?
+                KhzStepSize = 12.5m;
             }
 
             if (ChannelListViewObj.SelectedItems.Count > 0)
             {
-                if (UserSelectedChannel == false | ChannelListViewObj.SelectedItems[0].Index == ChannelListViewObj.Items.Count - 1)
+                if (UserSelectedChannel == false || ChannelListViewObj.SelectedItems[0].Index == ChannelListViewObj.Items.Count - 1)
                 {
-                    if (MHzComboBoxObj.Text != "BLANK" & !string.IsNullOrEmpty(MHzComboBoxObj.Text))
+                    if (MHzComboBoxObj.Text != "BLANK" && !string.IsNullOrEmpty(MHzComboBoxObj.Text))
                     {
                         RepeaterComboBoxObj.Text = "SIMPLEX";
                         if (ToneRadioButtonObj.Checked == true)
                         {
-                            ToneComboBoxObj.Text = "88.5";
+                            ToneComboBoxObj.Text = "88.5";  // this text always has a period for decimal separator
                         }
                         else
                         {
@@ -687,15 +687,15 @@ namespace Radio
                         }
 
                         KHzComboBoxObj.Items.Clear();
-                        double x;
-                        x = 0.0d;
-                        while (x < 1000d)
+                        decimal x;
+                        x = 0.0m;
+                        while (x < 1000m)
                         {
-                            if (x < 10d)
+                            if (x < 10m)
                             {
                                 KHzComboBoxObj.Items.Add(string.Concat("00", Convert.ToString(x)));
                             }
-                            else if (x < 100d)
+                            else if (x < 100m)
                             {
                                 KHzComboBoxObj.Items.Add(string.Concat("0", Convert.ToString(x)));
                             }
@@ -722,15 +722,13 @@ namespace Radio
                 KHzComboBoxObj.Text = "";
                 CtcssRadioButtonObj.Checked = false;
                 ToneRadioButtonObj.Checked = false;
-
             }
         }
 
         private int repeaterModeCurrentIndex;
         private int repeaterElements;
 
-        private readonly string[] _getRepeaterModeList = new string[] { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" };
-        private List<string> repeaterModes = new List<string>(new string[] { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" });
+        private readonly List<string> repeaterModes = new() { "SIMPLEX", "PLUS", "MINUS", "DBL MINUS" };
 
         /// <summary>
         /// 
@@ -741,17 +739,19 @@ namespace Radio
         {
             int count = 0;
             var toFind = str.ToUpper() ?? "";
-//            repeaterModes.FindIndex(toFind);
+            var foundAt = repeaterModes.IndexOf(toFind);
 
-            while (toFind != (_getRepeaterModeList[repeaterModeCurrentIndex] ?? ""))
+            if (foundAt != repeaterModeCurrentIndex)
             {
-                repeaterModeCurrentIndex++;
-                if (repeaterModeCurrentIndex >= repeaterElements)
+                if (foundAt > repeaterModeCurrentIndex)
                 {
-                    repeaterModeCurrentIndex = 0;
+                    count = foundAt - repeaterModeCurrentIndex;
                 }
-                count++;
-                // todo check for overflow
+                else
+                {
+                    count = (repeaterElements - repeaterModeCurrentIndex) + foundAt;
+                }
+                repeaterModeCurrentIndex = foundAt;
             }
 
             return count;
@@ -765,7 +765,7 @@ namespace Radio
         public int getCtcssModeIndex(string str)
         {
             int count = 0;
-            if (My.MyProject.Forms.Form2.Tsu7CheckBox.Checked)
+            if (parentForm.Tsu7CheckBox.Checked)
             {
                 CTCSSModeList_NumElementsToUse = 3;
             }
@@ -790,16 +790,17 @@ namespace Radio
 
         private int CTCSSToneFrequencyIndex;
 
-        private readonly double[] CTCSSToneFrequencyList = new double[] { 67.0d, 71.9d, 74.4d, 77.0d, 79.7d, 82.5d, 85.4d, 88.5d, 91.5d, 94.8d, 97.4d, 100.0d, 103.5d, 107.2d, 110.9d, 114.8d, 118.8d, 123.0d, 127.3d, 131.8d, 136.5d, 141.3d, 146.2d, 151.4d, 156.7d, 162.2d, 167.9d, 173.8d, 179.9d, 186.2d, 192.8d, 203.5d, 210.7d, 218.1d, 225.7d, 233.6d, 241.8d, 250.3d };
+        // where these show in each tab's drop-down list, they are all shown with periods for decimal separator.
+        private readonly decimal[] CTCSSToneFrequencyList = new decimal[] { 67.0m, 71.9m, 74.4m, 77.0m, 79.7m, 82.5m, 85.4m, 88.5m, 91.5m, 94.8m, 97.4m, 100.0m, 103.5m, 107.2m, 110.9m, 114.8m, 118.8m, 123.0m, 127.3m, 131.8m, 136.5m, 141.3m, 146.2m, 151.4m, 156.7m, 162.2m, 167.9m, 173.8m, 179.9m, 186.2m, 192.8m, 203.5m, 210.7m, 218.1m, 225.7m, 233.6m, 241.8m, 250.3m };
 
         public int getCTCSSToneFrequencyIndex(string str, ref string command)
         {
             int count = 0;
-
-            if (Convert.ToDouble(fixDecimalSeparator(str)) <= CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
+            decimal toFind = Convert.ToDecimal(str, System.Globalization.CultureInfo.InvariantCulture);
+            if (toFind <= CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
             {
                 command = "DOWN";
-                while (Convert.ToDouble(fixDecimalSeparator(str)) != CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
+                while (toFind != CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
                 {
                     CTCSSToneFrequencyIndex--;
                     if (CTCSSToneFrequencyIndex == -1)
@@ -812,7 +813,7 @@ namespace Radio
             else
             {
                 command = "UP";
-                while (Convert.ToDouble(fixDecimalSeparator(str)) != CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
+                while (toFind != CTCSSToneFrequencyList[CTCSSToneFrequencyIndex])
                 {
                     CTCSSToneFrequencyIndex++;
                     if (CTCSSToneFrequencyIndex == CTCSSToneFrequencyList.Length)
@@ -825,6 +826,7 @@ namespace Radio
 
             return count;
         }
+
         private void ButtonProgramBandModule_Click(object sender, EventArgs e)
         {
             ProgramBandModule();
@@ -887,7 +889,6 @@ namespace Radio
             repeaterModeCurrentIndex = 0;
             CTCSSToneFrequencyIndex = 7;
             ctcssModeCurrentIndex = 0;
-            repeaterElements = 3;
 
             ToolStripStatusLabel.Text = "";
 
@@ -896,6 +897,11 @@ namespace Radio
             {
                 // allow "DBL MINUS"
                 repeaterElements = 4;
+            }
+            else
+            {
+                // disallow "DBL MINUS"
+                repeaterElements = 3;
             }
 
             if (ChannelListViewObj.Items.Count - 2 < 0)
@@ -912,14 +918,15 @@ namespace Radio
             {
                 return;
             }
+
             Timer1.Enabled = true;
 
             int toneAndButtonOnTime;
-            if (My.MyProject.Forms.Form2.normalRadioTimingButton.Checked)
+            if (parentForm.normalRadioTimingButton.Checked)
             {
                 toneAndButtonOnTime = NORMAL_RADIO_TIMING;
             }
-            else if (My.MyProject.Forms.Form2.slowRadioTimingButton.Checked)
+            else if (parentForm.slowRadioTimingButton.Checked)
             {
                 toneAndButtonOnTime = SLOW_RADIO_TIMING;
             }
@@ -970,33 +977,49 @@ namespace Radio
                 ChannelListViewObj.Items[channelIndex].BackColor = Color.LightGreen;
                 ChannelListViewObj.Update();
 
-                if (ChannelListViewObj.Items[channelIndex].SubItems[1].Text == "BLANK" | string.IsNullOrEmpty(ChannelListViewObj.Items[channelIndex].SubItems[1].Text))
+                if (ChannelListViewObj.Items[channelIndex].SubItems[1].Text == "BLANK" || string.IsNullOrEmpty(ChannelListViewObj.Items[channelIndex].SubItems[1].Text))
                 {
                     blankChannelCount++;
                 }
                 else
                 {
                     // send freq digits
-                    string freq;
-                    freq = ChannelListViewObj.Items[channelIndex].SubItems[1].Text;
+                    string freq = ChannelListViewObj.Items[channelIndex].SubItems[1].Text;
+                    decimal decFrequency = 0m;
 
                     int decimalPointLocation = freq.IndexOf(".");
                     if (decimalPointLocation == -1)
                     {
                         // this handles 'European' data with comma as decimal separator (the 'decimal point')
-                        decimalPointLocation = freq.IndexOf(",");
+                        decimalPointLocation = freq.IndexOf(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+                        if(decimalPointLocation != -1)
+                        {
+                            decFrequency = Convert.ToDecimal(freq, System.Globalization.CultureInfo.CurrentCulture);
+                        }
+                        else
+                        {
+                            // panic
+                        }
                     }
+                    else
+                    {
+                        // ensure conversion based on period '.' is the decimal separator
+                        decFrequency = Convert.ToDecimal(freq, System.Globalization.CultureInfo.InvariantCulture);
+                    }
+
                     string mhzVal = Convert.ToString(Strings.Mid(freq, 1, decimalPointLocation));
                     string kHzVal = Convert.ToString(Strings.Mid(freq, decimalPointLocation + 2));
+
                     int numOfKhzChars = 3;
-                    if (Conversions.ToBoolean(Operators.OrObject(Convert.ToDouble(fixDecimalSeparator(Conversions.ToString(ToolStripComboBoxObj.SelectedItem))) == 12.5d, Operators.ConditionalCompareObjectEqual(ToolStripComboBoxObj.SelectedItem, 25, false))))
+                    if ((Convert.ToDecimal(Conversions.ToString(ToolStripComboBoxObj.SelectedItem)) == 12.5m)
+                        || Operators.ConditionalCompareObjectEqual(ToolStripComboBoxObj.SelectedItem, 25.0m, false))
                     {
                         numOfKhzChars = 2;
                     }
 
                     SendString("A");        // ENTER key. See page 61 of User Manual.
 
-                    if (My.MyProject.Forms.Form2.wideBandCheckBox.Checked && TabControl.SelectedTab.Text.Contains("1200"))
+                    if (parentForm.wideBandCheckBox.Checked && TabControl.SelectedTab.Text.Contains("1200"))
                     {
                         SendString(Conversions.ToString(mhzVal[mhzVal.Length - 3]));
                     }
@@ -1015,50 +1038,50 @@ namespace Radio
                         freqCharIndex++;
                     }
 
-                    if (My.MyProject.Forms.Form2.AROcheckBox.Checked)
+                    if (parentForm.AROcheckBox.Checked)
                     {
                         // only the UT144 and UT220 have 'Automatic Receiver Offset' feature, it seems
-                        if ((TabControl.SelectedIndex == 0 && My.MyProject.Forms.Form2.Mod1UT144.Checked)
-                            || (TabControl.SelectedIndex == 1 && My.MyProject.Forms.Form2.Mod2UT144.Checked)
-                            || (TabControl.SelectedIndex == 2 && My.MyProject.Forms.Form2.Mod3UT144.Checked))
+                        if ((TabControl.SelectedIndex == 0 && parentForm.Mod1UT144.Checked)
+                            || (TabControl.SelectedIndex == 1 && parentForm.Mod2UT144.Checked)
+                            || (TabControl.SelectedIndex == 2 && parentForm.Mod3UT144.Checked))
                         {
                             // it's a 2m module
-                            if (!My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
+                            if (!parentForm.eTypeRadioCheckBox.Checked)
                             {
                                 // USA band plan for 2m, based on 'Type E' checkbox being not checked
-                                if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.1d)
+                                if (decFrequency < 145.1m)
                                 {
                                     getRepeaterIncrement("SIMPLEX");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.5d)
+                                else if (decFrequency < 145.5m)
                                 {
                                     getRepeaterIncrement("MINUS");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 146.0d)
+                                else if (decFrequency < 146.0m)
                                 {
                                     getRepeaterIncrement("SIMPLEX");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 146.4d)
+                                else if (decFrequency < 146.4m)
                                 {
                                     getRepeaterIncrement("PLUS");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 146.6d)
+                                else if (decFrequency < 146.6m)
                                 {
                                     getRepeaterIncrement("SIMPLEX");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 147.0d)
+                                else if (decFrequency < 147.0m)
                                 {
                                     getRepeaterIncrement("MINUS");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 147.4d)
+                                else if (decFrequency < 147.4m)
                                 {
                                     getRepeaterIncrement("PLUS");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 147.6d)
+                                else if (decFrequency < 147.6m)
                                 {
                                     getRepeaterIncrement("SIMPLEX");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 148.0d)
+                                else if (decFrequency < 148.0m)
                                 {
                                     getRepeaterIncrement("MINUS");
                                 }
@@ -1070,11 +1093,11 @@ namespace Radio
                             else
                             {
                                 // European band plan for 2m, based on 'Type E' checkbox being checked
-                                if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.6d)
+                                if (decFrequency < 145.6m)
                                 {
                                     getRepeaterIncrement("SIMPLEX");
                                 }
-                                else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 145.8d)
+                                else if (decFrequency < 145.8m)
                                 {
                                     getRepeaterIncrement("MINUS");
                                 }
@@ -1084,17 +1107,17 @@ namespace Radio
                                 }
                             }
                         }
-                        else if ((TabControl.SelectedIndex == 0 && My.MyProject.Forms.Form2.Mod1UT220.Checked && !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
-                            || (TabControl.SelectedIndex == 1 && My.MyProject.Forms.Form2.Mod2UT220.Checked && !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
-                            || (TabControl.SelectedIndex == 2 && My.MyProject.Forms.Form2.Mod3UT220.Checked && !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked))
+                        else if ((TabControl.SelectedIndex == 0 && parentForm.Mod1UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked)
+                            || (TabControl.SelectedIndex == 1 && parentForm.Mod2UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked)
+                            || (TabControl.SelectedIndex == 2 && parentForm.Mod3UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked))
 
                         {
                             // it's a 220 MHz module.  Cannot be used in an 'e-type' radio (not legal in Europe)
-                            if (Convert.ToDouble(fixDecimalSeparator(freq)) < 223.92d)
+                            if (decFrequency < 223.92m)
                             {
                                 getRepeaterIncrement("SIMPLEX");
                             }
-                            else if (Convert.ToDouble(fixDecimalSeparator(freq)) < 225.0d)
+                            else if (decFrequency < 225.0m)
                             {
                                 getRepeaterIncrement("MINUS");
                             }
@@ -1165,6 +1188,7 @@ namespace Radio
                 ChannelListViewObj.Update();
 
                 Application.DoEvents();
+
                 if (stopProgrammingRequested)
                 {
                     break;
@@ -1187,13 +1211,18 @@ namespace Radio
         {
             ToolStripStatusLabel ToolStripStatusLabel;
 
+            // why is SelectedIndex values of 1 and 2 not handled differently?
             if (TabControl.SelectedIndex == 0)
             {
                 ToolStripStatusLabel = Tab1ToolStripStatusLabel;
             }
-            else
+            else if (TabControl.SelectedIndex == 1)
             {
                 ToolStripStatusLabel = Tab2ToolStripStatusLabel;
+            }
+            else
+            {
+                ToolStripStatusLabel = Tab3ToolStripStatusLabel;
             }
 
             if (!ToolStripStatusLabel.Text.Contains("Programming"))
@@ -1210,7 +1239,7 @@ namespace Radio
                 ToolStripStatusLabel.Text += " .";
             }
 
-            _Timer1_Tick_cntr += 1;
+            _Timer1_Tick_cntr++;
         }
 
         private void KHzStepSizeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1266,15 +1295,15 @@ namespace Radio
             ToolStripLabelObj.Text = "kHz Step Size: " + ToolStripComboBoxObj.Text;
 
             KHzComboBoxObj.Items.Clear();
-            double x = 0.0d;
-            double KhzStepSize = Convert.ToDouble(fixDecimalSeparator(ToolStripComboBoxObj.Text));
-            while (x < 1000d)
+            decimal x = 0.0m;
+            decimal KhzStepSize = Convert.ToDecimal(ToolStripComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture);
+            while (x < 1000m)
             {
-                if (x < 10d)
+                if (x < 10m)
                 {
                     KHzComboBoxObj.Items.Add(string.Concat("00", Convert.ToString(x)));
                 }
-                else if (x < 100d)
+                else if (x < 100m)
                 {
                     KHzComboBoxObj.Items.Add(string.Concat("0", Convert.ToString(x)));
                 }
@@ -1285,27 +1314,24 @@ namespace Radio
                 x += KhzStepSize;
             }
 
-            var testXml = new XmlDocument();
-            testXml.Load(My.MyProject.Forms.Form2.xmlFile);
             if (TabControl.SelectedIndex == 0)
             {
-                if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.getTab1StepSize()))
+                if (!ToolStripComboBoxObj.Text.Equals(parentForm.getTab1StepSize()))
                 {
-                    testXml.SelectSingleNode("TM742/tab1StepSize").InnerText = Convert.ToString(ToolStripComboBoxObj.Text);
+                    updateSingleEntity(parentForm.xmlFile, "TM742/tab1StepSize", Convert.ToString(ToolStripComboBoxObj.Text));
                 }
             }
             else if (TabControl.SelectedIndex == 1)
             {
-                if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.getTab2StepSize()))
+                if (!ToolStripComboBoxObj.Text.Equals(parentForm.getTab2StepSize()))
                 {
-                    testXml.SelectSingleNode("TM742/tab2StepSize").InnerText = Convert.ToString(ToolStripComboBoxObj.Text);
+                    updateSingleEntity(parentForm.xmlFile, "TM742/tab2StepSize", Convert.ToString(ToolStripComboBoxObj.Text));
                 }
             }
-            else if (!ToolStripComboBoxObj.Text.Equals(My.MyProject.Forms.Form2.getTab3StepSize()))
+            else if (!ToolStripComboBoxObj.Text.Equals(parentForm.getTab3StepSize()))
             {
-                testXml.SelectSingleNode("TM742/tab3StepSize").InnerText = Convert.ToString(ToolStripComboBoxObj.Text);
+                updateSingleEntity(parentForm.xmlFile, "TM742/tab3StepSize", Convert.ToString(ToolStripComboBoxObj.Text));
             }
-            testXml.Save(My.MyProject.Forms.Form2.xmlFile);
         }
 
         private void Tab1BackToMainMenuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1329,7 +1355,7 @@ namespace Radio
                 channelListObj = Tab3ChannelListView;
             }
 
-            if (channelListObj.Items.Count > 1 & channelUpdateClicked[TabControl.SelectedIndex] == true)
+            if (channelListObj.Items.Count > 1 && channelUpdateClicked[TabControl.SelectedIndex] == true)
             {
                 displaySaveMessage();
             }
@@ -1339,10 +1365,10 @@ namespace Radio
             MhzComboBoxObj.Text = "BLANK";
             Visible = false;
             // Form2.Visible = True
-            My.MyProject.Forms.Form2.Enabled = true;
+            parentForm.Enabled = true;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void ButtonClearChannelList_Click(object sender, EventArgs e)
         {
             ListView ChannelListViewObj;
             // Dim KhzToolStripComboBoxObj As ToolStripComboBox
@@ -1423,7 +1449,7 @@ namespace Radio
                 CtcssXmitRecObj = Tab3CtcssXmitRec;
             }
 
-            if (CtcssXmitObj.Checked == false & CtcssXmitRecObj.Checked == false)
+            if (CtcssXmitObj.Checked == false && CtcssXmitRecObj.Checked == false)
             {
                 if (CtcssXmitObj.Focused)
                 {
@@ -1540,19 +1566,20 @@ namespace Radio
             var loopTo = channelListView.Items.Count - 2;
             for (index = 0; index <= loopTo; index++)
             {
-                string newLine = channelListView.Items[index].SubItems[0].Text + ",";
-                string mhzLcl = channelListView.Items[index].SubItems[1].Text;
-                if (decimalSeparator == ",")
-                {
-                    mhzLcl = mhzLcl.Replace(",", ".");
-                }
-                newLine += mhzLcl + ",";
-                newLine += channelListView.Items[index].SubItems[2].Text + ",";
-                newLine += channelListView.Items[index].SubItems[3].Text + ",";
-                newLine += channelListView.Items[index].SubItems[4].Text + ",";
-                newLine += channelListView.Items[index].SubItems[5].Text;
+                // initialize a string list, and give it its first entry on this line
+                List<string> newLine = new (){ channelListView.Items[index].SubItems[0].Text };
 
-                myWriter.WriteLine(newLine);
+                // make sure that the string has a period for a decimal separator
+                string mhzLcl = Convert.ToString(Convert.ToDecimal(channelListView.Items[index].SubItems[1].Text), System.Globalization.CultureInfo.InvariantCulture);
+                newLine.Add(mhzLcl);
+                newLine.Add(channelListView.Items[index].SubItems[2].Text);
+                newLine.Add(channelListView.Items[index].SubItems[3].Text);
+                newLine.Add(channelListView.Items[index].SubItems[4].Text);
+                newLine.Add(channelListView.Items[index].SubItems[5].Text);
+
+                // all values on the line are emitted, with a comma as a separator
+                string line = string.Join(",", newLine.ToArray());
+                myWriter.WriteLine(line);
             }
 
             myWriter.Close();
@@ -1627,7 +1654,8 @@ namespace Radio
                 }
                 else
                 {
-                    double testVal = Convert.ToDouble(fixDecimalSeparator(testAry[1]));
+                    // InvariantCulture uses a period as a decimal separator.  CUrrentCulture MAY use a comma.
+                    decimal testVal = Convert.ToDecimal(testAry[1], System.Globalization.CultureInfo.InvariantCulture);
                     // Dim freqStr As String = testAry(1)
                     // Dim decimalPointLocation = freqStr.IndexOf(".")
                     // If decimalPointLocation = -1 Then
@@ -1635,8 +1663,9 @@ namespace Radio
                     // End If
                     // Dim mhzVal As String = Convert.ToString(Mid(freqStr, 1, decimalPointLocation))
                     // Dim kHzVal As String = Convert.ToString(Mid(freqStr, decimalPointLocation + 2))
-                    // Dim testVal As Double = Convert.ToDouble(mhzVal) + (Convert.ToDouble(kHzVal) * 0.001)
-                    if (mhzComboBox.Items.Contains(Convert.ToString(Math.Truncate(testVal))) & (Math.Round(testVal * 10000d, 0) % 12.5d == 0d | Math.Round(testVal * 1000d, 0) % 5d == 0d))
+                    // Dim testVal As Decimal = Convert.ToDecimal(mhzVal) + (Convert.ToDecimal(kHzVal) * 0.001m)
+                    if (mhzComboBox.Items.Contains(Convert.ToString(Math.Truncate(testVal)))
+                        && ((Math.Round(testVal * 10000m, 0) % 12.5m == 0m) || (Math.Round(testVal * 1000m, 0) % 5m == 0m)))
                     {
                         channelListView.Items[indexLcl].SubItems.Add(testAry[1]);
                     }
@@ -1669,7 +1698,7 @@ namespace Radio
                         return;
                     }
 
-                    if (!(My.MyProject.Forms.Form2.Tsu7CheckBox.Checked == false & testAry[4] == "Xmit/Rec"))
+                    if (!(parentForm.Tsu7CheckBox.Checked == false && testAry[4] == "Xmit/Rec"))
                     {
                         channelListView.Items[indexLcl].SubItems.Add(testAry[4]);
                     }
@@ -1688,6 +1717,7 @@ namespace Radio
                         channelListView.Items[indexLcl].SubItems.Add("");
                     }
                 }
+
                 channelListView.Items[indexLcl].EnsureVisible();
                 indexLcl += 1;
             }
@@ -1746,7 +1776,6 @@ namespace Radio
             ChannelListViewObj.HideSelection = false;
             UserSelectedChannel = false;
             ToolStripStatusLabelObj.Text = "";
-
         }
 
         public bool SendString(string strLcl)
@@ -1786,7 +1815,6 @@ namespace Radio
             {
                 Sleep(200L);
                 return true;
-
             }
         }
 
@@ -1825,7 +1853,7 @@ namespace Radio
                     cmdRcvdObj.Update();
                 }
 
-                if (newDataAvailable & recvdData.Contains("READY"))
+                if (newDataAvailable && recvdData.Contains("READY"))
                 {
                     newDataAvailable = false;
                     return true;
@@ -1834,23 +1862,20 @@ namespace Radio
                 {
                     cntrLcl++;
                 }
-            }
-            while (cntrLcl != 10);
+            } while (cntrLcl != 10);
+
             newDataAvailable = false;
             return false;
         }
 
         private void SerialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-
             recvdData = SerialPort1.ReadLine();
             newDataAvailable = true;
         }
 
-
         private void Tab1KHzCombBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             ComboBox MhzComboBox;
             ComboBox KhzComboBox;
             ComboBox RepeaterComboBox;
@@ -1875,7 +1900,6 @@ namespace Radio
             }
 
             RepeaterComboBox.Text = getRepeaterVal(MhzComboBox.Text, KhzComboBox.Text, TabControl.SelectedIndex);
-
         }
 
         public string getRepeaterVal(string mHz, string kHz, int tabIndex)
@@ -1887,47 +1911,50 @@ namespace Radio
                 return "SIMPLEX";
             }
 
-            double frequency;
-            frequency = Convert.ToDouble(fixDecimalSeparator(mHz)) + Convert.ToDouble(fixDecimalSeparator(kHz)) / 1000.0d;
+            decimal frequency;
+            frequency = Convert.ToDecimal(mHz, System.Globalization.CultureInfo.InvariantCulture)
+                + Convert.ToDecimal(kHz, System.Globalization.CultureInfo.InvariantCulture) / 1000.0m;
 
-            if (tabIndex == 0 & My.MyProject.Forms.Form2.Mod1UT144.Checked | tabIndex == 1 & My.MyProject.Forms.Form2.Mod2UT144.Checked | tabIndex == 2 & My.MyProject.Forms.Form2.Mod3UT144.Checked)
+            if ((tabIndex == 0 && parentForm.Mod1UT144.Checked)
+                || (tabIndex == 1 && parentForm.Mod2UT144.Checked)
+                || (tabIndex == 2 && parentForm.Mod3UT144.Checked))
 
             {
-                if (!My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
+                if (!parentForm.eTypeRadioCheckBox.Checked)
                 {
-                    if (frequency < 145.1d)
+                    if (frequency < 145.1m)
                     {
                         getRepeaterValRet = "SIMPLEX";
                     }
-                    else if (frequency < 145.5d)
+                    else if (frequency < 145.5m)
                     {
                         getRepeaterValRet = "MINUS";
                     }
-                    else if (frequency < 146.0d)
+                    else if (frequency < 146.0m)
                     {
                         getRepeaterValRet = "SIMPLEX";
                     }
-                    else if (frequency < 146.4d)
+                    else if (frequency < 146.4m)
                     {
                         getRepeaterValRet = "PLUS";
                     }
-                    else if (frequency < 146.6d)
+                    else if (frequency < 146.6m)
                     {
                         getRepeaterValRet = "SIMPLEX";
                     }
-                    else if (frequency < 147.0d)
+                    else if (frequency < 147.0m)
                     {
                         getRepeaterValRet = "MINUS";
                     }
-                    else if (frequency < 147.4d)
+                    else if (frequency < 147.4m)
                     {
                         getRepeaterValRet = "PLUS";
                     }
-                    else if (frequency < 147.6d)
+                    else if (frequency < 147.6m)
                     {
                         getRepeaterValRet = "SIMPLEX";
                     }
-                    else if (frequency < 148.0d)
+                    else if (frequency < 148.0m)
                     {
                         getRepeaterValRet = "MINUS";
                     }
@@ -1936,11 +1963,11 @@ namespace Radio
                         getRepeaterValRet = "SIMPLEX";
                     }
                 }
-                else if (frequency < 145.6d)
+                else if (frequency < 145.6m)
                 {
                     getRepeaterValRet = "SIMPLEX";
                 }
-                else if (frequency < 145.8d)
+                else if (frequency < 145.8m)
                 {
                     getRepeaterValRet = "MINUS";
                 }
@@ -1949,14 +1976,16 @@ namespace Radio
                     getRepeaterValRet = "SIMPLEX";
                 }
             }
-            else if (tabIndex == 0 & My.MyProject.Forms.Form2.Mod1UT220.Checked & !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked | tabIndex == 1 & My.MyProject.Forms.Form2.Mod2UT220.Checked & !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked | tabIndex == 2 & My.MyProject.Forms.Form2.Mod3UT220.Checked & !My.MyProject.Forms.Form2.eTypeRadioCheckBox.Checked)
+            else if ((tabIndex == 0 && parentForm.Mod1UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked) 
+                || (tabIndex == 1 && parentForm.Mod2UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked) 
+                || (tabIndex == 2 && parentForm.Mod3UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked))
 
             {
-                if (frequency < 223.92d)
+                if (frequency < 223.92m)
                 {
                     getRepeaterValRet = "SIMPLEX";
                 }
-                else if (frequency < 225.0d)
+                else if (frequency < 225.0m)
                 {
                     getRepeaterValRet = "MINUS";
                 }
@@ -1992,14 +2021,14 @@ namespace Radio
             }
             SerialPort1.Close();
 
-            if (channelListObj.Items.Count > 1 & channelUpdateClicked[TabControl.SelectedIndex] == true)
+            if (channelListObj.Items.Count > 1 && channelUpdateClicked[TabControl.SelectedIndex] == true)
             {
                 displaySaveMessage();
             }
 
             channelUpdateClicked[TabControl.SelectedIndex] = false;
 
-            My.MyProject.Forms.Form2.Enabled = true;
+            parentForm.Enabled = true;
         }
 
         private void Button11_Click(object sender, EventArgs e)
@@ -2052,7 +2081,6 @@ namespace Radio
             catch
             {
             }
-
         }
 
         private void StopProgramButton_Click(object sender, EventArgs e)
@@ -2103,7 +2131,7 @@ namespace Radio
                 channelListObj = Tab3ChannelListView;
             }
 
-            if (channelListObj.Items.Count > 1 & !My.MyProject.Forms.Form2.initializing & channelUpdateClicked[TabControl.SelectedIndex] == true)
+            if (channelListObj.Items.Count > 1 && !parentForm.initializing && channelUpdateClicked[TabControl.SelectedIndex] == true)
             {
                 if (displaySaveMessage() == false)
                 {
@@ -2138,7 +2166,7 @@ namespace Radio
             {
                 int channelIndex = Convert.ToInt32(ChannelListViewObj.SelectedItems[0].Text);
 
-                if (channelIndex > 1 & channelIndex < numOfChannels)
+                if (channelIndex > 1 && channelIndex < numOfChannels)
                 {
                     ChannelListViewObj.Items.RemoveAt(channelIndex - 1);
 
@@ -2154,17 +2182,6 @@ namespace Radio
             catch
             {
             }
-        }
-
-        public string fixDecimalSeparator(string inputStr)
-        {
-            string fixDecimalSeparatorRet = inputStr;
-            if (decimalSeparator == ",")
-            {
-                fixDecimalSeparatorRet = inputStr.Replace(".", ",");
-            }
-
-            return fixDecimalSeparatorRet;
         }
 
         private void Tab2CtcssOff_CheckedChanged(object sender, EventArgs e)

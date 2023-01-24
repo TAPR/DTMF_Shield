@@ -34,9 +34,11 @@ namespace Radio
         public RadioConfigStruct radioConfig;
         public string applicationPath;
         public string xmlFile;
+        private readonly Form1 moduleForm = null;
 
         public Form2()
         {
+            moduleForm = new Form1(this);
             InitializeComponent();
         }
 
@@ -76,6 +78,11 @@ namespace Radio
             ToolTip1.ReshowDelay = 500;
             ToolTip1.SetToolTip(GroupBox5, "These radio buttons control the DTMF tone and button press duration for programming" + Constants.vbCrLf + Strings.Chr(149) + "The normal selection uses an 80 millisecond duration" + Constants.vbCrLf + Strings.Chr(149) + "The slow selection uses a 250 millisecond duration" + Constants.vbCrLf + Strings.Chr(149) + "The debug selection uses a 1 second duration (this is slow enough that one can follow the actual commands being sent to the radio" + Constants.vbCrLf + "These selections are useful for different radio models/firmware.  If the normal (default) duration does not work properly, try the slow setting");
 
+            loadConfigFile(xmlFile);
+        }
+
+        private void loadConfigFile(string xmlFile)
+        {
             Mod1None.Checked = true;
             Mod2None.Checked = true;
             Mod3None.Checked = true;
@@ -136,130 +143,88 @@ namespace Radio
             switch (radioConfig.tab1Mod ?? "")
             {
                 case "Mod1UT30":
-                    {
                         Mod1UT30.Checked = true;
                         break;
-                    }
                 case "Mod1UT50":
-                    {
                         Mod1UT50.Checked = true;
                         break;
-                    }
                 case "Mod1UT144":
                 case "Mod1UT144e":
-                    {
                         Mod1UT144.Checked = true;
                         break;
-                    }
                 case "Mod1UT220":
-                    {
                         Mod1UT220.Checked = true;
                         break;
-                    }
                 case "Mod1UT440":
                 case "Mod1UT440e":
-                    {
                         Mod1UT440.Checked = true;
                         break;
-                    }
                 case "Mod1UT1200":
                 case "Mod1UT1200e":
-                    {
                         Mod1UT1200.Checked = true;
                         break;
-                    }
 
                 default:
-                    {
-                        break;
-                    }
                     // do nothing
+                    break;
             }
 
             switch (radioConfig.tab2Mod ?? "")
             {
                 case "Mod2UT30":
-                    {
                         Mod2UT30.Checked = true;
                         break;
-                    }
                 case "Mod2UT50":
-                    {
                         Mod2UT50.Checked = true;
                         break;
-                    }
                 case "Mod2UT144":
                 case "Mod2UT144e":
-                    {
                         Mod2UT144.Checked = true;
                         break;
-                    }
                 case "Mod2UT220":
-                    {
                         Mod2UT220.Checked = true;
                         break;
-                    }
                 case "Mod2UT440":
                 case "Mod2UT440e":
-                    {
                         Mod2UT440.Checked = true;
                         break;
-                    }
                 case "Mod2UT1200":
                 case "Mod2UT1200e":
-                    {
                         Mod2UT1200.Checked = true;
                         break;
-                    }
 
                 default:
-                    {
-                        break;
-                    }
                     // do nothing
+                    break;
             }
 
             switch (radioConfig.tab3Mod ?? "")
             {
                 case "Mod3UT30":
-                    {
-                        Mod3UT30.Checked = true;
+                         Mod3UT30.Checked = true;
                         break;
-                    }
                 case "Mod3UT50":
-                    {
                         Mod3UT50.Checked = true;
                         break;
-                    }
                 case "Mod3UT144":
                 case "Mod3UT144e":
-                    {
                         Mod3UT144.Checked = true;
                         break;
-                    }
                 case "Mod3UT220":
-                    {
                         Mod3UT220.Checked = true;
                         break;
-                    }
                 case "Mod3UT440":
                 case "Mod3UT440e":
-                    {
                         Mod3UT440.Checked = true;
                         break;
-                    }
                 case "Mod3UT1200":
                 case "Mod3UT1200e":
-                    {
                         Mod3UT1200.Checked = true;
                         break;
-                    }
 
                 default:
-                    {
-                        break;
-                    }
                     // do nothing
+                    break;
             }
         }
 
@@ -272,177 +237,181 @@ namespace Radio
             }
 
             // Me.Visible = False
-            int y;
-
             initializing = true;
 
-            y = 2;      //select tab 3
-            My.MyProject.Forms.Form1.TabControl.SelectedIndex = y;
+            //select 3rd tab
+            moduleForm.TabControl.SelectedIndex = 2;
+            var selectedTab = moduleForm.TabControl.SelectedTab;
             if (Mod3UT30.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod3UT30.Text;
+                selectedTab.Text = Mod3UT30.Text;
             }
             else if (Mod3UT50.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod3UT50.Text;
+                selectedTab.Text = Mod3UT50.Text;
             }
             else if (Mod3UT144.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT144.Text + "e";
+                selectedTab.Text = Mod1UT144.Text + "e";
             }
             else if (Mod3UT144.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod3UT144.Text;
+                selectedTab.Text = Mod3UT144.Text;
             }
             else if (Mod3UT220.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod3UT220.Text;
+                selectedTab.Text = Mod3UT220.Text;
             }
             else if (Mod3UT440.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod3UT440.Text + "e";
+                selectedTab.Text = Mod3UT440.Text + "e";
             }
             else if (Mod3UT440.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod3UT440.Text;
+                selectedTab.Text = Mod3UT440.Text;
             }
             else if (Mod3UT1200.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod3UT1200.Text + "e";
+                selectedTab.Text = Mod3UT1200.Text + "e";
             }
             else if (Mod3UT1200.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod3UT1200.Text;
+                selectedTab.Text = Mod3UT1200.Text;
             }
             if (Mod3None.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = "Mod3 Not Installed";
-                My.MyProject.Forms.Form1.Panel20.Enabled = false;
-                My.MyProject.Forms.Form1.Panel22.Enabled = false;
-                My.MyProject.Forms.Form1.Panel23.Enabled = false;
+                selectedTab.Text = "Mod3 Not Installed";
+
+                moduleForm.Panel20.Enabled = false;
+                moduleForm.Panel22.Enabled = false;
+                moduleForm.Panel23.Enabled = false;
             }
             else
             {
-                My.MyProject.Forms.Form1.Panel20.Enabled = true;
-                My.MyProject.Forms.Form1.Panel22.Enabled = true;
-                My.MyProject.Forms.Form1.Panel23.Enabled = true;
+                moduleForm.Panel20.Enabled = true;
+                moduleForm.Panel22.Enabled = true;
+                moduleForm.Panel23.Enabled = true;
             }
 
-            if (!radioConfig.tab3Filename.Contains(My.MyProject.Forms.Form1.TabControl.SelectedTab.Text))
+            if (!radioConfig.tab3Filename.Contains(selectedTab.Text))
             {
                 tabHasChanged[2] = true;
             }
 
-            y = 1;  // select tab 2
-            My.MyProject.Forms.Form1.TabControl.SelectedIndex = y;
+            // select tab 2
+            moduleForm.TabControl.SelectedIndex = 1;
+            selectedTab = moduleForm.TabControl.SelectedTab;
             if (Mod2UT30.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod2UT30.Text;
+                selectedTab.Text = Mod2UT30.Text;
             }
             else if (Mod2UT50.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod2UT50.Text;
+                selectedTab.Text = Mod2UT50.Text;
             }
             else if (Mod2UT144.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT144.Text + "e";
+                selectedTab.Text = Mod1UT144.Text + "e";
             }
             else if (Mod2UT144.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod2UT144.Text;
+                selectedTab.Text = Mod2UT144.Text;
             }
             else if (Mod2UT220.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod2UT220.Text;
+                selectedTab.Text = Mod2UT220.Text;
             }
             else if (Mod2UT440.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod2UT440.Text + "e";
+                selectedTab.Text = Mod2UT440.Text + "e";
             }
             else if (Mod2UT440.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod2UT440.Text;
+                selectedTab.Text = Mod2UT440.Text;
             }
             else if (Mod2UT1200.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod2UT1200.Text + "e";
+                selectedTab.Text = Mod2UT1200.Text + "e";
             }
             else if (Mod2UT1200.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod2UT1200.Text;
+                selectedTab.Text = Mod2UT1200.Text;
             }
             if (Mod2None.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = "Mod2 Not Installed";
-                My.MyProject.Forms.Form1.Panel11.Enabled = false;
-                My.MyProject.Forms.Form1.Panel12.Enabled = false;
-                My.MyProject.Forms.Form1.Panel15.Enabled = false;
+                selectedTab.Text = "Mod2 Not Installed";
+
+                moduleForm.Panel11.Enabled = false;
+                moduleForm.Panel12.Enabled = false;
+                moduleForm.Panel15.Enabled = false;
             }
             else
             {
-                My.MyProject.Forms.Form1.Panel11.Enabled = true;
-                My.MyProject.Forms.Form1.Panel12.Enabled = true;
-                My.MyProject.Forms.Form1.Panel15.Enabled = true;
+                moduleForm.Panel11.Enabled = true;
+                moduleForm.Panel12.Enabled = true;
+                moduleForm.Panel15.Enabled = true;
             }
 
-            if (!radioConfig.tab2Filename.Contains(My.MyProject.Forms.Form1.TabControl.SelectedTab.Text))
+            if (!radioConfig.tab2Filename.Contains(selectedTab.Text))
             {
                 tabHasChanged[1] = true;
             }
 
-            y = 0;      // now finally tab 1 (the left section), representing the topmost module position.  Iften blank in a 2 module radio
-            My.MyProject.Forms.Form1.TabControl.SelectedIndex = y;
+            // select 1st tab (index 0)
+            moduleForm.TabControl.SelectedIndex = 0;
+            selectedTab = moduleForm.TabControl.SelectedTab;
             if (Mod1UT30.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT30.Text;
+                selectedTab.Text = Mod1UT30.Text;
             }
             else if (Mod1UT50.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT50.Text;
+                selectedTab.Text = Mod1UT50.Text;
             }
             else if (Mod1UT144.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT144.Text + "e";
+                selectedTab.Text = Mod1UT144.Text + "e";
             }
             else if (Mod1UT144.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT144.Text;
+                selectedTab.Text = Mod1UT144.Text;
             }
             else if (Mod1UT220.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT220.Text;
+                selectedTab.Text = Mod1UT220.Text;
             }
             else if (Mod1UT440.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT440.Text + "e";
+                selectedTab.Text = Mod1UT440.Text + "e";
             }
             else if (Mod1UT440.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT440.Text;
+                selectedTab.Text = Mod1UT440.Text;
             }
             else if (Mod1UT1200.Checked & eTypeRadioCheckBox.Checked)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT1200.Text + "e";
+                selectedTab.Text = Mod1UT1200.Text + "e";
             }
             else if (Mod1UT1200.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = Mod1UT1200.Text;
+                selectedTab.Text = Mod1UT1200.Text;
             }
             if (Mod1None.Checked == true)
             {
-                My.MyProject.Forms.Form1.TabControl.SelectedTab.Text = "Mod1 Not Installed";
-                My.MyProject.Forms.Form1.Panel1.Enabled = false;
-                My.MyProject.Forms.Form1.Panel2.Enabled = false;
-                My.MyProject.Forms.Form1.Panel3.Enabled = false;
+                selectedTab.Text = "Mod1 Not Installed";
+
+                moduleForm.Panel1.Enabled = false;
+                moduleForm.Panel2.Enabled = false;
+                moduleForm.Panel3.Enabled = false;
             }
             else
             {
-                My.MyProject.Forms.Form1.Panel1.Enabled = true;
-                My.MyProject.Forms.Form1.Panel2.Enabled = true;
-                My.MyProject.Forms.Form1.Panel3.Enabled = true;
+                moduleForm.Panel1.Enabled = true;
+                moduleForm.Panel2.Enabled = true;
+                moduleForm.Panel3.Enabled = true;
             }
 
-            if (!radioConfig.tab1Filename.Contains(My.MyProject.Forms.Form1.TabControl.SelectedTab.Text))
+            if (!radioConfig.tab1Filename.Contains(selectedTab.Text))
             {
                 tabHasChanged[0] = true;
             }
@@ -461,30 +430,30 @@ namespace Radio
             {
                 if (x == 0)
                 {
-                    channelListViewObj = My.MyProject.Forms.Form1.Tab1ChannelListView;
-                    ctcssXmitRecObj = My.MyProject.Forms.Form1.Tab1CtcssXmitRec;
-                    listViewObj = My.MyProject.Forms.Form1.Tab1ChannelListView;
-                    mhzComboBoxObj = My.MyProject.Forms.Form1.Tab1MHzComboBox;
-                    repeaterComboBoxObj = My.MyProject.Forms.Form1.Tab1RepeaterComboBox;
-                    My.MyProject.Forms.Form1.TabControl.SelectedIndex = x;
+                    channelListViewObj = moduleForm.Tab1ChannelListView;
+                    ctcssXmitRecObj = moduleForm.Tab1CtcssXmitRec;
+                    listViewObj = moduleForm.Tab1ChannelListView;
+                    mhzComboBoxObj = moduleForm.Tab1MHzComboBox;
+                    repeaterComboBoxObj = moduleForm.Tab1RepeaterComboBox;
+                    moduleForm.TabControl.SelectedIndex = x;
                 }
                 else if (x == 1)
                 {
-                    channelListViewObj = My.MyProject.Forms.Form1.Tab2ChannelListView;
-                    ctcssXmitRecObj = My.MyProject.Forms.Form1.Tab2CtcssXmitRec;
-                    listViewObj = My.MyProject.Forms.Form1.Tab2ChannelListView;
-                    mhzComboBoxObj = My.MyProject.Forms.Form1.Tab2MHzComboBox;
-                    repeaterComboBoxObj = My.MyProject.Forms.Form1.Tab2RepeaterComboBox;
-                    My.MyProject.Forms.Form1.TabControl.SelectedIndex = x;
+                    channelListViewObj = moduleForm.Tab2ChannelListView;
+                    ctcssXmitRecObj = moduleForm.Tab2CtcssXmitRec;
+                    listViewObj = moduleForm.Tab2ChannelListView;
+                    mhzComboBoxObj = moduleForm.Tab2MHzComboBox;
+                    repeaterComboBoxObj = moduleForm.Tab2RepeaterComboBox;
+                    moduleForm.TabControl.SelectedIndex = x;
                 }
                 else
                 {
-                    channelListViewObj = My.MyProject.Forms.Form1.Tab3ChannelListView;
-                    ctcssXmitRecObj = My.MyProject.Forms.Form1.Tab3CtcssXmitRec;
-                    listViewObj = My.MyProject.Forms.Form1.Tab3ChannelListView;
-                    mhzComboBoxObj = My.MyProject.Forms.Form1.Tab3MHzComboBox;
-                    repeaterComboBoxObj = My.MyProject.Forms.Form1.Tab3RepeaterComboBox;
-                    My.MyProject.Forms.Form1.TabControl.SelectedIndex = x;
+                    channelListViewObj = moduleForm.Tab3ChannelListView;
+                    ctcssXmitRecObj = moduleForm.Tab3CtcssXmitRec;
+                    listViewObj = moduleForm.Tab3ChannelListView;
+                    mhzComboBoxObj = moduleForm.Tab3MHzComboBox;
+                    repeaterComboBoxObj = moduleForm.Tab3RepeaterComboBox;
+                    moduleForm.TabControl.SelectedIndex = x;
                 }
 
                 channelListViewObj.Items.Clear();
@@ -494,45 +463,115 @@ namespace Radio
                 repeaterComboBoxObj.Items.Add("PLUS");
                 repeaterComboBoxObj.Items.Add("MINUS");
 
-                if (x == 0 & (Mod1UT440.Checked & eTypeRadioCheckBox.Checked | Mod1UT1200.Checked & !eTypeRadioCheckBox.Checked) | x == 1 & (Mod2UT440.Checked & eTypeRadioCheckBox.Checked | Mod2UT1200.Checked & !eTypeRadioCheckBox.Checked) | x == 2 & (Mod3UT440.Checked & eTypeRadioCheckBox.Checked | Mod3UT1200.Checked & !eTypeRadioCheckBox.Checked))
+                // 430 band or 1200 band in Euro band plan has double-minus
+                if (((x == 0) && ((Mod1UT440.Checked && eTypeRadioCheckBox.Checked) || (Mod1UT1200.Checked && !eTypeRadioCheckBox.Checked)))
+                    || ((x == 1) && (Mod2UT440.Checked && eTypeRadioCheckBox.Checked || Mod2UT1200.Checked && !eTypeRadioCheckBox.Checked))
+                    || ((x == 2) && (Mod3UT440.Checked && eTypeRadioCheckBox.Checked || Mod3UT1200.Checked && !eTypeRadioCheckBox.Checked)))
                 {
                     repeaterComboBoxObj.Items.Add("DBL MINUS");
                 }
 
-                My.MyProject.Forms.Form1.TabControl.SelectedIndex = x;
-                if ((My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT30.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT30.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT30.Text ?? ""))
+                moduleForm.TabControl.SelectedIndex = x;
+                string moduleName = moduleForm.TabControl.SelectedTab.Text;
+                if ((moduleName ?? "") == (Mod1UT30.Text ?? "") || (moduleName ?? "") == (Mod2UT30.Text ?? "") || (moduleName ?? "") == (Mod3UT30.Text ?? ""))
                 {
-                    startVal = 28;
-                    stopVal = 29;
+                    // UT30
+                    if (wideBandCheckBox.Checked)
+                    {
+                        startVal = 18;
+                        stopVal = 54;
+                    }
+                    else
+                    {
+                        startVal = 28;
+                        stopVal = 29;
+                    }
                 }
-                else if ((My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT50.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT50.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT50.Text ?? ""))
+                else if ((moduleName ?? "") == (Mod1UT50.Text ?? "") || (moduleName ?? "") == (Mod2UT50.Text ?? "") || (moduleName ?? "") == (Mod3UT50.Text ?? ""))
                 {
-                    startVal = 50;
-                    stopVal = 53;
+                    // UT50
+                    if (wideBandCheckBox.Checked)
+                    {
+                        startVal = 40;
+                        stopVal = 90;
+                    }
+                    else
+                    {
+                        startVal = 50;
+                        stopVal = 53;
+                    }
                 }
-                else if ((My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT144.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT144.Text + "e" ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT144.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT144.Text + "e" ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT144.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT144.Text + "e" ?? ""))
+                else if ((moduleName ?? "") == (Mod1UT144.Text ?? "") || (moduleName ?? "") == (Mod1UT144.Text + "e" ?? "")
+                    || (moduleName ?? "") == (Mod2UT144.Text ?? "") || (moduleName ?? "") == (Mod2UT144.Text + "e" ?? "")
+                    || (moduleName ?? "") == (Mod3UT144.Text ?? "") | (moduleName ?? "") == (Mod3UT144.Text + "e" ?? ""))
                 {
-                    startVal = 118;
-                    stopVal = 174;
+                    // UT144, either euro-band-plan or not (with 'e' suffix...)
+                    if (wideBandCheckBox.Checked)
+                    {
+                        startVal = 118;
+                        stopVal = 174;
+                    }
+                    else if (moduleName.Contains("e"))
+                    {
+                        startVal = 144;
+                        stopVal = 146;
+                    }
+                    else
+                    {
+                        startVal = 144;
+                        stopVal = 148;
+                    }
                 }
-                else if ((My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT220.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT220.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT220.Text ?? ""))
+                else if ((moduleForm.TabControl.SelectedTab.Text ?? "") == (Mod1UT220.Text ?? "")
+                    || (moduleForm.TabControl.SelectedTab.Text ?? "") == (Mod2UT220.Text ?? "")
+                    || (moduleForm.TabControl.SelectedTab.Text ?? "") == (Mod3UT220.Text ?? ""))
                 {
-                    startVal = 220;
-                    stopVal = 224;
+                    // UT220
+                    if (wideBandCheckBox.Checked)
+                    {
+                        startVal = 215;
+                        stopVal = 260;
+                    }
+                    else
+                    {
+                        startVal = 220;
+                        stopVal = 224;
+                    }
                 }
-                else if ((My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT440.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT440.Text + "e" ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT440.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT440.Text + "e" ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT440.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT440.Text + "e" ?? ""))
+                else if ((moduleName ?? "") == (Mod1UT440.Text ?? "") || (moduleName ?? "") == (Mod1UT440.Text + "e" ?? "")
+                    || (moduleName ?? "") == (Mod2UT440.Text ?? "") || (moduleName ?? "") == (Mod2UT440.Text + "e" ?? "")
+                    || (moduleName ?? "") == (Mod3UT440.Text ?? "") || (moduleName ?? "") == (Mod3UT440.Text + "e" ?? ""))
                 {
-                    startVal = 410;
-                    stopVal = 470;
+                    // UT440, either euro-band-plan or not (with 'e' suffix...)
+                    if (wideBandCheckBox.Checked)
+                    {
+                        startVal = 410;
+                        stopVal = 470;
+                    }
+                    else if (moduleName.Contains("e"))
+                    {
+                        startVal = 430;
+                        stopVal = 440;
+                    }
+                    else
+                    {
+                        startVal = 430;
+                        stopVal = 450;
+                    }
                 }
-                else if ((My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT1200.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod1UT1200.Text + "e" ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT1200.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod2UT1200.Text + "e" ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT1200.Text ?? "") | (My.MyProject.Forms.Form1.TabControl.SelectedTab.Text ?? "") == (Mod3UT1200.Text + "e" ?? ""))
+                else if ((moduleName ?? "") == (Mod1UT1200.Text ?? "") || (moduleName ?? "") == (Mod1UT1200.Text + "e" ?? "")
+                    || (moduleName ?? "") == (Mod2UT1200.Text ?? "") || (moduleName ?? "") == (Mod2UT1200.Text + "e" ?? "")
+                    || (moduleName ?? "") == (Mod3UT1200.Text ?? "") || (moduleName ?? "") == (Mod3UT1200.Text + "e" ?? ""))
                 {
-                    startVal = 1240;
-                    stopVal = 1299;
                     if (wideBandCheckBox.Checked)
                     {
                         startVal = 1100;
                         stopVal = 1399;
+                    }
+                    else
+                    {
+                        startVal = 1240;
+                        stopVal = 1299;
                     }
                 }
 
@@ -557,11 +596,19 @@ namespace Radio
                 }
             }
 
-            My.MyProject.Forms.Form1.initializeForm();
-            My.MyProject.Forms.Form1.Visible = true;
+            moduleForm.initializeForm();
+            moduleForm.Visible = true;
 
             initializing = false;
 
+            var firstInstalledModule = saveConfigFile(xmlFile);
+
+            moduleForm.TabControl.SelectedIndex = firstInstalledModule < 0 ? 0 : firstInstalledModule;
+            Enabled = false;
+        }
+
+        public int saveConfigFile(string xmlFile)
+        { 
             var testXml = new XmlDocument();
             testXml.Load(xmlFile);
             testXml.SelectSingleNode("TM742/eType").InnerText = Convert.ToString(eTypeRadioCheckBox.Checked);
@@ -581,10 +628,12 @@ namespace Radio
                 testXml.SelectSingleNode("TM742/timingMode").InnerText = Convert.ToString("2");
             }
 
-            My.MyProject.Forms.Form1.TabControl.SelectedIndex = 0;
-            if (!My.MyProject.Forms.Form1.TabControl.SelectedTab.Text.Contains("Installed"))
+            var firstInstalledModuleIndex = -1;
+            moduleForm.TabControl.SelectedIndex = 0;
+            if (!moduleForm.TabControl.SelectedTab.Text.Contains("Not Installed"))
             {
-                string tmpStr = Strings.Mid(My.MyProject.Forms.Form1.TabControl.SelectedTab.Text, 4, My.MyProject.Forms.Form1.TabControl.SelectedTab.Text.Length);
+                firstInstalledModuleIndex = 0;
+                string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
                 testXml.SelectSingleNode("TM742/tab1Mod").InnerText = "Mod1UT" + tmpStr;
             }
             else
@@ -592,10 +641,14 @@ namespace Radio
                 testXml.SelectSingleNode("TM742/tab1Mod").InnerText = "NULL";
             }
 
-            My.MyProject.Forms.Form1.TabControl.SelectedIndex = 1;
-            if (!My.MyProject.Forms.Form1.TabControl.SelectedTab.Text.StartsWith("Installed"))
+            moduleForm.TabControl.SelectedIndex = 1;
+            if (!moduleForm.TabControl.SelectedTab.Text.StartsWith("Not Installed"))
             {
-                string tmpStr = Strings.Mid(My.MyProject.Forms.Form1.TabControl.SelectedTab.Text, 4, My.MyProject.Forms.Form1.TabControl.SelectedTab.Text.Length);
+                if (firstInstalledModuleIndex == -1)
+                {
+                    firstInstalledModuleIndex = 1;
+                }
+                string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
                 testXml.SelectSingleNode("TM742/tab2Mod").InnerText = "Mod2UT" + tmpStr;
             }
             else
@@ -603,10 +656,14 @@ namespace Radio
                 testXml.SelectSingleNode("TM742/tab2Mod").InnerText = "NULL";
             }
 
-            My.MyProject.Forms.Form1.TabControl.SelectedIndex = 2;
-            if (!My.MyProject.Forms.Form1.TabControl.SelectedTab.Text.StartsWith("Installed"))
+            moduleForm.TabControl.SelectedIndex = 2;
+            if (!moduleForm.TabControl.SelectedTab.Text.StartsWith("Not Installed"))
             {
-                string tmpStr = Strings.Mid(My.MyProject.Forms.Form1.TabControl.SelectedTab.Text, 4, My.MyProject.Forms.Form1.TabControl.SelectedTab.Text.Length);
+                if (firstInstalledModuleIndex == -1)
+                {
+                    firstInstalledModuleIndex = 2;
+                }
+                string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
                 testXml.SelectSingleNode("TM742/tab3Mod").InnerText = "Mod3UT" + tmpStr;
             }
             else
@@ -616,13 +673,12 @@ namespace Radio
 
             testXml.Save(xmlFile);
 
-            My.MyProject.Forms.Form1.TabControl.SelectedIndex = 0;
-            Enabled = false;
-        }
+            return firstInstalledModuleIndex;
+       }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // just exit
+            saveConfigFile(xmlFile);
         }
 
         private void eTypeRadioCheckBox_CheckedChanged(object sender, EventArgs e)

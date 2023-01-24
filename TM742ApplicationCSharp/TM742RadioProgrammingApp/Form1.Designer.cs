@@ -631,7 +631,7 @@ namespace Radio
             this.Tab1ClearChannelList.TabIndex = 12;
             this.Tab1ClearChannelList.Text = "Clear Channel List";
             this.Tab1ClearChannelList.UseVisualStyleBackColor = true;
-            this.Tab1ClearChannelList.Click += new System.EventHandler(this.Button1_Click);
+            this.Tab1ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList_Click);
             // 
             // Label4
             // 
@@ -873,7 +873,6 @@ namespace Radio
             this.Tab1MHzComboBox.Name = "Tab1MHzComboBox";
             this.Tab1MHzComboBox.Size = new System.Drawing.Size(70, 30);
             this.Tab1MHzComboBox.TabIndex = 0;
-            this.Tab1MHzComboBox.DropDown += new System.EventHandler(this.MHzComboBox_DropDown);
             this.Tab1MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.MHzComboBox_SelectedIndexChanged);
             // 
             // Tab1MenuStrip
@@ -1395,7 +1394,7 @@ namespace Radio
             this.Tab2ClearChannelList.TabIndex = 12;
             this.Tab2ClearChannelList.Text = "Clear Channel List";
             this.Tab2ClearChannelList.UseVisualStyleBackColor = true;
-            this.Tab2ClearChannelList.Click += new System.EventHandler(this.Button1_Click);
+            this.Tab2ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList_Click);
             // 
             // Label25
             // 
@@ -1636,7 +1635,6 @@ namespace Radio
             this.Tab2MHzComboBox.Name = "Tab2MHzComboBox";
             this.Tab2MHzComboBox.Size = new System.Drawing.Size(70, 30);
             this.Tab2MHzComboBox.TabIndex = 0;
-            this.Tab2MHzComboBox.DropDown += new System.EventHandler(this.MHzComboBox_DropDown);
             this.Tab2MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.MHzComboBox_SelectedIndexChanged);
             // 
             // Tab2MenuStrip
@@ -2155,7 +2153,7 @@ namespace Radio
             this.Tab3ClearChannelList.TabIndex = 12;
             this.Tab3ClearChannelList.Text = "Clear Channel List";
             this.Tab3ClearChannelList.UseVisualStyleBackColor = true;
-            this.Tab3ClearChannelList.Click += new System.EventHandler(this.Button1_Click);
+            this.Tab3ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList_Click);
             // 
             // Label58
             // 
@@ -2396,7 +2394,6 @@ namespace Radio
             this.Tab3MHzComboBox.Name = "Tab3MHzComboBox";
             this.Tab3MHzComboBox.Size = new System.Drawing.Size(70, 30);
             this.Tab3MHzComboBox.TabIndex = 0;
-            this.Tab3MHzComboBox.DropDown += new System.EventHandler(this.MHzComboBox_DropDown);
             this.Tab3MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.MHzComboBox_SelectedIndexChanged);
             // 
             // Tab3MenuStrip
