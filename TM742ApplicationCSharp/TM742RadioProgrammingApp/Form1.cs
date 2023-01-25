@@ -799,10 +799,11 @@ namespace Radio
                         SendString(Conversions.ToString(mhzVal[mhzVal.Length - 3]));    // hundreds of MHz
                     }
 
-                    if (!TabControl.SelectedTab.Text.Contains("e") || TabControl.SelectedTab.Text.Contains("1200"))
+                    if (parentForm.wideBandCheckBox.Checked || !TabControl.SelectedTab.Text.Contains("e") || TabControl.SelectedTab.Text.Contains("1200"))
                     {
                         SendString(Conversions.ToString(mhzVal[mhzVal.Length - 2]));    // tens of MHz
                     }
+                    
                     SendString(Conversions.ToString(mhzVal[mhzVal.Length - 1]));    // units of MHz
 
                     // now send the KHz characters needed

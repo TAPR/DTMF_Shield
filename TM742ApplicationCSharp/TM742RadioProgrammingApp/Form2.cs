@@ -367,16 +367,9 @@ namespace Radio
             }
 
             channelListViewObj.Text = "BLANK";
-            if (Tsu7CheckBox.Checked)
-            {
-                ctcssXmitRecObj.Visible = true;
-                ctcssXmitRecObj.Update();
-            }
-            else
-            {
-                ctcssXmitRecObj.Visible = false;
-                ctcssXmitRecObj.Update();
-            }
+
+            ctcssXmitRecObj.Visible = Tsu7CheckBox.Checked;
+            ctcssXmitRecObj.Update();
         }
 
         private void ShowChannelLists_Click(object sender, EventArgs e)
