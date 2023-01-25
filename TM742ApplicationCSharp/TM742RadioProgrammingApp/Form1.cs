@@ -34,23 +34,8 @@ namespace Radio
         private const int DEBUG_RADIO_TIMING = 500;
         private readonly Form2 parentForm = null;
         
-        public bool SetStepSize(string stepSizeStr)
+        public bool SetStepSize(ToolStripComboBox KhzToolStripComboBoxObj, string stepSizeStr)
         {
-            ToolStripComboBox KhzToolStripComboBoxObj;
-
-            if (TabControl.SelectedIndex == 0)
-            {
-                KhzToolStripComboBoxObj = Tab1KHzToolStripComboBox;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                KhzToolStripComboBoxObj = Tab2KHzToolStripComboBox;
-            }
-            else
-            {
-                KhzToolStripComboBoxObj = Tab3KHzToolStripComboBox;
-            }
-
             if (stepSizeStr.Equals("10"))
             {
                 KhzToolStripComboBoxObj.SelectedIndex = 0;
@@ -75,17 +60,56 @@ namespace Radio
             return true;
         }
 
+        private void initializeTab(int tabIndex, string stepSize, ListView ChannelListViewObj,
+            ToolStripComboBox KhzToolStripComboBoxObj, ToolStripStatusLabel ToolStripStatusLabelObj,
+            RadioButton XmitButton, RadioButton XmitRecButton, RadioButton CtcssOffButton, ComboBox ToneComboBox, ComboBox MhzComboBox)
+        {
+            TabControl.SelectedIndex = tabIndex;
+            KhzToolStripComboBoxObj.Text = 5.ToString();
+            ChannelListViewObj.Items.Add(0.ToString());
+            ChannelListViewObj.Items[0].SubItems.Add("");
+            ChannelListViewObj.Items[0].Text = "1";
+            ChannelListViewObj.Items[0].SubItems.Add("");
+            ChannelListViewObj.Items[0].SubItems.Add("");
+            ChannelListViewObj.Items[0].SubItems.Add("");
+            ChannelListViewObj.Items[0].SubItems.Add("");
+            ChannelListViewObj.Text = 0.ToString();
+            ChannelListViewObj.Items[0].Selected = true;
+            ChannelListViewObj.HideSelection = false;
+            UserSelectedChannel = false;
+            if (!SetStepSize(KhzToolStripComboBoxObj, stepSize))
+            {
+                KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
+                if (TabControl.SelectedTab.Text.Contains("144e"))
+                {
+                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
+                }
+                else if (TabControl.SelectedTab.Text.Contains("144"))
+                {
+                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[2]);
+                }
+                else if (TabControl.SelectedTab.Text.Contains("440"))
+                {
+                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
+                }
+                else if (TabControl.SelectedTab.Text.Contains("1200"))
+                {
+                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[3]);
+                }
+            }
+
+            ToolStripStatusLabelObj.Text = "";
+            XmitButton.Checked = false;
+            XmitRecButton.Checked = false;
+            CtcssOffButton.Checked = true;
+            ToneComboBox.Text = Conversions.ToString(ToneComboBox.Items[0]);
+            ToneComboBox.Enabled = false;
+            MhzComboBox.Text = Conversions.ToString(MhzComboBox.Items[0]);
+            ChannelListViewObj.Items[0].SubItems[1].Text = Conversions.ToString(MhzComboBox.Items[0]);
+        }
+
         public bool initializeForm()
         {
-            ListView ChannelListViewObj;
-            ToolStripComboBox KhzToolStripComboBoxObj;
-            ToolStripStatusLabel ToolStripStatusLabelObj;
-            RadioButton XmitButton;
-            RadioButton XmitRecButton;
-            RadioButton CtcssOffButton;
-            ComboBox ToneComboBox;
-            ComboBox MhzComboBox;
-
             for (int x = 0; x <= 2; x++)
             {
                 channelUpdateClicked[x] = false;
@@ -97,162 +121,19 @@ namespace Radio
 
             stopProgrammingRequested = false;
 
-            ChannelListViewObj = Tab1ChannelListView;
-            KhzToolStripComboBoxObj = Tab1KHzToolStripComboBox;
-            ToolStripStatusLabelObj = Tab1ToolStripStatusLabel;
-            XmitButton = Tab1CtcssXmit;
-            XmitRecButton = Tab1CtcssXmitRec;
-            CtcssOffButton = Tab1CtcssOff;
-            ToneComboBox = Tab1ToneComboBox;
-            MhzComboBox = Tab1MHzComboBox;
+            // tab index 0, number 1
+            initializeTab(0, parentForm.getTab1StepSize(), Tab1ChannelListView, Tab1KHzToolStripComboBox, Tab1ToolStripStatusLabel,
+                Tab1CtcssXmit, Tab1CtcssXmitRec, Tab1CtcssOff, Tab1ToneComboBox, Tab1MHzComboBox);
 
-            TabControl.SelectedIndex = 0;
-            KhzToolStripComboBoxObj.Text = 5.ToString();
-            ChannelListViewObj.Items.Add(0.ToString());
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].Text = "1";
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Text = 0.ToString();
-            ChannelListViewObj.Items[0].Selected = true;
-            ChannelListViewObj.HideSelection = false;
-            UserSelectedChannel = false;
-            if (!SetStepSize(parentForm.getTab1StepSize()))
-            {
-                KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
-                if (TabControl.SelectedTab.Text.Contains("144e"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("144"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[2]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("440"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("1200"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[3]);
-                }
-            }
+            // tab index 1, number 2
+            initializeTab(1, parentForm.getTab2StepSize(), Tab2ChannelListView, Tab2KHzToolStripComboBox, Tab2ToolStripStatusLabel,
+                Tab2CtcssXmit, Tab2CtcssXmitRec, Tab2CtcssOff, Tab2ToneComboBox, Tab2MHzComboBox);
 
-            ToolStripStatusLabelObj.Text = "";
-            XmitButton.Checked = false;
-            XmitRecButton.Checked = false;
-            CtcssOffButton.Checked = true;
-            ToneComboBox.Text = Conversions.ToString(ToneComboBox.Items[0]);
-            ToneComboBox.Enabled = false;
-            MhzComboBox.Text = Conversions.ToString(MhzComboBox.Items[0]);
-            ChannelListViewObj.Items[0].SubItems[1].Text = Conversions.ToString(MhzComboBox.Items[0]);
+            // tab index 2, number 3
+            initializeTab(2, parentForm.getTab3StepSize(), Tab3ChannelListView, Tab3KHzToolStripComboBox, Tab3ToolStripStatusLabel,
+                Tab3CtcssXmit, Tab3CtcssXmitRec, Tab3CtcssOff, Tab3ToneComboBox, Tab3MHzComboBox);
 
-            ChannelListViewObj = Tab2ChannelListView;
-            KhzToolStripComboBoxObj = Tab2KHzToolStripComboBox;
-            ToolStripStatusLabelObj = Tab2ToolStripStatusLabel;
-            XmitButton = Tab2CtcssXmit;
-            XmitRecButton = Tab2CtcssXmitRec;
-            CtcssOffButton = Tab2CtcssOff;
-            ToneComboBox = Tab2ToneComboBox;
-            MhzComboBox = Tab2MHzComboBox;
-
-            TabControl.SelectedIndex = 1;
-            KhzToolStripComboBoxObj.Text = 5.ToString();
-            ChannelListViewObj.Items.Add(0.ToString());
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].Text = "1";
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Text = 0.ToString();
-            ChannelListViewObj.Items[0].Selected = true;
-            ChannelListViewObj.HideSelection = false;
-            UserSelectedChannel = false;
-            if (!SetStepSize(parentForm.getTab2StepSize()))
-            {
-                KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
-                if (TabControl.SelectedTab.Text.Contains("144e"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("144"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[2]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("440"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("1200"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[3]);
-                }
-            }
-
-            ToolStripStatusLabelObj.Text = "";
-            XmitButton.Checked = false;
-            XmitRecButton.Checked = false;
-            CtcssOffButton.Checked = true;
-            ToneComboBox.Text = Conversions.ToString(ToneComboBox.Items[0]);
-            ToneComboBox.Enabled = false;
-            MhzComboBox.Text = Conversions.ToString(MhzComboBox.Items[0]);
-            ChannelListViewObj.Items[0].SubItems[1].Text = Conversions.ToString(MhzComboBox.Items[0]);
-
-            ChannelListViewObj = Tab3ChannelListView;
-            KhzToolStripComboBoxObj = Tab3KHzToolStripComboBox;
-            ToolStripStatusLabelObj = Tab3ToolStripStatusLabel;
-            XmitButton = Tab3CtcssXmit;
-            XmitRecButton = Tab3CtcssXmitRec;
-            CtcssOffButton = Tab3CtcssOff;
-            ToneComboBox = Tab3ToneComboBox;
-            MhzComboBox = Tab3MHzComboBox;
-
-            TabControl.SelectedIndex = 2;
-            KhzToolStripComboBoxObj.Text = 5.ToString();
-            ChannelListViewObj.Items.Add(0.ToString());
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].Text = "1";
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Items[0].SubItems.Add("");
-            ChannelListViewObj.Text = 0.ToString();
-            ChannelListViewObj.Items[0].Selected = true;
-            ChannelListViewObj.HideSelection = false;
-            UserSelectedChannel = false;
-            if (!SetStepSize(parentForm.getTab3StepSize()))
-            {
-                KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[0]);
-                if (TabControl.SelectedTab.Text.Contains("144e"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("144"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[2]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("440"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
-                }
-                else if (TabControl.SelectedTab.Text.Contains("1200"))
-                {
-                    KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[3]);
-                }
-            }
-
-            ToolStripStatusLabelObj.Text = "";
-            XmitButton.Checked = false;
-            XmitRecButton.Checked = false;
-            CtcssOffButton.Checked = true;
-            ToneComboBox.Text = Conversions.ToString(ToneComboBox.Items[0]);
-            ToneComboBox.Enabled = false;
-            MhzComboBox.Text = Conversions.ToString(MhzComboBox.Items[0]);
-            ChannelListViewObj.Items[0].SubItems[1].Text = Conversions.ToString(MhzComboBox.Items[0]);
-
+            // set current tab to index 0 (Tab1)
             TabControl.SelectedIndex = 0;
 
             return true;
@@ -266,7 +147,7 @@ namespace Radio
             }
         }
 
-        private bool openSerialPort()
+        private bool openSerialPort(TextBox ComPortTextBox)
         {
             if (DEBUG)
             {
@@ -276,21 +157,6 @@ namespace Radio
             if (SerialPort1.IsOpen)
             {
                 return true;
-            }
-
-            TextBox textBoxObj;
-
-            if (TabControl.SelectedIndex == 0)
-            {
-                textBoxObj = Tab1ComPortTextBox;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                textBoxObj = Tab2ComPortTextBox;
-            }
-            else
-            {
-                textBoxObj = Tab3ComPortTextBox;
             }
 
             bool tryDefaultPort = false;
@@ -323,11 +189,11 @@ namespace Radio
                 }
             }
 
-            textBoxObj.Visible = true;
+            ComPortTextBox.Visible = true;
             for (int x = 1; x <= 20; x++)
             {
-                textBoxObj.Text = "Searching for Arduino on COM Port: " + x;
-                textBoxObj.Update();
+                ComPortTextBox.Text = "Searching for Arduino on COM Port: " + x;
+                ComPortTextBox.Update();
 
                 try
                 {
@@ -350,7 +216,7 @@ namespace Radio
                     MessageBox.Show(message);
 
                     updateSingleEntity(parentForm.xmlFile, "TM742/usbPort", Convert.ToString(x));
-                    textBoxObj.Visible = false;
+                    ComPortTextBox.Visible = false;
 
                     return true;
                 }
@@ -362,7 +228,7 @@ namespace Radio
                 }
             }
 
-            textBoxObj.Visible = false;
+            ComPortTextBox.Visible = false;
             return false;
         }
 
@@ -374,53 +240,27 @@ namespace Radio
             testXml.Save(xmlFile);
         }
 
-        private void SetChannelButton_Click(object sender, EventArgs e)
+        private void Tab1SetChannelButton_Click(object sender, EventArgs e)
         {
-            ListView ChannelListViewObj;
-            ComboBox MHzComboBoxObj;
-            ComboBox KHzComboBoxObj;
-            ComboBox RepeaterComboBoxObj;
-            ComboBox ToneComboBoxObj;
-            RadioButton CtcssRadioButtonObj;
-            RadioButton ToneRadioButtonObj;
+            SetChannelButton(0, Tab1ChannelListView, Tab1MHzComboBox, Tab1KHzCombBox, Tab1RepeaterComboBox, Tab1ToneComboBox, Tab1CtcssXmitRec, Tab1CtcssXmit, Tab1ChannelNotes);
+        }
+
+        private void Tab2SetChannelButton_Click(object sender, EventArgs e)
+        {
+            SetChannelButton(1, Tab2ChannelListView, Tab2MHzComboBox, Tab2KHzCombBox, Tab2RepeaterComboBox, Tab2ToneComboBox, Tab2CtcssXmitRec, Tab2CtcssXmit, Tab2ChannelNotes);
+        }
+
+        private void Tab3SetChannelButton_Click(object sender, EventArgs e)
+        {
+            SetChannelButton(2, Tab3ChannelListView, Tab3MHzComboBox, Tab3KHzCombBox, Tab3RepeaterComboBox, Tab3ToneComboBox, Tab3CtcssXmitRec, Tab3CtcssXmit, Tab3ChannelNotes);
+        }
+
+        private void SetChannelButton(int tabIndex, ListView ChannelListViewObj, ComboBox MHzComboBoxObj, ComboBox KHzComboBoxObj, ComboBox RepeaterComboBoxObj,
+            ComboBox ToneComboBoxObj, RadioButton CtcssRadioButtonObj, RadioButton ToneRadioButtonObj, TextBox NotesObj)
+        {
             int selectedIndex;
-            TextBox NotesObj;
 
-            if (TabControl.SelectedIndex == 0)
-            {
-                ChannelListViewObj = Tab1ChannelListView;
-                MHzComboBoxObj = Tab1MHzComboBox;
-                KHzComboBoxObj = Tab1KHzCombBox;
-                RepeaterComboBoxObj = Tab1RepeaterComboBox;
-                ToneComboBoxObj = Tab1ToneComboBox;
-                CtcssRadioButtonObj = Tab1CtcssXmitRec;
-                ToneRadioButtonObj = Tab1CtcssXmit;
-                NotesObj = Tab1ChannelNotes;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ChannelListViewObj = Tab2ChannelListView;
-                MHzComboBoxObj = Tab2MHzComboBox;
-                KHzComboBoxObj = Tab2KHzCombBox;
-                RepeaterComboBoxObj = Tab2RepeaterComboBox;
-                ToneComboBoxObj = Tab2ToneComboBox;
-                CtcssRadioButtonObj = Tab2CtcssXmitRec;
-                ToneRadioButtonObj = Tab2CtcssXmit;
-                NotesObj = Tab2ChannelNotes;
-            }
-            else
-            {
-                ChannelListViewObj = Tab3ChannelListView;
-                MHzComboBoxObj = Tab3MHzComboBox;
-                KHzComboBoxObj = Tab3KHzCombBox;
-                RepeaterComboBoxObj = Tab3RepeaterComboBox;
-                ToneComboBoxObj = Tab3ToneComboBox;
-                CtcssRadioButtonObj = Tab3CtcssXmitRec;
-                ToneRadioButtonObj = Tab3CtcssXmit;
-                NotesObj = Tab3ChannelNotes;
-            }
-
-            channelUpdateClicked[TabControl.SelectedIndex] = true;
+            channelUpdateClicked[tabIndex] = true;
 
             if (!(MHzComboBoxObj.Text == "BLANK"))
             {
@@ -507,55 +347,27 @@ namespace Radio
             }
         }
 
-        private void ChannelListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void Tab1ChannelListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListView ChannelListViewObj;
-            ComboBox MHzComboBoxObj;
-            ComboBox KHzComboBoxObj;
-            ComboBox RepeaterComboBoxObj;
-            ComboBox ToneComboBoxObj;
-            TextBox ChannelTextBoxObj;
-            RadioButton CtcssRadioButtonObj;
-            RadioButton ToneRadioButtonObj;
-            TextBox NotesTextObj;
+            ChannelListView_SelectedIndexChanged(Tab1ChannelListView, Tab1MHzComboBox, Tab1KHzCombBox, Tab1RepeaterComboBox, Tab1ToneComboBox, Tab1ChannelTextBox,
+                Tab1CtcssXmitRec, Tab1CtcssXmit, Tab1ChannelNotes);
+        }
 
-            if (TabControl.SelectedIndex == 0)
-            {
-                ChannelListViewObj = Tab1ChannelListView;
-                MHzComboBoxObj = Tab1MHzComboBox;
-                KHzComboBoxObj = Tab1KHzCombBox;
-                RepeaterComboBoxObj = Tab1RepeaterComboBox;
-                ToneComboBoxObj = Tab1ToneComboBox;
-                ChannelTextBoxObj = Tab1ChannelTextBox;
-                CtcssRadioButtonObj = Tab1CtcssXmitRec;
-                ToneRadioButtonObj = Tab1CtcssXmit;
-                NotesTextObj = Tab1ChannelNotes;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ChannelListViewObj = Tab2ChannelListView;
-                MHzComboBoxObj = Tab2MHzComboBox;
-                KHzComboBoxObj = Tab2KHzCombBox;
-                RepeaterComboBoxObj = Tab2RepeaterComboBox;
-                ToneComboBoxObj = Tab2ToneComboBox;
-                ChannelTextBoxObj = Tab2ChannelTextBox;
-                CtcssRadioButtonObj = Tab2CtcssXmitRec;
-                ToneRadioButtonObj = Tab2CtcssXmit;
-                NotesTextObj = Tab2ChannelNotes;
-            }
-            else
-            {
-                ChannelListViewObj = Tab3ChannelListView;
-                MHzComboBoxObj = Tab3MHzComboBox;
-                KHzComboBoxObj = Tab3KHzCombBox;
-                RepeaterComboBoxObj = Tab3RepeaterComboBox;
-                ToneComboBoxObj = Tab3ToneComboBox;
-                ChannelTextBoxObj = Tab3ChannelTextBox;
-                CtcssRadioButtonObj = Tab3CtcssXmitRec;
-                ToneRadioButtonObj = Tab3CtcssXmit;
-                NotesTextObj = Tab3ChannelNotes;
-            }
+        private void Tab2ChannelListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChannelListView_SelectedIndexChanged(Tab2ChannelListView, Tab2MHzComboBox, Tab2KHzCombBox, Tab2RepeaterComboBox, Tab2ToneComboBox, Tab2ChannelTextBox,
+                Tab2CtcssXmitRec, Tab2CtcssXmit, Tab2ChannelNotes);
+        }
 
+        private void Tab3ChannelListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChannelListView_SelectedIndexChanged(Tab3ChannelListView, Tab3MHzComboBox, Tab3KHzCombBox, Tab3RepeaterComboBox, Tab3ToneComboBox, Tab3ChannelTextBox,
+                Tab3CtcssXmitRec, Tab3CtcssXmit, Tab3ChannelNotes);
+        }
+
+        private void ChannelListView_SelectedIndexChanged(ListView ChannelListViewObj, ComboBox MHzComboBoxObj, ComboBox KHzComboBoxObj, ComboBox RepeaterComboBoxObj,
+            ComboBox ToneComboBoxObj, TextBox ChannelTextBoxObj, RadioButton CtcssRadioButtonObj, RadioButton ToneRadioButtonObj, TextBox NotesObj)
+        {
             if (ChannelListViewObj.SelectedItems.Count > 0)
             {
                 UserSelectedChannel = true;
@@ -607,60 +419,33 @@ namespace Radio
                     CtcssRadioButtonObj.Checked = false;
                     ToneRadioButtonObj.Checked = false;
                 }
-                NotesTextObj.Text = ChannelListViewObj.SelectedItems[0].SubItems[5].Text;
+                NotesObj.Text = ChannelListViewObj.SelectedItems[0].SubItems[5].Text;
             }
         }
 
-        private void MHzComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void Tab1MHzComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            MHzComboBox_SelectedIndexChanged(Tab1ChannelListView, Tab1MHzComboBox, Tab1KHzCombBox, Tab1KHzToolStripComboBox, Tab1RepeaterComboBox, Tab1ToneComboBox,
+                Tab1ChannelTextBox, Tab1CtcssXmitRec, Tab1CtcssXmit, Tab1ChannelNotes, parentForm.Mod1UT144.Checked, parentForm.Mod1UT220.Checked);
+        }
 
-            ListView ChannelListViewObj;
-            ComboBox MHzComboBoxObj;
-            ComboBox KHzComboBoxObj;
-            ComboBox RepeaterComboBoxObj;
-            ComboBox ToneComboBoxObj;
-//            TextBox ChannelTextBoxObj;
-            ToolStripComboBox KhzStepSizeObj;
-            RadioButton CtcssRadioButtonObj;
-            RadioButton ToneRadioButtonObj;
+        private void Tab2MHzComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MHzComboBox_SelectedIndexChanged(Tab2ChannelListView, Tab2MHzComboBox, Tab2KHzCombBox, Tab2KHzToolStripComboBox, Tab2RepeaterComboBox, Tab2ToneComboBox,
+                Tab2ChannelTextBox, Tab2CtcssXmitRec, Tab2CtcssXmit, Tab2ChannelNotes, parentForm.Mod2UT144.Checked, parentForm.Mod2UT220.Checked);
+        }
 
-            if (TabControl.SelectedIndex == 0)
-            {
-                ChannelListViewObj = Tab1ChannelListView;
-                MHzComboBoxObj = Tab1MHzComboBox;
-                KHzComboBoxObj = Tab1KHzCombBox;
-                RepeaterComboBoxObj = Tab1RepeaterComboBox;
-                ToneComboBoxObj = Tab1ToneComboBox;
-//                ChannelTextBoxObj = Tab1ChannelTextBox;
-                KhzStepSizeObj = Tab1KHzToolStripComboBox;
-                CtcssRadioButtonObj = Tab1CtcssXmitRec;
-                ToneRadioButtonObj = Tab1CtcssXmit;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ChannelListViewObj = Tab2ChannelListView;
-                MHzComboBoxObj = Tab2MHzComboBox;
-                KHzComboBoxObj = Tab2KHzCombBox;
-                RepeaterComboBoxObj = Tab2RepeaterComboBox;
-                ToneComboBoxObj = Tab2ToneComboBox;
-//                ChannelTextBoxObj = Tab2ChannelTextBox;
-                KhzStepSizeObj = Tab2KHzToolStripComboBox;
-                CtcssRadioButtonObj = Tab2CtcssXmitRec;
-                ToneRadioButtonObj = Tab2CtcssXmit;
-            }
-            else
-            {
-                ChannelListViewObj = Tab3ChannelListView;
-                MHzComboBoxObj = Tab3MHzComboBox;
-                KHzComboBoxObj = Tab3KHzCombBox;
-                RepeaterComboBoxObj = Tab3RepeaterComboBox;
-                ToneComboBoxObj = Tab3ToneComboBox;
-//                ChannelTextBoxObj = Tab3ChannelTextBox;
-                KhzStepSizeObj = Tab3KHzToolStripComboBox;
-                CtcssRadioButtonObj = Tab3CtcssXmitRec;
-                ToneRadioButtonObj = Tab3CtcssXmit;
-            }
+        private void Tab3MHzComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MHzComboBox_SelectedIndexChanged(Tab3ChannelListView, Tab3MHzComboBox, Tab3KHzCombBox, Tab3KHzToolStripComboBox, Tab3RepeaterComboBox, Tab3ToneComboBox,
+                Tab3ChannelTextBox, Tab3CtcssXmitRec, Tab3CtcssXmit, Tab3ChannelNotes, parentForm.Mod3UT144.Checked, parentForm.Mod3UT220.Checked);
+        }
 
+#pragma warning disable IDE0060
+        private void MHzComboBox_SelectedIndexChanged(ListView ChannelListViewObj, ComboBox MHzComboBoxObj, ComboBox KHzComboBoxObj, ToolStripComboBox KhzStepSizeObj,
+            ComboBox RepeaterComboBoxObj, ComboBox ToneComboBoxObj, TextBox ChannelTextBoxObj, RadioButton CtcssRadioButtonObj, RadioButton ToneRadioButtonObj, TextBox NotesObj,
+            bool moduleIsUT144, bool moduleIsUT220)
+        {
             decimal KhzStepSize = Conversions.ToDecimal(KhzStepSizeObj.Text);
             // this should be based on whether a 'type E' radio (really 'use European band plan').  It was: what is the decimal separator
             // was:             if (KhzStepSizeObj.Text.StartsWith("12") && decimalSeparator == ",")
@@ -686,9 +471,9 @@ namespace Radio
                             ToneComboBoxObj.Text = "OFF";
                         }
 
+                        // clear and write KHz ComboBox items
                         KHzComboBoxObj.Items.Clear();
-                        decimal x;
-                        x = 0.0m;
+                        decimal x = 0.0m;
                         while (x < 1000m)
                         {
                             if (x < 10m)
@@ -706,14 +491,12 @@ namespace Radio
                             x += KhzStepSize;
                         }
 
-                        // Tab1KHzCombBox.SelectionStart = 100
-                        // Tab1KHzCombBox.SelectedIndex = 50
                         KHzComboBoxObj.DroppedDown = true;
                     }
                 }
             }
 
-            RepeaterComboBoxObj.Text = getRepeaterVal(MHzComboBoxObj.Text, KHzComboBoxObj.Text, TabControl.SelectedIndex);
+            RepeaterComboBoxObj.Text = getRepeaterVal(MHzComboBoxObj.Text, KHzComboBoxObj.Text, moduleIsUT144, moduleIsUT220);
 
             if (MHzComboBoxObj.Text == "BLANK" | string.IsNullOrEmpty(MHzComboBoxObj.Text))
             {
@@ -724,6 +507,7 @@ namespace Radio
                 ToneRadioButtonObj.Checked = false;
             }
         }
+#pragma warning restore IDE0060
 
         private int repeaterModeCurrentIndex;
         private int repeaterElements;
@@ -827,70 +611,58 @@ namespace Radio
             return count;
         }
 
-        private void ButtonProgramBandModule_Click(object sender, EventArgs e)
+        private void ButtonProgramBandModule1_Click(object sender, EventArgs e)
         {
-            ProgramBandModule();
+            ProgramBandModule(0, Tab1ProgressBar1,Tab1ChannelListView, Tab1ToolStripStatusLabel, Tab1KHzToolStripComboBox, Tab1UsbCmdLabel, Tab1ComPortTextBox, Tab1SaveChannelFileToolStripMenuItem, parentForm.Mod1UT144.Checked, parentForm.Mod1UT220.Checked);
 
             // ensure serial port is closed.
             closeSerialPort();
         }
 
-        private void ProgramBandModule()
+        private void ButtonProgramBandModule2_Click(object sender, EventArgs e)
         {
-            ProgressBar ProgressBarObj;
-            ListView ChannelListViewObj;
-            ToolStripStatusLabel ToolStripStatusLabel;
-            ToolStripComboBox ToolStripComboBoxObj;
+            ProgramBandModule(1, Tab2ProgressBar1, Tab2ChannelListView, Tab2ToolStripStatusLabel, Tab2KHzToolStripComboBox, Tab2UsbCmdLabel, Tab2ComPortTextBox, Tab2SaveChannelFileToolStripMenuItem, parentForm.Mod2UT144.Checked, parentForm.Mod2UT220.Checked);
+
+            // ensure serial port is closed.
+            closeSerialPort();
+        }
+
+        private void ButtonProgramBandModule3_Click(object sender, EventArgs e)
+        {
+            ProgramBandModule(2, Tab3ProgressBar1, Tab3ChannelListView, Tab3ToolStripStatusLabel, Tab3KHzToolStripComboBox, Tab3UsbCmdLabel, Tab3ComPortTextBox, Tab3SaveChannelFileToolStripMenuItem, parentForm.Mod3UT144.Checked, parentForm.Mod3UT220.Checked);
+
+            // ensure serial port is closed.
+            closeSerialPort();
+        }
+
+
+        private void ProgramBandModule(int tabIndex, ProgressBar ProgressBarObj, ListView ChannelListViewObj, ToolStripStatusLabel ToolStripStatusLabelObj,
+            ToolStripComboBox ToolStripComboBoxObj, Label commandLabel, TextBox ComPortTextBox, ToolStripMenuItem saveFile, bool moduleIsUT144, bool moduleIsUT220)
+        {
             int blankChannelCount = 0;
             bool firstChannelComplete = false;
-            Label commandLabel;
 
             textBoxSerialCommands.Text = "";
 
             stopProgrammingRequested = false;
 
-            if (channelUpdateClicked[TabControl.SelectedIndex] == true)
+            if (channelUpdateClicked[tabIndex] == true)
             {
-                displaySaveMessage();
+                displaySaveMessage(saveFile);
             }
-            channelUpdateClicked[TabControl.SelectedIndex] = false;
+            channelUpdateClicked[tabIndex] = false;
 
-            if (openSerialPort() != true)
+            if (openSerialPort( ComPortTextBox) != true)
             {
                 MessageBox.Show("Could not determine Arduino COM port.  Ensure USB cable is plugged in.");
                 return;
-            }
-
-            if (TabControl.SelectedIndex == 0)
-            {
-                ProgressBarObj = Tab1ProgressBar1;
-                ChannelListViewObj = Tab1ChannelListView;
-                ToolStripStatusLabel = Tab1ToolStripStatusLabel;
-                ToolStripComboBoxObj = Tab1KHzToolStripComboBox;
-                commandLabel = Tab1UsbCmdLabel;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ProgressBarObj = Tab2ProgressBar1;
-                ChannelListViewObj = Tab2ChannelListView;
-                ToolStripStatusLabel = Tab2ToolStripStatusLabel;
-                ToolStripComboBoxObj = Tab2KHzToolStripComboBox;
-                commandLabel = Tab2UsbCmdLabel;
-            }
-            else
-            {
-                ProgressBarObj = Tab3ProgressBar1;
-                ChannelListViewObj = Tab3ChannelListView;
-                ToolStripStatusLabel = Tab3ToolStripStatusLabel;
-                ToolStripComboBoxObj = Tab3KHzToolStripComboBox;
-                commandLabel = Tab3UsbCmdLabel;
             }
 
             repeaterModeCurrentIndex = 0;
             CTCSSToneFrequencyIndex = 7;
             ctcssModeCurrentIndex = 0;
 
-            ToolStripStatusLabel.Text = "";
+            ToolStripStatusLabelObj.Text = "";
 
             string modLabel = TabControl.SelectedTab.Text;
             if (modLabel.EndsWith("440e") | modLabel.EndsWith("1200"))
@@ -912,6 +684,7 @@ namespace Radio
 
             ProgressBarObj.Maximum = ChannelListViewObj.Items.Count - 2;
             string mhzLabel = TabControl.SelectedTab.Text;
+
             var msgResult = Interaction.MsgBox("1. Reset Band in radio." + Constants.vbCrLf + "   " + Strings.Chr(149) + " Hold 'F' and Band select while turning on radio." + Constants.vbCrLf + "2. Put radio in 'RC' mode." + Constants.vbCrLf + "3. Select " + Strings.Mid(mhzLabel, 3, mhzLabel.Length - 2) + " MHz band on radio." + Constants.vbCrLf + "4. Ensure that both the radio and the tabbed channel list frequency step size are correct." + Constants.vbCrLf + "   " + Strings.Chr(149) + " Step size is selectable per tab under the Options menu", (MsgBoxStyle)((int)MsgBoxStyle.OkCancel + (int)MsgBoxStyle.Critical + (int)MsgBoxStyle.DefaultButton2), "Programming setup message");
 
             if (msgResult == MsgBoxResult.Cancel)
@@ -985,7 +758,7 @@ namespace Radio
                 {
                     // send freq digits
                     string freq = ChannelListViewObj.Items[channelIndex].SubItems[1].Text;
-                    decimal decFrequency = 0m;
+                    decimal decFrequency;
 
                     int decimalPointLocation = freq.IndexOf(".");
                     if (decimalPointLocation == -1)
@@ -998,7 +771,9 @@ namespace Radio
                         }
                         else
                         {
-                            // panic
+                            // no decimal separator! is that reason to panic? maybe not; just convert as there won't be an issue.
+                            // it's just MHz with no KHz somehow.
+                            decFrequency = Convert.ToDecimal(freq, System.Globalization.CultureInfo.InvariantCulture);
                         }
                     }
                     else
@@ -1007,8 +782,8 @@ namespace Radio
                         decFrequency = Convert.ToDecimal(freq, System.Globalization.CultureInfo.InvariantCulture);
                     }
 
-                    string mhzVal = Convert.ToString(Strings.Mid(freq, 1, decimalPointLocation));
-                    string kHzVal = Convert.ToString(Strings.Mid(freq, decimalPointLocation + 2));
+                    string mhzVal = decimalPointLocation != -1 ? Strings.Mid(freq, 1, decimalPointLocation) : freq;
+                    string kHzVal = decimalPointLocation != -1 ? Strings.Mid(freq, decimalPointLocation + 2) : "000";
 
                     int numOfKhzChars = 3;
                     if ((Convert.ToDecimal(Conversions.ToString(ToolStripComboBoxObj.SelectedItem)) == 12.5m)
@@ -1021,14 +796,14 @@ namespace Radio
 
                     if (parentForm.wideBandCheckBox.Checked && TabControl.SelectedTab.Text.Contains("1200"))
                     {
-                        SendString(Conversions.ToString(mhzVal[mhzVal.Length - 3]));
+                        SendString(Conversions.ToString(mhzVal[mhzVal.Length - 3]));    // hundreds of MHz
                     }
 
                     if (!TabControl.SelectedTab.Text.Contains("e") || TabControl.SelectedTab.Text.Contains("1200"))
                     {
-                        SendString(Conversions.ToString(mhzVal[mhzVal.Length - 2]));
+                        SendString(Conversions.ToString(mhzVal[mhzVal.Length - 2]));    // tens of MHz
                     }
-                    SendString(Conversions.ToString(mhzVal[mhzVal.Length - 1]));
+                    SendString(Conversions.ToString(mhzVal[mhzVal.Length - 1]));    // units of MHz
 
                     // now send the KHz characters needed
                     int freqCharIndex = 0;
@@ -1041,14 +816,12 @@ namespace Radio
                     if (parentForm.AROcheckBox.Checked)
                     {
                         // only the UT144 and UT220 have 'Automatic Receiver Offset' feature, it seems
-                        if ((TabControl.SelectedIndex == 0 && parentForm.Mod1UT144.Checked)
-                            || (TabControl.SelectedIndex == 1 && parentForm.Mod2UT144.Checked)
-                            || (TabControl.SelectedIndex == 2 && parentForm.Mod3UT144.Checked))
+                        if (moduleIsUT144)
                         {
                             // it's a 2m module
                             if (!parentForm.eTypeRadioCheckBox.Checked)
                             {
-                                // USA band plan for 2m, based on 'Type E' checkbox being not checked
+                                // USA band plan for 2m, based on 'Type E' check box being not checked
                                 if (decFrequency < 145.1m)
                                 {
                                     getRepeaterIncrement("SIMPLEX");
@@ -1107,10 +880,7 @@ namespace Radio
                                 }
                             }
                         }
-                        else if ((TabControl.SelectedIndex == 0 && parentForm.Mod1UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked)
-                            || (TabControl.SelectedIndex == 1 && parentForm.Mod2UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked)
-                            || (TabControl.SelectedIndex == 2 && parentForm.Mod3UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked))
-
+                        else if (moduleIsUT220 && !parentForm.eTypeRadioCheckBox.Checked)
                         {
                             // it's a 220 MHz module.  Cannot be used in an 'e-type' radio (not legal in Europe)
                             if (decFrequency < 223.92m)
@@ -1133,7 +903,7 @@ namespace Radio
                     int repeaterCount = getRepeaterIncrement(ChannelListViewObj.Items[channelIndex].SubItems[2].Text);
                     if (repeaterCount > 0)
                     {
-                        textBoxSerialCommands.AppendText(" Mode ");
+                        textBoxSerialCommands.AppendText(" (Mode) ");
                         for (int loopVar = 0; loopVar <= (repeaterCount - 1); loopVar++)
                             SendString("1");
                     }
@@ -1142,7 +912,7 @@ namespace Radio
                     int ctcssCount = getCtcssModeIndex(ChannelListViewObj.Items[channelIndex].SubItems[4].Text);
                     if (ctcssCount > 0)
                     {
-                        textBoxSerialCommands.AppendText(" CTCSS ");
+                        textBoxSerialCommands.AppendText(" (CTCSS) ");
                         for (int loopVar = 0; loopVar <= (ctcssCount - 1); loopVar++)
                             SendString("2");
                     }
@@ -1154,7 +924,7 @@ namespace Radio
                         int toneCount = getCTCSSToneFrequencyIndex(ChannelListViewObj.Items[channelIndex].SubItems[3].Text, ref direction);
                         if (toneCount > 0)
                         {
-                            textBoxSerialCommands.AppendText(" CTCSS Freq ");
+                            textBoxSerialCommands.AppendText(" (CTCSS Freq) ");
                             SendString("D");
                             SendString("2");
                             for (int loopVar = 0; loopVar <= (toneCount - 1); loopVar++)
@@ -1198,8 +968,9 @@ namespace Radio
             ProgressBarObj.Value = ChannelListViewObj.Items.Count - 2;
             ChannelListViewObj.Items[ChannelListViewObj.Items.Count - 2].BackColor = Color.White;
             Timer1.Enabled = false;
-            ToolStripStatusLabel.Text = "Programming complete.";
+            ToolStripStatusLabelObj.Text = "Programming complete.";
             commandLabel.Text = "";
+
             Tab1UsbRcvdLabel.Text = "";
             Tab2UsbRcvdLabel.Text = "";
             Tab3UsbRcvdLabel.Text = "";
@@ -1209,90 +980,86 @@ namespace Radio
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            ToolStripStatusLabel ToolStripStatusLabel;
+            ToolStripStatusLabel ToolStripStatusLabelObj;
 
             // why is SelectedIndex values of 1 and 2 not handled differently?
             if (TabControl.SelectedIndex == 0)
             {
-                ToolStripStatusLabel = Tab1ToolStripStatusLabel;
+                ToolStripStatusLabelObj = Tab1ToolStripStatusLabel;
             }
             else if (TabControl.SelectedIndex == 1)
             {
-                ToolStripStatusLabel = Tab2ToolStripStatusLabel;
+                ToolStripStatusLabelObj = Tab2ToolStripStatusLabel;
             }
             else
             {
-                ToolStripStatusLabel = Tab3ToolStripStatusLabel;
+                ToolStripStatusLabelObj = Tab3ToolStripStatusLabel;
             }
 
-            if (!ToolStripStatusLabel.Text.Contains("Programming"))
+            if (!ToolStripStatusLabelObj.Text.Contains("Programming"))
             {
                 _Timer1_Tick_cntr = 0;
             }
 
             if (_Timer1_Tick_cntr % 3 == 0)
             {
-                ToolStripStatusLabel.Text = "Programming the radio.";
+                ToolStripStatusLabelObj.Text = "Programming the radio.";
             }
             else
             {
-                ToolStripStatusLabel.Text += " .";
+                ToolStripStatusLabelObj.Text += " .";
             }
 
             _Timer1_Tick_cntr++;
         }
 
-        private void KHzStepSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Tab1KHzStepSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ToolStripComboBox KhzToolStripComboBoxObj;
+            Tab1KHzToolStripComboBox.DroppedDown = true;
+        }
 
-            if (TabControl.SelectedIndex == 0)
-            {
-                KhzToolStripComboBoxObj = Tab1KHzToolStripComboBox;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                KhzToolStripComboBoxObj = Tab2KHzToolStripComboBox;
-            }
-            else
-            {
-                KhzToolStripComboBoxObj = Tab3KHzToolStripComboBox;
-            }
+        private void Tab2KHzStepSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Tab2KHzToolStripComboBox.DroppedDown = true;
+        }
 
-            KhzToolStripComboBoxObj.DroppedDown = true;
+        private void Tab3KHzStepSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Tab3KHzToolStripComboBox.DroppedDown = true;
         }
 
         private void Tab1KHzToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MenuStrip MenuStripObj;
-            ToolStripComboBox ToolStripComboBoxObj;
-            ToolStripLabel ToolStripLabelObj;
-            ComboBox KHzComboBoxObj;
+            FillKHzComboBox(Tab1MenuStrip, Tab1KHzToolStripComboBox, Tab1ToolStripStepSize, Tab1KHzCombBox);
 
-            if (TabControl.SelectedIndex == 0)
+            if (!Tab1KHzToolStripComboBox.Text.Equals(parentForm.getTab1StepSize()))
             {
-                MenuStripObj = Tab1MenuStrip;
-                ToolStripComboBoxObj = Tab1KHzToolStripComboBox;
-                ToolStripLabelObj = Tab1ToolStripStepSize;
-                KHzComboBoxObj = Tab1KHzCombBox;
+                updateSingleEntity(parentForm.xmlFile, "TM742/tab1StepSize", Convert.ToString(Tab1KHzToolStripComboBox.Text));
             }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                MenuStripObj = Tab2MenuStrip;
-                ToolStripComboBoxObj = Tab2KHzToolStripComboBox;
-                ToolStripLabelObj = Tab2ToolStripStepSize;
-                KHzComboBoxObj = Tab2KHzCombBox;
-            }
-            else
-            {
-                MenuStripObj = Tab3MenuStrip;
-                ToolStripComboBoxObj = Tab3KHzToolStripComboBox;
-                ToolStripLabelObj = Tab3ToolStripStepSize;
-                KHzComboBoxObj = Tab3KHzCombBox;
-            }
+        }
+        private void Tab2KHzToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillKHzComboBox(Tab2MenuStrip, Tab2KHzToolStripComboBox, Tab2ToolStripStepSize, Tab2KHzCombBox);
 
+            if (!Tab2KHzToolStripComboBox.Text.Equals(parentForm.getTab2StepSize()))
+            {
+                updateSingleEntity(parentForm.xmlFile, "TM742/tab2StepSize", Convert.ToString(Tab2KHzToolStripComboBox.Text));
+            }
+        }
+        private void Tab3KHzToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillKHzComboBox(Tab3MenuStrip, Tab3KHzToolStripComboBox, Tab3ToolStripStepSize, Tab3KHzCombBox);
+
+            if (!Tab3KHzToolStripComboBox.Text.Equals(parentForm.getTab3StepSize()))
+            {
+                updateSingleEntity(parentForm.xmlFile, "TM742/tab3StepSize", Convert.ToString(Tab3KHzToolStripComboBox.Text));
+            }
+        }
+
+        private void FillKHzComboBox(MenuStrip MenuStripObj, ToolStripComboBox ToolStripComboBoxObj, ToolStripLabel ToolStripLabelObj, ComboBox KHzComboBoxObj)
+        {
             MenuStripObj.Items[0].Select();
-            ToolStripLabelObj.Text = "kHz Step Size: " + ToolStripComboBoxObj.Text;
+            ToolStripLabelObj.Text = "KHz Step Size: " + ToolStripComboBoxObj.Text;
 
             KHzComboBoxObj.Items.Clear();
             decimal x = 0.0m;
@@ -1313,95 +1080,70 @@ namespace Radio
                 }
                 x += KhzStepSize;
             }
-
-            if (TabControl.SelectedIndex == 0)
-            {
-                if (!ToolStripComboBoxObj.Text.Equals(parentForm.getTab1StepSize()))
-                {
-                    updateSingleEntity(parentForm.xmlFile, "TM742/tab1StepSize", Convert.ToString(ToolStripComboBoxObj.Text));
-                }
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                if (!ToolStripComboBoxObj.Text.Equals(parentForm.getTab2StepSize()))
-                {
-                    updateSingleEntity(parentForm.xmlFile, "TM742/tab2StepSize", Convert.ToString(ToolStripComboBoxObj.Text));
-                }
-            }
-            else if (!ToolStripComboBoxObj.Text.Equals(parentForm.getTab3StepSize()))
-            {
-                updateSingleEntity(parentForm.xmlFile, "TM742/tab3StepSize", Convert.ToString(ToolStripComboBoxObj.Text));
-            }
         }
 
         private void Tab1BackToMainMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ComboBox MhzComboBoxObj;
-            ListView channelListObj;
-
-            if (TabControl.SelectedIndex == 0)
+            if (Tab1ChannelListView.Items.Count > 1 && channelUpdateClicked[0] == true)
             {
-                MhzComboBoxObj = Tab1MHzComboBox;
-                channelListObj = Tab1ChannelListView;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                MhzComboBoxObj = Tab2MHzComboBox;
-                channelListObj = Tab2ChannelListView;
-            }
-            else
-            {
-                MhzComboBoxObj = Tab3MHzComboBox;
-                channelListObj = Tab3ChannelListView;
+                displaySaveMessage(Tab1SaveChannelFileToolStripMenuItem);
             }
 
-            if (channelListObj.Items.Count > 1 && channelUpdateClicked[TabControl.SelectedIndex] == true)
-            {
-                displaySaveMessage();
-            }
+            channelUpdateClicked[0] = false;
 
-            channelUpdateClicked[TabControl.SelectedIndex] = false;
+            Tab1MHzComboBox.Text = "BLANK";
 
-            MhzComboBoxObj.Text = "BLANK";
             Visible = false;
-            // Form2.Visible = True
             parentForm.Enabled = true;
         }
 
-        private void ButtonClearChannelList_Click(object sender, EventArgs e)
+        private void Tab2BackToMainMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ListView ChannelListViewObj;
-            // Dim KhzToolStripComboBoxObj As ToolStripComboBox
-            ToolStripLabel ToolStripStatusLabelObj;
-            RadioButton CtssXmitToneObj;
-            RadioButton CtcssXmitRecToneObj;
-
-
-            if (TabControl.SelectedIndex == 0)
+            if (Tab2ChannelListView.Items.Count > 1 && channelUpdateClicked[1] == true)
             {
-                ChannelListViewObj = Tab1ChannelListView;
-                // KhzToolStripComboBoxObj = Tab1KHzToolStripComboBox
-                ToolStripStatusLabelObj = Tab1ToolStripStatusLabel;
-                CtssXmitToneObj = Tab1CtcssXmit;
-                CtcssXmitRecToneObj = Tab1CtcssXmitRec;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ChannelListViewObj = Tab2ChannelListView;
-                // KhzToolStripComboBoxObj = Tab2KHzToolStripComboBox
-                ToolStripStatusLabelObj = Tab2ToolStripStatusLabel;
-                CtssXmitToneObj = Tab2CtcssXmit;
-                CtcssXmitRecToneObj = Tab2CtcssXmitRec;
-            }
-            else
-            {
-                ChannelListViewObj = Tab3ChannelListView;
-                // KhzToolStripComboBoxObj = Tab3KHzToolStripComboBox
-                ToolStripStatusLabelObj = Tab3ToolStripStatusLabel;
-                CtssXmitToneObj = Tab3CtcssXmit;
-                CtcssXmitRecToneObj = Tab3CtcssXmitRec;
+                displaySaveMessage(Tab2SaveChannelFileToolStripMenuItem);
             }
 
+            channelUpdateClicked[1] = false;
+
+            Tab2MHzComboBox.Text = "BLANK";
+
+            Visible = false;
+            parentForm.Enabled = true;
+        }
+
+        private void Tab3BackToMainMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Tab3ChannelListView.Items.Count > 1 && channelUpdateClicked[2] == true)
+            {
+                displaySaveMessage(Tab3SaveChannelFileToolStripMenuItem);
+            }
+
+            channelUpdateClicked[2] = false;
+
+            Tab3MHzComboBox.Text = "BLANK";
+
+            Visible = false;
+            parentForm.Enabled = true;
+        }
+
+        private void ButtonClearChannelList1_Click(object sender, EventArgs e)
+        {
+            clearChannelList(Tab1ChannelListView, Tab1ToolStripStatusLabel, Tab1CtcssXmit, Tab1CtcssXmitRec);
+        }
+
+        private void ButtonClearChannelList2_Click(object sender, EventArgs e)
+        {
+            clearChannelList(Tab2ChannelListView, Tab2ToolStripStatusLabel, Tab2CtcssXmit, Tab2CtcssXmitRec);
+        }
+
+        private void ButtonClearChannelList3_Click(object sender, EventArgs e)
+        {
+            clearChannelList(Tab3ChannelListView, Tab3ToolStripStatusLabel, Tab3CtcssXmit, Tab3CtcssXmitRec);
+        }
+
+        private void clearChannelList(ListView ChannelListViewObj, ToolStripLabel ToolStripStatusLabelObj, RadioButton CtssXmitToneObj, RadioButton CtcssXmitRecToneObj)
+        { 
             int response = (int)Interaction.MsgBox("Are you sure you want to clear the channel list?", MsgBoxStyle.YesNo, "Channel list clear verification");
             if (response == (int)Constants.vbYes)
             {
@@ -1426,33 +1168,25 @@ namespace Radio
 
         private void Tab1CtcssXmit_MouseDown(object sender, MouseEventArgs e)
         {
-            ComboBox ToneObj;
-            RadioButton CtcssXmitObj;
-            RadioButton CtcssXmitRecObj;
+            handleMouseDown(Tab1ToneComboBox, Tab1CtcssXmit, Tab1CtcssXmitRec);
+        }
 
-            if (TabControl.SelectedIndex == 0)
-            {
-                ToneObj = Tab1ToneComboBox;
-                CtcssXmitObj = Tab1CtcssXmit;
-                CtcssXmitRecObj = Tab1CtcssXmitRec;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ToneObj = Tab2ToneComboBox;
-                CtcssXmitObj = Tab2CtcssXmit;
-                CtcssXmitRecObj = Tab2CtcssXmitRec;
-            }
-            else
-            {
-                ToneObj = Tab3ToneComboBox;
-                CtcssXmitObj = Tab3CtcssXmit;
-                CtcssXmitRecObj = Tab3CtcssXmitRec;
-            }
+        private void Tab2CtcssXmit_MouseDown(object sender, MouseEventArgs e)
+        {
+            handleMouseDown(Tab2ToneComboBox, Tab2CtcssXmit, Tab2CtcssXmitRec);
+        }
 
+        private void Tab3CtcssXmit_MouseDown(object sender, MouseEventArgs e)
+        {
+            handleMouseDown(Tab3ToneComboBox, Tab3CtcssXmit, Tab3CtcssXmitRec);
+        }
+
+        private void handleMouseDown(ComboBox ToneObj, RadioButton CtcssXmitObj, RadioButton CtcssXmitRecObj)
+        { 
             if (CtcssXmitObj.Checked == false && CtcssXmitRecObj.Checked == false)
             {
                 if (CtcssXmitObj.Focused)
-                {
+                { 
                     CtcssXmitObj.Checked = true;
                 }
                 else if (CtcssXmitRecObj.Focused)
@@ -1466,72 +1200,64 @@ namespace Radio
 
         private void Tab1ToneComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            ComboBox ToneObj;
-            RadioButton CtcssXmitObj;
-            RadioButton CtcssXmitRecObj;
+            if (Tab1ToneComboBox.SelectedIndex == 0)
+            {
+                Tab1CtcssXmit.Checked = false;
+                Tab1CtcssXmitRec.Checked = false;
+                Tab1ToneComboBox.Enabled = false;
+            }
+        }
 
-            if (TabControl.SelectedIndex == 0)
+        private void Tab2ToneComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            if (Tab2ToneComboBox.SelectedIndex == 0)
             {
-                ToneObj = Tab1ToneComboBox;
-                CtcssXmitObj = Tab1CtcssXmit;
-                CtcssXmitRecObj = Tab1CtcssXmitRec;
+                Tab2CtcssXmit.Checked = false;
+                Tab2CtcssXmitRec.Checked = false;
+                Tab2ToneComboBox.Enabled = false;
             }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ToneObj = Tab2ToneComboBox;
-                CtcssXmitObj = Tab2CtcssXmit;
-                CtcssXmitRecObj = Tab2CtcssXmitRec;
-            }
-            else
-            {
-                ToneObj = Tab3ToneComboBox;
-                CtcssXmitObj = Tab3CtcssXmit;
-                CtcssXmitRecObj = Tab3CtcssXmitRec;
-            }
+        }
 
-            if (ToneObj.SelectedIndex == 0)
+        private void Tab3ToneComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            if (Tab3ToneComboBox.SelectedIndex == 0)
             {
-                CtcssXmitObj.Checked = false;
-                CtcssXmitRecObj.Checked = false;
-                ToneObj.Enabled = false;
+                Tab3CtcssXmit.Checked = false;
+                Tab3CtcssXmitRec.Checked = false;
+                Tab3ToneComboBox.Enabled = false;
             }
         }
 
         private void Tab1ToneComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox ToneObj;
-            RadioButton CtcssXmitObj;
-            RadioButton CtcssXmitRecObj;
-            RadioButton CtcssOffObj;
+            if (Tab1ToneComboBox.Text == "OFF")
+            {
+                Tab1CtcssXmit.Checked = false;
+                Tab1CtcssXmitRec.Checked = false;
+                Tab1CtcssOff.Checked = true;
+                Tab1ToneComboBox.Enabled = false;
+            }
+        }
 
-            if (TabControl.SelectedIndex == 0)
+        private void Tab2ToneComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Tab2ToneComboBox.Text == "OFF")
             {
-                ToneObj = Tab1ToneComboBox;
-                CtcssXmitObj = Tab1CtcssXmit;
-                CtcssXmitRecObj = Tab1CtcssXmitRec;
-                CtcssOffObj = Tab1CtcssOff;
+                Tab2CtcssXmit.Checked = false;
+                Tab2CtcssXmitRec.Checked = false;
+                Tab2CtcssOff.Checked = true;
+                Tab2ToneComboBox.Enabled = false;
             }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ToneObj = Tab2ToneComboBox;
-                CtcssXmitObj = Tab2CtcssXmit;
-                CtcssXmitRecObj = Tab2CtcssXmitRec;
-                CtcssOffObj = Tab2CtcssOff;
-            }
-            else
-            {
-                ToneObj = Tab3ToneComboBox;
-                CtcssXmitObj = Tab3CtcssXmit;
-                CtcssXmitRecObj = Tab3CtcssXmitRec;
-                CtcssOffObj = Tab3CtcssOff;
-            }
+        }
 
-            if (ToneObj.Text == "OFF")
+        private void Tab3ToneComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Tab3ToneComboBox.Text == "OFF")
             {
-                CtcssXmitObj.Checked = false;
-                CtcssXmitRecObj.Checked = false;
-                CtcssOffObj.Checked = true;
-                ToneObj.Enabled = false;
+                Tab3CtcssXmit.Checked = false;
+                Tab3CtcssXmitRec.Checked = false;
+                Tab3CtcssOff.Checked = true;
+                Tab3ToneComboBox.Enabled = false;
             }
         }
 
@@ -1876,33 +1602,20 @@ namespace Radio
 
         private void Tab1KHzCombBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox MhzComboBox;
-            ComboBox KhzComboBox;
-            ComboBox RepeaterComboBox;
-
-            if (TabControl.SelectedIndex == 0)
-            {
-                MhzComboBox = Tab1MHzComboBox;
-                KhzComboBox = Tab1KHzCombBox;
-                RepeaterComboBox = Tab1RepeaterComboBox;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                MhzComboBox = Tab2MHzComboBox;
-                KhzComboBox = Tab2KHzCombBox;
-                RepeaterComboBox = Tab2RepeaterComboBox;
-            }
-            else
-            {
-                MhzComboBox = Tab3MHzComboBox;
-                KhzComboBox = Tab3KHzCombBox;
-                RepeaterComboBox = Tab3RepeaterComboBox;
-            }
-
-            RepeaterComboBox.Text = getRepeaterVal(MhzComboBox.Text, KhzComboBox.Text, TabControl.SelectedIndex);
+            Tab1RepeaterComboBox.Text = getRepeaterVal(Tab1MHzComboBox.Text, Tab1KHzCombBox.Text, parentForm.Mod1UT144.Checked, parentForm.Mod1UT220.Checked);
         }
 
-        public string getRepeaterVal(string mHz, string kHz, int tabIndex)
+        private void Tab2KHzCombBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Tab2RepeaterComboBox.Text = getRepeaterVal(Tab2MHzComboBox.Text, Tab2KHzCombBox.Text, parentForm.Mod2UT144.Checked, parentForm.Mod2UT220.Checked);
+        }
+
+        private void Tab3KHzCombBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Tab3RepeaterComboBox.Text = getRepeaterVal(Tab3MHzComboBox.Text, Tab3KHzCombBox.Text, parentForm.Mod3UT144.Checked, parentForm.Mod3UT220.Checked);
+        }
+
+        public string getRepeaterVal(string mHz, string kHz, bool moduleIsUT144, bool moduleIsUT220)
         {
             string getRepeaterValRet;
 
@@ -1915,10 +1628,7 @@ namespace Radio
             frequency = Convert.ToDecimal(mHz, System.Globalization.CultureInfo.InvariantCulture)
                 + Convert.ToDecimal(kHz, System.Globalization.CultureInfo.InvariantCulture) / 1000.0m;
 
-            if ((tabIndex == 0 && parentForm.Mod1UT144.Checked)
-                || (tabIndex == 1 && parentForm.Mod2UT144.Checked)
-                || (tabIndex == 2 && parentForm.Mod3UT144.Checked))
-
+            if (moduleIsUT144)
             {
                 if (!parentForm.eTypeRadioCheckBox.Checked)
                 {
@@ -1976,10 +1686,7 @@ namespace Radio
                     getRepeaterValRet = "SIMPLEX";
                 }
             }
-            else if ((tabIndex == 0 && parentForm.Mod1UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked) 
-                || (tabIndex == 1 && parentForm.Mod2UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked) 
-                || (tabIndex == 2 && parentForm.Mod3UT220.Checked && !parentForm.eTypeRadioCheckBox.Checked))
-
+            else if (moduleIsUT220 && !parentForm.eTypeRadioCheckBox.Checked) 
             {
                 if (frequency < 223.92m)
                 {
@@ -2006,24 +1713,29 @@ namespace Radio
         {
 
             ListView channelListObj;
+            ToolStripMenuItem menuItemObj;
 
             if (TabControl.SelectedIndex == 0)
             {
                 channelListObj = Tab1ChannelListView;
+                menuItemObj = Tab1SaveChannelFileToolStripMenuItem;
             }
             else if (TabControl.SelectedIndex == 1)
             {
                 channelListObj = Tab2ChannelListView;
+                menuItemObj = Tab2SaveChannelFileToolStripMenuItem;
             }
             else
             {
                 channelListObj = Tab3ChannelListView;
+                menuItemObj = Tab3SaveChannelFileToolStripMenuItem;
             }
+
             SerialPort1.Close();
 
             if (channelListObj.Items.Count > 1 && channelUpdateClicked[TabControl.SelectedIndex] == true)
             {
-                displaySaveMessage();
+                displaySaveMessage(menuItemObj);
             }
 
             channelUpdateClicked[TabControl.SelectedIndex] = false;
@@ -2088,23 +1800,8 @@ namespace Radio
             stopProgrammingRequested = true;
         }
 
-        public bool displaySaveMessage()
+        public bool displaySaveMessage(ToolStripMenuItem saveFile)
         {
-            ToolStripMenuItem saveFile;
-
-            if (TabControl.SelectedIndex == 0)
-            {
-                saveFile = Tab1SaveChannelFileToolStripMenuItem;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                saveFile = Tab2SaveChannelFileToolStripMenuItem;
-            }
-            else
-            {
-                saveFile = Tab3SaveChannelFileToolStripMenuItem;
-            }
-
             var msgResult = Interaction.MsgBox("Would you like to save changes to your Channel List file before continuing?", (MsgBoxStyle)((int)MsgBoxStyle.YesNo + (int)MsgBoxStyle.Critical + (int)MsgBoxStyle.DefaultButton2), "Save query message");
             if (msgResult == MsgBoxResult.Yes)
             {
@@ -2116,50 +1813,52 @@ namespace Radio
 
         private void TabControl_Deselecting(object sender, TabControlCancelEventArgs e)
         {
-            ListView channelListObj;
-
             if (TabControl.SelectedIndex == 0)
             {
-                channelListObj = Tab1ChannelListView;
+                saveTabOnLeavingIfDirty(0, Tab1ChannelListView, Tab1SaveChannelFileToolStripMenuItem, e);
             }
             else if (TabControl.SelectedIndex == 1)
             {
-                channelListObj = Tab2ChannelListView;
+                saveTabOnLeavingIfDirty(1, Tab2ChannelListView, Tab2SaveChannelFileToolStripMenuItem, e);
             }
-            else
+            else if (TabControl.SelectedIndex == 2)
             {
-                channelListObj = Tab3ChannelListView;
+                saveTabOnLeavingIfDirty(2, Tab3ChannelListView, Tab3SaveChannelFileToolStripMenuItem, e);
             }
 
-            if (channelListObj.Items.Count > 1 && !parentForm.initializing && channelUpdateClicked[TabControl.SelectedIndex] == true)
+        }
+
+        private void saveTabOnLeavingIfDirty(int tabIndexLeaving, ListView channelListObj, ToolStripMenuItem saveFile, TabControlCancelEventArgs e)
+        {
+            if (channelListObj.Items.Count > 1 && !parentForm.initializing && channelUpdateClicked[tabIndexLeaving] == true)
             {
-                if (displaySaveMessage() == false)
+                if (displaySaveMessage(saveFile) == false)
                 {
                     e.Cancel = true;
                     return;
                 }
             }
 
-            channelUpdateClicked[TabControl.SelectedIndex] = false;
+            channelUpdateClicked[tabIndexLeaving] = false;
         }
 
         private void Tab1DeleteRowButton_Click(object sender, EventArgs e)
         {
-            ListView ChannelListViewObj;
+            DeleteRow(0, Tab1ChannelListView);
+        }
 
-            if (TabControl.SelectedIndex == 0)
-            {
-                ChannelListViewObj = Tab1ChannelListView;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ChannelListViewObj = Tab2ChannelListView;
-            }
-            else
-            {
-                ChannelListViewObj = Tab3ChannelListView;
-            }
+        private void Tab2DeleteRowButton_Click(object sender, EventArgs e)
+        {
+            DeleteRow(1, Tab2ChannelListView);
+        }
 
+        private void Tab3DeleteRowButton_Click(object sender, EventArgs e)
+        {
+            DeleteRow(2, Tab3ChannelListView);
+        }
+
+        private void DeleteRow(int selectedIndex, ListView ChannelListViewObj)
+        {
             int numOfChannels = ChannelListViewObj.Items.Count;
 
             try
@@ -2176,7 +1875,7 @@ namespace Radio
                     ChannelListViewObj.Items[channelIndex - 1].Selected = true;
                     ChannelListViewObj.Select();
 
-                    channelUpdateClicked[TabControl.SelectedIndex] = true;
+                    channelUpdateClicked[selectedIndex] = true;
                 }
             }
             catch
@@ -2184,35 +1883,23 @@ namespace Radio
             }
         }
 
+        private void Tab1CtcssOff_CheckedChanged(object sender, EventArgs e)
+        {
+            CtcssOffChange(Tab1ToneComboBox, Tab1CtcssXmit, Tab1CtcssXmitRec, Tab1CtcssOff);
+        }
+
         private void Tab2CtcssOff_CheckedChanged(object sender, EventArgs e)
         {
-            ComboBox ToneObj;
-            RadioButton CtcssXmitObj;
-            RadioButton CtcssXmitRecObj;
-            RadioButton CtcssOffObj;
+            CtcssOffChange(Tab2ToneComboBox, Tab2CtcssXmit, Tab2CtcssXmitRec, Tab2CtcssOff);
+        }
 
-            if (TabControl.SelectedIndex == 0)
-            {
-                ToneObj = Tab1ToneComboBox;
-                CtcssXmitObj = Tab1CtcssXmit;
-                CtcssXmitRecObj = Tab1CtcssXmitRec;
-                CtcssOffObj = Tab1CtcssOff;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                ToneObj = Tab2ToneComboBox;
-                CtcssXmitObj = Tab2CtcssXmit;
-                CtcssXmitRecObj = Tab2CtcssXmitRec;
-                CtcssOffObj = Tab2CtcssOff;
-            }
-            else
-            {
-                ToneObj = Tab3ToneComboBox;
-                CtcssXmitObj = Tab3CtcssXmit;
-                CtcssXmitRecObj = Tab3CtcssXmitRec;
-                CtcssOffObj = Tab3CtcssOff;
-            }
+        private void Tab3CtcssOff_CheckedChanged(object sender, EventArgs e)
+        {
+            CtcssOffChange(Tab3ToneComboBox, Tab3CtcssXmit, Tab3CtcssXmitRec, Tab3CtcssOff);
+        }
 
+        private void CtcssOffChange(ComboBox ToneObj, RadioButton CtcssXmitObj, RadioButton CtcssXmitRecObj, RadioButton CtcssOffObj)
+        { 
             if (CtcssOffObj.Checked)
             {
                 CtcssXmitObj.Checked = false;

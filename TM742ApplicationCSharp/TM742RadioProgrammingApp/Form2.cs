@@ -34,11 +34,10 @@ namespace Radio
         public RadioConfigStruct radioConfig;
         public string applicationPath;
         public string xmlFile;
-        private readonly Form1 moduleForm = null;
+        private Form1 moduleForm = null;
 
         public Form2()
         {
-            moduleForm = new Form1(this);
             InitializeComponent();
         }
 
@@ -115,18 +114,22 @@ namespace Radio
             {
                 eTypeRadioCheckBox.Checked = true;
             }
+
             if (radioConfig.tsu7Installed == true)
             {
                 Tsu7CheckBox.Checked = true;
             }
+
             if (radioConfig.wideBand == true)
             {
                 wideBandCheckBox.Checked = true;
             }
+
             if (radioConfig.ARO == true)
             {
                 AROcheckBox.Checked = true;
             }
+
             if (radioConfig.timingMode == 0)
             {
                 normalRadioTimingButton.Checked = true;
@@ -135,152 +138,91 @@ namespace Radio
             {
                 slowRadioTimingButton.Checked = true;
             }
-            else
+            else if (radioConfig.timingMode == 2)
             {
                 debugRadioTimingButton.Checked = true;
             }
-
-            switch (radioConfig.tab1Mod ?? "")
+            else
             {
-                case "Mod1UT30":
-                        Mod1UT30.Checked = true;
-                        break;
-                case "Mod1UT50":
-                        Mod1UT50.Checked = true;
-                        break;
-                case "Mod1UT144":
-                case "Mod1UT144e":
-                        Mod1UT144.Checked = true;
-                        break;
-                case "Mod1UT220":
-                        Mod1UT220.Checked = true;
-                        break;
-                case "Mod1UT440":
-                case "Mod1UT440e":
-                        Mod1UT440.Checked = true;
-                        break;
-                case "Mod1UT1200":
-                case "Mod1UT1200e":
-                        Mod1UT1200.Checked = true;
-                        break;
-
-                default:
-                    // do nothing
-                    break;
+                radioConfig.timingMode = 0;
+                normalRadioTimingButton.Checked = true;
             }
 
-            switch (radioConfig.tab2Mod ?? "")
-            {
-                case "Mod2UT30":
-                        Mod2UT30.Checked = true;
-                        break;
-                case "Mod2UT50":
-                        Mod2UT50.Checked = true;
-                        break;
-                case "Mod2UT144":
-                case "Mod2UT144e":
-                        Mod2UT144.Checked = true;
-                        break;
-                case "Mod2UT220":
-                        Mod2UT220.Checked = true;
-                        break;
-                case "Mod2UT440":
-                case "Mod2UT440e":
-                        Mod2UT440.Checked = true;
-                        break;
-                case "Mod2UT1200":
-                case "Mod2UT1200e":
-                        Mod2UT1200.Checked = true;
-                        break;
+            chooseModuleType(radioConfig.tab1Mod, Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200);
+            chooseModuleType(radioConfig.tab2Mod, Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200);
+            chooseModuleType(radioConfig.tab3Mod, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
+        }
 
-                default:
-                    // do nothing
+        private void chooseModuleType(string moduleType,
+            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200)
+        {
+            switch (moduleType ?? "")
+            {
+                case "UT30":
+                    moduleUT30.Checked = true;
                     break;
-            }
-
-            switch (radioConfig.tab3Mod ?? "")
-            {
-                case "Mod3UT30":
-                         Mod3UT30.Checked = true;
-                        break;
-                case "Mod3UT50":
-                        Mod3UT50.Checked = true;
-                        break;
-                case "Mod3UT144":
-                case "Mod3UT144e":
-                        Mod3UT144.Checked = true;
-                        break;
-                case "Mod3UT220":
-                        Mod3UT220.Checked = true;
-                        break;
-                case "Mod3UT440":
-                case "Mod3UT440e":
-                        Mod3UT440.Checked = true;
-                        break;
-                case "Mod3UT1200":
-                case "Mod3UT1200e":
-                        Mod3UT1200.Checked = true;
-                        break;
+                case "UT50":
+                    moduleUT50.Checked = true;
+                    break;
+                case "UT144":
+                case "UT144e":
+                    moduleUT144.Checked = true;
+                    break;
+                case "UT220":
+                    moduleUT220.Checked = true;
+                    break;
+                case "UT440":
+                case "UT440e":
+                    moduleUT440.Checked = true;
+                    break;
+                case "UT1200":
+                case "UT1200e":
+                    moduleUT1200.Checked = true;
+                    break;
 
                 default:
-                    // do nothing
+                    moduleNone.Checked = true;
                     break;
             }
         }
 
-        private void ChannelLists_Click(object sender, EventArgs e)
+        private void getModuleName(string moduleNoneName, TabPage selectedTab,
+            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200)
         {
-            if (Mod1None.Checked == true & Mod2None.Checked == true & Mod3None.Checked == true)
+            if (moduleUT30.Checked == true)
             {
-                Interaction.MsgBox("At least one module must be selected to continue.", MsgBoxStyle.Critical, "Module selection check");
-                return;
+                selectedTab.Text = moduleUT30.Text;
+            }
+            else if (moduleUT50.Checked == true)
+            {
+                selectedTab.Text = moduleUT50.Text;
+            }
+           else if (moduleUT144.Checked == true)
+            {
+                selectedTab.Text = moduleUT144.Text;
+                if (eTypeRadioCheckBox.Checked)
+                    selectedTab.Text += "e";
+            }
+            else if (moduleUT220.Checked == true & !eTypeRadioCheckBox.Checked)
+            {
+                selectedTab.Text = moduleUT220.Text;
+            }
+            else if (moduleUT440.Checked)
+            {
+                selectedTab.Text = moduleUT440.Text;
+                if (eTypeRadioCheckBox.Checked)
+                    selectedTab.Text += "e";
+            }
+            else if (moduleUT1200.Checked == true)
+            {
+                selectedTab.Text = moduleUT1200.Text;
+                if (eTypeRadioCheckBox.Checked)
+                    selectedTab.Text += "e";
             }
 
-            // Me.Visible = False
-            initializing = true;
-
-            //select 3rd tab
-            moduleForm.TabControl.SelectedIndex = 2;
-            var selectedTab = moduleForm.TabControl.SelectedTab;
-            if (Mod3UT30.Checked == true)
+            if (moduleNone.Checked == true)
             {
-                selectedTab.Text = Mod3UT30.Text;
-            }
-            else if (Mod3UT50.Checked == true)
-            {
-                selectedTab.Text = Mod3UT50.Text;
-            }
-            else if (Mod3UT144.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod1UT144.Text + "e";
-            }
-            else if (Mod3UT144.Checked == true)
-            {
-                selectedTab.Text = Mod3UT144.Text;
-            }
-            else if (Mod3UT220.Checked == true)
-            {
-                selectedTab.Text = Mod3UT220.Text;
-            }
-            else if (Mod3UT440.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod3UT440.Text + "e";
-            }
-            else if (Mod3UT440.Checked)
-            {
-                selectedTab.Text = Mod3UT440.Text;
-            }
-            else if (Mod3UT1200.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod3UT1200.Text + "e";
-            }
-            else if (Mod3UT1200.Checked == true)
-            {
-                selectedTab.Text = Mod3UT1200.Text;
-            }
-            if (Mod3None.Checked == true)
-            {
-                selectedTab.Text = "Mod3 Not Installed";
+                selectedTab.Text = moduleNoneName;
 
                 moduleForm.Panel20.Enabled = false;
                 moduleForm.Panel22.Enabled = false;
@@ -292,309 +234,200 @@ namespace Radio
                 moduleForm.Panel22.Enabled = true;
                 moduleForm.Panel23.Enabled = true;
             }
+        }
 
-            if (!radioConfig.tab3Filename.Contains(selectedTab.Text))
+        private void initTabPage(int tabIndex, TabPage tabPage, ComboBox repeaterComboBoxObj, ComboBox mhzComboBoxObj, RadioButton ctcssXmitRecObj, ListView channelListViewObj,
+            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200)
+        {
+            moduleForm.TabControl.SelectedIndex = tabIndex;
+            var startVal = default(int);
+            var stopVal = default(int);
+
+            channelListViewObj.Items.Clear();
+
+            repeaterComboBoxObj.Items.Clear();
+            repeaterComboBoxObj.Items.Add("SIMPLEX");
+            repeaterComboBoxObj.Items.Add("PLUS");
+            repeaterComboBoxObj.Items.Add("MINUS");
+
+            // (430 band in European band plan) or (1200 band NOT in European band plan) has double-minus
+            if ((moduleUT144.Checked && eTypeRadioCheckBox.Checked) || (moduleUT1200.Checked && !eTypeRadioCheckBox.Checked))               
+            {
+                repeaterComboBoxObj.Items.Add("DBL MINUS");
+            }
+
+            string moduleName = tabPage.Text;
+
+            if ((moduleName ?? "") == (moduleUT30.Text ?? ""))
+            {
+                // UT30
+                if (wideBandCheckBox.Checked)
+                {
+                    startVal = 18;
+                    stopVal = 54;
+                }
+                else
+                {
+                    startVal = 28;
+                    stopVal = 29;
+                }
+            }
+            else if ((moduleName ?? "") == (moduleUT50.Text ?? ""))
+            {
+                // UT50
+                if (wideBandCheckBox.Checked)
+                {
+                    startVal = 40;
+                    stopVal = 90;
+                }
+                else
+                {
+                    startVal = 50;
+                    stopVal = 53;
+                }
+            }
+            else if ((moduleName ?? "") == (moduleUT144.Text ?? "") || (moduleName ?? "") == (moduleUT144.Text + "e" ?? ""))
+            {
+                // UT144, either euro-band-plan or not (with 'e' suffix...)
+                if (wideBandCheckBox.Checked)
+                {
+                    startVal = 118;
+                    stopVal = 174;
+                }
+                else if (moduleName.Contains("e"))
+                {
+                    startVal = 144;
+                    stopVal = 146;
+                }
+                else
+                {
+                    startVal = 144;
+                    stopVal = 148;
+                }
+            }
+            else if ((moduleName ?? "") == (moduleUT220.Text ?? ""))
+            {
+                // UT220
+                if (wideBandCheckBox.Checked)
+                {
+                    startVal = 215;
+                    stopVal = 260;
+                }
+                else
+                {
+                    startVal = 220;
+                    stopVal = 224;
+                }
+            }
+            else if ((moduleName ?? "") == (moduleUT440.Text ?? "") || (moduleName ?? "") == (moduleUT440.Text + "e" ?? ""))
+            {
+                // UT440, either euro-band-plan or not (with 'e' suffix...)
+                if (wideBandCheckBox.Checked)
+                {
+                    startVal = 410;
+                    stopVal = 470;
+                }
+                else if (moduleName.Contains("e"))
+                {
+                    startVal = 430;
+                    stopVal = 440;
+                }
+                else
+                {
+                    startVal = 430;
+                    stopVal = 450;
+                }
+            }
+            else if ((moduleName ?? "") == (moduleUT1200.Text ?? "") || (moduleName ?? "") == (moduleUT1200.Text + "e" ?? ""))
+            {
+                if (wideBandCheckBox.Checked)
+                {
+                    startVal = 1100;
+                    stopVal = 1399;
+                }
+                else
+                {
+                    startVal = 1240;
+                    stopVal = 1299;
+                }
+            }
+            else if ((moduleName ?? "") == (moduleNone.Text ?? ""))
+            {
+                startVal = 0;
+                stopVal = 0;
+            }
+
+            // populate MHz combo box
+            mhzComboBoxObj.Items.Clear();
+            mhzComboBoxObj.Items.Add("BLANK");
+            while (startVal <= stopVal)
+            {
+                mhzComboBoxObj.Items.Add(Convert.ToString(startVal));
+                startVal += 1;
+            }
+
+            channelListViewObj.Text = "BLANK";
+            if (Tsu7CheckBox.Checked)
+            {
+                ctcssXmitRecObj.Visible = true;
+                ctcssXmitRecObj.Update();
+            }
+            else
+            {
+                ctcssXmitRecObj.Visible = false;
+                ctcssXmitRecObj.Update();
+            }
+        }
+
+        private void ShowChannelLists_Click(object sender, EventArgs e)
+        {
+            moduleForm = new Form1(this);
+
+            if (Mod1None.Checked == true & Mod2None.Checked == true & Mod3None.Checked == true)
+            {
+                Interaction.MsgBox("At least one module must be selected to continue.", MsgBoxStyle.Critical, "Module selection check");
+                return;
+            }
+
+            // Me.Visible = False
+            initializing = true;
+
+            //select 3rd tab
+            moduleForm.TabControl.SelectedIndex = 2;
+            getModuleName("Mod3 Not Installed", moduleForm.TabPage3, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
+
+            if (!radioConfig.tab3Filename.Contains(moduleForm.TabPage3.Text))
             {
                 tabHasChanged[2] = true;
             }
 
             // select tab 2
             moduleForm.TabControl.SelectedIndex = 1;
-            selectedTab = moduleForm.TabControl.SelectedTab;
-            if (Mod2UT30.Checked == true)
-            {
-                selectedTab.Text = Mod2UT30.Text;
-            }
-            else if (Mod2UT50.Checked == true)
-            {
-                selectedTab.Text = Mod2UT50.Text;
-            }
-            else if (Mod2UT144.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod1UT144.Text + "e";
-            }
-            else if (Mod2UT144.Checked == true)
-            {
-                selectedTab.Text = Mod2UT144.Text;
-            }
-            else if (Mod2UT220.Checked == true)
-            {
-                selectedTab.Text = Mod2UT220.Text;
-            }
-            else if (Mod2UT440.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod2UT440.Text + "e";
-            }
-            else if (Mod2UT440.Checked == true)
-            {
-                selectedTab.Text = Mod2UT440.Text;
-            }
-            else if (Mod2UT1200.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod2UT1200.Text + "e";
-            }
-            else if (Mod2UT1200.Checked == true)
-            {
-                selectedTab.Text = Mod2UT1200.Text;
-            }
-            if (Mod2None.Checked == true)
-            {
-                selectedTab.Text = "Mod2 Not Installed";
-
-                moduleForm.Panel11.Enabled = false;
-                moduleForm.Panel12.Enabled = false;
-                moduleForm.Panel15.Enabled = false;
-            }
-            else
-            {
-                moduleForm.Panel11.Enabled = true;
-                moduleForm.Panel12.Enabled = true;
-                moduleForm.Panel15.Enabled = true;
-            }
-
-            if (!radioConfig.tab2Filename.Contains(selectedTab.Text))
+            getModuleName("Mod2 Not Installed", moduleForm.TabPage2, Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200);
+            if (!radioConfig.tab2Filename.Contains(moduleForm.TabPage2.Text))
             {
                 tabHasChanged[1] = true;
             }
 
             // select 1st tab (index 0)
             moduleForm.TabControl.SelectedIndex = 0;
-            selectedTab = moduleForm.TabControl.SelectedTab;
-            if (Mod1UT30.Checked == true)
-            {
-                selectedTab.Text = Mod1UT30.Text;
-            }
-            else if (Mod1UT50.Checked == true)
-            {
-                selectedTab.Text = Mod1UT50.Text;
-            }
-            else if (Mod1UT144.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod1UT144.Text + "e";
-            }
-            else if (Mod1UT144.Checked == true)
-            {
-                selectedTab.Text = Mod1UT144.Text;
-            }
-            else if (Mod1UT220.Checked == true)
-            {
-                selectedTab.Text = Mod1UT220.Text;
-            }
-            else if (Mod1UT440.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod1UT440.Text + "e";
-            }
-            else if (Mod1UT440.Checked == true)
-            {
-                selectedTab.Text = Mod1UT440.Text;
-            }
-            else if (Mod1UT1200.Checked & eTypeRadioCheckBox.Checked)
-            {
-                selectedTab.Text = Mod1UT1200.Text + "e";
-            }
-            else if (Mod1UT1200.Checked == true)
-            {
-                selectedTab.Text = Mod1UT1200.Text;
-            }
-            if (Mod1None.Checked == true)
-            {
-                selectedTab.Text = "Mod1 Not Installed";
+            getModuleName("Mod1 Not Installed", moduleForm.TabPage1, Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200);
 
-                moduleForm.Panel1.Enabled = false;
-                moduleForm.Panel2.Enabled = false;
-                moduleForm.Panel3.Enabled = false;
-            }
-            else
-            {
-                moduleForm.Panel1.Enabled = true;
-                moduleForm.Panel2.Enabled = true;
-                moduleForm.Panel3.Enabled = true;
-            }
-
-            if (!radioConfig.tab1Filename.Contains(selectedTab.Text))
+            if (!radioConfig.tab1Filename.Contains(moduleForm.TabPage1.Text))
             {
                 tabHasChanged[0] = true;
             }
 
-            // Dim test As String
-            // Dim MhzComboBoxObj As Object
-            var startVal = default(int);
-            var stopVal = default(int);
-            ComboBox repeaterComboBoxObj;
-            ComboBox mhzComboBoxObj;
-            ListView listViewObj;
-            RadioButton ctcssXmitRecObj;
-            ListView channelListViewObj;
+            initTabPage(2, moduleForm.TabPage3, moduleForm.Tab3RepeaterComboBox, moduleForm.Tab3MHzComboBox, moduleForm.Tab3CtcssXmitRec, moduleForm.Tab3ChannelListView,
+                Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
 
-            for (int x = 0; x <= 2; x++)
-            {
-                if (x == 0)
-                {
-                    channelListViewObj = moduleForm.Tab1ChannelListView;
-                    ctcssXmitRecObj = moduleForm.Tab1CtcssXmitRec;
-                    listViewObj = moduleForm.Tab1ChannelListView;
-                    mhzComboBoxObj = moduleForm.Tab1MHzComboBox;
-                    repeaterComboBoxObj = moduleForm.Tab1RepeaterComboBox;
-                    moduleForm.TabControl.SelectedIndex = x;
-                }
-                else if (x == 1)
-                {
-                    channelListViewObj = moduleForm.Tab2ChannelListView;
-                    ctcssXmitRecObj = moduleForm.Tab2CtcssXmitRec;
-                    listViewObj = moduleForm.Tab2ChannelListView;
-                    mhzComboBoxObj = moduleForm.Tab2MHzComboBox;
-                    repeaterComboBoxObj = moduleForm.Tab2RepeaterComboBox;
-                    moduleForm.TabControl.SelectedIndex = x;
-                }
-                else
-                {
-                    channelListViewObj = moduleForm.Tab3ChannelListView;
-                    ctcssXmitRecObj = moduleForm.Tab3CtcssXmitRec;
-                    listViewObj = moduleForm.Tab3ChannelListView;
-                    mhzComboBoxObj = moduleForm.Tab3MHzComboBox;
-                    repeaterComboBoxObj = moduleForm.Tab3RepeaterComboBox;
-                    moduleForm.TabControl.SelectedIndex = x;
-                }
+            initTabPage(1, moduleForm.TabPage2, moduleForm.Tab2RepeaterComboBox, moduleForm.Tab2MHzComboBox, moduleForm.Tab2CtcssXmitRec, moduleForm.Tab2ChannelListView,
+                Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200);
 
-                channelListViewObj.Items.Clear();
+            initTabPage(0, moduleForm.TabPage1, moduleForm.Tab1RepeaterComboBox, moduleForm.Tab1MHzComboBox, moduleForm.Tab1CtcssXmitRec, moduleForm.Tab1ChannelListView,
+                Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200);
 
-                repeaterComboBoxObj.Items.Clear();
-                repeaterComboBoxObj.Items.Add("SIMPLEX");
-                repeaterComboBoxObj.Items.Add("PLUS");
-                repeaterComboBoxObj.Items.Add("MINUS");
-
-                // 430 band or 1200 band in Euro band plan has double-minus
-                if (((x == 0) && ((Mod1UT440.Checked && eTypeRadioCheckBox.Checked) || (Mod1UT1200.Checked && !eTypeRadioCheckBox.Checked)))
-                    || ((x == 1) && (Mod2UT440.Checked && eTypeRadioCheckBox.Checked || Mod2UT1200.Checked && !eTypeRadioCheckBox.Checked))
-                    || ((x == 2) && (Mod3UT440.Checked && eTypeRadioCheckBox.Checked || Mod3UT1200.Checked && !eTypeRadioCheckBox.Checked)))
-                {
-                    repeaterComboBoxObj.Items.Add("DBL MINUS");
-                }
-
-                moduleForm.TabControl.SelectedIndex = x;
-                string moduleName = moduleForm.TabControl.SelectedTab.Text;
-                if ((moduleName ?? "") == (Mod1UT30.Text ?? "") || (moduleName ?? "") == (Mod2UT30.Text ?? "") || (moduleName ?? "") == (Mod3UT30.Text ?? ""))
-                {
-                    // UT30
-                    if (wideBandCheckBox.Checked)
-                    {
-                        startVal = 18;
-                        stopVal = 54;
-                    }
-                    else
-                    {
-                        startVal = 28;
-                        stopVal = 29;
-                    }
-                }
-                else if ((moduleName ?? "") == (Mod1UT50.Text ?? "") || (moduleName ?? "") == (Mod2UT50.Text ?? "") || (moduleName ?? "") == (Mod3UT50.Text ?? ""))
-                {
-                    // UT50
-                    if (wideBandCheckBox.Checked)
-                    {
-                        startVal = 40;
-                        stopVal = 90;
-                    }
-                    else
-                    {
-                        startVal = 50;
-                        stopVal = 53;
-                    }
-                }
-                else if ((moduleName ?? "") == (Mod1UT144.Text ?? "") || (moduleName ?? "") == (Mod1UT144.Text + "e" ?? "")
-                    || (moduleName ?? "") == (Mod2UT144.Text ?? "") || (moduleName ?? "") == (Mod2UT144.Text + "e" ?? "")
-                    || (moduleName ?? "") == (Mod3UT144.Text ?? "") | (moduleName ?? "") == (Mod3UT144.Text + "e" ?? ""))
-                {
-                    // UT144, either euro-band-plan or not (with 'e' suffix...)
-                    if (wideBandCheckBox.Checked)
-                    {
-                        startVal = 118;
-                        stopVal = 174;
-                    }
-                    else if (moduleName.Contains("e"))
-                    {
-                        startVal = 144;
-                        stopVal = 146;
-                    }
-                    else
-                    {
-                        startVal = 144;
-                        stopVal = 148;
-                    }
-                }
-                else if ((moduleForm.TabControl.SelectedTab.Text ?? "") == (Mod1UT220.Text ?? "")
-                    || (moduleForm.TabControl.SelectedTab.Text ?? "") == (Mod2UT220.Text ?? "")
-                    || (moduleForm.TabControl.SelectedTab.Text ?? "") == (Mod3UT220.Text ?? ""))
-                {
-                    // UT220
-                    if (wideBandCheckBox.Checked)
-                    {
-                        startVal = 215;
-                        stopVal = 260;
-                    }
-                    else
-                    {
-                        startVal = 220;
-                        stopVal = 224;
-                    }
-                }
-                else if ((moduleName ?? "") == (Mod1UT440.Text ?? "") || (moduleName ?? "") == (Mod1UT440.Text + "e" ?? "")
-                    || (moduleName ?? "") == (Mod2UT440.Text ?? "") || (moduleName ?? "") == (Mod2UT440.Text + "e" ?? "")
-                    || (moduleName ?? "") == (Mod3UT440.Text ?? "") || (moduleName ?? "") == (Mod3UT440.Text + "e" ?? ""))
-                {
-                    // UT440, either euro-band-plan or not (with 'e' suffix...)
-                    if (wideBandCheckBox.Checked)
-                    {
-                        startVal = 410;
-                        stopVal = 470;
-                    }
-                    else if (moduleName.Contains("e"))
-                    {
-                        startVal = 430;
-                        stopVal = 440;
-                    }
-                    else
-                    {
-                        startVal = 430;
-                        stopVal = 450;
-                    }
-                }
-                else if ((moduleName ?? "") == (Mod1UT1200.Text ?? "") || (moduleName ?? "") == (Mod1UT1200.Text + "e" ?? "")
-                    || (moduleName ?? "") == (Mod2UT1200.Text ?? "") || (moduleName ?? "") == (Mod2UT1200.Text + "e" ?? "")
-                    || (moduleName ?? "") == (Mod3UT1200.Text ?? "") || (moduleName ?? "") == (Mod3UT1200.Text + "e" ?? ""))
-                {
-                    if (wideBandCheckBox.Checked)
-                    {
-                        startVal = 1100;
-                        stopVal = 1399;
-                    }
-                    else
-                    {
-                        startVal = 1240;
-                        stopVal = 1299;
-                    }
-                }
-
-                mhzComboBoxObj.Items.Clear();
-                mhzComboBoxObj.Items.Add("BLANK");
-                while (startVal <= stopVal)
-                {
-                    mhzComboBoxObj.Items.Add(Convert.ToString(startVal));
-                    startVal += 1;
-                }
-
-                listViewObj.Text = "BLANK";
-                if (Tsu7CheckBox.Checked)
-                {
-                    ctcssXmitRecObj.Visible = true;
-                    ctcssXmitRecObj.Update();
-                }
-                else
-                {
-                    ctcssXmitRecObj.Visible = false;
-                    ctcssXmitRecObj.Update();
-                }
-            }
+           // end initialize all tab pages
 
             moduleForm.initializeForm();
             moduleForm.Visible = true;
@@ -634,7 +467,7 @@ namespace Radio
             {
                 firstInstalledModuleIndex = 0;
                 string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
-                testXml.SelectSingleNode("TM742/tab1Mod").InnerText = "Mod1UT" + tmpStr;
+                testXml.SelectSingleNode("TM742/tab1Mod").InnerText = "UT" + tmpStr;
             }
             else
             {
@@ -649,7 +482,7 @@ namespace Radio
                     firstInstalledModuleIndex = 1;
                 }
                 string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
-                testXml.SelectSingleNode("TM742/tab2Mod").InnerText = "Mod2UT" + tmpStr;
+                testXml.SelectSingleNode("TM742/tab2Mod").InnerText = "UT" + tmpStr;
             }
             else
             {
@@ -664,7 +497,7 @@ namespace Radio
                     firstInstalledModuleIndex = 2;
                 }
                 string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
-                testXml.SelectSingleNode("TM742/tab3Mod").InnerText = "Mod3UT" + tmpStr;
+                testXml.SelectSingleNode("TM742/tab3Mod").InnerText = "UT" + tmpStr;
             }
             else
             {

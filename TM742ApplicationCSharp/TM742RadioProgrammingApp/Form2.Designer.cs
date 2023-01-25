@@ -638,7 +638,7 @@ namespace Radio
             this.ChannelLists.TabIndex = 2;
             this.ChannelLists.Text = "Go To Channel Lists";
             this.ChannelLists.UseVisualStyleBackColor = true;
-            this.ChannelLists.Click += new System.EventHandler(this.ChannelLists_Click);
+            this.ChannelLists.Click += new System.EventHandler(this.ShowChannelLists_Click);
             // 
             // Form2
             // 

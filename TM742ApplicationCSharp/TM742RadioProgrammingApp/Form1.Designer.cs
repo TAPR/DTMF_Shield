@@ -78,6 +78,7 @@ namespace Radio
             this.Tab1KHzStepSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tab1KHzToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.Panel2 = new System.Windows.Forms.Panel();
+            this.textBoxSerialCommands = new System.Windows.Forms.TextBox();
             this.tab1ChannelFileName = new System.Windows.Forms.Label();
             this.Label9 = new System.Windows.Forms.Label();
             this.Tab1StopProgramButton = new System.Windows.Forms.Button();
@@ -337,7 +338,6 @@ namespace Radio
             this.ColumnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Label54 = new System.Windows.Forms.Label();
-            this.textBoxSerialCommands = new System.Windows.Forms.TextBox();
             this.TabControl.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.Tab1TableLayoutPanel1.SuspendLayout();
@@ -553,7 +553,7 @@ namespace Radio
             this.Tab1CtcssOff.TabStop = true;
             this.Tab1CtcssOff.Text = "Off";
             this.Tab1CtcssOff.UseVisualStyleBackColor = true;
-            this.Tab1CtcssOff.CheckedChanged += new System.EventHandler(this.Tab2CtcssOff_CheckedChanged);
+            this.Tab1CtcssOff.CheckedChanged += new System.EventHandler(this.Tab1CtcssOff_CheckedChanged);
             // 
             // Tab1CtcssXmit
             // 
@@ -600,7 +600,7 @@ namespace Radio
             this.Tab1SetChannelButton.TabIndex = 11;
             this.Tab1SetChannelButton.Text = "Set/Update Channel";
             this.Tab1SetChannelButton.UseVisualStyleBackColor = true;
-            this.Tab1SetChannelButton.Click += new System.EventHandler(this.SetChannelButton_Click);
+            this.Tab1SetChannelButton.Click += new System.EventHandler(this.Tab1SetChannelButton_Click);
             // 
             // Label6
             // 
@@ -631,7 +631,7 @@ namespace Radio
             this.Tab1ClearChannelList.TabIndex = 12;
             this.Tab1ClearChannelList.Text = "Clear Channel List";
             this.Tab1ClearChannelList.UseVisualStyleBackColor = true;
-            this.Tab1ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList_Click);
+            this.Tab1ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList1_Click);
             // 
             // Label4
             // 
@@ -873,7 +873,7 @@ namespace Radio
             this.Tab1MHzComboBox.Name = "Tab1MHzComboBox";
             this.Tab1MHzComboBox.Size = new System.Drawing.Size(70, 30);
             this.Tab1MHzComboBox.TabIndex = 0;
-            this.Tab1MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.MHzComboBox_SelectedIndexChanged);
+            this.Tab1MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab1MHzComboBox_SelectedIndexChanged);
             // 
             // Tab1MenuStrip
             // 
@@ -936,7 +936,7 @@ namespace Radio
             this.Tab1KHzStepSizeToolStripMenuItem.Name = "Tab1KHzStepSizeToolStripMenuItem";
             this.Tab1KHzStepSizeToolStripMenuItem.Size = new System.Drawing.Size(280, 34);
             this.Tab1KHzStepSizeToolStripMenuItem.Text = "kHz Step Size";
-            this.Tab1KHzStepSizeToolStripMenuItem.Click += new System.EventHandler(this.KHzStepSizeToolStripMenuItem_Click);
+            this.Tab1KHzStepSizeToolStripMenuItem.Click += new System.EventHandler(this.Tab1KHzStepSizeToolStripMenuItem_Click);
             // 
             // Tab1KHzToolStripComboBox
             // 
@@ -972,6 +972,15 @@ namespace Radio
             this.Panel2.Size = new System.Drawing.Size(455, 304);
             this.Panel2.TabIndex = 1;
             // 
+            // textBoxSerialCommands
+            // 
+            this.textBoxSerialCommands.Location = new System.Drawing.Point(7, 212);
+            this.textBoxSerialCommands.Multiline = true;
+            this.textBoxSerialCommands.Name = "textBoxSerialCommands";
+            this.textBoxSerialCommands.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxSerialCommands.Size = new System.Drawing.Size(439, 85);
+            this.textBoxSerialCommands.TabIndex = 27;
+            // 
             // tab1ChannelFileName
             // 
             this.tab1ChannelFileName.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -988,7 +997,7 @@ namespace Radio
             this.Label9.AutoSize = true;
             this.Label9.Location = new System.Drawing.Point(8, 177);
             this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(149, 30);
+            this.Label9.Size = new System.Drawing.Size(124, 25);
             this.Label9.TabIndex = 25;
             this.Label9.Text = "Module File";
             this.Label9.Visible = false;
@@ -1078,7 +1087,7 @@ namespace Radio
             this.Tab1ProgramButton.TabIndex = 0;
             this.Tab1ProgramButton.Text = "Program Radio Channels";
             this.Tab1ProgramButton.UseVisualStyleBackColor = true;
-            this.Tab1ProgramButton.Click += new System.EventHandler(this.ButtonProgramBandModule_Click);
+            this.Tab1ProgramButton.Click += new System.EventHandler(this.ButtonProgramBandModule1_Click);
             // 
             // Tab1StatusStrip1
             // 
@@ -1139,7 +1148,7 @@ namespace Radio
             this.Tab1ChannelListView.TabIndex = 12;
             this.Tab1ChannelListView.UseCompatibleStateImageBehavior = false;
             this.Tab1ChannelListView.View = System.Windows.Forms.View.Details;
-            this.Tab1ChannelListView.SelectedIndexChanged += new System.EventHandler(this.ChannelListView_SelectedIndexChanged);
+            this.Tab1ChannelListView.SelectedIndexChanged += new System.EventHandler(this.Tab1ChannelListView_SelectedIndexChanged);
             // 
             // Channel
             // 
@@ -1191,7 +1200,7 @@ namespace Radio
             this.TabPage2.Location = new System.Drawing.Point(4, 34);
             this.TabPage2.Name = "TabPage2";
             this.TabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage2.Size = new System.Drawing.Size(1006, 530);
+            this.TabPage2.Size = new System.Drawing.Size(1006, 631);
             this.TabPage2.TabIndex = 1;
             this.TabPage2.Text = "TabPage2";
             this.TabPage2.UseVisualStyleBackColor = true;
@@ -1208,7 +1217,7 @@ namespace Radio
             this.TableLayoutPanel7.Name = "TableLayoutPanel7";
             this.TableLayoutPanel7.RowCount = 1;
             this.TableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableLayoutPanel7.Size = new System.Drawing.Size(1000, 524);
+            this.TableLayoutPanel7.Size = new System.Drawing.Size(1000, 625);
             this.TableLayoutPanel7.TabIndex = 2;
             // 
             // TableLayoutPanel4
@@ -1225,7 +1234,7 @@ namespace Radio
             this.TableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.14286F));
             this.TableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.85714F));
             this.TableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
-            this.TableLayoutPanel4.Size = new System.Drawing.Size(461, 518);
+            this.TableLayoutPanel4.Size = new System.Drawing.Size(461, 619);
             this.TableLayoutPanel4.TabIndex = 0;
             // 
             // Panel11
@@ -1255,7 +1264,7 @@ namespace Radio
             this.Panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel11.Location = new System.Drawing.Point(3, 3);
             this.Panel11.Name = "Panel11";
-            this.Panel11.Size = new System.Drawing.Size(455, 277);
+            this.Panel11.Size = new System.Drawing.Size(455, 335);
             this.Panel11.TabIndex = 0;
             // 
             // Tab2DeleteRowButton
@@ -1266,7 +1275,7 @@ namespace Radio
             this.Tab2DeleteRowButton.TabIndex = 23;
             this.Tab2DeleteRowButton.Text = "Delete Row";
             this.Tab2DeleteRowButton.UseVisualStyleBackColor = true;
-            this.Tab2DeleteRowButton.Click += new System.EventHandler(this.Tab1DeleteRowButton_Click);
+            this.Tab2DeleteRowButton.Click += new System.EventHandler(this.Tab2DeleteRowButton_Click);
             // 
             // Tab2InsertRowButton
             // 
@@ -1329,7 +1338,7 @@ namespace Radio
             this.Tab2CtcssXmit.TabStop = true;
             this.Tab2CtcssXmit.Text = "Xmit";
             this.Tab2CtcssXmit.UseVisualStyleBackColor = true;
-            this.Tab2CtcssXmit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tab1CtcssXmit_MouseDown);
+            this.Tab2CtcssXmit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tab2CtcssXmit_MouseDown);
             // 
             // Tab2CtcssXmitRec
             // 
@@ -1342,7 +1351,7 @@ namespace Radio
             this.Tab2CtcssXmitRec.TabStop = true;
             this.Tab2CtcssXmitRec.Text = "Xmit/Rec";
             this.Tab2CtcssXmitRec.UseVisualStyleBackColor = true;
-            this.Tab2CtcssXmitRec.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tab1CtcssXmit_MouseDown);
+            this.Tab2CtcssXmitRec.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tab2CtcssXmit_MouseDown);
             // 
             // Label22
             // 
@@ -1363,7 +1372,7 @@ namespace Radio
             this.Tab2SetChannelButton.TabIndex = 11;
             this.Tab2SetChannelButton.Text = "Set/Update Channel";
             this.Tab2SetChannelButton.UseVisualStyleBackColor = true;
-            this.Tab2SetChannelButton.Click += new System.EventHandler(this.SetChannelButton_Click);
+            this.Tab2SetChannelButton.Click += new System.EventHandler(this.Tab2SetChannelButton_Click);
             // 
             // Label23
             // 
@@ -1394,7 +1403,7 @@ namespace Radio
             this.Tab2ClearChannelList.TabIndex = 12;
             this.Tab2ClearChannelList.Text = "Clear Channel List";
             this.Tab2ClearChannelList.UseVisualStyleBackColor = true;
-            this.Tab2ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList_Click);
+            this.Tab2ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList2_Click);
             // 
             // Label25
             // 
@@ -1493,7 +1502,8 @@ namespace Radio
             this.Tab2ToneComboBox.Name = "Tab2ToneComboBox";
             this.Tab2ToneComboBox.Size = new System.Drawing.Size(58, 30);
             this.Tab2ToneComboBox.TabIndex = 3;
-            this.Tab2ToneComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab1ToneComboBox_SelectedIndexChanged);
+            this.Tab2ToneComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab2ToneComboBox_SelectedIndexChanged);
+            this.Tab2ToneComboBox.DropDownClosed += new System.EventHandler(this.Tab2ToneComboBox_DropDownClosed);
             // 
             // Tab2RepeaterComboBox
             // 
@@ -1618,7 +1628,7 @@ namespace Radio
             this.Tab2KHzCombBox.Name = "Tab2KHzCombBox";
             this.Tab2KHzCombBox.Size = new System.Drawing.Size(66, 30);
             this.Tab2KHzCombBox.TabIndex = 1;
-            this.Tab2KHzCombBox.SelectedIndexChanged += new System.EventHandler(this.Tab1KHzCombBox_SelectedIndexChanged);
+            this.Tab2KHzCombBox.SelectedIndexChanged += new System.EventHandler(this.Tab2KHzCombBox_SelectedIndexChanged);
             // 
             // Tab2MHzComboBox
             // 
@@ -1635,7 +1645,7 @@ namespace Radio
             this.Tab2MHzComboBox.Name = "Tab2MHzComboBox";
             this.Tab2MHzComboBox.Size = new System.Drawing.Size(70, 30);
             this.Tab2MHzComboBox.TabIndex = 0;
-            this.Tab2MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.MHzComboBox_SelectedIndexChanged);
+            this.Tab2MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab2MHzComboBox_SelectedIndexChanged);
             // 
             // Tab2MenuStrip
             // 
@@ -1689,7 +1699,7 @@ namespace Radio
             this.Tab2BackToMainMenuToolStripMenuItem.Name = "Tab2BackToMainMenuToolStripMenuItem";
             this.Tab2BackToMainMenuToolStripMenuItem.Size = new System.Drawing.Size(280, 34);
             this.Tab2BackToMainMenuToolStripMenuItem.Text = "Back to Main Menu";
-            this.Tab2BackToMainMenuToolStripMenuItem.Click += new System.EventHandler(this.Tab1BackToMainMenuToolStripMenuItem_Click);
+            this.Tab2BackToMainMenuToolStripMenuItem.Click += new System.EventHandler(this.Tab2BackToMainMenuToolStripMenuItem_Click);
             // 
             // Tab2KHzStepSizeToolStripMenuItem
             // 
@@ -1698,7 +1708,7 @@ namespace Radio
             this.Tab2KHzStepSizeToolStripMenuItem.Name = "Tab2KHzStepSizeToolStripMenuItem";
             this.Tab2KHzStepSizeToolStripMenuItem.Size = new System.Drawing.Size(280, 34);
             this.Tab2KHzStepSizeToolStripMenuItem.Text = "kHz Step Size";
-            this.Tab2KHzStepSizeToolStripMenuItem.Click += new System.EventHandler(this.KHzStepSizeToolStripMenuItem_Click);
+            this.Tab2KHzStepSizeToolStripMenuItem.Click += new System.EventHandler(this.Tab2KHzStepSizeToolStripMenuItem_Click);
             // 
             // Tab2KHzToolStripComboBox
             // 
@@ -1710,7 +1720,7 @@ namespace Radio
             "25"});
             this.Tab2KHzToolStripComboBox.Name = "Tab2KHzToolStripComboBox";
             this.Tab2KHzToolStripComboBox.Size = new System.Drawing.Size(121, 33);
-            this.Tab2KHzToolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab1KHzToolStripComboBox_SelectedIndexChanged);
+            this.Tab2KHzToolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab2KHzToolStripComboBox_SelectedIndexChanged);
             // 
             // Panel12
             // 
@@ -1728,9 +1738,9 @@ namespace Radio
             this.Panel12.Controls.Add(this.Tab2ProgressBar1);
             this.Panel12.Controls.Add(this.Tab2ProgramButton);
             this.Panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel12.Location = new System.Drawing.Point(3, 286);
+            this.Panel12.Location = new System.Drawing.Point(3, 344);
             this.Panel12.Name = "Panel12";
-            this.Panel12.Size = new System.Drawing.Size(455, 206);
+            this.Panel12.Size = new System.Drawing.Size(455, 249);
             this.Panel12.TabIndex = 1;
             // 
             // tab2ChannelFileName
@@ -1839,7 +1849,7 @@ namespace Radio
             this.Tab2ProgramButton.TabIndex = 0;
             this.Tab2ProgramButton.Text = "Program Radio Channels";
             this.Tab2ProgramButton.UseVisualStyleBackColor = true;
-            this.Tab2ProgramButton.Click += new System.EventHandler(this.ButtonProgramBandModule_Click);
+            this.Tab2ProgramButton.Click += new System.EventHandler(this.ButtonProgramBandModule2_Click);
             // 
             // Tab2StatusStrip
             // 
@@ -1847,7 +1857,7 @@ namespace Radio
             this.Tab2StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Tab2ToolStripStepSize,
             this.Tab2ToolStripStatusLabel});
-            this.Tab2StatusStrip.Location = new System.Drawing.Point(0, 495);
+            this.Tab2StatusStrip.Location = new System.Drawing.Point(0, 596);
             this.Tab2StatusStrip.Name = "Tab2StatusStrip";
             this.Tab2StatusStrip.Size = new System.Drawing.Size(461, 23);
             this.Tab2StatusStrip.TabIndex = 2;
@@ -1875,7 +1885,7 @@ namespace Radio
             this.Panel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel15.Location = new System.Drawing.Point(470, 3);
             this.Panel15.Name = "Panel15";
-            this.Panel15.Size = new System.Drawing.Size(527, 518);
+            this.Panel15.Size = new System.Drawing.Size(527, 619);
             this.Panel15.TabIndex = 1;
             // 
             // Tab2ChannelListView
@@ -1898,7 +1908,7 @@ namespace Radio
             this.Tab2ChannelListView.TabIndex = 12;
             this.Tab2ChannelListView.UseCompatibleStateImageBehavior = false;
             this.Tab2ChannelListView.View = System.Windows.Forms.View.Details;
-            this.Tab2ChannelListView.SelectedIndexChanged += new System.EventHandler(this.ChannelListView_SelectedIndexChanged);
+            this.Tab2ChannelListView.SelectedIndexChanged += new System.EventHandler(this.Tab2ChannelListView_SelectedIndexChanged);
             // 
             // ColumnHeader8
             // 
@@ -1950,7 +1960,7 @@ namespace Radio
             this.TabPage3.Location = new System.Drawing.Point(4, 34);
             this.TabPage3.Name = "TabPage3";
             this.TabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage3.Size = new System.Drawing.Size(1006, 530);
+            this.TabPage3.Size = new System.Drawing.Size(1006, 631);
             this.TabPage3.TabIndex = 2;
             this.TabPage3.Text = "TabPage3";
             this.TabPage3.UseVisualStyleBackColor = true;
@@ -1967,7 +1977,7 @@ namespace Radio
             this.TableLayoutPanel8.Name = "TableLayoutPanel8";
             this.TableLayoutPanel8.RowCount = 1;
             this.TableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableLayoutPanel8.Size = new System.Drawing.Size(1000, 524);
+            this.TableLayoutPanel8.Size = new System.Drawing.Size(1000, 625);
             this.TableLayoutPanel8.TabIndex = 3;
             // 
             // TableLayoutPanel10
@@ -1984,7 +1994,7 @@ namespace Radio
             this.TableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.80473F));
             this.TableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.19527F));
             this.TableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
-            this.TableLayoutPanel10.Size = new System.Drawing.Size(461, 518);
+            this.TableLayoutPanel10.Size = new System.Drawing.Size(461, 619);
             this.TableLayoutPanel10.TabIndex = 0;
             // 
             // Panel20
@@ -2014,7 +2024,7 @@ namespace Radio
             this.Panel20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel20.Location = new System.Drawing.Point(3, 3);
             this.Panel20.Name = "Panel20";
-            this.Panel20.Size = new System.Drawing.Size(455, 277);
+            this.Panel20.Size = new System.Drawing.Size(455, 334);
             this.Panel20.TabIndex = 0;
             // 
             // Tab3DeleteRowButton
@@ -2025,7 +2035,7 @@ namespace Radio
             this.Tab3DeleteRowButton.TabIndex = 22;
             this.Tab3DeleteRowButton.Text = "Delete Row";
             this.Tab3DeleteRowButton.UseVisualStyleBackColor = true;
-            this.Tab3DeleteRowButton.Click += new System.EventHandler(this.Tab1DeleteRowButton_Click);
+            this.Tab3DeleteRowButton.Click += new System.EventHandler(this.Tab3DeleteRowButton_Click);
             // 
             // Tab3InsertRowButton
             // 
@@ -2075,7 +2085,7 @@ namespace Radio
             this.Tab3CtcssOff.TabStop = true;
             this.Tab3CtcssOff.Text = "Off";
             this.Tab3CtcssOff.UseVisualStyleBackColor = true;
-            this.Tab3CtcssOff.CheckedChanged += new System.EventHandler(this.Tab2CtcssOff_CheckedChanged);
+            this.Tab3CtcssOff.CheckedChanged += new System.EventHandler(this.Tab3CtcssOff_CheckedChanged);
             // 
             // Tab3CtcssXmit
             // 
@@ -2088,7 +2098,7 @@ namespace Radio
             this.Tab3CtcssXmit.TabStop = true;
             this.Tab3CtcssXmit.Text = "Xmit";
             this.Tab3CtcssXmit.UseVisualStyleBackColor = true;
-            this.Tab3CtcssXmit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tab1CtcssXmit_MouseDown);
+            this.Tab3CtcssXmit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tab3CtcssXmit_MouseDown);
             // 
             // Tab3CtcssXmitRec
             // 
@@ -2101,7 +2111,7 @@ namespace Radio
             this.Tab3CtcssXmitRec.TabStop = true;
             this.Tab3CtcssXmitRec.Text = "Xmit/Rec";
             this.Tab3CtcssXmitRec.UseVisualStyleBackColor = true;
-            this.Tab3CtcssXmitRec.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tab1CtcssXmit_MouseDown);
+            this.Tab3CtcssXmitRec.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tab3CtcssXmit_MouseDown);
             // 
             // Label55
             // 
@@ -2122,7 +2132,7 @@ namespace Radio
             this.Tab3SetChannelButton.TabIndex = 11;
             this.Tab3SetChannelButton.Text = "Set/Update Channel";
             this.Tab3SetChannelButton.UseVisualStyleBackColor = true;
-            this.Tab3SetChannelButton.Click += new System.EventHandler(this.SetChannelButton_Click);
+            this.Tab3SetChannelButton.Click += new System.EventHandler(this.Tab3SetChannelButton_Click);
             // 
             // Label56
             // 
@@ -2153,7 +2163,7 @@ namespace Radio
             this.Tab3ClearChannelList.TabIndex = 12;
             this.Tab3ClearChannelList.Text = "Clear Channel List";
             this.Tab3ClearChannelList.UseVisualStyleBackColor = true;
-            this.Tab3ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList_Click);
+            this.Tab3ClearChannelList.Click += new System.EventHandler(this.ButtonClearChannelList3_Click);
             // 
             // Label58
             // 
@@ -2252,7 +2262,8 @@ namespace Radio
             this.Tab3ToneComboBox.Name = "Tab3ToneComboBox";
             this.Tab3ToneComboBox.Size = new System.Drawing.Size(58, 30);
             this.Tab3ToneComboBox.TabIndex = 3;
-            this.Tab3ToneComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab1ToneComboBox_SelectedIndexChanged);
+            this.Tab3ToneComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab3ToneComboBox_SelectedIndexChanged);
+            this.Tab3ToneComboBox.DropDownClosed += new System.EventHandler(this.Tab3ToneComboBox_DropDownClosed);
             // 
             // Tab3RepeaterComboBox
             // 
@@ -2377,7 +2388,7 @@ namespace Radio
             this.Tab3KHzCombBox.Name = "Tab3KHzCombBox";
             this.Tab3KHzCombBox.Size = new System.Drawing.Size(66, 30);
             this.Tab3KHzCombBox.TabIndex = 1;
-            this.Tab3KHzCombBox.SelectedIndexChanged += new System.EventHandler(this.Tab1KHzCombBox_SelectedIndexChanged);
+            this.Tab3KHzCombBox.SelectedIndexChanged += new System.EventHandler(this.Tab3KHzCombBox_SelectedIndexChanged);
             // 
             // Tab3MHzComboBox
             // 
@@ -2394,7 +2405,7 @@ namespace Radio
             this.Tab3MHzComboBox.Name = "Tab3MHzComboBox";
             this.Tab3MHzComboBox.Size = new System.Drawing.Size(70, 30);
             this.Tab3MHzComboBox.TabIndex = 0;
-            this.Tab3MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.MHzComboBox_SelectedIndexChanged);
+            this.Tab3MHzComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab3MHzComboBox_SelectedIndexChanged);
             // 
             // Tab3MenuStrip
             // 
@@ -2448,7 +2459,7 @@ namespace Radio
             this.Tab3BackToMainMenuToolStripMenuItem.Name = "Tab3BackToMainMenuToolStripMenuItem";
             this.Tab3BackToMainMenuToolStripMenuItem.Size = new System.Drawing.Size(280, 34);
             this.Tab3BackToMainMenuToolStripMenuItem.Text = "Back to Main Menu";
-            this.Tab3BackToMainMenuToolStripMenuItem.Click += new System.EventHandler(this.Tab1BackToMainMenuToolStripMenuItem_Click);
+            this.Tab3BackToMainMenuToolStripMenuItem.Click += new System.EventHandler(this.Tab3BackToMainMenuToolStripMenuItem_Click);
             // 
             // Tab3KHzStepSizeToolStripMenuItem
             // 
@@ -2457,7 +2468,7 @@ namespace Radio
             this.Tab3KHzStepSizeToolStripMenuItem.Name = "Tab3KHzStepSizeToolStripMenuItem";
             this.Tab3KHzStepSizeToolStripMenuItem.Size = new System.Drawing.Size(280, 34);
             this.Tab3KHzStepSizeToolStripMenuItem.Text = "kHz Step Size";
-            this.Tab3KHzStepSizeToolStripMenuItem.Click += new System.EventHandler(this.KHzStepSizeToolStripMenuItem_Click);
+            this.Tab3KHzStepSizeToolStripMenuItem.Click += new System.EventHandler(this.Tab3KHzStepSizeToolStripMenuItem_Click);
             // 
             // Tab3KHzToolStripComboBox
             // 
@@ -2469,7 +2480,7 @@ namespace Radio
             "25"});
             this.Tab3KHzToolStripComboBox.Name = "Tab3KHzToolStripComboBox";
             this.Tab3KHzToolStripComboBox.Size = new System.Drawing.Size(121, 33);
-            this.Tab3KHzToolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab1KHzToolStripComboBox_SelectedIndexChanged);
+            this.Tab3KHzToolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.Tab3KHzToolStripComboBox_SelectedIndexChanged);
             // 
             // Panel22
             // 
@@ -2487,9 +2498,9 @@ namespace Radio
             this.Panel22.Controls.Add(this.Tab3ProgressBar1);
             this.Panel22.Controls.Add(this.Tab3ProgramButton);
             this.Panel22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel22.Location = new System.Drawing.Point(3, 286);
+            this.Panel22.Location = new System.Drawing.Point(3, 343);
             this.Panel22.Name = "Panel22";
-            this.Panel22.Size = new System.Drawing.Size(455, 209);
+            this.Panel22.Size = new System.Drawing.Size(455, 253);
             this.Panel22.TabIndex = 1;
             // 
             // tab3ChannelFileName
@@ -2598,7 +2609,7 @@ namespace Radio
             this.Tab3ProgramButton.TabIndex = 0;
             this.Tab3ProgramButton.Text = "Program Radio Channels";
             this.Tab3ProgramButton.UseVisualStyleBackColor = true;
-            this.Tab3ProgramButton.Click += new System.EventHandler(this.ButtonProgramBandModule_Click);
+            this.Tab3ProgramButton.Click += new System.EventHandler(this.ButtonProgramBandModule3_Click);
             // 
             // Tab3StatusStrip
             // 
@@ -2606,7 +2617,7 @@ namespace Radio
             this.Tab3StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Tab3ToolStripStepSize,
             this.Tab3ToolStripStatusLabel});
-            this.Tab3StatusStrip.Location = new System.Drawing.Point(0, 498);
+            this.Tab3StatusStrip.Location = new System.Drawing.Point(0, 599);
             this.Tab3StatusStrip.Name = "Tab3StatusStrip";
             this.Tab3StatusStrip.Size = new System.Drawing.Size(461, 20);
             this.Tab3StatusStrip.TabIndex = 2;
@@ -2634,7 +2645,7 @@ namespace Radio
             this.Panel23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel23.Location = new System.Drawing.Point(470, 3);
             this.Panel23.Name = "Panel23";
-            this.Panel23.Size = new System.Drawing.Size(527, 518);
+            this.Panel23.Size = new System.Drawing.Size(527, 619);
             this.Panel23.TabIndex = 1;
             // 
             // Tab3ChannelListView
@@ -2657,7 +2668,7 @@ namespace Radio
             this.Tab3ChannelListView.TabIndex = 12;
             this.Tab3ChannelListView.UseCompatibleStateImageBehavior = false;
             this.Tab3ChannelListView.View = System.Windows.Forms.View.Details;
-            this.Tab3ChannelListView.SelectedIndexChanged += new System.EventHandler(this.ChannelListView_SelectedIndexChanged);
+            this.Tab3ChannelListView.SelectedIndexChanged += new System.EventHandler(this.Tab3ChannelListView_SelectedIndexChanged);
             // 
             // ColumnHeader21
             // 
@@ -4416,15 +4427,6 @@ namespace Radio
             this.Label54.TabIndex = 11;
             this.Label54.Text = "Channel List";
             // 
-            // textBoxSerialCommands
-            // 
-            this.textBoxSerialCommands.Location = new System.Drawing.Point(7, 212);
-            this.textBoxSerialCommands.Multiline = true;
-            this.textBoxSerialCommands.Name = "textBoxSerialCommands";
-            this.textBoxSerialCommands.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxSerialCommands.Size = new System.Drawing.Size(439, 85);
-            this.textBoxSerialCommands.TabIndex = 27;
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4542,7 +4544,6 @@ namespace Radio
 
 
         internal TabControl TabControl;
-        internal TabPage TabPage1;
         internal TableLayoutPanel Tab1TableLayoutPanel1;
         internal TableLayoutPanel TableLayoutPanel2;
         internal Panel Panel1;
@@ -4585,7 +4586,6 @@ namespace Radio
         internal ColumnHeader Tone;
         internal ColumnHeader CTSS;
         internal Label Label8;
-        internal TabPage TabPage2;
 
         internal Button Tab1ClearChannelList;
         internal System.IO.Ports.SerialPort SerialPort1;
@@ -4705,7 +4705,6 @@ namespace Radio
         internal ColumnHeader ColumnHeader12;
         internal ColumnHeader ColumnHeader13;
         internal Label Label42;
-        internal TabPage TabPage3;
         internal TableLayoutPanel TableLayoutPanel8;
         internal TableLayoutPanel TableLayoutPanel10;
         internal Panel Panel20;
@@ -4838,5 +4837,8 @@ namespace Radio
         internal RadioButton Tab2CtcssOff;
         internal RadioButton Tab3CtcssOff;
         private TextBox textBoxSerialCommands;
+        public TabPage TabPage1;
+        public TabPage TabPage2;
+        public TabPage TabPage3;
     }
 }

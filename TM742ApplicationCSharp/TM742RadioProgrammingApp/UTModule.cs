@@ -149,7 +149,7 @@ namespace Radio
                 ""),
 
             new UTModule(ModuleType.UT440, "UT-440", new ModuleOptions []{ }, -1,
-                430m, 450m, 430m, 450m, 0, 0, -1, -1, 25m,
+                430m, 449.995m, 430m, 449.995m, 0, 0, -1, -1, 25m,
                 new decimal [] {5m, 10m, 15m, 20m, 12.5m, 25m},
                 new decimal []{ +5.0m, -5.0m },
                 ""),
@@ -182,7 +182,7 @@ namespace Radio
             new UTModule(ModuleType.UT1200Wideband, "UT-1200 Wide", new ModuleOptions []{ModuleOptions.WIDEBAND}, -1,
                 1100m, 1399.99m, 1100m, 1399.99m, 0, 0, -1, -1, 25m,
                 new decimal [] {10m, 20m, 12.5m, 25m},
-                new decimal[] { +35.0m, -6.0m},
+                new decimal []{ +12.0m, -12.0m, -20.0m },
                 ""),
             new UTModule(ModuleType.UT1200e, "UT-1200E Wide", new ModuleOptions []{ ModuleOptions.WIDEBAND, ModuleOptions.EUROPEAN_BAND_PLAN}, -1,
                 1100m, 1399.99m, 1100m, 1399.99m, 0, 0, -1, -1, 25m,
