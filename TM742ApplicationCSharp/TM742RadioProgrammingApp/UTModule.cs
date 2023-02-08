@@ -26,6 +26,16 @@ namespace Radio
             UT2400      // the TM-2400 module for 2.4 GHz. In the Japan manual for TM-x42 series
         }
 
+        public enum Region
+        {
+            USA_CA,
+            NORTH_AMERICA,
+            EUROPE,
+            JAPAN,
+            ROW
+        }
+
+
         public ModuleType type;
         public string name;
 
@@ -154,7 +164,7 @@ namespace Radio
                 new decimal []{ +5.0m, -5.0m },
                 ""),
             new UTModule(ModuleType.UT440, "UT-440 Wide", new ModuleOptions []{ModuleOptions.WIDEBAND}, -1,
-                410m, 470m, 410m, 470m, 0, 0, -1, -1, 25m,
+                410m, 470m, 410m, 469.995m, 0, 0, -1, -1, 25m,
                 new decimal [] {5m, 10m, 15m, 20m, 12.5m, 25m},
                 new decimal []{ +5.0m, -5.0m },
                 ""),
@@ -164,7 +174,7 @@ namespace Radio
                 new decimal []{ +1.6m, -1.6m, -7.6m },
                 ""),
             new UTModule(ModuleType.UT440e, "UT-440E Wide", new ModuleOptions []{ ModuleOptions.WIDEBAND, ModuleOptions.EUROPEAN_BAND_PLAN}, -1,
-                430m, 439.995m, 430m, 439.995m, 0, 0, -1, -1, 25m,
+                430m, 439.995m, 410m, 469.995m, 0, 0, -1, -1, 25m,
                 new decimal [] {5m, 10m, 15m, 20m, 12.5m, 25m},
                 new decimal []{ +1.6m, -1.6m, -7.6m },
                 ""),
@@ -191,10 +201,12 @@ namespace Radio
                 ""),   // and a third manual offset: +28.0m, according to Werner OE1RS
 
             // actually, the TM-2400 radio, with one, double-high module for 2400 MHz band.
+            // it isn't a type 'E' radio.  It's similar to Japanese radios.
+            // In many ways, Japanese radios seem more like US/CAN radios than Euro radios. However, things like the offsets can well be different.
             new UTModule(ModuleType.UT2400, "UT-2400", new ModuleOptions []{ }, -1,
                 2400m, 2449.999m, 2400m, 2449.999m, 0, 0, -1, -1, 25m,
-                new decimal [] {10m, 20m, 12.5m, 25m},
-                new decimal []{ },
+                new decimal [] {10m, 20m, 12.5m, 25m},  // page 61 of the JP manual.  Apparently the default is 20KHz.
+                new decimal []{+20.0m, -20.0m}, // page 27 of the JP manual for the TM-2400
                 ""),
         };
     }

@@ -99,16 +99,16 @@ namespace Radio
             radioConfig.tsu7Installed = Convert.ToBoolean(testXml.SelectSingleNode("TM742/tsu7Installed").InnerText);
             radioConfig.wideBand = Convert.ToBoolean(testXml.SelectSingleNode("TM742/wideBand").InnerText);
             radioConfig.ARO = Convert.ToBoolean(testXml.SelectSingleNode("TM742/ARO").InnerText);
-            // radioConfig.timingMode = Convert.ToBoolean(testXml.SelectSingleNode("TM742/timingMode").InnerText)
-            radioConfig.tab1Mod = Convert.ToString(testXml.SelectSingleNode("TM742/tab1Mod").InnerText);
-            radioConfig.tab1StepSize = Convert.ToString(testXml.SelectSingleNode("TM742/tab1StepSize").InnerText);
-            radioConfig.tab1Filename = Convert.ToString(testXml.SelectSingleNode("TM742/tab1Filename").InnerText);
-            radioConfig.tab2Mod = Convert.ToString(testXml.SelectSingleNode("TM742/tab2Mod").InnerText);
-            radioConfig.tab2StepSize = Convert.ToString(testXml.SelectSingleNode("TM742/tab2StepSize").InnerText);
-            radioConfig.tab2Filename = Convert.ToString(testXml.SelectSingleNode("TM742/tab2Filename").InnerText);
-            radioConfig.tab3Mod = Convert.ToString(testXml.SelectSingleNode("TM742/tab3Mod").InnerText);
-            radioConfig.tab3StepSize = Convert.ToString(testXml.SelectSingleNode("TM742/tab3StepSize").InnerText);
-            radioConfig.tab3Filename = Convert.ToString(testXml.SelectSingleNode("TM742/tab3Filename").InnerText);
+
+            radioConfig.tab1Mod = testXml.SelectSingleNode("TM742/tab1Mod").InnerText;
+            radioConfig.tab1StepSize = testXml.SelectSingleNode("TM742/tab1StepSize").InnerText;
+            radioConfig.tab1Filename = testXml.SelectSingleNode("TM742/tab1Filename").InnerText;
+            radioConfig.tab2Mod = testXml.SelectSingleNode("TM742/tab2Mod").InnerText;
+            radioConfig.tab2StepSize = testXml.SelectSingleNode("TM742/tab2StepSize").InnerText;
+            radioConfig.tab2Filename = testXml.SelectSingleNode("TM742/tab2Filename").InnerText;
+            radioConfig.tab3Mod = testXml.SelectSingleNode("TM742/tab3Mod").InnerText;
+            radioConfig.tab3StepSize = testXml.SelectSingleNode("TM742/tab3StepSize").InnerText;
+            radioConfig.tab3Filename = testXml.SelectSingleNode("TM742/tab3Filename").InnerText;
 
             if (radioConfig.eType == true)
             {
@@ -153,6 +153,33 @@ namespace Radio
             chooseModuleType(radioConfig.tab3Mod, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
         }
 
+        public void saveConfigFile(string xmlFile)
+        {
+            var testXml = new XmlDocument();
+            testXml.Load(xmlFile);
+            testXml.SelectSingleNode("TM742/eType").InnerText = Convert.ToString(eTypeRadioCheckBox.Checked);
+            testXml.SelectSingleNode("TM742/tsu7Installed").InnerText = Convert.ToString(Tsu7CheckBox.Checked);
+            testXml.SelectSingleNode("TM742/wideBand").InnerText = Convert.ToString(wideBandCheckBox.Checked);
+            testXml.SelectSingleNode("TM742/ARO").InnerText = Convert.ToString(AROcheckBox.Checked);
+
+            if (normalRadioTimingButton.Checked)
+            {
+                testXml.SelectSingleNode("TM742/timingMode").InnerText = Convert.ToString("0");
+            }
+            else if (slowRadioTimingButton.Checked)
+            {
+                testXml.SelectSingleNode("TM742/timingMode").InnerText = Convert.ToString("1");
+            }
+            else
+            {
+                testXml.SelectSingleNode("TM742/timingMode").InnerText = Convert.ToString("2");
+            }
+
+            testXml.Save(xmlFile);
+
+            return;
+        }
+
         private void chooseModuleType(string moduleType,
             RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200)
         {
@@ -186,7 +213,7 @@ namespace Radio
             }
         }
 
-        private void getModuleName(string moduleNoneName, TabPage selectedTab,
+        private string getModuleName(string moduleNoneName, TabPage selectedTab,
             RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200)
         {
             if (moduleUT30.Checked == true)
@@ -234,6 +261,8 @@ namespace Radio
                 moduleForm.Panel22.Enabled = true;
                 moduleForm.Panel23.Enabled = true;
             }
+
+            return selectedTab.Text;
         }
 
         private void initTabPage(int tabIndex, TabPage tabPage, ComboBox repeaterComboBoxObj, ComboBox mhzComboBoxObj, RadioButton ctcssXmitRecObj, ListView channelListViewObj,
@@ -263,8 +292,8 @@ namespace Radio
                 // UT30
                 if (wideBandCheckBox.Checked)
                 {
-                    startVal = 18;
-                    stopVal = 54;
+                    startVal = 26;
+                    stopVal = 45;
                 }
                 else
                 {
@@ -277,8 +306,8 @@ namespace Radio
                 // UT50
                 if (wideBandCheckBox.Checked)
                 {
-                    startVal = 40;
-                    stopVal = 90;
+                    startVal = 46;
+                    stopVal = 76;
                 }
                 else
                 {
@@ -291,7 +320,7 @@ namespace Radio
                 // UT144, either euro-band-plan or not (with 'e' suffix...)
                 if (wideBandCheckBox.Checked)
                 {
-                    startVal = 118;
+                    startVal = 136;
                     stopVal = 174;
                 }
                 else if (moduleName.Contains("e"))
@@ -311,7 +340,7 @@ namespace Radio
                 if (wideBandCheckBox.Checked)
                 {
                     startVal = 215;
-                    stopVal = 260;
+                    stopVal = 235;
                 }
                 else
                 {
@@ -372,6 +401,14 @@ namespace Radio
             ctcssXmitRecObj.Update();
         }
 
+        public void updateSingleEntity(string xmlFile, string nodeName, string value)
+        {
+            var testXml = new XmlDocument();
+            testXml.Load(xmlFile);
+            testXml.SelectSingleNode(nodeName).InnerText = value;
+            testXml.Save(xmlFile);
+        }
+
         private void ShowChannelLists_Click(object sender, EventArgs e)
         {
             moduleForm = new Form1(this);
@@ -387,28 +424,59 @@ namespace Radio
 
             //select 3rd tab
             moduleForm.TabControl.SelectedIndex = 2;
-            getModuleName("Mod3 Not Installed", moduleForm.TabPage3, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
+            string installedModuleName = getModuleName("Mod3 Not Installed", moduleForm.TabPage3, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
 
             if (!radioConfig.tab3Filename.Contains(moduleForm.TabPage3.Text))
             {
                 tabHasChanged[2] = true;
+
+                if (!installedModuleName.Contains("Not Installed"))
+                {
+                    // the radio buttons like Mod1UT30 have for text: "UT 30".  So the band module type starts at position 4 of the string
+                    string tmpStr = "UT" + Strings.Mid(installedModuleName, 4);
+                    updateSingleEntity(xmlFile, "TM742/tab3Mod", tmpStr);
+                }
+                else
+                {
+                    updateSingleEntity(xmlFile, "TM742/tab3Mod", "NULL");
+                }
             }
 
             // select tab 2
             moduleForm.TabControl.SelectedIndex = 1;
-            getModuleName("Mod2 Not Installed", moduleForm.TabPage2, Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200);
+            installedModuleName = getModuleName("Mod2 Not Installed", moduleForm.TabPage2, Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200);
             if (!radioConfig.tab2Filename.Contains(moduleForm.TabPage2.Text))
             {
                 tabHasChanged[1] = true;
+
+                if (!installedModuleName.Contains("Not Installed"))
+                {
+                    string tmpStr = "UT" + Strings.Mid(installedModuleName, 4);
+                    updateSingleEntity(xmlFile, "TM742/tab2Mod", tmpStr);
+                }
+                else
+                {
+                    updateSingleEntity(xmlFile, "TM742/tab2Mod", "NULL");
+                }
             }
 
             // select 1st tab (index 0)
             moduleForm.TabControl.SelectedIndex = 0;
-            getModuleName("Mod1 Not Installed", moduleForm.TabPage1, Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200);
+            installedModuleName = getModuleName("Mod1 Not Installed", moduleForm.TabPage1, Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200);
 
             if (!radioConfig.tab1Filename.Contains(moduleForm.TabPage1.Text))
             {
                 tabHasChanged[0] = true;
+
+                if (!installedModuleName.Contains("Not Installed"))
+                {
+                    string tmpStr = "UT" + Strings.Mid(installedModuleName, 4);
+                    updateSingleEntity(xmlFile, "TM742/tab1Mod", tmpStr);
+                }
+                else
+                {
+                    updateSingleEntity(xmlFile, "TM742/tab1Mod", "NULL");
+                }
             }
 
             initTabPage(2, moduleForm.TabPage3, moduleForm.Tab3RepeaterComboBox, moduleForm.Tab3MHzComboBox, moduleForm.Tab3CtcssXmitRec, moduleForm.Tab3ChannelListView,
@@ -427,80 +495,12 @@ namespace Radio
 
             initializing = false;
 
-            var firstInstalledModule = saveConfigFile(xmlFile);
+            saveConfigFile(xmlFile);
 
-            moduleForm.TabControl.SelectedIndex = firstInstalledModule < 0 ? 0 : firstInstalledModule;
+            // should select the first module that is chosen as 'present'
+            moduleForm.TabControl.SelectedIndex = 0;
             Enabled = false;
         }
-
-        public int saveConfigFile(string xmlFile)
-        { 
-            var testXml = new XmlDocument();
-            testXml.Load(xmlFile);
-            testXml.SelectSingleNode("TM742/eType").InnerText = Convert.ToString(eTypeRadioCheckBox.Checked);
-            testXml.SelectSingleNode("TM742/tsu7Installed").InnerText = Convert.ToString(Tsu7CheckBox.Checked);
-            testXml.SelectSingleNode("TM742/wideBand").InnerText = Convert.ToString(wideBandCheckBox.Checked);
-            testXml.SelectSingleNode("TM742/ARO").InnerText = Convert.ToString(AROcheckBox.Checked);
-            if (normalRadioTimingButton.Checked)
-            {
-                testXml.SelectSingleNode("TM742/timingMode").InnerText = Convert.ToString("0");
-            }
-            else if (slowRadioTimingButton.Checked)
-            {
-                testXml.SelectSingleNode("TM742/timingMode").InnerText = Convert.ToString("1");
-            }
-            else
-            {
-                testXml.SelectSingleNode("TM742/timingMode").InnerText = Convert.ToString("2");
-            }
-
-            var firstInstalledModuleIndex = -1;
-            moduleForm.TabControl.SelectedIndex = 0;
-            if (!moduleForm.TabControl.SelectedTab.Text.Contains("Not Installed"))
-            {
-                firstInstalledModuleIndex = 0;
-                string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
-                testXml.SelectSingleNode("TM742/tab1Mod").InnerText = "UT" + tmpStr;
-            }
-            else
-            {
-                testXml.SelectSingleNode("TM742/tab1Mod").InnerText = "NULL";
-            }
-
-            moduleForm.TabControl.SelectedIndex = 1;
-            if (!moduleForm.TabControl.SelectedTab.Text.StartsWith("Not Installed"))
-            {
-                if (firstInstalledModuleIndex == -1)
-                {
-                    firstInstalledModuleIndex = 1;
-                }
-                string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
-                testXml.SelectSingleNode("TM742/tab2Mod").InnerText = "UT" + tmpStr;
-            }
-            else
-            {
-                testXml.SelectSingleNode("TM742/tab2Mod").InnerText = "NULL";
-            }
-
-            moduleForm.TabControl.SelectedIndex = 2;
-            if (!moduleForm.TabControl.SelectedTab.Text.StartsWith("Not Installed"))
-            {
-                if (firstInstalledModuleIndex == -1)
-                {
-                    firstInstalledModuleIndex = 2;
-                }
-                string tmpStr = Strings.Mid(moduleForm.TabControl.SelectedTab.Text, 4, moduleForm.TabControl.SelectedTab.Text.Length);
-                testXml.SelectSingleNode("TM742/tab3Mod").InnerText = "UT" + tmpStr;
-            }
-            else
-            {
-                testXml.SelectSingleNode("TM742/tab3Mod").InnerText = "NULL";
-            }
-
-            testXml.Save(xmlFile);
-
-            return firstInstalledModuleIndex;
-       }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {

@@ -292,9 +292,11 @@ namespace Radio
 
             if (!MHzComboBoxObj.Text.Equals("BLANK"))
             {
+                decimal khz = Convert.ToDecimal(KHzComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture);
                 decimal test = Convert.ToDecimal(MHzComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture)
-                    + Convert.ToDecimal(KHzComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture) * 0.001m;
-                ChannelListViewObj.Items[selectedIndex].SubItems[1].Text = string.Format("{0:F4}", test);
+                    + (khz * 0.001m);
+                var freqString = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:F4}", test);
+                ChannelListViewObj.Items[selectedIndex].SubItems[1].Text = freqString;
                 ChannelListViewObj.Items[selectedIndex].SubItems[2].Text = RepeaterComboBoxObj.Text;
                 ChannelListViewObj.Items[selectedIndex].SubItems[3].Text = ToneComboBoxObj.Text;
                 if (ToneRadioButtonObj.Checked)
@@ -379,7 +381,7 @@ namespace Radio
                     frequency = Convert.ToDecimal(ChannelListViewObj.SelectedItems[0].SubItems[1].Text, System.Globalization.CultureInfo.InvariantCulture);
                     MHzComboBoxObj.Text = Convert.ToInt32(frequency - frequency % 1m).ToString();
                     decimal kHzVal = Convert.ToDecimal(Math.Round(frequency % 1m * 1000m, 1));
-                    string kHzString = Convert.ToString(kHzVal);
+                    string kHzString = Convert.ToString(kHzVal, System.Globalization.CultureInfo.InvariantCulture);
                     if (kHzVal < 10.0m)
                     {
                         kHzString = "00" + kHzString;
@@ -446,14 +448,7 @@ namespace Radio
             ComboBox RepeaterComboBoxObj, ComboBox ToneComboBoxObj, TextBox ChannelTextBoxObj, RadioButton CtcssRadioButtonObj, RadioButton ToneRadioButtonObj, TextBox NotesObj,
             bool moduleIsUT144, bool moduleIsUT220)
         {
-            decimal KhzStepSize = Conversions.ToDecimal(KhzStepSizeObj.Text);
-            // this should be based on whether a 'type E' radio (really 'use European band plan').  It was: what is the decimal separator
-            // was:             if (KhzStepSizeObj.Text.StartsWith("12") && decimalSeparator == ",")
-            if (KhzStepSizeObj.Text.StartsWith("12") && parentForm.eTypeRadioCheckBox.Checked)
-            {
-                // is this if statement necessary?  what other khzStepSize could it be?
-                KhzStepSize = 12.5m;
-            }
+            decimal KhzStepSize = Convert.ToDecimal(KhzStepSizeObj.Text, System.Globalization.CultureInfo.InvariantCulture);
 
             if (ChannelListViewObj.SelectedItems.Count > 0)
             {
@@ -471,26 +466,7 @@ namespace Radio
                             ToneComboBoxObj.Text = "OFF";
                         }
 
-                        // clear and write KHz ComboBox items
-                        KHzComboBoxObj.Items.Clear();
-                        decimal x = 0.0m;
-                        while (x < 1000m)
-                        {
-                            if (x < 10m)
-                            {
-                                KHzComboBoxObj.Items.Add(string.Concat("00", Convert.ToString(x)));
-                            }
-                            else if (x < 100m)
-                            {
-                                KHzComboBoxObj.Items.Add(string.Concat("0", Convert.ToString(x)));
-                            }
-                            else
-                            {
-                                KHzComboBoxObj.Items.Add(Convert.ToString(x));
-                            }
-                            x += KhzStepSize;
-                        }
-
+                        // the user chose an MHz value.  Cause the KHz combo box to drop down to make a choice
                         KHzComboBoxObj.DroppedDown = true;
                     }
                 }
@@ -758,29 +734,10 @@ namespace Radio
                 {
                     // send freq digits
                     string freq = ChannelListViewObj.Items[channelIndex].SubItems[1].Text;
-                    decimal decFrequency;
+                    // ensure conversion based on period '.' is the decimal separator
+                    decimal decFrequency = Convert.ToDecimal(freq, System.Globalization.CultureInfo.InvariantCulture); ;
 
                     int decimalPointLocation = freq.IndexOf(".");
-                    if (decimalPointLocation == -1)
-                    {
-                        // this handles 'European' data with comma as decimal separator (the 'decimal point')
-                        decimalPointLocation = freq.IndexOf(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-                        if(decimalPointLocation != -1)
-                        {
-                            decFrequency = Convert.ToDecimal(freq, System.Globalization.CultureInfo.CurrentCulture);
-                        }
-                        else
-                        {
-                            // no decimal separator! is that reason to panic? maybe not; just convert as there won't be an issue.
-                            // it's just MHz with no KHz somehow.
-                            decFrequency = Convert.ToDecimal(freq, System.Globalization.CultureInfo.InvariantCulture);
-                        }
-                    }
-                    else
-                    {
-                        // ensure conversion based on period '.' is the decimal separator
-                        decFrequency = Convert.ToDecimal(freq, System.Globalization.CultureInfo.InvariantCulture);
-                    }
 
                     string mhzVal = decimalPointLocation != -1 ? Strings.Mid(freq, 1, decimalPointLocation) : freq;
                     string kHzVal = decimalPointLocation != -1 ? Strings.Mid(freq, decimalPointLocation + 2) : "000";
@@ -1035,25 +992,27 @@ namespace Radio
 
             if (!Tab1KHzToolStripComboBox.Text.Equals(parentForm.getTab1StepSize()))
             {
-                updateSingleEntity(parentForm.xmlFile, "TM742/tab1StepSize", Convert.ToString(Tab1KHzToolStripComboBox.Text));
+                updateSingleEntity(parentForm.xmlFile, "TM742/tab1StepSize", Tab1KHzToolStripComboBox.Text);
             }
         }
+
         private void Tab2KHzToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillKHzComboBox(Tab2MenuStrip, Tab2KHzToolStripComboBox, Tab2ToolStripStepSize, Tab2KHzCombBox);
 
             if (!Tab2KHzToolStripComboBox.Text.Equals(parentForm.getTab2StepSize()))
             {
-                updateSingleEntity(parentForm.xmlFile, "TM742/tab2StepSize", Convert.ToString(Tab2KHzToolStripComboBox.Text));
+                updateSingleEntity(parentForm.xmlFile, "TM742/tab2StepSize", Tab2KHzToolStripComboBox.Text);
             }
         }
+
         private void Tab3KHzToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillKHzComboBox(Tab3MenuStrip, Tab3KHzToolStripComboBox, Tab3ToolStripStepSize, Tab3KHzCombBox);
 
             if (!Tab3KHzToolStripComboBox.Text.Equals(parentForm.getTab3StepSize()))
             {
-                updateSingleEntity(parentForm.xmlFile, "TM742/tab3StepSize", Convert.ToString(Tab3KHzToolStripComboBox.Text));
+                updateSingleEntity(parentForm.xmlFile, "TM742/tab3StepSize", Tab3KHzToolStripComboBox.Text);
             }
         }
 
@@ -1067,17 +1026,18 @@ namespace Radio
             decimal KhzStepSize = Convert.ToDecimal(ToolStripComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture);
             while (x < 1000m)
             {
+                var khzString = Convert.ToString(x, System.Globalization.CultureInfo.InvariantCulture);
                 if (x < 10m)
                 {
-                    KHzComboBoxObj.Items.Add(string.Concat("00", Convert.ToString(x)));
+                    KHzComboBoxObj.Items.Add(string.Concat("00", khzString));
                 }
                 else if (x < 100m)
                 {
-                    KHzComboBoxObj.Items.Add(string.Concat("0", Convert.ToString(x)));
+                    KHzComboBoxObj.Items.Add(string.Concat("0", khzString));
                 }
                 else
                 {
-                    KHzComboBoxObj.Items.Add(Convert.ToString(x));
+                    KHzComboBoxObj.Items.Add(khzString);
                 }
                 x += KhzStepSize;
             }
@@ -1296,9 +1256,7 @@ namespace Radio
                 // initialize a string list, and give it its first entry on this line
                 List<string> newLine = new (){ channelListView.Items[index].SubItems[0].Text };
 
-                // make sure that the string has a period for a decimal separator
-                string mhzLcl = Convert.ToString(Convert.ToDecimal(channelListView.Items[index].SubItems[1].Text), System.Globalization.CultureInfo.InvariantCulture);
-                newLine.Add(mhzLcl);
+                newLine.Add(channelListView.Items[index].SubItems[1].Text);
                 newLine.Add(channelListView.Items[index].SubItems[2].Text);
                 newLine.Add(channelListView.Items[index].SubItems[3].Text);
                 newLine.Add(channelListView.Items[index].SubItems[4].Text);
@@ -1321,44 +1279,26 @@ namespace Radio
 
         private void OpenFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (TabControl.SelectedIndex == 0)
+            {
+                LoadChannelList(Tab1ChannelListView, Tab1MHzComboBox, Tab1RepeaterComboBox, Tab1ToneComboBox);
+            }
+            else if (TabControl.SelectedIndex == 1)
+            {
+                LoadChannelList(Tab2ChannelListView, Tab2MHzComboBox, Tab2RepeaterComboBox, Tab2ToneComboBox);
+            }
+            else
+            {
+                LoadChannelList(Tab3ChannelListView, Tab3MHzComboBox, Tab3RepeaterComboBox, Tab3ToneComboBox);
+            }
+        }
+
+        private void LoadChannelList(ListView channelListView, ComboBox mhzComboBox, ComboBox repeaterComboBox, ComboBox toneComboBox)
+        { 
             var myParser = My.MyProject.Computer.FileSystem.OpenTextFieldParser(OpenFileDialog1.FileName);
             myParser.SetDelimiters(",");
 
             int indexLcl = 0;
-            ListView channelListView;
-            ComboBox mhzComboBox;
-//            ComboBox khzComboBox;
-            ComboBox repeaterComboBox;
-            ComboBox toneComboBox;
-//            TextBox notesTextObj;
-
-            if (TabControl.SelectedIndex == 0)
-            {
-                channelListView = Tab1ChannelListView;
-                mhzComboBox = Tab1MHzComboBox;
-//                khzComboBox = Tab1KHzCombBox;
-                repeaterComboBox = Tab1RepeaterComboBox;
-                toneComboBox = Tab1ToneComboBox;
-//                notesTextObj = Tab1ChannelNotes;
-            }
-            else if (TabControl.SelectedIndex == 1)
-            {
-                channelListView = Tab2ChannelListView;
-                mhzComboBox = Tab2MHzComboBox;
-//                khzComboBox = Tab2KHzCombBox;
-                repeaterComboBox = Tab2RepeaterComboBox;
-                toneComboBox = Tab2ToneComboBox;
-//                notesTextObj = Tab2ChannelNotes;
-            }
-            else
-            {
-                channelListView = Tab3ChannelListView;
-                mhzComboBox = Tab3MHzComboBox;
-//                khzComboBox = Tab3KHzCombBox;
-                repeaterComboBox = Tab3RepeaterComboBox;
-                toneComboBox = Tab3ToneComboBox;
-//                notesTextObj = Tab3ChannelNotes;
-            }
 
             channelListView.Items.Clear();
 
@@ -1381,16 +1321,8 @@ namespace Radio
                 }
                 else
                 {
-                    // InvariantCulture uses a period as a decimal separator.  CUrrentCulture MAY use a comma.
+                    // InvariantCulture uses a period as a decimal separator.  CurrentCulture MAY use a comma or other symbol.
                     decimal testVal = Convert.ToDecimal(testAry[1], System.Globalization.CultureInfo.InvariantCulture);
-                    // Dim freqStr As String = testAry(1)
-                    // Dim decimalPointLocation = freqStr.IndexOf(".")
-                    // If decimalPointLocation = -1 Then
-                    // decimalPointLocation = freqStr.IndexOf(",")
-                    // End If
-                    // Dim mhzVal As String = Convert.ToString(Mid(freqStr, 1, decimalPointLocation))
-                    // Dim kHzVal As String = Convert.ToString(Mid(freqStr, decimalPointLocation + 2))
-                    // Dim testVal As Decimal = Convert.ToDecimal(mhzVal) + (Convert.ToDecimal(kHzVal) * 0.001m)
                     if (mhzComboBox.Items.Contains(Convert.ToString(Math.Truncate(testVal)))
                         && ((Math.Round(testVal * 10000m, 0) % 12.5m == 0m) || (Math.Round(testVal * 1000m, 0) % 5m == 0m)))
                     {
@@ -1625,8 +1557,7 @@ namespace Radio
                 return "SIMPLEX";
             }
 
-            decimal frequency;
-            frequency = Convert.ToDecimal(mHz, System.Globalization.CultureInfo.InvariantCulture)
+            decimal frequency = Convert.ToDecimal(mHz, System.Globalization.CultureInfo.InvariantCulture)
                 + Convert.ToDecimal(kHz, System.Globalization.CultureInfo.InvariantCulture) / 1000.0m;
 
             if (moduleIsUT144)
@@ -1826,7 +1757,6 @@ namespace Radio
             {
                 saveTabOnLeavingIfDirty(2, Tab3ChannelListView, Tab3SaveChannelFileToolStripMenuItem, e);
             }
-
         }
 
         private void saveTabOnLeavingIfDirty(int tabIndexLeaving, ListView channelListObj, ToolStripMenuItem saveFile, TabControlCancelEventArgs e)

@@ -119,7 +119,7 @@ namespace Radio
             this.TableLayoutPanel2.ColumnCount = 3;
             this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.17544F));
             this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.82456F));
-            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 213F));
+            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 214F));
             this.TableLayoutPanel2.Controls.Add(this.Panel2, 1, 0);
             this.TableLayoutPanel2.Controls.Add(this.Panel3, 0, 0);
             this.TableLayoutPanel2.Controls.Add(this.Panel1, 2, 0);
@@ -140,7 +140,7 @@ namespace Radio
             this.Panel2.Location = new System.Drawing.Point(180, 5);
             this.Panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Panel2.Name = "Panel2";
-            this.Panel2.Size = new System.Drawing.Size(167, 325);
+            this.Panel2.Size = new System.Drawing.Size(166, 325);
             this.Panel2.TabIndex = 1;
             // 
             // GroupBox1
@@ -363,10 +363,10 @@ namespace Radio
             this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Panel1.Controls.Add(this.GroupBox3);
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel1.Location = new System.Drawing.Point(355, 5);
+            this.Panel1.Location = new System.Drawing.Point(354, 5);
             this.Panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(206, 325);
+            this.Panel1.Size = new System.Drawing.Size(207, 325);
             this.Panel1.TabIndex = 3;
             // 
             // GroupBox3
@@ -649,7 +649,7 @@ namespace Radio
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form2";
-            this.Text = "Radio Configuration (Version 1.2)";
+            this.Text = "Radio Configuration (Version 1.3)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.TableLayoutPanel1.ResumeLayout(false);

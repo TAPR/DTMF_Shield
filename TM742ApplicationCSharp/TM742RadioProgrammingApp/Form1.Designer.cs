@@ -4441,7 +4441,7 @@ namespace Radio
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Channel Lists (Version 1.2)";
+            this.Text = "Channel Lists (Version 1.3)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.TabControl.ResumeLayout(false);
             this.TabPage1.ResumeLayout(false);
