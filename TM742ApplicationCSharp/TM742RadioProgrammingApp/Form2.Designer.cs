@@ -42,6 +42,7 @@ namespace Radio
             this.TableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.Panel2 = new System.Windows.Forms.Panel();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.Mod2UT2400 = new System.Windows.Forms.RadioButton();
             this.Mod2None = new System.Windows.Forms.RadioButton();
             this.Mod2UT1200 = new System.Windows.Forms.RadioButton();
             this.Mod2UT440 = new System.Windows.Forms.RadioButton();
@@ -82,6 +83,7 @@ namespace Radio
             this.Panel4 = new System.Windows.Forms.Panel();
             this.ChannelLists = new System.Windows.Forms.Button();
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.Mod1UT2400 = new System.Windows.Forms.RadioButton();
             this.TableLayoutPanel1.SuspendLayout();
             this.TableLayoutPanel2.SuspendLayout();
             this.Panel2.SuspendLayout();
@@ -119,7 +121,7 @@ namespace Radio
             this.TableLayoutPanel2.ColumnCount = 3;
             this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.17544F));
             this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.82456F));
-            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 214F));
+            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 218F));
             this.TableLayoutPanel2.Controls.Add(this.Panel2, 1, 0);
             this.TableLayoutPanel2.Controls.Add(this.Panel3, 0, 0);
             this.TableLayoutPanel2.Controls.Add(this.Panel1, 2, 0);
@@ -137,14 +139,15 @@ namespace Radio
             this.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Panel2.Controls.Add(this.GroupBox1);
             this.Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel2.Location = new System.Drawing.Point(180, 5);
+            this.Panel2.Location = new System.Drawing.Point(178, 5);
             this.Panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Panel2.Name = "Panel2";
-            this.Panel2.Size = new System.Drawing.Size(166, 325);
+            this.Panel2.Size = new System.Drawing.Size(164, 325);
             this.Panel2.TabIndex = 1;
             // 
             // GroupBox1
             // 
+            this.GroupBox1.Controls.Add(this.Mod2UT2400);
             this.GroupBox1.Controls.Add(this.Mod2None);
             this.GroupBox1.Controls.Add(this.Mod2UT1200);
             this.GroupBox1.Controls.Add(this.Mod2UT440);
@@ -152,14 +155,26 @@ namespace Radio
             this.GroupBox1.Controls.Add(this.Mod2UT220);
             this.GroupBox1.Controls.Add(this.Mod2UT50);
             this.GroupBox1.Controls.Add(this.Mod2UT144);
-            this.GroupBox1.Location = new System.Drawing.Point(24, 32);
+            this.GroupBox1.Location = new System.Drawing.Point(20, 21);
             this.GroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.GroupBox1.Size = new System.Drawing.Size(146, 288);
+            this.GroupBox1.Size = new System.Drawing.Size(146, 299);
             this.GroupBox1.TabIndex = 2;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Module 2";
+            // 
+            // Mod2UT2400
+            // 
+            this.Mod2UT2400.AutoSize = true;
+            this.Mod2UT2400.Location = new System.Drawing.Point(39, 271);
+            this.Mod2UT2400.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod2UT2400.Name = "Mod2UT2400";
+            this.Mod2UT2400.Size = new System.Drawing.Size(95, 24);
+            this.Mod2UT2400.TabIndex = 8;
+            this.Mod2UT2400.TabStop = true;
+            this.Mod2UT2400.Text = "UT 2400";
+            this.Mod2UT2400.UseVisualStyleBackColor = true;
             // 
             // Mod2None
             // 
@@ -176,7 +191,7 @@ namespace Radio
             // Mod2UT1200
             // 
             this.Mod2UT1200.AutoSize = true;
-            this.Mod2UT1200.Location = new System.Drawing.Point(40, 242);
+            this.Mod2UT1200.Location = new System.Drawing.Point(40, 240);
             this.Mod2UT1200.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod2UT1200.Name = "Mod2UT1200";
             this.Mod2UT1200.Size = new System.Drawing.Size(95, 24);
@@ -188,7 +203,7 @@ namespace Radio
             // Mod2UT440
             // 
             this.Mod2UT440.AutoSize = true;
-            this.Mod2UT440.Location = new System.Drawing.Point(40, 206);
+            this.Mod2UT440.Location = new System.Drawing.Point(40, 204);
             this.Mod2UT440.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod2UT440.Name = "Mod2UT440";
             this.Mod2UT440.Size = new System.Drawing.Size(86, 24);
@@ -200,7 +215,7 @@ namespace Radio
             // Mod2UT30
             // 
             this.Mod2UT30.AutoSize = true;
-            this.Mod2UT30.Location = new System.Drawing.Point(40, 65);
+            this.Mod2UT30.Location = new System.Drawing.Point(40, 63);
             this.Mod2UT30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod2UT30.Name = "Mod2UT30";
             this.Mod2UT30.Size = new System.Drawing.Size(77, 24);
@@ -212,7 +227,7 @@ namespace Radio
             // Mod2UT220
             // 
             this.Mod2UT220.AutoSize = true;
-            this.Mod2UT220.Location = new System.Drawing.Point(40, 171);
+            this.Mod2UT220.Location = new System.Drawing.Point(40, 169);
             this.Mod2UT220.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod2UT220.Name = "Mod2UT220";
             this.Mod2UT220.Size = new System.Drawing.Size(86, 24);
@@ -224,7 +239,7 @@ namespace Radio
             // Mod2UT50
             // 
             this.Mod2UT50.AutoSize = true;
-            this.Mod2UT50.Location = new System.Drawing.Point(40, 100);
+            this.Mod2UT50.Location = new System.Drawing.Point(40, 98);
             this.Mod2UT50.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod2UT50.Name = "Mod2UT50";
             this.Mod2UT50.Size = new System.Drawing.Size(77, 24);
@@ -236,7 +251,7 @@ namespace Radio
             // Mod2UT144
             // 
             this.Mod2UT144.AutoSize = true;
-            this.Mod2UT144.Location = new System.Drawing.Point(40, 135);
+            this.Mod2UT144.Location = new System.Drawing.Point(40, 133);
             this.Mod2UT144.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod2UT144.Name = "Mod2UT144";
             this.Mod2UT144.Size = new System.Drawing.Size(86, 24);
@@ -253,11 +268,12 @@ namespace Radio
             this.Panel3.Location = new System.Drawing.Point(4, 5);
             this.Panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Panel3.Name = "Panel3";
-            this.Panel3.Size = new System.Drawing.Size(168, 325);
+            this.Panel3.Size = new System.Drawing.Size(166, 325);
             this.Panel3.TabIndex = 2;
             // 
             // GroupBox2
             // 
+            this.GroupBox2.Controls.Add(this.Mod1UT2400);
             this.GroupBox2.Controls.Add(this.Mod1None);
             this.GroupBox2.Controls.Add(this.Mod1UT1200);
             this.GroupBox2.Controls.Add(this.Mod1UT440);
@@ -265,11 +281,11 @@ namespace Radio
             this.GroupBox2.Controls.Add(this.Mod1UT220);
             this.GroupBox2.Controls.Add(this.Mod1UT50);
             this.GroupBox2.Controls.Add(this.Mod1UT144);
-            this.GroupBox2.Location = new System.Drawing.Point(22, 32);
+            this.GroupBox2.Location = new System.Drawing.Point(14, 20);
             this.GroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.GroupBox2.Name = "GroupBox2";
             this.GroupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.GroupBox2.Size = new System.Drawing.Size(146, 288);
+            this.GroupBox2.Size = new System.Drawing.Size(146, 303);
             this.GroupBox2.TabIndex = 1;
             this.GroupBox2.TabStop = false;
             this.GroupBox2.Text = "Module 1";
@@ -289,7 +305,7 @@ namespace Radio
             // Mod1UT1200
             // 
             this.Mod1UT1200.AutoSize = true;
-            this.Mod1UT1200.Location = new System.Drawing.Point(40, 242);
+            this.Mod1UT1200.Location = new System.Drawing.Point(40, 240);
             this.Mod1UT1200.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod1UT1200.Name = "Mod1UT1200";
             this.Mod1UT1200.Size = new System.Drawing.Size(95, 24);
@@ -313,7 +329,7 @@ namespace Radio
             // Mod1UT30
             // 
             this.Mod1UT30.AutoSize = true;
-            this.Mod1UT30.Location = new System.Drawing.Point(40, 65);
+            this.Mod1UT30.Location = new System.Drawing.Point(40, 63);
             this.Mod1UT30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod1UT30.Name = "Mod1UT30";
             this.Mod1UT30.Size = new System.Drawing.Size(77, 24);
@@ -325,7 +341,7 @@ namespace Radio
             // Mod1UT220
             // 
             this.Mod1UT220.AutoSize = true;
-            this.Mod1UT220.Location = new System.Drawing.Point(40, 171);
+            this.Mod1UT220.Location = new System.Drawing.Point(37, 167);
             this.Mod1UT220.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod1UT220.Name = "Mod1UT220";
             this.Mod1UT220.Size = new System.Drawing.Size(86, 24);
@@ -337,7 +353,7 @@ namespace Radio
             // Mod1UT50
             // 
             this.Mod1UT50.AutoSize = true;
-            this.Mod1UT50.Location = new System.Drawing.Point(40, 100);
+            this.Mod1UT50.Location = new System.Drawing.Point(40, 98);
             this.Mod1UT50.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod1UT50.Name = "Mod1UT50";
             this.Mod1UT50.Size = new System.Drawing.Size(77, 24);
@@ -349,7 +365,7 @@ namespace Radio
             // Mod1UT144
             // 
             this.Mod1UT144.AutoSize = true;
-            this.Mod1UT144.Location = new System.Drawing.Point(40, 135);
+            this.Mod1UT144.Location = new System.Drawing.Point(40, 133);
             this.Mod1UT144.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mod1UT144.Name = "Mod1UT144";
             this.Mod1UT144.Size = new System.Drawing.Size(86, 24);
@@ -363,10 +379,10 @@ namespace Radio
             this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Panel1.Controls.Add(this.GroupBox3);
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel1.Location = new System.Drawing.Point(354, 5);
+            this.Panel1.Location = new System.Drawing.Point(350, 5);
             this.Panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(207, 325);
+            this.Panel1.Size = new System.Drawing.Size(211, 325);
             this.Panel1.TabIndex = 3;
             // 
             // GroupBox3
@@ -378,11 +394,11 @@ namespace Radio
             this.GroupBox3.Controls.Add(this.Mod3UT220);
             this.GroupBox3.Controls.Add(this.Mod3UT50);
             this.GroupBox3.Controls.Add(this.Mod3UT144);
-            this.GroupBox3.Location = new System.Drawing.Point(27, 32);
+            this.GroupBox3.Location = new System.Drawing.Point(26, 21);
             this.GroupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.GroupBox3.Name = "GroupBox3";
             this.GroupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.GroupBox3.Size = new System.Drawing.Size(146, 288);
+            this.GroupBox3.Size = new System.Drawing.Size(158, 299);
             this.GroupBox3.TabIndex = 3;
             this.GroupBox3.TabStop = false;
             this.GroupBox3.Text = "Module 3";
@@ -523,6 +539,7 @@ namespace Radio
             this.debugRadioTimingButton.TabStop = true;
             this.debugRadioTimingButton.Text = "Debug";
             this.debugRadioTimingButton.UseVisualStyleBackColor = true;
+            this.debugRadioTimingButton.CheckedChanged += new System.EventHandler(this.debugRadioTimingButton_CheckedChanged);
             // 
             // slowRadioTimingButton
             // 
@@ -535,6 +552,7 @@ namespace Radio
             this.slowRadioTimingButton.TabStop = true;
             this.slowRadioTimingButton.Text = "Slow";
             this.slowRadioTimingButton.UseVisualStyleBackColor = true;
+            this.slowRadioTimingButton.CheckedChanged += new System.EventHandler(this.slowRadioTimingButton_CheckedChanged);
             // 
             // normalRadioTimingButton
             // 
@@ -548,6 +566,7 @@ namespace Radio
             this.normalRadioTimingButton.TabStop = true;
             this.normalRadioTimingButton.Text = "Normal";
             this.normalRadioTimingButton.UseVisualStyleBackColor = true;
+            this.normalRadioTimingButton.CheckedChanged += new System.EventHandler(this.normalRadioTimingButton_CheckedChanged);
             // 
             // GroupBox4
             // 
@@ -573,6 +592,7 @@ namespace Radio
             this.AROcheckBox.TabIndex = 4;
             this.AROcheckBox.Text = "Automatic Repeater Offset";
             this.AROcheckBox.UseVisualStyleBackColor = true;
+            this.AROcheckBox.CheckedChanged += new System.EventHandler(this.AROcheckBox_CheckedChanged);
             // 
             // wideBandCheckBox
             // 
@@ -584,6 +604,7 @@ namespace Radio
             this.wideBandCheckBox.TabIndex = 3;
             this.wideBandCheckBox.Text = "Wide Band";
             this.wideBandCheckBox.UseVisualStyleBackColor = true;
+            this.wideBandCheckBox.CheckedChanged += new System.EventHandler(this.wideBandCheckBox_CheckedChanged);
             // 
             // eTypeRadioCheckBox
             // 
@@ -607,6 +628,7 @@ namespace Radio
             this.Tsu7CheckBox.TabIndex = 0;
             this.Tsu7CheckBox.Text = "TSU-7 Installed";
             this.Tsu7CheckBox.UseVisualStyleBackColor = true;
+            this.Tsu7CheckBox.CheckedChanged += new System.EventHandler(this.Tsu7CheckBox_CheckedChanged);
             // 
             // Panel6
             // 
@@ -640,6 +662,18 @@ namespace Radio
             this.ChannelLists.UseVisualStyleBackColor = true;
             this.ChannelLists.Click += new System.EventHandler(this.ShowChannelLists_Click);
             // 
+            // Mod1UT2400
+            // 
+            this.Mod1UT2400.AutoSize = true;
+            this.Mod1UT2400.Location = new System.Drawing.Point(40, 272);
+            this.Mod1UT2400.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Mod1UT2400.Name = "Mod1UT2400";
+            this.Mod1UT2400.Size = new System.Drawing.Size(95, 24);
+            this.Mod1UT2400.TabIndex = 9;
+            this.Mod1UT2400.TabStop = true;
+            this.Mod1UT2400.Text = "UT 2400";
+            this.Mod1UT2400.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -649,7 +683,7 @@ namespace Radio
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form2";
-            this.Text = "Radio Configuration (Version 1.3)";
+            this.Text = "Radio Configuration (Version 1.5)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.TableLayoutPanel1.ResumeLayout(false);
@@ -718,5 +752,7 @@ namespace Radio
         internal RadioButton normalRadioTimingButton;
         internal ToolTip ToolTip1;
         internal CheckBox AROcheckBox;
+        internal RadioButton Mod2UT2400;
+        internal RadioButton Mod1UT2400;
     }
 }

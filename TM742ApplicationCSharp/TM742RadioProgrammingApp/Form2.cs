@@ -34,6 +34,7 @@ namespace Radio
         public RadioConfigStruct radioConfig;
         public string applicationPath;
         public string xmlFile;
+        public bool xmlConfigFileDirty = false;
         private Form1 moduleForm = null;
 
         public Form2()
@@ -148,9 +149,9 @@ namespace Radio
                 normalRadioTimingButton.Checked = true;
             }
 
-            chooseModuleType(radioConfig.tab1Mod, Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200);
-            chooseModuleType(radioConfig.tab2Mod, Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200);
-            chooseModuleType(radioConfig.tab3Mod, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
+            chooseModuleType(radioConfig.tab1Mod, Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200, Mod1UT2400);
+            chooseModuleType(radioConfig.tab2Mod, Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200, Mod2UT2400);
+            chooseModuleType(radioConfig.tab3Mod, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200, null);
         }
 
         public void saveConfigFile(string xmlFile)
@@ -176,12 +177,13 @@ namespace Radio
             }
 
             testXml.Save(xmlFile);
+            xmlConfigFileDirty = false;
 
             return;
         }
 
         private void chooseModuleType(string moduleType,
-            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200)
+            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200, RadioButton moduleUT2400)
         {
             switch (moduleType ?? "")
             {
@@ -207,6 +209,10 @@ namespace Radio
                     moduleUT1200.Checked = true;
                     break;
 
+                case "UT2400":
+                    moduleUT2400.Checked = true;
+                    break;
+
                 default:
                     moduleNone.Checked = true;
                     break;
@@ -214,7 +220,7 @@ namespace Radio
         }
 
         private string getModuleName(string moduleNoneName, TabPage selectedTab,
-            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200)
+            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200, RadioButton moduleUT2400)
         {
             if (moduleUT30.Checked == true)
             {
@@ -246,6 +252,10 @@ namespace Radio
                 if (eTypeRadioCheckBox.Checked)
                     selectedTab.Text += "e";
             }
+            else if ((moduleUT2400 != null) && (moduleUT2400.Checked == true))
+            {
+                selectedTab.Text = moduleUT2400.Text;
+            }
 
             if (moduleNone.Checked == true)
             {
@@ -266,7 +276,7 @@ namespace Radio
         }
 
         private void initTabPage(int tabIndex, TabPage tabPage, ComboBox repeaterComboBoxObj, ComboBox mhzComboBoxObj, RadioButton ctcssXmitRecObj, ListView channelListViewObj,
-            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200)
+            RadioButton moduleNone, RadioButton moduleUT30, RadioButton moduleUT50, RadioButton moduleUT144, RadioButton moduleUT220, RadioButton moduleUT440, RadioButton moduleUT1200, RadioButton moduleUT2400)
         {
             moduleForm.TabControl.SelectedIndex = tabIndex;
             var startVal = default(int);
@@ -280,7 +290,7 @@ namespace Radio
             repeaterComboBoxObj.Items.Add("MINUS");
 
             // (430 band in European band plan) or (1200 band NOT in European band plan) has double-minus
-            if ((moduleUT144.Checked && eTypeRadioCheckBox.Checked) || (moduleUT1200.Checked && !eTypeRadioCheckBox.Checked))               
+            if ((moduleUT440.Checked && eTypeRadioCheckBox.Checked) || (moduleUT1200.Checked && !eTypeRadioCheckBox.Checked))               
             {
                 repeaterComboBoxObj.Items.Add("DBL MINUS");
             }
@@ -380,6 +390,19 @@ namespace Radio
                     stopVal = 1299;
                 }
             }
+            else if ((moduleUT2400 != null) && (moduleName ?? "") == (moduleUT2400.Text ?? ""))
+            {
+                if (wideBandCheckBox.Checked)
+                {
+                    startVal = 2400;
+                    stopVal = 2449;
+                }
+                else
+                {
+                    startVal = 2400;
+                    stopVal = 2449;
+                }
+            }
             else if ((moduleName ?? "") == (moduleNone.Text ?? ""))
             {
                 startVal = 0;
@@ -424,7 +447,7 @@ namespace Radio
 
             //select 3rd tab
             moduleForm.TabControl.SelectedIndex = 2;
-            string installedModuleName = getModuleName("Mod3 Not Installed", moduleForm.TabPage3, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
+            string installedModuleName = getModuleName("Mod3 Not Installed", moduleForm.TabPage3, Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200, null);
 
             if (!radioConfig.tab3Filename.Contains(moduleForm.TabPage3.Text))
             {
@@ -444,7 +467,7 @@ namespace Radio
 
             // select tab 2
             moduleForm.TabControl.SelectedIndex = 1;
-            installedModuleName = getModuleName("Mod2 Not Installed", moduleForm.TabPage2, Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200);
+            installedModuleName = getModuleName("Mod2 Not Installed", moduleForm.TabPage2, Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200, Mod2UT2400);
             if (!radioConfig.tab2Filename.Contains(moduleForm.TabPage2.Text))
             {
                 tabHasChanged[1] = true;
@@ -462,7 +485,7 @@ namespace Radio
 
             // select 1st tab (index 0)
             moduleForm.TabControl.SelectedIndex = 0;
-            installedModuleName = getModuleName("Mod1 Not Installed", moduleForm.TabPage1, Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200);
+            installedModuleName = getModuleName("Mod1 Not Installed", moduleForm.TabPage1, Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200, Mod1UT2400);
 
             if (!radioConfig.tab1Filename.Contains(moduleForm.TabPage1.Text))
             {
@@ -480,13 +503,13 @@ namespace Radio
             }
 
             initTabPage(2, moduleForm.TabPage3, moduleForm.Tab3RepeaterComboBox, moduleForm.Tab3MHzComboBox, moduleForm.Tab3CtcssXmitRec, moduleForm.Tab3ChannelListView,
-                Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200);
+                Mod3None, Mod3UT30, Mod3UT50, Mod3UT144, Mod3UT220, Mod3UT440, Mod3UT1200, null);
 
             initTabPage(1, moduleForm.TabPage2, moduleForm.Tab2RepeaterComboBox, moduleForm.Tab2MHzComboBox, moduleForm.Tab2CtcssXmitRec, moduleForm.Tab2ChannelListView,
-                Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200);
+                Mod2None, Mod2UT30, Mod2UT50, Mod2UT144, Mod2UT220, Mod2UT440, Mod2UT1200, Mod2UT2400);
 
             initTabPage(0, moduleForm.TabPage1, moduleForm.Tab1RepeaterComboBox, moduleForm.Tab1MHzComboBox, moduleForm.Tab1CtcssXmitRec, moduleForm.Tab1ChannelListView,
-                Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200);
+                Mod1None, Mod1UT30, Mod1UT50, Mod1UT144, Mod1UT220, Mod1UT440, Mod1UT1200, Mod1UT2400);
 
            // end initialize all tab pages
 
@@ -498,46 +521,50 @@ namespace Radio
             saveConfigFile(xmlFile);
 
             // should select the first module that is chosen as 'present'
-            moduleForm.TabControl.SelectedIndex = 0;
+            int firstModuleIndex = (!Mod1None.Checked) ? 0 : (!Mod2None.Checked) ? 1 : (!Mod3None.Checked) ? 2 : 0;
+            moduleForm.TabControl.SelectedIndex = firstModuleIndex;
             Enabled = false;
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveConfigFile(xmlFile);
+            if (xmlConfigFileDirty)
+            {
+                saveConfigFile(xmlFile);
+            }
         }
 
         private void eTypeRadioCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            bool ut220Checked = false;
             if (eTypeRadioCheckBox.Checked)
             {
+                bool ut220WasChecked = false;
                 if (Mod1UT220.Checked)
                 {
                     Mod1UT220.Checked = false;
                     Mod1None.Checked = true;
-                    ut220Checked = true;
+                    ut220WasChecked = true;
                 }
                 if (Mod2UT220.Checked)
                 {
                     Mod2UT220.Checked = false;
                     Mod2None.Checked = true;
-                    ut220Checked = true;
+                    ut220WasChecked = true;
                 }
                 if (Mod3UT220.Checked)
                 {
                     Mod3UT220.Checked = false;
                     Mod3None.Checked = true;
-                    ut220Checked = true;
+                    ut220WasChecked = true;
                 }
 
                 Mod1UT220.Enabled = false;
                 Mod2UT220.Enabled = false;
                 Mod3UT220.Enabled = false;
 
-                if (ut220Checked == true)
+                if (ut220WasChecked == true)
                 {
-                    Interaction.MsgBox("UT220 module is not a valid selection with an 'E' type radio.");
+                    Interaction.MsgBox("UT220 module is not a valid selection with an 'E' type radio.  It has been de-selected.");
                 }
             }
             else
@@ -546,6 +573,38 @@ namespace Radio
                 Mod2UT220.Enabled = true;
                 Mod3UT220.Enabled = true;
             }
+
+            xmlConfigFileDirty = true;
+        }
+
+        private void Tsu7CheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            xmlConfigFileDirty = true;
+        }
+
+        private void wideBandCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            xmlConfigFileDirty = true;
+        }
+
+        private void AROcheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            xmlConfigFileDirty = true;
+        }
+
+        private void normalRadioTimingButton_CheckedChanged(object sender, EventArgs e)
+        {
+            xmlConfigFileDirty = true;
+        }
+
+        private void slowRadioTimingButton_CheckedChanged(object sender, EventArgs e)
+        {
+            xmlConfigFileDirty = true;
+        }
+
+        private void debugRadioTimingButton_CheckedChanged(object sender, EventArgs e)
+        {
+            xmlConfigFileDirty = true;
         }
     }
 }

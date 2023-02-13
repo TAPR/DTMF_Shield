@@ -5,8 +5,9 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml;
 using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.MyServices;
 using Microsoft.VisualBasic.CompilerServices;
+using System.Xml.Linq;
+using System.Text;
 
 namespace Radio
 {
@@ -92,7 +93,7 @@ namespace Radio
                 {
                     KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[1]);
                 }
-                else if (TabControl.SelectedTab.Text.Contains("1200"))
+                else if (TabControl.SelectedTab.Text.Contains("1200") || TabControl.SelectedTab.Text.Contains("2400"))
                 {
                     KhzToolStripComboBoxObj.Text = Conversions.ToString(KhzToolStripComboBoxObj.Items[3]);
                 }
@@ -448,7 +449,7 @@ namespace Radio
             ComboBox RepeaterComboBoxObj, ComboBox ToneComboBoxObj, TextBox ChannelTextBoxObj, RadioButton CtcssRadioButtonObj, RadioButton ToneRadioButtonObj, TextBox NotesObj,
             bool moduleIsUT144, bool moduleIsUT220)
         {
-            decimal KhzStepSize = Convert.ToDecimal(KhzStepSizeObj.Text, System.Globalization.CultureInfo.InvariantCulture);
+ //           decimal KhzStepSize = Convert.ToDecimal(KhzStepSizeObj.Text, System.Globalization.CultureInfo.InvariantCulture);
 
             if (ChannelListViewObj.SelectedItems.Count > 0)
             {
@@ -743,8 +744,8 @@ namespace Radio
                     string kHzVal = decimalPointLocation != -1 ? Strings.Mid(freq, decimalPointLocation + 2) : "000";
 
                     int numOfKhzChars = 3;
-                    if ((Convert.ToDecimal(Conversions.ToString(ToolStripComboBoxObj.SelectedItem)) == 12.5m)
-                        || Operators.ConditionalCompareObjectEqual(ToolStripComboBoxObj.SelectedItem, 25.0m, false))
+                    decimal stepSize = Convert.ToDecimal(Conversions.ToString(ToolStripComboBoxObj.SelectedItem), System.Globalization.CultureInfo.InvariantCulture);
+                    if ((stepSize == 12.5m) || (stepSize == 25.0m))
                     {
                         numOfKhzChars = 2;
                     }
@@ -756,7 +757,10 @@ namespace Radio
                         SendString(Conversions.ToString(mhzVal[mhzVal.Length - 3]));    // hundreds of MHz
                     }
 
-                    if (parentForm.wideBandCheckBox.Checked || !TabControl.SelectedTab.Text.Contains("e") || TabControl.SelectedTab.Text.Contains("1200"))
+                    if (parentForm.wideBandCheckBox.Checked 
+                        || !TabControl.SelectedTab.Text.Contains("e")
+                        || TabControl.SelectedTab.Text.Contains("1200")
+                        || TabControl.SelectedTab.Text.Contains("2400"))
                     {
                         SendString(Conversions.ToString(mhzVal[mhzVal.Length - 2]));    // tens of MHz
                     }
@@ -1022,24 +1026,20 @@ namespace Radio
             ToolStripLabelObj.Text = "KHz Step Size: " + ToolStripComboBoxObj.Text;
 
             KHzComboBoxObj.Items.Clear();
-            decimal x = 0.0m;
             decimal KhzStepSize = Convert.ToDecimal(ToolStripComboBoxObj.Text, System.Globalization.CultureInfo.InvariantCulture);
-            while (x < 1000m)
+            for (decimal kHzVal = 0.0m; kHzVal < 1000m; kHzVal += KhzStepSize)
             {
-                var khzString = Convert.ToString(x, System.Globalization.CultureInfo.InvariantCulture);
-                if (x < 10m)
+                var kHzString = Convert.ToString(kHzVal, System.Globalization.CultureInfo.InvariantCulture);
+                if (kHzVal < 10.0m)
                 {
-                    KHzComboBoxObj.Items.Add(string.Concat("00", khzString));
+                    kHzString = "00" + kHzString;
                 }
-                else if (x < 100m)
+                else if (kHzVal < 100.0m)
                 {
-                    KHzComboBoxObj.Items.Add(string.Concat("0", khzString));
+                    kHzString = "0" + kHzString;
                 }
-                else
-                {
-                    KHzComboBoxObj.Items.Add(khzString);
-                }
-                x += KhzStepSize;
+
+                KHzComboBoxObj.Items.Add(kHzString);
             }
         }
 
@@ -1225,53 +1225,35 @@ namespace Radio
         private void Tab1SaveChannelFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog1.AddExtension = true;
-            SaveFileDialog1.DefaultExt = "csv";
+            SaveFileDialog1.DefaultExt = "xml";
 
             SaveFileDialog1.ShowDialog();
         }
 
         private void SaveFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var myWriter = My.MyProject.Computer.FileSystem.OpenTextFileWriter(SaveFileDialog1.FileName, false);
-
-            int index;
-            ListView channelListView;
-
             if (TabControl.SelectedIndex == 0)
             {
-                channelListView = Tab1ChannelListView;
+                //SaveChannelList(Tab1ChannelListView, SaveFileDialog1.FileName);
+                SaveChannelListXml(Tab1ChannelListView, SaveFileDialog1.FileName);
+
+                channelUpdateClicked[0] = false;
             }
             else if (TabControl.SelectedIndex == 1)
             {
-                channelListView = Tab2ChannelListView;
+                //SaveChannelList(Tab2ChannelListView, SaveFileDialog1.FileName);
+                SaveChannelListXml(Tab2ChannelListView, SaveFileDialog1.FileName);
+
+                channelUpdateClicked[1] = false;
             }
-            else
+            else if (TabControl.SelectedIndex == 2)
             {
-                channelListView = Tab3ChannelListView;
+                //SaveChannelList(Tab3ChannelListView, SaveFileDialog1.FileName);
+                SaveChannelListXml(Tab2ChannelListView, SaveFileDialog1.FileName);
+
+                channelUpdateClicked[2] = false;
             }
-
-            var loopTo = channelListView.Items.Count - 2;
-            for (index = 0; index <= loopTo; index++)
-            {
-                // initialize a string list, and give it its first entry on this line
-                List<string> newLine = new (){ channelListView.Items[index].SubItems[0].Text };
-
-                newLine.Add(channelListView.Items[index].SubItems[1].Text);
-                newLine.Add(channelListView.Items[index].SubItems[2].Text);
-                newLine.Add(channelListView.Items[index].SubItems[3].Text);
-                newLine.Add(channelListView.Items[index].SubItems[4].Text);
-                newLine.Add(channelListView.Items[index].SubItems[5].Text);
-
-                // all values on the line are emitted, with a comma as a separator
-                string line = string.Join(",", newLine.ToArray());
-                myWriter.WriteLine(line);
-            }
-
-            myWriter.Close();
-
-            channelUpdateClicked[TabControl.SelectedIndex] = false;
         }
-
         private void Tab1OpenChannelFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog1.ShowDialog();
@@ -1279,23 +1261,43 @@ namespace Radio
 
         private void OpenFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            var fileName = OpenFileDialog1.FileName;
             if (TabControl.SelectedIndex == 0)
             {
-                LoadChannelList(Tab1ChannelListView, Tab1MHzComboBox, Tab1RepeaterComboBox, Tab1ToneComboBox);
+                if (fileName.EndsWith(".csv")) {
+                    LoadChannelList(0, Tab1ChannelListView, Tab1MHzComboBox, Tab1RepeaterComboBox, Tab1ToneComboBox, fileName);
+                }
+                else if (fileName.EndsWith(".xml")) {
+                    LoadChannelListXml(0, Tab1ChannelListView, Tab1MHzComboBox, Tab1RepeaterComboBox, Tab1ToneComboBox, fileName);
+                }
             }
             else if (TabControl.SelectedIndex == 1)
             {
-                LoadChannelList(Tab2ChannelListView, Tab2MHzComboBox, Tab2RepeaterComboBox, Tab2ToneComboBox);
+                if (fileName.EndsWith(".csv"))
+                {
+                    LoadChannelList(1, Tab2ChannelListView, Tab2MHzComboBox, Tab2RepeaterComboBox, Tab2ToneComboBox, OpenFileDialog1.FileName);
+                }
+                else if (fileName.EndsWith(".xml"))
+                {
+                    LoadChannelListXml(1, Tab2ChannelListView, Tab2MHzComboBox, Tab2RepeaterComboBox, Tab2ToneComboBox, OpenFileDialog1.FileName);
+                }
             }
-            else
+            else if (TabControl.SelectedIndex == 2)
             {
-                LoadChannelList(Tab3ChannelListView, Tab3MHzComboBox, Tab3RepeaterComboBox, Tab3ToneComboBox);
+                if (fileName.EndsWith(".csv"))
+                {
+                    LoadChannelList(2, Tab3ChannelListView, Tab3MHzComboBox, Tab3RepeaterComboBox, Tab3ToneComboBox, OpenFileDialog1.FileName);
+                }
+                else if (fileName.EndsWith(".xml"))
+                {
+                    LoadChannelListXml(2, Tab3ChannelListView, Tab3MHzComboBox, Tab3RepeaterComboBox, Tab3ToneComboBox, OpenFileDialog1.FileName);
+                }
             }
         }
 
-        private void LoadChannelList(ListView channelListView, ComboBox mhzComboBox, ComboBox repeaterComboBox, ComboBox toneComboBox)
+        private void LoadChannelList(int tabIndex, ListView channelListView, ComboBox mhzComboBox, ComboBox repeaterComboBox, ComboBox toneComboBox, string fileName)
         { 
-            var myParser = My.MyProject.Computer.FileSystem.OpenTextFieldParser(OpenFileDialog1.FileName);
+            var myParser = My.MyProject.Computer.FileSystem.OpenTextFieldParser(fileName);
             myParser.SetDelimiters(",");
 
             int indexLcl = 0;
@@ -1367,9 +1369,124 @@ namespace Radio
                         channelListView.Items[indexLcl].SubItems.Add("Xmit");
                     }
 
+                    // if notes are present...
                     if (testAry.Length == 6)
                     {
                         channelListView.Items[indexLcl].SubItems.Add(testAry[5]);
+                    }
+                    else
+                    {
+                        channelListView.Items[indexLcl].SubItems.Add("");
+                    }
+                }
+
+                channelListView.Items[indexLcl].EnsureVisible();
+                indexLcl += 1;
+            }
+
+            myParser.Close();
+
+            channelListView.Items.Add(indexLcl.ToString());
+            channelListView.Items[indexLcl].Text = (indexLcl + 1).ToString();
+            channelListView.Items[indexLcl].SubItems.Add("BLANK");
+            channelListView.Items[indexLcl].SubItems.Add("");
+            channelListView.Items[indexLcl].SubItems.Add("");
+            channelListView.Items[indexLcl].SubItems.Add("");
+            channelListView.Items[indexLcl].SubItems.Add("");
+            channelListView.Items[indexLcl].Selected = true;
+
+            channelUpdateClicked[tabIndex] = false;
+        }
+
+        private void LoadChannelListXml(int tabIndex, ListView channelListView, ComboBox mhzComboBox, ComboBox repeaterComboBox, ComboBox toneComboBox, string fileName)
+        {
+            var testXml = new XmlDocument();
+            testXml.Load(fileName);
+
+            XmlNode channels = testXml.SelectSingleNode("Root/Channels");
+
+            int indexLcl = 0;
+
+            channelListView.Items.Clear();
+
+            var channelList = channels.ChildNodes;
+            foreach ( XmlNode channel in channelList)
+            {
+                var channelIndex = channel.SelectSingleNode("ChannelNumber").InnerText;
+                var frequency = channel.SelectSingleNode("Frequency").InnerText;
+                var repeater = channel.SelectSingleNode("Repeater").InnerText;
+                var tone = channel.SelectSingleNode("Tone").InnerText;
+                var ctcss = channel.SelectSingleNode("CTCSS").InnerText;
+                var note = channel.SelectSingleNode("Note").InnerText;
+
+                channelListView.Items.Add(indexLcl.ToString());
+                channelListView.Items[indexLcl].Text = (indexLcl + 1).ToString();
+                if (frequency == "BLANK")
+                {
+                    channelListView.Items[indexLcl].SubItems.Add("BLANK");
+                    channelListView.Items[indexLcl].SubItems.Add("");
+                    channelListView.Items[indexLcl].SubItems.Add("");
+                    channelListView.Items[indexLcl].SubItems.Add("");
+                    channelListView.Items[indexLcl].SubItems.Add("");
+
+                    // if notes...
+                    if (note != null)
+                    {
+                        channelListView.Items[indexLcl].SubItems[5].Text = note;
+                    }
+                }
+                else
+                {
+                    // InvariantCulture uses a period as a decimal separator.  CurrentCulture MAY use a comma or other symbol.
+                    decimal testVal = Convert.ToDecimal(frequency, System.Globalization.CultureInfo.InvariantCulture);
+                    if (mhzComboBox.Items.Contains(Convert.ToString(Math.Truncate(testVal)))
+                        && ((Math.Round(testVal * 10000m, 0) % 12.5m == 0m) || (Math.Round(testVal * 1000m, 0) % 5m == 0m)))
+                    {
+                        channelListView.Items[indexLcl].SubItems.Add(frequency);
+                    }
+                    else
+                    {
+                        Interaction.MsgBox("Channel frequency in file is not valid for this module selection !", MsgBoxStyle.Critical, "Programming setup message");
+                        clearList();
+                        return;
+                    }
+
+                    if (repeaterComboBox.Items.Contains(repeater))
+                    {
+                        channelListView.Items[indexLcl].SubItems.Add(repeater);
+                    }
+                    else
+                    {
+                        Interaction.MsgBox("Repeater value in file is not valid for this module selection !", MsgBoxStyle.Critical, "Programming setup message");
+                        clearList();
+                        return;
+                    }
+
+                    if (toneComboBox.Items.Contains(tone))
+                    {
+                        channelListView.Items[indexLcl].SubItems.Add(tone);
+                    }
+                    else
+                    {
+                        Interaction.MsgBox("Tone value in file is not valid for this module selection !", MsgBoxStyle.Critical, "Programming setup message");
+                        clearList();
+                        return;
+                    }
+
+                    if (!((parentForm.Tsu7CheckBox.Checked == false) && (ctcss == "Xmit/Rec")))
+                    {
+                        channelListView.Items[indexLcl].SubItems.Add(ctcss);
+                    }
+                    else
+                    {
+                        Interaction.MsgBox("CTCSS value in file is not valid for this module selection - defaulting to Xmit only  !", MsgBoxStyle.Critical, "Programming setup message");
+                        channelListView.Items[indexLcl].SubItems.Add("Xmit");
+                    }
+
+                    // if notes are present...
+                    if (note != null)
+                    {
+                        channelListView.Items[indexLcl].SubItems.Add(note);
                     }
                     else
                     {
@@ -1390,9 +1507,60 @@ namespace Radio
             channelListView.Items[indexLcl].SubItems.Add("");
             channelListView.Items[indexLcl].Selected = true;
 
-            myParser.Close();
+            channelUpdateClicked[tabIndex] = false;
+        }
 
-            channelUpdateClicked[TabControl.SelectedIndex] = false;
+/*        private void SaveChannelList(ListView channelListView, string fileName)
+        {
+            var myWriter = My.MyProject.Computer.FileSystem.OpenTextFileWriter(fileName, false);
+
+            int index;
+            var loopTo = channelListView.Items.Count - 1;
+            for (index = 0; index < loopTo; index++)
+            {
+                // initialize a string list, and give it its first entry on this line
+                List<string> newLine = new() { channelListView.Items[index].SubItems[0].Text };
+
+                newLine.Add(channelListView.Items[index].SubItems[1].Text);
+                newLine.Add(channelListView.Items[index].SubItems[2].Text);
+                newLine.Add(channelListView.Items[index].SubItems[3].Text);
+                newLine.Add(channelListView.Items[index].SubItems[4].Text);
+                newLine.Add(channelListView.Items[index].SubItems[5].Text);
+
+                // all values on the line are emitted, with a comma as a separator
+                string line = string.Join(",", newLine.ToArray());
+                myWriter.WriteLine(line);
+            }
+
+            myWriter.Close();
+        }
+*/
+        private void SaveChannelListXml(ListView channelListView, string fileName)
+        {
+            var xws = new XmlWriterSettings
+            {
+                OmitXmlDeclaration = true,
+                Indent = true
+            };
+
+            using var xw = XmlWriter.Create(fileName, xws);
+            xw.WriteStartElement("Root");
+            xw.WriteStartElement("Channels");
+
+            for (int index = 0; index < channelListView.Items.Count - 1; index++)
+            {
+                xw.WriteStartElement("Channel");
+                xw.WriteElementString("ChannelNumber", channelListView.Items[index].SubItems[0].Text);
+                xw.WriteElementString("Frequency", channelListView.Items[index].SubItems[1].Text);
+                xw.WriteElementString("Repeater", channelListView.Items[index].SubItems[2].Text);
+                xw.WriteElementString("Tone", channelListView.Items[index].SubItems[3].Text);
+                xw.WriteElementString("CTCSS", channelListView.Items[index].SubItems[4].Text);
+                xw.WriteElementString("Note", channelListView.Items[index].SubItems[5].Text);
+                xw.WriteEndElement();
+            }
+
+            xw.WriteEndElement();   // end 'Channels'
+            xw.WriteEndElement();   // end 'Root'
         }
 
         private void clearList()
