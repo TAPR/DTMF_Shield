@@ -34,20 +34,11 @@ and the Upload, also worked as well as with the Arduino IDE 1.x.
 I suspect that this project could be modified to easily program the Kenwood TM-732, and possibly TM-733.  It can also be a generic DTMF generating board.
 The Arduino is just a serial port that accepts commands that are processed by the DTMF_Shield sketch.  DTMF tones and button presses and such result from this.
 
-Note that it is possible that this code will work on a Mac or on Linux using Visual Studio, in some form.  You would have to edit the code related to how Arduino unit
-interfacing and identification work. The current code attempts to open SerialPort objects for devices with names like 'COM1' and so on.  For example, on a Mac, I
-see a serial port Arduino on port '/dev/cu.usbmodem14101'.  On Ubuntu 22.04LTS I saw a device name like '/dev/ttyACM01'.
-
-VS IDE and VS Code seem to want to do only C# on a Mac.  VS Code only wants to do C# on Linux.  So converting the code from VB.Net to C# is in order.
-Using ICSharpCode.CodeConverter vsix plugin for vs2019 (or vs2022), I've converted the VB.Net original project/solution to CSharp.  4 minor code changes were required.
-The result looks like it runs.  It does in fact run.
-
 Mac and Linux do NOT want to do Windows Forms applications (which is what the programmer app is...) any more. I think that maybe 10 years ago we could create
 the app on windows, and run it under Mono.  However, the Mac and Linux seem to use only .Net Core, which does not include support for Windows Forms apps.  It no longer
-works that way.  It looks like the way forward is to convert to a Xamarin app.  But I could be very wrong, and chasing alleged unicorns.
-
-I have and use MacOS and Linux myself, but help is appreciated!
-
+works that way.  It looks like the way forward is to convert to a Xamarin app.  But I could be very wrong, and chasing alleged unicorns.  Perhaps the way forward is
+a command line program that can read the new XML channel list files, and write to the radio that is connected.  Since the UI would be 'command line',
+there are not the same problems that a Windows Forms app would have.
 
 What the DTMF_Shield sketch does:
 1) it processes a set of serial command strings.  Some are single character, some are multiple character.  These commands/actions are described below.
@@ -63,5 +54,6 @@ What the DTMF_Shield sketch does:
     		Similar for "DOWN", "MR", "VFO", and "CALL"
 	
 Long and short presses are performed by having the TM742 programmer application change the TONE_TIME and BUTTON_TIME appropriately, then returning to the normal value.
-A possible improvement could to build in things like 'short MR' and 'long MR' by having more time values that can be set.  But those actions can already be performed with the commands that are now present.
+I have now implemented additional commands "SET_LONG_PRESS_TIME:" (followed by milliseconds, default is 1.2 seconds or 1200 milliseconds.) and "LONG_MR".
+"LONG_MR" is used when programming a custom repeater offset (whole MHz only, +/- 30 MHz), also known as an 'odd split' or non-standard split/offset.
 
