@@ -4,6 +4,31 @@
         <name>Kenwood TM742 Programmer</name>
     </assembly>
     <members>
+        <member name="M:Radio.ModuleSelectorControl.SetModuleType(System.String)">
+            <summary>
+            find the moduleName in the current list.  If found, select it,
+            otherwise select "None" (index 0)
+            </summary>
+            <param name="moduleType"></param>
+            <returns>true if found in list, false otherwise</returns>
+        </member>
+        <member name="F:Radio.ModuleSelectorControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Radio.ModuleSelectorControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Radio.ModuleSelectorControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:Radio.My.Resources.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -20,14 +45,14 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="M:Radio.Form1.getRepeaterIncrement(System.String)">
+        <member name="M:Radio.ChannelListsForm.getRepeaterIncrement(System.String)">
             <summary>
             
             </summary>
             <param name="str"></param>
             <returns></returns>
         </member>
-        <member name="M:Radio.Form1.WaitForReady">
+        <member name="M:Radio.ChannelListsForm.WaitForReady">
             <summary>
             
             </summary>

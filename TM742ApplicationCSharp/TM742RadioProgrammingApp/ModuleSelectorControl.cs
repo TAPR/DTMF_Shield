@@ -92,6 +92,11 @@ namespace Radio
             }
         }
 
+        public string GetCurrentModuleName()
+        {
+            return comboBoxModuleType.SelectedItem.ToString();
+        }
+
         /// <summary>
         /// find the moduleName in the current list.  If found, select it,
         /// otherwise select "None" (index 0)

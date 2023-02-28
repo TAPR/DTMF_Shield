@@ -181,12 +181,12 @@ namespace Radio
                 1240m, 1299.999m, 1240m, 1299.999m, 0, 0, -1, -1, 25m,
                 new decimal [] {10m, 20m, 12.5m, 25m},
                 new decimal []{+35.0m, -6.0m},
-                ""),   // and a third manual offset: +28.0m, according to Werner OE1RS
+                ""),   // and a third manual offset: -28.0m, according to Werner OE1RS
             new UTModule(ModuleType.UT1200e, "UT-1200J", new ModuleOptions []{ModuleOptions.JAPANESE_BAND_PLAN}, -1,
                 1240m, 1299.999m, 1240m, 1299.999m, 0, 0, -1, -1, 25m,
                 new decimal [] {10m, 20m, 12.5m, 25m},
                 new decimal []{+20.0m, -20.0m},
-                ""),   // and a third manual offset: +28.0m, according to Werner OE1RS
+                ""),   // and a third manual offset: -28.0m, according to Werner OE1RS
             new UTModule(ModuleType.UT1200Wideband, "UT-1200 Wide", new ModuleOptions []{ModuleOptions.WIDEBAND}, -1,
                 1100m, 1399.99m, 1100m, 1399.99m, 0, 0, -1, -1, 25m,
                 new decimal [] {10m, 20m, 12.5m, 25m},
@@ -196,12 +196,12 @@ namespace Radio
                 1100m, 1399.99m, 1100m, 1399.99m, 0, 0, -1, -1, 25m,
                 new decimal [] {10m, 20m, 12.5m, 25m},
                 new decimal []{+35.0m, -6.0m},
-                ""),   // and a third manual offset: +28.0m, according to Werner OE1RS
+                ""),   // and a third manual offset: -28.0m, according to Werner OE1RS
             new UTModule(ModuleType.UT1200e, "UT-1200J Wide", new ModuleOptions []{ ModuleOptions.WIDEBAND, ModuleOptions.JAPANESE_BAND_PLAN}, -1,
                 1100m, 1399.99m, 1100m, 1399.99m, 0, 0, -1, -1, 25m,
                 new decimal [] {10m, 20m, 12.5m, 25m},
                 new decimal []{+20.0m, -20.0m},
-                ""),   // and a third manual offset: +28.0m, according to Werner OE1RS
+                ""),   // and a third manual offset: -28.0m, according to Werner OE1RS
 
             // actually, the TM-2400 radio, with one, double-high module for 2400 MHz band.
             // it isn't a type 'E' radio.  It's similar to Japanese radios.
@@ -209,7 +209,7 @@ namespace Radio
             new UTModule(ModuleType.UT2400, "UT-2400", new ModuleOptions []{ }, -1,
                 2400m, 2449.999m, 2400m, 2449.999m, 0, 0, -1, -1, 25m,
                 new decimal [] {10m, 20m, 12.5m, 25m},  // page 61 of the JP manual.  Apparently the default is 20KHz.
-                new decimal []{+20.0m, -20.0m}, // page 27 of the JP manual for the TM-2400
+                new decimal []{+20.0m, -20.0m}, // page 27 of the JP manual for the TM-2400.  And a third, manual offset, apparently +48MHz, according to Werner OE1RS
                 ""),
         };
     }

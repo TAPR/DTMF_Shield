@@ -6,13 +6,19 @@
   <wideBand>False</wideBand>
   <ARO>True</ARO>
   <timingMode>0</timingMode>
-  <tab1Mod>None</tab1Mod>
-  <tab1StepSize>0</tab1StepSize>
-  <tab1Filename>NULL</tab1Filename>
-  <tab2Mod>None</tab2Mod>
-  <tab2StepSize>0</tab2StepSize>
-  <tab2Filename>NULL</tab2Filename>
-  <tab3Mod>None</tab3Mod>
-  <tab3StepSize>0</tab3StepSize>
-  <tab3Filename>NULL</tab3Filename>
+  <Module1>
+	  <Type>UT50</Type>
+	  <StepSize>5</StepSize>
+	  <Filename>NULL</Filename>
+  </Module1>
+  <Module2>
+	  <Type>UT144e</Type>
+	  <StepSize>5</StepSize>
+	  <Filename>NULL</Filename>
+  </Module2>
+  <Module3>
+	  <Type>UT440e</Type>
+	  <StepSize>5</StepSize>
+	  <Filename>NULL</Filename>
+  </Module3>
 </TM742>
