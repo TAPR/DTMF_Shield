@@ -82,7 +82,7 @@ namespace Radio
             this.FileToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(1465, 33);
+            this.MenuStrip.Size = new System.Drawing.Size(1758, 43);
             this.MenuStrip.TabIndex = 18;
             this.MenuStrip.Text = "MenuStrip1";
             // 
@@ -93,7 +93,7 @@ namespace Radio
             this.SaveChannelFileToolStripMenuItem});
             this.FileToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.Size = new System.Drawing.Size(57, 29);
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(57, 37);
             this.FileToolStripMenuItem.Text = "File";
             // 
             // OpenChannelFileToolStripMenuItem
@@ -139,7 +139,7 @@ namespace Radio
             this.TabPage2.Location = new System.Drawing.Point(4, 29);
             this.TabPage2.Name = "TabPage2";
             this.TabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage2.Size = new System.Drawing.Size(1455, 550);
+            this.TabPage2.Size = new System.Drawing.Size(1455, 531);
             this.TabPage2.TabIndex = 1;
             this.TabPage2.Text = "Module 2";
             this.TabPage2.UseVisualStyleBackColor = true;
@@ -150,7 +150,7 @@ namespace Radio
             this.TabPage3.Location = new System.Drawing.Point(4, 29);
             this.TabPage3.Name = "TabPage3";
             this.TabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage3.Size = new System.Drawing.Size(1455, 550);
+            this.TabPage3.Size = new System.Drawing.Size(1455, 531);
             this.TabPage3.TabIndex = 2;
             this.TabPage3.Text = "Module 3";
             this.TabPage3.UseVisualStyleBackColor = true;
@@ -188,9 +188,9 @@ namespace Radio
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 174);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(135, 20);
+            this.label2.Size = new System.Drawing.Size(336, 24);
             this.label2.TabIndex = 29;
-            this.label2.Text = "Command History";
+            this.label2.Text = "Serial DTMF_Shield Command History";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
@@ -209,7 +209,7 @@ namespace Radio
             this.textBoxSerialCommands.Multiline = true;
             this.textBoxSerialCommands.Name = "textBoxSerialCommands";
             this.textBoxSerialCommands.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxSerialCommands.Size = new System.Drawing.Size(1450, 150);
+            this.textBoxSerialCommands.Size = new System.Drawing.Size(1450, 129);
             this.textBoxSerialCommands.TabIndex = 27;
             // 
             // StopProgramButton
@@ -355,7 +355,7 @@ namespace Radio
             this.moduleLayoutPanelTab2.Location = new System.Drawing.Point(3, 3);
             this.moduleLayoutPanelTab2.moduleSelectorControl = null;
             this.moduleLayoutPanelTab2.Name = "moduleLayoutPanelTab2";
-            this.moduleLayoutPanelTab2.Size = new System.Drawing.Size(1449, 544);
+            this.moduleLayoutPanelTab2.Size = new System.Drawing.Size(1449, 525);
             this.moduleLayoutPanelTab2.TabIndex = 0;
             this.moduleLayoutPanelTab2.UserSelectedChannel = false;
             // 
@@ -366,7 +366,7 @@ namespace Radio
             this.moduleLayoutPanelTab3.Location = new System.Drawing.Point(3, 3);
             this.moduleLayoutPanelTab3.moduleSelectorControl = null;
             this.moduleLayoutPanelTab3.Name = "moduleLayoutPanelTab3";
-            this.moduleLayoutPanelTab3.Size = new System.Drawing.Size(1449, 544);
+            this.moduleLayoutPanelTab3.Size = new System.Drawing.Size(1449, 525);
             this.moduleLayoutPanelTab3.TabIndex = 1;
             this.moduleLayoutPanelTab3.UserSelectedChannel = false;
             // 

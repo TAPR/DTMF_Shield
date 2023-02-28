@@ -94,7 +94,7 @@ namespace Radio
             this.splitContainer1.Panel2.Controls.Add(this.label9);
             this.splitContainer1.Panel2.Controls.Add(this.ChannelListView);
             this.splitContainer1.Size = new System.Drawing.Size(1442, 624);
-            this.splitContainer1.SplitterDistance = 696;
+            this.splitContainer1.SplitterDistance = 717;
             this.splitContainer1.TabIndex = 0;
             // 
             // PanelChannelSettings
@@ -125,14 +125,14 @@ namespace Radio
             this.PanelChannelSettings.Controls.Add(this.MHzComboBox);
             this.PanelChannelSettings.Location = new System.Drawing.Point(5, 5);
             this.PanelChannelSettings.Name = "PanelChannelSettings";
-            this.PanelChannelSettings.Size = new System.Drawing.Size(692, 612);
+            this.PanelChannelSettings.Size = new System.Drawing.Size(705, 612);
             this.PanelChannelSettings.TabIndex = 1;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(522, 61);
+            this.label8.Location = new System.Drawing.Point(526, 117);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(152, 25);
             this.label8.TabIndex = 29;
@@ -140,7 +140,7 @@ namespace Radio
             // 
             // numericUpDownCustomOffsetMHz
             // 
-            this.numericUpDownCustomOffsetMHz.Location = new System.Drawing.Point(529, 88);
+            this.numericUpDownCustomOffsetMHz.Location = new System.Drawing.Point(527, 157);
             this.numericUpDownCustomOffsetMHz.Maximum = new decimal(new int[] {
             60,
             0,
@@ -162,7 +162,7 @@ namespace Radio
             this.groupBox1.Controls.Add(this.CtcssXmitRadioButton);
             this.groupBox1.Controls.Add(this.CtcssXmitRecRadioButton);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(529, 175);
+            this.groupBox1.Location = new System.Drawing.Point(525, 202);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(134, 118);
             this.groupBox1.TabIndex = 27;
@@ -211,15 +211,17 @@ namespace Radio
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 368);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(8, 61);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(112, 20);
+            this.label7.Size = new System.Drawing.Size(153, 25);
             this.label7.TabIndex = 26;
             this.label7.Text = "KHz Step Size";
             // 
             // KhzSpacingComboBox
             // 
-            this.KhzSpacingComboBox.FormattingEnabled = true;
+            this.KhzSpacingComboBox.AllowDrop = true;
+            this.KhzSpacingComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KhzSpacingComboBox.Items.AddRange(new object[] {
             "10",
             "12.5",
@@ -227,15 +229,16 @@ namespace Radio
             "25",
             "20",
             "15"});
-            this.KhzSpacingComboBox.Location = new System.Drawing.Point(151, 365);
+            this.KhzSpacingComboBox.Location = new System.Drawing.Point(198, 58);
             this.KhzSpacingComboBox.Name = "KhzSpacingComboBox";
-            this.KhzSpacingComboBox.Size = new System.Drawing.Size(100, 28);
+            this.KhzSpacingComboBox.Size = new System.Drawing.Size(100, 33);
             this.KhzSpacingComboBox.TabIndex = 25;
             this.KhzSpacingComboBox.SelectedIndexChanged += new System.EventHandler(this.KhzSpacingComboBox_SelectedIndexChanged);
             // 
             // DeleteRowButton
             // 
-            this.DeleteRowButton.Location = new System.Drawing.Point(71, 308);
+            this.DeleteRowButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteRowButton.Location = new System.Drawing.Point(463, 376);
             this.DeleteRowButton.Name = "DeleteRowButton";
             this.DeleteRowButton.Size = new System.Drawing.Size(200, 46);
             this.DeleteRowButton.TabIndex = 24;
@@ -245,7 +248,8 @@ namespace Radio
             // 
             // InsertRowButton
             // 
-            this.InsertRowButton.Location = new System.Drawing.Point(275, 308);
+            this.InsertRowButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InsertRowButton.Location = new System.Drawing.Point(463, 326);
             this.InsertRowButton.Name = "InsertRowButton";
             this.InsertRowButton.Size = new System.Drawing.Size(200, 44);
             this.InsertRowButton.TabIndex = 22;
@@ -256,7 +260,7 @@ namespace Radio
             // Label67
             // 
             this.Label67.AutoSize = true;
-            this.Label67.Location = new System.Drawing.Point(17, 159);
+            this.Label67.Location = new System.Drawing.Point(8, 202);
             this.Label67.Name = "Label67";
             this.Label67.Size = new System.Drawing.Size(114, 20);
             this.Label67.TabIndex = 19;
@@ -264,16 +268,16 @@ namespace Radio
             // 
             // ChannelNotes
             // 
-            this.ChannelNotes.Location = new System.Drawing.Point(11, 193);
+            this.ChannelNotes.Location = new System.Drawing.Point(12, 235);
             this.ChannelNotes.MaxLength = 25;
             this.ChannelNotes.Name = "ChannelNotes";
-            this.ChannelNotes.Size = new System.Drawing.Size(464, 26);
+            this.ChannelNotes.Size = new System.Drawing.Size(473, 26);
             this.ChannelNotes.TabIndex = 18;
             // 
             // Tab1SetChannelButton
             // 
             this.Tab1SetChannelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Tab1SetChannelButton.Location = new System.Drawing.Point(275, 225);
+            this.Tab1SetChannelButton.Location = new System.Drawing.Point(209, 302);
             this.Tab1SetChannelButton.Name = "Tab1SetChannelButton";
             this.Tab1SetChannelButton.Size = new System.Drawing.Size(200, 68);
             this.Tab1SetChannelButton.TabIndex = 11;
@@ -295,7 +299,7 @@ namespace Radio
             // 
             this.Label5.AutoSize = true;
             this.Label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label5.Location = new System.Drawing.Point(406, 61);
+            this.Label5.Location = new System.Drawing.Point(423, 117);
             this.Label5.Name = "Label5";
             this.Label5.Size = new System.Drawing.Size(62, 25);
             this.Label5.TabIndex = 9;
@@ -304,9 +308,9 @@ namespace Radio
             // ClearChannelListButton
             // 
             this.ClearChannelListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClearChannelListButton.Location = new System.Drawing.Point(90, 225);
+            this.ClearChannelListButton.Location = new System.Drawing.Point(463, 428);
             this.ClearChannelListButton.Name = "ClearChannelListButton";
-            this.ClearChannelListButton.Size = new System.Drawing.Size(169, 68);
+            this.ClearChannelListButton.Size = new System.Drawing.Size(200, 75);
             this.ClearChannelListButton.TabIndex = 12;
             this.ClearChannelListButton.Text = "Clear Channel List";
             this.ClearChannelListButton.UseVisualStyleBackColor = true;
@@ -316,7 +320,7 @@ namespace Radio
             // 
             this.Label4.AutoSize = true;
             this.Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label4.Location = new System.Drawing.Point(279, 60);
+            this.Label4.Location = new System.Drawing.Point(292, 117);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(99, 25);
             this.Label4.TabIndex = 8;
@@ -326,7 +330,7 @@ namespace Radio
             // 
             this.Label3.AutoSize = true;
             this.Label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label3.Location = new System.Drawing.Point(175, 60);
+            this.Label3.Location = new System.Drawing.Point(198, 117);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(53, 25);
             this.Label3.TabIndex = 7;
@@ -335,7 +339,7 @@ namespace Radio
             // ChannelTextBox
             // 
             this.ChannelTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChannelTextBox.Location = new System.Drawing.Point(3, 89);
+            this.ChannelTextBox.Location = new System.Drawing.Point(3, 154);
             this.ChannelTextBox.Name = "ChannelTextBox";
             this.ChannelTextBox.ReadOnly = true;
             this.ChannelTextBox.Size = new System.Drawing.Size(62, 28);
@@ -345,7 +349,7 @@ namespace Radio
             // 
             this.Label2.AutoSize = true;
             this.Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label2.Location = new System.Drawing.Point(7, 61);
+            this.Label2.Location = new System.Drawing.Point(7, 117);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(61, 25);
             this.Label2.TabIndex = 5;
@@ -355,7 +359,7 @@ namespace Radio
             // 
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label1.Location = new System.Drawing.Point(75, 61);
+            this.Label1.Location = new System.Drawing.Point(82, 117);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(56, 25);
             this.Label1.TabIndex = 4;
@@ -405,7 +409,7 @@ namespace Radio
             "233.6",
             "241.8",
             "250.3"});
-            this.ToneComboBox.Location = new System.Drawing.Point(411, 86);
+            this.ToneComboBox.Location = new System.Drawing.Point(416, 154);
             this.ToneComboBox.Name = "ToneComboBox";
             this.ToneComboBox.Size = new System.Drawing.Size(99, 30);
             this.ToneComboBox.TabIndex = 3;
@@ -419,7 +423,7 @@ namespace Radio
             "PLUS",
             "MINUS",
             "SIMPLEX"});
-            this.RepeaterModeComboBox.Location = new System.Drawing.Point(275, 85);
+            this.RepeaterModeComboBox.Location = new System.Drawing.Point(276, 154);
             this.RepeaterModeComboBox.Name = "RepeaterModeComboBox";
             this.RepeaterModeComboBox.Size = new System.Drawing.Size(133, 30);
             this.RepeaterModeComboBox.TabIndex = 2;
@@ -529,7 +533,7 @@ namespace Radio
             "970",
             "980",
             "990"});
-            this.KHzComboBox.Location = new System.Drawing.Point(179, 86);
+            this.KHzComboBox.Location = new System.Drawing.Point(180, 154);
             this.KHzComboBox.MaxDropDownItems = 10;
             this.KHzComboBox.Name = "KHzComboBox";
             this.KHzComboBox.Size = new System.Drawing.Size(90, 30);
@@ -547,7 +551,7 @@ namespace Radio
             "148",
             "149",
             "150"});
-            this.MHzComboBox.Location = new System.Drawing.Point(71, 86);
+            this.MHzComboBox.Location = new System.Drawing.Point(71, 152);
             this.MHzComboBox.Name = "MHzComboBox";
             this.MHzComboBox.Size = new System.Drawing.Size(102, 30);
             this.MHzComboBox.TabIndex = 0;
@@ -583,7 +587,7 @@ namespace Radio
             this.ChannelListView.Location = new System.Drawing.Point(3, 68);
             this.ChannelListView.MultiSelect = false;
             this.ChannelListView.Name = "ChannelListView";
-            this.ChannelListView.Size = new System.Drawing.Size(732, 549);
+            this.ChannelListView.Size = new System.Drawing.Size(711, 549);
             this.ChannelListView.TabIndex = 13;
             this.ChannelListView.UseCompatibleStateImageBehavior = false;
             this.ChannelListView.View = System.Windows.Forms.View.Details;
