@@ -57,3 +57,6 @@ Long and short presses are performed by having the TM742 programmer application 
 I have now implemented additional commands "SET_LONG_PRESS_TIME:" (followed by milliseconds, default is 1.2 seconds or 1200 milliseconds.) and "LONG_MR".
 "LONG_MR" is used when programming a custom repeater offset (whole MHz only, +/- 30 MHz), also known as an 'odd split' or non-standard split/offset.
 
+--->>> TRY THE NEW BRANCH! https://github.com/TAPR/DTMF_Shield/tree/main/TM742ApplicationCSharpNew 
+This is a very much refactored branch.  It has 'custom/odd/nonstandard' repeater split/offset frequency in whole MHz.  There is a new beta release for its installer.
+
