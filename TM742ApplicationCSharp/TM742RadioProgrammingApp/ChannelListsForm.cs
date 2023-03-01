@@ -645,7 +645,7 @@ namespace Radio
 
         private bool SetButtonTime(int toneTimeMs)
         {
-            bool serialStatus = SendString("SET_BUTTONE_TIME:");
+            bool serialStatus = SendString("SET_BUTTON_TIME:");
             if (serialStatus != true)
             {
                 return false;
