@@ -205,11 +205,11 @@ namespace Radio
 
             channelListsForm.initializeForm();
 
-            channelListsForm.moduleLayoutPanelTab3.initTabPage(this, module3SelectorControl);
+            channelListsForm.moduleLayoutPanelTab3.initTabPage(radioConfig, module3SelectorControl);
 
-            channelListsForm.moduleLayoutPanelTab2.initTabPage(this, module2SelectorControl);
+            channelListsForm.moduleLayoutPanelTab2.initTabPage(radioConfig, module2SelectorControl);
 
-            channelListsForm.moduleLayoutPanelTab1.initTabPage(this, module1SelectorControl);
+            channelListsForm.moduleLayoutPanelTab1.initTabPage(radioConfig, module1SelectorControl);
 
             // end initialize all tab pages
 

@@ -21,7 +21,6 @@ namespace Radio
             InitializeComponent();
         }
 
-        MainForm mainForm;
         RadioConfig radioConfig;
         ChannelListForm channelListForm;
         UTModule utModule;
@@ -36,15 +35,14 @@ namespace Radio
 
         public bool UserSelectedChannel { get; set; }
 
-        public void initializeTab(MainForm mainForm, int tabNumber, ChannelListForm channelListForm, UTModule utModule, ModuleSelectorControl moduleSelectorControl, string stepSize)
+        public void initializeTab(RadioConfig radioConfig, int tabNumber, ChannelListForm channelListForm, UTModule utModule, ModuleSelectorControl moduleSelectorControl, string stepSize)
         {
             this.tabNumber = tabNumber;     // 0, 1, or 2
             this.moduleSelectorControl = moduleSelectorControl;
             this.channelListForm = channelListForm;
-            this.mainForm = mainForm;
-            this.radioConfig = mainForm.radioConfig;
+            this.radioConfig = radioConfig;
             this.utModule = utModule;
-            channelListManager = new(utModule, ChannelListView, mainForm.radioConfig);
+            channelListManager = new(utModule, ChannelListView, radioConfig);
 
             KhzSpacingComboBox.Text = 5.ToString();
 
@@ -120,10 +118,10 @@ namespace Radio
 
         private void SetChannelButton_Click(object sender, EventArgs e)
         {
-            SetChannelButton();
+            SetChannel();
         }
 
-        private void SetChannelButton()
+        private void SetChannel()
         {
             channelUpdateClicked = true;
 
@@ -365,15 +363,14 @@ namespace Radio
             channelUpdateClicked = false;
         }
 
-        public void initTabPage(MainForm mainForm, ModuleSelectorControl moduleSelector)
+        public void initTabPage(RadioConfig radioConfig, ModuleSelectorControl moduleSelector)
         {
-            this.mainForm = mainForm;
-            this.radioConfig = mainForm.radioConfig;
+            this.radioConfig = radioConfig;
 
             var currentModule = moduleSelector.GetCurrentModuleName();
 
             RepeaterModeComboBox.Items.Clear();
-            if (mainForm.checkBoxAllowOddOffset.Checked)
+            if (radioConfig.AllowCustomOffset)
             {
                 RepeaterModeComboBox.Items.Add("CUSTOM");
             }
@@ -382,7 +379,7 @@ namespace Radio
             RepeaterModeComboBox.Items.Add("MINUS");
 
             // (430 band in European band plan) or (1200 band NOT in European band plan) has double-minus
-            if (((currentModule == "UT440") && mainForm.eTypeRadioCheckBox.Checked) || ((currentModule == "UT1200") && !mainForm.eTypeRadioCheckBox.Checked))
+            if (((currentModule == "UT440") && radioConfig.EType) || ((currentModule == "UT1200") && !radioConfig.EType))
             {
                 RepeaterModeComboBox.Items.Add("DBL MINUS");
             }
@@ -517,7 +514,7 @@ namespace Radio
 
         public void saveTabOnLeavingIfDirty(TabControlCancelEventArgs e)
         {
-            if (ChannelListView.Items.Count > 1 && !mainForm.initializing && (channelUpdateClicked == true))
+            if (ChannelListView.Items.Count > 1 && (channelUpdateClicked == true))
             {
                 if (displaySaveMessage() == false)
                 {
@@ -531,7 +528,7 @@ namespace Radio
 
         public void saveTabOnLeavingIfDirty()
         {
-            if (ChannelListView.Items.Count > 1 && !mainForm.initializing && (channelUpdateClicked == true))
+            if (ChannelListView.Items.Count > 1 && (channelUpdateClicked == true))
             {
                 if (displaySaveMessage() == false)
                 {

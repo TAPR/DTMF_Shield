@@ -31,10 +31,12 @@ namespace Radio
 
         private string recvdData = "";
         private bool stopProgrammingRequested;
+
         public bool DEBUG = false;
         private const int NORMAL_RADIO_TIMING = 100;    // 80;
         private const int SLOW_RADIO_TIMING = 250;
         private const int DEBUG_RADIO_TIMING = 500;
+
         private readonly MainForm mainForm = null;
         private readonly RadioConfig radioConfig = null;
 
@@ -56,19 +58,19 @@ namespace Radio
             utm = UTModule.findBestModule(mainForm.module1SelectorControl.GetCurrentModuleName(),
                 radioConfig.EType ? UTModule.BandPlanOption.EUROPEAN_BAND_PLAN : UTModule.BandPlanOption.NORTHAMERICAN_BAND_PLAN,
                 radioConfig.WideBand ? UTModule.WidebandOption.WIDEBAND : UTModule.WidebandOption.NORMAL);
-            moduleLayoutPanelTab1.initializeTab(mainForm, 0, this, utm, mainForm.module1SelectorControl, mainForm.radioConfig.getTab1StepSize());
+            moduleLayoutPanelTab1.initializeTab(radioConfig, 0, this, utm, mainForm.module1SelectorControl, radioConfig.getTab1StepSize());
 
             // tab index 1, number 2
             utm = UTModule.findBestModule(mainForm.module2SelectorControl.GetCurrentModuleName(),
                            radioConfig.EType ? UTModule.BandPlanOption.EUROPEAN_BAND_PLAN : UTModule.BandPlanOption.NORTHAMERICAN_BAND_PLAN,
                            radioConfig.WideBand ? UTModule.WidebandOption.WIDEBAND : UTModule.WidebandOption.NORMAL);
-            moduleLayoutPanelTab2.initializeTab(mainForm, 1, this, utm, mainForm.module2SelectorControl, mainForm.radioConfig.getTab2StepSize());
+            moduleLayoutPanelTab2.initializeTab(radioConfig, 1, this, utm, mainForm.module2SelectorControl, radioConfig.getTab2StepSize());
 
             // tab index 2, number 3
             utm = UTModule.findBestModule(mainForm.module3SelectorControl.GetCurrentModuleName(),
                            radioConfig.EType ? UTModule.BandPlanOption.EUROPEAN_BAND_PLAN : UTModule.BandPlanOption.NORTHAMERICAN_BAND_PLAN,
                            radioConfig.WideBand ? UTModule.WidebandOption.WIDEBAND : UTModule.WidebandOption.NORMAL);
-            moduleLayoutPanelTab3.initializeTab(mainForm, 2, this, utm, mainForm.module3SelectorControl, mainForm.radioConfig.getTab3StepSize());
+            moduleLayoutPanelTab3.initializeTab(radioConfig, 2, this, utm, mainForm.module3SelectorControl, radioConfig.getTab3StepSize());
             
             ToolStripStatusLabel.Text = "";
 
@@ -101,7 +103,7 @@ namespace Radio
             bool tryDefaultPort = false;
             try
             {
-                string portString = mainForm.radioConfig.getUsbPortName();
+                string portString = radioConfig.getUsbPortName();
                 SerialPort1.PortName = portString;
                 SerialPort1.Open();
                 Sleep(3000L);
@@ -117,7 +119,7 @@ namespace Radio
                 bool testMsg = SendString(" ");
                 if (testMsg)
                 {
-                    string message = String.Format("Found Arduino on on COM port: {0}", mainForm.radioConfig.getUsbPortNumber());
+                    string message = String.Format("Found Arduino on on COM port: {0}", radioConfig.getUsbPortNumber());
                     MessageBox.Show(message);
                     return true;
                 }
@@ -154,7 +156,7 @@ namespace Radio
                     message += Convert.ToString(x);
                     MessageBox.Show(message);
 
-                    mainForm.radioConfig.UpdateUSBComPort(x);
+                    radioConfig.UpdateUSBComPort(x);
 
                     ComPortTextBox.Visible = false;
 
@@ -213,7 +215,7 @@ namespace Radio
         public int getCtcssModeIndex(string str)
         {
             int count = 0;
-            if (mainForm.Tsu7CheckBox.Checked)
+            if (radioConfig.Tsu7Installed)
             {
                 CTCSSModeList_NumElementsToUse = 3;
             }
@@ -387,11 +389,11 @@ namespace Radio
 
             Timer1.Enabled = true;
 
-            if (mainForm.normalRadioTimingButton.Checked)
+            if (radioConfig.TimingMode == 0)
             {
                 toneAndButtonOnTime = NORMAL_RADIO_TIMING;
             }
-            else if (mainForm.slowRadioTimingButton.Checked)
+            else if (radioConfig.TimingMode == 1)
             {
                 toneAndButtonOnTime = SLOW_RADIO_TIMING;
             }
@@ -453,12 +455,12 @@ namespace Radio
 
                     SendString("A");        // ENTER key. See page 61 of User Manual.
 
-                    if (mainForm.wideBandCheckBox.Checked && TabControl.SelectedTab.Text.Contains("1200"))
+                    if (radioConfig.WideBand && TabControl.SelectedTab.Text.Contains("1200"))
                     {
                         SendString(Conversions.ToString(mhzVal[mhzVal.Length - 3]));    // hundreds of MHz
                     }
 
-                    if (mainForm.wideBandCheckBox.Checked
+                    if (radioConfig.WideBand
                         || !TabControl.SelectedTab.Text.Contains("e")
                         || TabControl.SelectedTab.Text.Contains("1200")
                         || TabControl.SelectedTab.Text.Contains("2400"))
@@ -476,13 +478,13 @@ namespace Radio
                         freqCharIndex++;
                     }
 
-                    if (mainForm.AROcheckBox.Checked)
+                    if (radioConfig.ARO)
                     {
                         // only the UT144 and UT220 have 'Automatic Receiver Offset' feature, it seems
                         if (moduleIsUT144)
                         {
                             // it's a 2m module
-                            if (!mainForm.eTypeRadioCheckBox.Checked)
+                            if (!radioConfig.EType)
                             {
                                 // USA band plan for 2m, based on 'Type E' check box being not checked
                                 if (decFrequency < 145.1m)
@@ -543,7 +545,7 @@ namespace Radio
                                 }
                             }
                         }
-                        else if (moduleIsUT220 && !mainForm.eTypeRadioCheckBox.Checked)
+                        else if (moduleIsUT220 && !radioConfig.EType)
                         {
                             // it's a 220 MHz module.  Cannot be used in an 'e-type' radio (not legal in Europe)
                             if (decFrequency < 223.92m)

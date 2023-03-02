@@ -46,7 +46,7 @@ namespace Radio
             this.InsertRowButton = new System.Windows.Forms.Button();
             this.Label67 = new System.Windows.Forms.Label();
             this.ChannelNotes = new System.Windows.Forms.TextBox();
-            this.Tab1SetChannelButton = new System.Windows.Forms.Button();
+            this.SetChannelButton = new System.Windows.Forms.Button();
             this.Label6 = new System.Windows.Forms.Label();
             this.Label5 = new System.Windows.Forms.Label();
             this.ClearChannelListButton = new System.Windows.Forms.Button();
@@ -111,7 +111,7 @@ namespace Radio
             this.PanelChannelSettings.Controls.Add(this.InsertRowButton);
             this.PanelChannelSettings.Controls.Add(this.Label67);
             this.PanelChannelSettings.Controls.Add(this.ChannelNotes);
-            this.PanelChannelSettings.Controls.Add(this.Tab1SetChannelButton);
+            this.PanelChannelSettings.Controls.Add(this.SetChannelButton);
             this.PanelChannelSettings.Controls.Add(this.Label6);
             this.PanelChannelSettings.Controls.Add(this.Label5);
             this.PanelChannelSettings.Controls.Add(this.ClearChannelListButton);
@@ -275,22 +275,22 @@ namespace Radio
             this.ChannelNotes.Size = new System.Drawing.Size(473, 26);
             this.ChannelNotes.TabIndex = 18;
             // 
-            // Tab1SetChannelButton
+            // SetChannelButton
             // 
-            this.Tab1SetChannelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Tab1SetChannelButton.Location = new System.Drawing.Point(209, 302);
-            this.Tab1SetChannelButton.Name = "Tab1SetChannelButton";
-            this.Tab1SetChannelButton.Size = new System.Drawing.Size(200, 68);
-            this.Tab1SetChannelButton.TabIndex = 11;
-            this.Tab1SetChannelButton.Text = "Set/Update Channel";
-            this.Tab1SetChannelButton.UseVisualStyleBackColor = true;
-            this.Tab1SetChannelButton.Click += new System.EventHandler(this.SetChannelButton_Click);
+            this.SetChannelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SetChannelButton.Location = new System.Drawing.Point(209, 302);
+            this.SetChannelButton.Name = "SetChannelButton";
+            this.SetChannelButton.Size = new System.Drawing.Size(200, 68);
+            this.SetChannelButton.TabIndex = 11;
+            this.SetChannelButton.Text = "Set/Update Channel";
+            this.SetChannelButton.UseVisualStyleBackColor = true;
+            this.SetChannelButton.Click += new System.EventHandler(this.SetChannelButton_Click);
             // 
             // Label6
             // 
             this.Label6.AutoSize = true;
             this.Label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label6.Location = new System.Drawing.Point(115, 7);
+            this.Label6.Location = new System.Drawing.Point(191, 7);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(276, 37);
             this.Label6.TabIndex = 10;
@@ -564,7 +564,7 @@ namespace Radio
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(171, 14);
+            this.label9.Location = new System.Drawing.Point(228, 14);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(207, 37);
             this.label9.TabIndex = 14;
@@ -677,7 +677,7 @@ namespace Radio
         internal System.Windows.Forms.Button InsertRowButton;
         internal System.Windows.Forms.Label Label67;
         internal System.Windows.Forms.TextBox ChannelNotes;
-        internal System.Windows.Forms.Button Tab1SetChannelButton;
+        internal System.Windows.Forms.Button SetChannelButton;
         internal System.Windows.Forms.Label Label6;
         internal System.Windows.Forms.Label Label5;
         internal System.Windows.Forms.Button ClearChannelListButton;
