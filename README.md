@@ -17,13 +17,17 @@ This consists of:
   the two zip files are the original installer and the original Visual Studio source code.  It was called 'UsbTest' then.
 
 "TM742 Programmer - Rev 1 candidate Jul1 1, 2014.zip" is the original installer as provided by WA7YLI.  This is also what the 'initial release' gives you.
+https://github.com/TAPR/DTMF_Shield/blob/main/TM742%20Programmer%20-%20Rev%201%20candidate%20Jul1%201%2C%202014.zip
 
 "TM742ApplicationSln.zip" is the original source code from WA7YLI.
+https://github.com/TAPR/DTMF_Shield/blob/main/TM742ApplicationSln.zip
 
 "Instructions - readme - updated for Rev 1 Sept13_2015.pdf" original instructions from Larry.
+https://github.com/TAPR/DTMF_Shield/blob/main/Instructions%20-%20readme%20-%20updated%20for%20Rev%201%20Sept13_2015.pdf
 
 "TM742 Programming Kit Pictures.docx" - shows the shield board and how to put it on an Arduino.  Note that no power cable is needed by the Arduino in most all
 applications, unless your PC is unable to power the Arduino via the USB cable that you use.
+https://github.com/TAPR/DTMF_Shield/blob/main/TM742%20Programming%20Kit%20Pictures.docx
 
 If you are using Arduino IDE 1.x, place the Messenger folder inside your Documents\Arduino\libraries folder.  Open the DTMF_Shield sketch.
 Use 'upload' to put it onto an Arduino Uno that is plugged in to the computer and recognized.
