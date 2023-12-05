@@ -16,6 +16,11 @@ This consists of:
 3) a Visual Studio VB.Net application that, using a DTMF Shield on an Arduino, will program a Kenwood TM-742 series radio
   the two zip files are the original installer and the original Visual Studio source code.  It was called 'UsbTest' then.
 
+Folder DTMF_Shield: contains the Arduino 2.x sketch, DTMF_Shield.ino.
+
+Folder libraries: contains libraries no longer available via the Arduino IDE that are used by DTMF_Shield.  This has the subfolder Messenger, containing
+the deprecated library's code.
+
 "TM742 Programmer - Rev 1 candidate Jul1 1, 2014.zip" is the original installer as provided by WA7YLI.  This is also what the 'initial release' gives you.
 https://github.com/TAPR/DTMF_Shield/blob/main/TM742%20Programmer%20-%20Rev%201%20candidate%20Jul1%201%2C%202014.zip
 
