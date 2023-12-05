@@ -33,6 +33,13 @@ Using (currently) the Arduino IDE 2.x, place the libraries/Messenger folder insi
 into your Documents\Arduino folder, creating the DTMF_Shield subfolder, containing DTMF_Shield.ino.  Open DTMF_Shield.ino in your Arduino IDE.
 Use 'upload' to put it onto an Arduino Uno that is plugged in to the computer and recognized and selected.
 
+To make it easier to just use the Arduino Sketch, there is a zip file in the main folder, DTMF_Shield_Sketch.zip, that you should download.  It contains a folder DTMF_Shield,
+containing DTMF_Shield.ino (for IDE 2.x and above), and the folder libraries, containing the subfolder Messenger, containing the code for a no-longer available Arduino library
+that is used by the sketch.  If you place the contents of the zip file, those two folders, DTMF_Shield and libraries, in your Arduino sketch folder (often your Documents/Arduino folder)
+you will have everything you need to upload the sketch onto an Arduino Uno of your own, or to replace the code on your Uno, or one that has somehow lost its program (note: a firmware update
+will often cause loss of the sketch that was on the Uno previously.)  Using the Arudino IDE, open the DTMF_Shield.ino file (the sketch file) in the DTMF_Shield folder.  Voila!  Use 'Upload'
+under 'Sketch' to put the sketch onto your Uno.
+
 I suspect that this project could be modified to easily program the Kenwood TM-732, and possibly TM-733.  It can also be a generic DTMF generating board.
 The Arduino is just a serial port that accepts commands that are processed by the DTMF_Shield sketch.  DTMF tones and button presses and such result from this.
 
