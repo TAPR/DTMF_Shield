@@ -21,16 +21,16 @@ Folder DTMF_Shield: contains the Arduino 2.x sketch, DTMF_Shield.ino.
 Folder libraries: contains libraries no longer available via the Arduino IDE that are used by DTMF_Shield.  This has the subfolder Messenger, containing
 the deprecated library's code.
 
-"TM742 Programmer - Rev 1 candidate Jul1 1, 2014.zip" is the original installer as provided by WA7YLI.  This is also what the 'initial release' gives you.
+File "TM742 Programmer - Rev 1 candidate Jul1 1, 2014.zip" is the original installer as provided by WA7YLI.  This is also what the 'initial release' gives you.
 https://github.com/TAPR/DTMF_Shield/blob/main/TM742%20Programmer%20-%20Rev%201%20candidate%20Jul1%201%2C%202014.zip
 
-"TM742ApplicationSln.zip" is the original source code from WA7YLI.
+File "TM742ApplicationSln.zip" is the original source code from WA7YLI.
 https://github.com/TAPR/DTMF_Shield/blob/main/TM742ApplicationSln.zip
 
-"Instructions - readme - updated for Rev 1 Sept13_2015.pdf" original instructions from Larry.
+File "Instructions - readme - updated for Rev 1 Sept13_2015.pdf" original instructions from Larry.
 https://github.com/TAPR/DTMF_Shield/blob/main/Instructions%20-%20readme%20-%20updated%20for%20Rev%201%20Sept13_2015.pdf
 
-"TM742 Programming Kit Pictures.docx" - shows the shield board and how to put it on an Arduino.  Note that no power cable is needed by the Arduino in most all
+File "TM742 Programming Kit Pictures.docx" - shows the shield board and how to put it on an Arduino.  Note that no power cable is needed by the Arduino in most all
 applications, unless your PC is unable to power the Arduino via the USB cable that you use.
 https://github.com/TAPR/DTMF_Shield/blob/main/TM742%20Programming%20Kit%20Pictures.docx
 
