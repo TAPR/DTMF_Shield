@@ -45,14 +45,9 @@ you will have everything you need to upload the sketch onto an Arduino Uno of yo
 will often cause loss of the sketch that was on the Uno previously.)  Using the Arudino IDE, open the DTMF_Shield.ino file (the sketch file) in the DTMF_Shield folder.  Voila!  Use 'Upload'
 under 'Sketch' to put the sketch onto your Uno.
 
-I suspect that this project could be modified to easily program the Kenwood TM-732, and possibly TM-733.  It can also be a generic DTMF generating board.
-The Arduino is just a serial port that accepts commands that are processed by the DTMF_Shield sketch.  DTMF tones and button presses and such result from this.
-
 Mac and Linux do NOT want to do Windows Forms applications (which is what the programmer app is...) any more. I think that maybe 10 years ago we could create
 the app on windows, and run it under Mono.  However, the Mac and Linux seem to use only .Net Core, which does not include support for Windows Forms apps.  It no longer
-works that way.  It looks like the way forward is to convert to a Xamarin app.  But I could be very wrong, and chasing alleged unicorns.  Perhaps the way forward is
-a command line program that can read the new XML channel list files, and write to the radio that is connected.  Since the UI would be 'command line',
-there are not the same problems that a Windows Forms app would have.
+works that way.  So, it does't run on Mac or Linux.  Volunteers are welcome to undertake those ports.
 
 What the DTMF_Shield sketch does:
 1) it processes a set of serial command strings.  Some are single character, some are multiple character.  These commands/actions are described below.
