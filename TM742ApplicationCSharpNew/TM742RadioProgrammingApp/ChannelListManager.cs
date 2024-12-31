@@ -242,7 +242,7 @@ namespace Radio
                     }
 
                     // add empty CustomOffset column
-                    ChannelListView.Items[indexLcl].SubItems.Add("");
+                    ChannelListView.Items[indexLcl].SubItems.Add("0");
 
                     // if notes are present...
                     if (testAry.Length == 6)

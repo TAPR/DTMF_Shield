@@ -131,7 +131,7 @@ namespace Radio
             }
 
             ComPortTextBox.Visible = true;
-            for (int x = 1; x <= 20; x++)
+            for (int x = 1; x <= 60; x++)
             {
                 ComPortTextBox.Text = "Searching for Arduino on COM Port: " + x;
                 ComPortTextBox.Update();
@@ -566,7 +566,12 @@ namespace Radio
                     // get how many steps are needed from 'current' increment to what was chosen.  Code above in ARO accounts for some choices
                     // being automatic based on the frequency chosen.
                     var repeaterSplitMode = ChannelListView.Items[channelIndex].SubItems[2].Text;
-                    var offsetMHz = Convert.ToInt32(ChannelListView.Items[channelIndex].SubItems[5].Text, System.Globalization.CultureInfo.InvariantCulture);
+                    var offset = ChannelListView.Items[channelIndex].SubItems[5].Text;
+                    if (offset == "")
+                    {
+                        offset = "0";
+                    }
+                    var offsetMHz = Convert.ToInt32(offset, System.Globalization.CultureInfo.InvariantCulture);
                     var isOddSplit = repeaterSplitMode.Equals("CUSTOM") && (offsetMHz != 0);
 
                     int repeaterCount = getRepeaterIncrement(isOddSplit ? "SIMPLEX" : repeaterSplitMode);
@@ -879,6 +884,11 @@ namespace Radio
             SaveFileDialog1.DefaultExt = "xml";
 
             SaveFileDialog1.ShowDialog();
+        }
+
+        private void moduleLayoutPanelTab1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

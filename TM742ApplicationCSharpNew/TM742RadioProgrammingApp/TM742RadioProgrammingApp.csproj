@@ -18,8 +18,8 @@
     <OptionStrict>Off</OptionStrict>
     <OptionInfer>On</OptionInfer>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>7CE6771B42EAC2D10E198456FD7AD8FDB68A5B36</ManifestCertificateThumbprint>
-    <ManifestKeyFile>RadioProgrammingApp_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>7777E3AE18ABEA52E8ECEE6B89DF6D29C3D4BCF3</ManifestCertificateThumbprint>
+    <ManifestKeyFile>TM742RadioProgrammingApp_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <ApplicationIcon>tm742.ico</ApplicationIcon>
@@ -45,7 +45,7 @@
     <ProductName>TM742 Programmer</ProductName>
     <PublisherName>TM742</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>127</ApplicationRevision>
+    <ApplicationRevision>128</ApplicationRevision>
     <ApplicationVersion>1.6.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -175,6 +175,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="RadioProgrammingApp_TemporaryKey.pfx" />
+    <None Include="TM742RadioProgrammingApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="Tm742Configuration.xml">

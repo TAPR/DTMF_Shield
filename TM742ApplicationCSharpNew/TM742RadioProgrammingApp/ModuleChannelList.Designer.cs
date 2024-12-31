@@ -91,10 +91,11 @@ namespace Radio
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Silver;
             this.splitContainer1.Panel2.Controls.Add(this.label9);
             this.splitContainer1.Panel2.Controls.Add(this.ChannelListView);
-            this.splitContainer1.Size = new System.Drawing.Size(1442, 624);
+            this.splitContainer1.Size = new System.Drawing.Size(1442, 719);
             this.splitContainer1.SplitterDistance = 717;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -126,7 +127,7 @@ namespace Radio
             this.PanelChannelSettings.Controls.Add(this.MHzComboBox);
             this.PanelChannelSettings.Location = new System.Drawing.Point(5, 5);
             this.PanelChannelSettings.Name = "PanelChannelSettings";
-            this.PanelChannelSettings.Size = new System.Drawing.Size(705, 612);
+            this.PanelChannelSettings.Size = new System.Drawing.Size(705, 707);
             this.PanelChannelSettings.TabIndex = 1;
             // 
             // label8
@@ -588,7 +589,7 @@ namespace Radio
             this.ChannelListView.Location = new System.Drawing.Point(3, 68);
             this.ChannelListView.MultiSelect = false;
             this.ChannelListView.Name = "ChannelListView";
-            this.ChannelListView.Size = new System.Drawing.Size(711, 549);
+            this.ChannelListView.Size = new System.Drawing.Size(695, 629);
             this.ChannelListView.TabIndex = 13;
             this.ChannelListView.UseCompatibleStateImageBehavior = false;
             this.ChannelListView.View = System.Windows.Forms.View.Details;
@@ -638,7 +639,7 @@ namespace Radio
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
             this.Name = "ModuleChannelList";
-            this.Size = new System.Drawing.Size(1442, 624);
+            this.Size = new System.Drawing.Size(1442, 719);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
