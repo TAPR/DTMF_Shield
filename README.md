@@ -3,6 +3,16 @@ The Arduino DTMF Shield and software to program a Kenwood TM-742 series radio
 
 This code and designs all came from Larry Anderton, WA7YLI.  It is released with his expressed permission.
 
+# Not a programmer?
+Maybe you want Larry's original software download: https://github.com/user-attachments/files/18283761/Kenwood.TM742.Programmer.PublishedRelease.zip
+Maybe you want the latest with all the rearchitecture and bugfixes: https://github.com/user-attachments/files/18283761/Kenwood.TM742.Programmer.PublishedRelease.zip
+
+If you want to check out the published releases, and you are viewing this file in the main project page of this repository, look to the right edge of the browser
+window, where you will see a black section titled 'Releases'.  The latest release is at the top.  Just click on 'latest' to go see its assets.  In general, download
+and unzip the zip file that you find into a directory of its own.  Run the setup.exe file that you find.
+
+# a programmer, or very curious...
+
 Many thanks to Curt Mills, WE7U, 'the Xastir Guy', who loaned me his functional TM742 Programmer unit, so that I could test my built boards initially,
 and to know correct from incorrect, or unexpected, behavior.
 
