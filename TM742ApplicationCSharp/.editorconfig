@@ -1,4 +1,0 @@
-﻿[*.cs]
-
-# CS0649: Field 'Form3.components' is never assigned to, and will always have its default value null
-dotnet_diagnostic.CS0649.severity = none
